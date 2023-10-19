@@ -19,7 +19,8 @@ struct RemoveArchDepInfo : public PassInfoMixin<RemoveArchDepInfo> {
       for (auto &I : BB) {
         if (auto *CI = dyn_cast<CallInst>(&I)) {
           if (CI->isInlineAsm()) {
-            //CI->eraseFromParent();
+            outs() << "Remove inline asm: " << *CI << "\n";
+            //CI->removeFromParent();
             Changed = true;
           }
         }
