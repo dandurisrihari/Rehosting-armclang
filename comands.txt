@@ -1,0 +1,2 @@
+armclang -c -target arm-none-linux-gnueabi assert.ll -o assert.o
+llc -march=x86 assert.o -o assert.ll
