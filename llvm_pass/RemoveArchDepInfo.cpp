@@ -5,6 +5,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
+#include "llvm/Transforms/Utils/StripNonLineTableDebugInfo.h"
 
 using namespace llvm;
 
@@ -17,12 +18,24 @@ namespace {
       F.getParent()->setDataLayout("e-m:e-i64:64-f80:128-n8:16:32:64-S128");
 
       // Remove inline asm
+      LLVMContext &Ctx = F.getContext();
+      Type *Int32Ty = Type::getInt32Ty(Ctx);
+      FunctionType *ReadFromAsmTy = FunctionType::get(Int32Ty, {}, false);
+      FunctionCallee ReadFromAsmFn = F.getParent()->getOrInsertFunction("read_from_asm", ReadFromAsmTy);
+
       for (auto &BB : F) {
         for (auto I = BB.begin(); I != BB.end(); /* no increment here */) {
           Instruction *currentInstruction = &*I;
           if (auto *CI = dyn_cast<CallInst>(currentInstruction)) {
+            // Check if the instruction is an inline asm instruction.
             if (CI->isInlineAsm()) {
-              outs() << "Remove inline asm: " << *CI << "\n";
+              // Check if the inline asm has return type int.
+              if (CI->getType()->isIntegerTy(32)) {
+                // Create a call to the read_from_asm function.
+                CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
+                // Replace all uses of the inline asm with the return value of the read_from_asm function.
+                CI->replaceAllUsesWith(readFromAsmCall);
+              }
               // Erase the instruction from the basic block and increment the iterator.
               I = CI->eraseFromParent();
               continue;
