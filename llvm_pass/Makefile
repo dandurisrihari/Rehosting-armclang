@@ -25,7 +25,7 @@ $(PASS_OBJECT): $(PASS_NAME).cpp
 run-opt: $(PASS_SHARED_OBJECT) $(OPTIMIZED_IR_FILES)
 
 %_optimized.ll: %.ll
-	opt-17 -S -load-pass-plugin=./$(PASS_SHARED_OBJECT) -passes=$(PASS_NAME) $< -o $@
+	opt-17 -strip-debug -S -load-pass-plugin=./$(PASS_SHARED_OBJECT) -passes=$(PASS_NAME) $< -o $@
 
 # Clean the build
 clean:

@@ -12,11 +12,23 @@ using namespace llvm;
 namespace {
   struct RemoveArchDepInfo : public PassInfoMixin<RemoveArchDepInfo> {
     PreservedAnalyses run(Function &F, FunctionAnalysisManager &FAM) {
+      Module &M = *F.getParent();
 
       // Update the target triple and data layout to match the x86_64 target.
-      F.getParent()->setTargetTriple("x86_64-unknown-linux-gnu");
-      F.getParent()->setDataLayout("e-m:e-i64:64-f80:128-n8:16:32:64-S128");
+      M.setTargetTriple("x86_64-unknown-linux-gnu");
+      M.setDataLayout("e-m:e-i64:64-f80:128-n8:16:32:64-S128");
 
+      // Remove metadata
+      NamedMDNode *ModuleFlags = M.getNamedMetadata("llvm.module.flags");
+      if (ModuleFlags) {
+        M.eraseNamedMetadata(ModuleFlags);
+      }
+
+      NamedMDNode *Ident = M.getNamedMetadata("llvm.ident");
+      if (Ident) {
+        M.eraseNamedMetadata(Ident);
+      }
+ 
       // Remove inline asm
       LLVMContext &Ctx = F.getContext();
       Type *Int32Ty = Type::getInt32Ty(Ctx);
