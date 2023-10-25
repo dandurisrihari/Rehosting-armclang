@@ -11,12 +11,13 @@ using namespace llvm;
 
 namespace {
   struct RemoveArchDepInfo : public PassInfoMixin<RemoveArchDepInfo> {
-    PreservedAnalyses run(Function &F, FunctionAnalysisManager &FAM) {
-      Module &M = *F.getParent();
+    PreservedAnalyses run(Module &M, ModuleAnalysisManager &MAM) {
+      FunctionAnalysisManager &FAM =
+          MAM.getResult<FunctionAnalysisManagerModuleProxy>(M).getManager();
 
-      // Update the target triple and data layout to match the x86_64 target.
-      M.setTargetTriple("x86_64-unknown-linux-gnu");
-      M.setDataLayout("e-m:e-i64:64-f80:128-n8:16:32:64-S128");
+      // Remove the target triple and data layout.
+      M.setTargetTriple("");
+      M.setDataLayout("");
 
       // Remove metadata
       NamedMDNode *ModuleFlags = M.getNamedMetadata("llvm.module.flags");
@@ -30,47 +31,50 @@ namespace {
       }
  
       // Remove inline asm
-      LLVMContext &Ctx = F.getContext();
+      LLVMContext &Ctx = M.getContext();
       Type *Int32Ty = Type::getInt32Ty(Ctx);
       FunctionType *ReadFromAsmTy = FunctionType::get(Int32Ty, {}, false);
-      FunctionCallee ReadFromAsmFn = F.getParent()->getOrInsertFunction("read_from_asm", ReadFromAsmTy);
+      FunctionCallee ReadFromAsmFn = M.getOrInsertFunction("read_from_asm", ReadFromAsmTy);
 
-      for (auto &BB : F) {
-        for (auto I = BB.begin(); I != BB.end(); /* no increment here */) {
-          Instruction *currentInstruction = &*I;
-          if (auto *CI = dyn_cast<CallInst>(currentInstruction)) {
-            // Check if the instruction is an inline asm instruction.
-            if (CI->isInlineAsm()) {
-              // Check if the inline asm has return type int.
-              if (CI->getType()->isIntegerTy(32)) {
-                // Create a call to the read_from_asm function.
-                CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
-                // Replace all uses of the inline asm with the return value of the read_from_asm function.
-                CI->replaceAllUsesWith(readFromAsmCall);
-              }
-              // Erase the instruction from the basic block and increment the iterator.
-              I = CI->eraseFromParent();
-              continue;
-            }
-            // Replace all calls that have armIntrinsicPrefix
-            // with a call to the read_from_asm function if return type is int.
-            // Remove if return type is void.
-            std::string armIntrinsicPrefix = "llvm.arm.";
-            if (auto CF = CI->getCalledFunction()) {
-              if(CF->getName().startswith(armIntrinsicPrefix)){
+      for(auto &F : M){
+        for (auto &BB : F) {
+          for (auto I = BB.begin(); I != BB.end(); /* no increment here */) {
+            Instruction *currentInstruction = &*I;
+            if (auto *CI = dyn_cast<CallInst>(currentInstruction)) {
+              // Check if the instruction is an inline asm instruction.
+              if (CI->isInlineAsm()) {
+                // Check if the inline asm has return type int.
                 if (CI->getType()->isIntegerTy(32)) {
+                  // Create a call to the read_from_asm function.
                   CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
+                  // Replace all uses of the inline asm with the return value of the read_from_asm function.
                   CI->replaceAllUsesWith(readFromAsmCall);
                 }
+                // Erase the instruction from the basic block and increment the iterator.
                 I = CI->eraseFromParent();
-                continue;                
+                continue;
+              }
+              // Replace all calls that have armIntrinsicPrefix
+              // with a call to the read_from_asm function if return type is int.
+              // Remove if return type is void.
+              std::string armIntrinsicPrefix = "llvm.arm.";
+              if (auto CF = CI->getCalledFunction()) {
+                if(CF->getName().startswith(armIntrinsicPrefix)){
+                  if (CI->getType()->isIntegerTy(32)) {
+                    CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
+                    CI->replaceAllUsesWith(readFromAsmCall);
+                  }
+                  I = CI->eraseFromParent();
+                  continue;                
+                }
               }
             }
+            // Move to the next instruction in the basic block.
+            ++I;
           }
-          // Move to the next instruction in the basic block.
-          ++I;
         }
       }
+
 
       return PreservedAnalyses::none();
     }
@@ -85,10 +89,10 @@ llvmGetPassPluginInfo() {
     LLVM_PLUGIN_API_VERSION, "RemoveArchDepInfo", "v0.1",
     [](PassBuilder &PB) {
       PB.registerPipelineParsingCallback(
-        [](StringRef Name, FunctionPassManager &FPM,
+        [](StringRef Name,  ModulePassManager &MPM,
            ArrayRef<PassBuilder::PipelineElement>) {
           if (Name == "RemoveArchDepInfo") {
-            FPM.addPass(RemoveArchDepInfo());
+            MPM.addPass(RemoveArchDepInfo());
             return true;
           }
           return false;
