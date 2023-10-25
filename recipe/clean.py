@@ -1,4 +1,5 @@
 import os
+import re
 
 # get input _optimized.ll files from ../optimized_ll_files/
 input_files = os.listdir('../optimized_ll_files/')
@@ -13,7 +14,10 @@ for file in input_files:
         lines = f.readlines()
         with open(output_path + file.split('.')[0] + '_cleaned.ll', 'w') as f2:
             for line in lines:
-                if line.startswith('attributes') or line.startswith('!'):
+                # if line start with attributes # or ! skip it
+                if line.startswith('attributes #') or line.startswith('!'):
                     continue
-                else:
-                    f2.write(line)
+                # remove any words from line that start with ", !"
+                # write the line to the output file
+                line = re.sub(', !.*', '', line)
+                f2.write(line)

@@ -52,6 +52,20 @@ namespace {
               I = CI->eraseFromParent();
               continue;
             }
+            // Replace all calls that have armIntrinsicPrefix
+            // with a call to the read_from_asm function if return type is int.
+            // Remove if return type is void.
+            std::string armIntrinsicPrefix = "llvm.arm.";
+            if (auto CF = CI->getCalledFunction()) {
+              if(CF->getName().startswith(armIntrinsicPrefix)){
+                if (CI->getType()->isIntegerTy(32)) {
+                  CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
+                  CI->replaceAllUsesWith(readFromAsmCall);
+                }
+                I = CI->eraseFromParent();
+                continue;                
+              }
+            }
           }
           // Move to the next instruction in the basic block.
           ++I;

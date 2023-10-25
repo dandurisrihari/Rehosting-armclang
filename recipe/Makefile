@@ -5,7 +5,7 @@ all:
 	python3 ./clean.py
 # for all .ll files in optimized_cleaned_ll_files, run llc-17 and store objs in ../obj folder
 	for file in ../optimized_cleaned_ll_files/*.ll; do \
-		echo $$file; \
+		echo "obj: " $$file; \
 		llc-17 -filetype=obj $$file -o ../obj/$$(basename $$file .ll).o; \
 	done
 
