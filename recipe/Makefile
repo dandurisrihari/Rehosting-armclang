@@ -9,6 +9,8 @@ all:
 		llc-17 -filetype=obj $$file -o ../obj/$$(basename $$file .ll).o; \
 	done
 
+# compile externalLinking.c to externalLinking.o
+	clang-17 -c externalLinking.c -o ../obj/externalLinking.o
 
 clean:
 	$(MAKE) -C ../llvm_pass clean
