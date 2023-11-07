@@ -38,649 +38,620 @@ target triple = "aarch64-arm-none-eabi"
 @__device_dts_ord_49 = hidden constant %struct.device { ptr @.str, ptr null, ptr null, ptr @__devstate_dts_ord_49, ptr @exti_data }, section "._device.static.1_40_", align 4, !dbg !160
 @__init___device_dts_ord_49 = internal constant %struct.init_entry { %union.init_function { ptr @stm32_exti_init }, ptr @__device_dts_ord_49 }, section ".z_init_PRE_KERNEL_140_00049_", align 4, !dbg !182
 @stm32_exti_init.line_range_0 = internal constant %struct.stm32_exti_range { i8 0, i8 2 }, align 1, !dbg !219
-@stm32_exti_init.__isr_stm32_exti_isr_irq_0 = internal global %struct._isr_list { i32 5, i32 0, ptr @stm32_exti_isr, ptr @stm32_exti_init.line_range_0 }, section ".intList", align 4, !dbg !229
-@stm32_exti_init.line_range_1 = internal constant %struct.stm32_exti_range { i8 2, i8 2 }, align 1, !dbg !239
-@stm32_exti_init.__isr_stm32_exti_isr_irq_1 = internal global %struct._isr_list { i32 6, i32 0, ptr @stm32_exti_isr, ptr @stm32_exti_init.line_range_1 }, section ".intList", align 4, !dbg !241
-@stm32_exti_init.line_range_2 = internal constant %struct.stm32_exti_range { i8 4, i8 12 }, align 1, !dbg !243
-@stm32_exti_init.__isr_stm32_exti_isr_irq_2 = internal global %struct._isr_list { i32 7, i32 0, ptr @stm32_exti_isr, ptr @stm32_exti_init.line_range_2 }, section ".intList", align 4, !dbg !245
+@stm32_exti_init.__isr_stm32_exti_isr_irq_0 = internal global %struct._isr_list { i32 5, i32 0, ptr @stm32_exti_isr, ptr @stm32_exti_init.line_range_0 }, section ".intList", align 4, !dbg !228
+@stm32_exti_init.line_range_1 = internal constant %struct.stm32_exti_range { i8 2, i8 2 }, align 1, !dbg !238
+@stm32_exti_init.__isr_stm32_exti_isr_irq_1 = internal global %struct._isr_list { i32 6, i32 0, ptr @stm32_exti_isr, ptr @stm32_exti_init.line_range_1 }, section ".intList", align 4, !dbg !240
+@stm32_exti_init.line_range_2 = internal constant %struct.stm32_exti_range { i8 4, i8 12 }, align 1, !dbg !242
+@stm32_exti_init.__isr_stm32_exti_isr_irq_2 = internal global %struct._isr_list { i32 7, i32 0, ptr @stm32_exti_isr, ptr @stm32_exti_init.line_range_2 }, section ".intList", align 4, !dbg !244
 @llvm.used = appending global [5 x ptr] [ptr @__device_dts_ord_49, ptr @__init___device_dts_ord_49, ptr @stm32_exti_init.__isr_stm32_exti_isr_irq_0, ptr @stm32_exti_init.__isr_stm32_exti_isr_irq_1, ptr @stm32_exti_init.__isr_stm32_exti_isr_irq_2], section "llvm.metadata"
 
-; Function Attrs: inlinehint nounwind optsize
-define internal zeroext i1 @z_impl_device_is_ready(ptr noundef %0) #0 !dbg !256 {
+; Function Attrs: noinline nounwind optnone
+define internal zeroext i1 @z_impl_device_is_ready(ptr noundef %0) #0 !dbg !257 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
   call void @llvm.dbg.declare(metadata ptr %2, metadata !260, metadata !DIExpression()), !dbg !261
   %3 = load ptr, ptr %2, align 4, !dbg !262
-  %4 = call zeroext i1 @z_device_is_ready(ptr noundef %3) #5, !dbg !263
+  %4 = call zeroext i1 @z_device_is_ready(ptr noundef %3), !dbg !263
   ret i1 %4, !dbg !264
 }
 
-; Function Attrs: inlinehint nounwind optsize
+; Function Attrs: noinline nounwind optnone
 define internal void @z_impl_k_object_access_grant(ptr noundef %0, ptr noundef %1) #0 !dbg !265 {
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
   store ptr %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !383, metadata !DIExpression()), !dbg !385
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !381, metadata !DIExpression()), !dbg !382
   store ptr %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !384, metadata !DIExpression()), !dbg !386
-  %5 = load ptr, ptr %3, align 4, !dbg !387
-  %6 = load ptr, ptr %4, align 4, !dbg !388
-  ret void, !dbg !389
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !383, metadata !DIExpression()), !dbg !384
+  %5 = load ptr, ptr %3, align 4, !dbg !385
+  %6 = load ptr, ptr %4, align 4, !dbg !386
+  ret void, !dbg !387
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_impl_k_object_release(ptr noundef %0) #0 !dbg !390 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_impl_k_object_release(ptr noundef %0) #0 !dbg !388 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !394, metadata !DIExpression()), !dbg !395
-  %3 = load ptr, ptr %2, align 4, !dbg !396
-  ret void, !dbg !397
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !391, metadata !DIExpression()), !dbg !392
+  %3 = load ptr, ptr %2, align 4, !dbg !393
+  ret void, !dbg !394
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @z_impl_k_object_alloc(i8 noundef zeroext %0) #0 !dbg !398 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @z_impl_k_object_alloc(i8 noundef zeroext %0) #0 !dbg !395 {
   %2 = alloca i8, align 1
   store i8 %0, ptr %2, align 1
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !402, metadata !DIExpression()), !dbg !403
-  %3 = load i8, ptr %2, align 1, !dbg !404
-  ret ptr null, !dbg !405
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !398, metadata !DIExpression()), !dbg !399
+  %3 = load i8, ptr %2, align 1, !dbg !400
+  ret ptr null, !dbg !401
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @z_impl_k_object_alloc_size(i8 noundef zeroext %0, i32 noundef %1) #0 !dbg !406 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @z_impl_k_object_alloc_size(i8 noundef zeroext %0, i32 noundef %1) #0 !dbg !402 {
   %3 = alloca i8, align 1
   %4 = alloca i32, align 4
   store i8 %0, ptr %3, align 1
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !410, metadata !DIExpression()), !dbg !412
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !405, metadata !DIExpression()), !dbg !406
   store i32 %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !411, metadata !DIExpression()), !dbg !413
-  %5 = load i8, ptr %3, align 1, !dbg !414
-  %6 = load i32, ptr %4, align 4, !dbg !415
-  ret ptr null, !dbg !416
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !407, metadata !DIExpression()), !dbg !408
+  %5 = load i8, ptr %3, align 1, !dbg !409
+  %6 = load i32, ptr %4, align 4, !dbg !410
+  ret ptr null, !dbg !411
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_thread_timeout_expires_ticks(ptr noundef %0) #0 !dbg !417 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_thread_timeout_expires_ticks(ptr noundef %0) #0 !dbg !412 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !425, metadata !DIExpression()), !dbg !426
-  %3 = load ptr, ptr %2, align 4, !dbg !427
-  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !428
-  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !429
-  %6 = call i64 @z_timeout_expires(ptr noundef %5) #5, !dbg !430
-  ret i64 %6, !dbg !431
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !419, metadata !DIExpression()), !dbg !420
+  %3 = load ptr, ptr %2, align 4, !dbg !421
+  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !422
+  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !423
+  %6 = call i64 @z_timeout_expires(ptr noundef %5), !dbg !424
+  ret i64 %6, !dbg !425
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_thread_timeout_remaining_ticks(ptr noundef %0) #0 !dbg !432 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_thread_timeout_remaining_ticks(ptr noundef %0) #0 !dbg !426 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !434, metadata !DIExpression()), !dbg !435
-  %3 = load ptr, ptr %2, align 4, !dbg !436
-  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !437
-  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !438
-  %6 = call i64 @z_timeout_remaining(ptr noundef %5) #5, !dbg !439
-  ret i64 %6, !dbg !440
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !427, metadata !DIExpression()), !dbg !428
+  %3 = load ptr, ptr %2, align 4, !dbg !429
+  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !430
+  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !431
+  %6 = call i64 @z_timeout_remaining(ptr noundef %5), !dbg !432
+  ret i64 %6, !dbg !433
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_timer_expires_ticks(ptr noundef %0) #0 !dbg !441 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_timer_expires_ticks(ptr noundef %0) #0 !dbg !434 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !464, metadata !DIExpression()), !dbg !465
-  %3 = load ptr, ptr %2, align 4, !dbg !466
-  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !467
-  %5 = call i64 @z_timeout_expires(ptr noundef %4) #5, !dbg !468
-  ret i64 %5, !dbg !469
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !456, metadata !DIExpression()), !dbg !457
+  %3 = load ptr, ptr %2, align 4, !dbg !458
+  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !459
+  %5 = call i64 @z_timeout_expires(ptr noundef %4), !dbg !460
+  ret i64 %5, !dbg !461
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_timer_remaining_ticks(ptr noundef %0) #0 !dbg !470 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_timer_remaining_ticks(ptr noundef %0) #0 !dbg !462 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !472, metadata !DIExpression()), !dbg !473
-  %3 = load ptr, ptr %2, align 4, !dbg !474
-  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !475
-  %5 = call i64 @z_timeout_remaining(ptr noundef %4) #5, !dbg !476
-  ret i64 %5, !dbg !477
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !463, metadata !DIExpression()), !dbg !464
+  %3 = load ptr, ptr %2, align 4, !dbg !465
+  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !466
+  %5 = call i64 @z_timeout_remaining(ptr noundef %4), !dbg !467
+  ret i64 %5, !dbg !468
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_impl_k_timer_user_data_set(ptr noundef %0, ptr noundef %1) #0 !dbg !478 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_impl_k_timer_user_data_set(ptr noundef %0, ptr noundef %1) #0 !dbg !469 {
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
   store ptr %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !482, metadata !DIExpression()), !dbg !484
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !472, metadata !DIExpression()), !dbg !473
   store ptr %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !483, metadata !DIExpression()), !dbg !485
-  %5 = load ptr, ptr %4, align 4, !dbg !486
-  %6 = load ptr, ptr %3, align 4, !dbg !487
-  %7 = getelementptr inbounds %struct.k_timer, ptr %6, i32 0, i32 6, !dbg !488
-  store ptr %5, ptr %7, align 4, !dbg !489
-  ret void, !dbg !490
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !474, metadata !DIExpression()), !dbg !475
+  %5 = load ptr, ptr %4, align 4, !dbg !476
+  %6 = load ptr, ptr %3, align 4, !dbg !477
+  %7 = getelementptr inbounds %struct.k_timer, ptr %6, i32 0, i32 6, !dbg !478
+  store ptr %5, ptr %7, align 4, !dbg !479
+  ret void, !dbg !480
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @z_impl_k_timer_user_data_get(ptr noundef %0) #0 !dbg !491 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @z_impl_k_timer_user_data_get(ptr noundef %0) #0 !dbg !481 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !495, metadata !DIExpression()), !dbg !496
-  %3 = load ptr, ptr %2, align 4, !dbg !497
-  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 6, !dbg !498
-  %5 = load ptr, ptr %4, align 4, !dbg !498
-  ret ptr %5, !dbg !499
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !484, metadata !DIExpression()), !dbg !485
+  %3 = load ptr, ptr %2, align 4, !dbg !486
+  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 6, !dbg !487
+  %5 = load ptr, ptr %4, align 4, !dbg !487
+  ret ptr %5, !dbg !488
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_queue_is_empty(ptr noundef %0) #0 !dbg !500 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_queue_is_empty(ptr noundef %0) #0 !dbg !489 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !522, metadata !DIExpression()), !dbg !523
-  %3 = load ptr, ptr %2, align 4, !dbg !524
-  %4 = getelementptr inbounds %struct.k_queue, ptr %3, i32 0, i32 0, !dbg !525
-  %5 = call zeroext i1 @sys_sflist_is_empty(ptr noundef %4) #5, !dbg !526
-  %6 = zext i1 %5 to i32, !dbg !527
-  ret i32 %6, !dbg !528
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !510, metadata !DIExpression()), !dbg !511
+  %3 = load ptr, ptr %2, align 4, !dbg !512
+  %4 = getelementptr inbounds %struct.k_queue, ptr %3, i32 0, i32 0, !dbg !513
+  %5 = call zeroext i1 @sys_sflist_is_empty(ptr noundef %4), !dbg !514
+  %6 = zext i1 %5 to i32, !dbg !515
+  ret i32 %6, !dbg !516
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_sem_count_get(ptr noundef %0) #0 !dbg !529 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_sem_count_get(ptr noundef %0) #0 !dbg !517 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !539, metadata !DIExpression()), !dbg !540
-  %3 = load ptr, ptr %2, align 4, !dbg !541
-  %4 = getelementptr inbounds %struct.k_sem, ptr %3, i32 0, i32 1, !dbg !542
-  %5 = load i32, ptr %4, align 4, !dbg !542
-  ret i32 %5, !dbg !543
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !526, metadata !DIExpression()), !dbg !527
+  %3 = load ptr, ptr %2, align 4, !dbg !528
+  %4 = getelementptr inbounds %struct.k_sem, ptr %3, i32 0, i32 1, !dbg !529
+  %5 = load i32, ptr %4, align 4, !dbg !529
+  ret i32 %5, !dbg !530
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_msgq_num_free_get(ptr noundef %0) #0 !dbg !544 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_msgq_num_free_get(ptr noundef %0) #0 !dbg !531 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !562, metadata !DIExpression()), !dbg !563
-  %3 = load ptr, ptr %2, align 4, !dbg !564
-  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 3, !dbg !565
-  %5 = load i32, ptr %4, align 4, !dbg !565
-  %6 = load ptr, ptr %2, align 4, !dbg !566
-  %7 = getelementptr inbounds %struct.k_msgq, ptr %6, i32 0, i32 8, !dbg !567
-  %8 = load i32, ptr %7, align 4, !dbg !567
-  %9 = sub i32 %5, %8, !dbg !568
-  ret i32 %9, !dbg !569
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !548, metadata !DIExpression()), !dbg !549
+  %3 = load ptr, ptr %2, align 4, !dbg !550
+  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 3, !dbg !551
+  %5 = load i32, ptr %4, align 4, !dbg !551
+  %6 = load ptr, ptr %2, align 4, !dbg !552
+  %7 = getelementptr inbounds %struct.k_msgq, ptr %6, i32 0, i32 8, !dbg !553
+  %8 = load i32, ptr %7, align 4, !dbg !553
+  %9 = sub i32 %5, %8, !dbg !554
+  ret i32 %9, !dbg !555
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_msgq_num_used_get(ptr noundef %0) #0 !dbg !570 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_msgq_num_used_get(ptr noundef %0) #0 !dbg !556 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !572, metadata !DIExpression()), !dbg !573
-  %3 = load ptr, ptr %2, align 4, !dbg !574
-  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 8, !dbg !575
-  %5 = load i32, ptr %4, align 4, !dbg !575
-  ret i32 %5, !dbg !576
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !557, metadata !DIExpression()), !dbg !558
+  %3 = load ptr, ptr %2, align 4, !dbg !559
+  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 8, !dbg !560
+  %5 = load i32, ptr %4, align 4, !dbg !560
+  ret i32 %5, !dbg !561
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @stm32_exti_enable(i32 noundef %0) #1 !dbg !577 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @stm32_exti_enable(i32 noundef %0) #0 !dbg !562 {
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !581, metadata !DIExpression()), !dbg !583
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #6, !dbg !584
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !582, metadata !DIExpression()), !dbg !585
-  store i32 0, ptr %3, align 4, !dbg !585
-  %4 = load i32, ptr %2, align 4, !dbg !586
-  %5 = icmp sge i32 %4, 16, !dbg !588
-  br i1 %5, label %6, label %7, !dbg !589
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !565, metadata !DIExpression()), !dbg !566
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !567, metadata !DIExpression()), !dbg !568
+  store i32 0, ptr %3, align 4, !dbg !568
+  %4 = load i32, ptr %2, align 4, !dbg !569
+  %5 = icmp sge i32 %4, 16, !dbg !571
+  br i1 %5, label %6, label %7, !dbg !572
 
 6:                                                ; preds = %1
-  br label %7, !dbg !590
+  br label %7, !dbg !573
 
 7:                                                ; preds = %6, %1
-  %8 = load i32, ptr %2, align 4, !dbg !592
-  %9 = getelementptr inbounds [16 x i8], ptr @exti_irq_table, i32 0, i32 %8, !dbg !593
-  %10 = load i8, ptr %9, align 1, !dbg !593
-  %11 = sext i8 %10 to i32, !dbg !593
-  store i32 %11, ptr %3, align 4, !dbg !594
-  %12 = load i32, ptr %3, align 4, !dbg !595
-  %13 = icmp eq i32 %12, 255, !dbg !597
-  br i1 %13, label %14, label %15, !dbg !598
+  %8 = load i32, ptr %2, align 4, !dbg !575
+  %9 = getelementptr inbounds [16 x i8], ptr @exti_irq_table, i32 0, i32 %8, !dbg !576
+  %10 = load i8, ptr %9, align 1, !dbg !576
+  %11 = sext i8 %10 to i32, !dbg !576
+  store i32 %11, ptr %3, align 4, !dbg !577
+  %12 = load i32, ptr %3, align 4, !dbg !578
+  %13 = icmp eq i32 %12, 255, !dbg !580
+  br i1 %13, label %14, label %15, !dbg !581
 
 14:                                               ; preds = %7
-  br label %15, !dbg !599
+  br label %15, !dbg !582
 
 15:                                               ; preds = %14, %7
-  %16 = load i32, ptr %2, align 4, !dbg !601
-  %17 = shl i32 1, %16, !dbg !602
-  call void @LL_EXTI_EnableIT_0_31(i32 noundef %17) #5, !dbg !603
-  %18 = load i32, ptr %3, align 4, !dbg !604
-  call void @arch_irq_enable(i32 noundef %18) #5, !dbg !605
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #6, !dbg !606
-  ret void, !dbg !606
+  %16 = load i32, ptr %2, align 4, !dbg !584
+  %17 = shl i32 1, %16, !dbg !585
+  call void @LL_EXTI_EnableIT_0_31(i32 noundef %17), !dbg !586
+  %18 = load i32, ptr %3, align 4, !dbg !587
+  call void @arch_irq_enable(i32 noundef %18), !dbg !588
+  ret void, !dbg !589
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #2
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #3
-
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_EnableIT_0_31(i32 noundef %0) #0 !dbg !607 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_EnableIT_0_31(i32 noundef %0) #0 !dbg !590 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !612, metadata !DIExpression()), !dbg !613
-  %3 = load i32, ptr %2, align 4, !dbg !614
-  %4 = load volatile i32, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !615
-  %5 = or i32 %4, %3, !dbg !615
-  store volatile i32 %5, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !615
-  ret void, !dbg !616
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !594, metadata !DIExpression()), !dbg !595
+  %3 = load i32, ptr %2, align 4, !dbg !596
+  %4 = load volatile i32, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !597
+  %5 = or i32 %4, %3, !dbg !597
+  store volatile i32 %5, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !597
+  ret void, !dbg !598
 }
 
-; Function Attrs: optsize
-declare !dbg !617 dso_local void @arch_irq_enable(i32 noundef) #4
+declare void @arch_irq_enable(i32 noundef) #2
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #3
-
-; Function Attrs: nounwind optsize
-define hidden void @stm32_exti_disable(i32 noundef %0) #1 !dbg !621 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @stm32_exti_disable(i32 noundef %0) #0 !dbg !599 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !623, metadata !DIExpression()), !dbg !624
-  call void @z_stm32_hsem_lock(i32 noundef 0, i32 noundef 1048576) #5, !dbg !625
-  %3 = load i32, ptr %2, align 4, !dbg !626
-  %4 = icmp slt i32 %3, 32, !dbg !628
-  br i1 %4, label %5, label %8, !dbg !629
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !600, metadata !DIExpression()), !dbg !601
+  call void @z_stm32_hsem_lock(i32 noundef 0, i32 noundef 1048576), !dbg !602
+  %3 = load i32, ptr %2, align 4, !dbg !603
+  %4 = icmp slt i32 %3, 32, !dbg !605
+  br i1 %4, label %5, label %8, !dbg !606
 
 5:                                                ; preds = %1
-  %6 = load i32, ptr %2, align 4, !dbg !630
-  %7 = shl i32 1, %6, !dbg !632
-  call void @LL_EXTI_DisableIT_0_31(i32 noundef %7) #5, !dbg !633
-  br label %9, !dbg !634
+  %6 = load i32, ptr %2, align 4, !dbg !607
+  %7 = shl i32 1, %6, !dbg !609
+  call void @LL_EXTI_DisableIT_0_31(i32 noundef %7), !dbg !610
+  br label %9, !dbg !611
 
 8:                                                ; preds = %1
   br label %9
 
 9:                                                ; preds = %8, %5
-  call void @z_stm32_hsem_unlock(i32 noundef 0) #5, !dbg !635
-  ret void, !dbg !636
+  call void @z_stm32_hsem_unlock(i32 noundef 0), !dbg !612
+  ret void, !dbg !613
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_stm32_hsem_lock(i32 noundef %0, i32 noundef %1) #0 !dbg !637 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_stm32_hsem_lock(i32 noundef %0, i32 noundef %1) #0 !dbg !614 {
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store i32 %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !642, metadata !DIExpression()), !dbg !644
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !618, metadata !DIExpression()), !dbg !619
   store i32 %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !643, metadata !DIExpression()), !dbg !645
-  ret void, !dbg !646
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !620, metadata !DIExpression()), !dbg !621
+  ret void, !dbg !622
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_DisableIT_0_31(i32 noundef %0) #0 !dbg !647 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_DisableIT_0_31(i32 noundef %0) #0 !dbg !623 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !649, metadata !DIExpression()), !dbg !650
-  %3 = load i32, ptr %2, align 4, !dbg !651
-  %4 = xor i32 %3, -1, !dbg !652
-  %5 = load volatile i32, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !653
-  %6 = and i32 %5, %4, !dbg !653
-  store volatile i32 %6, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !653
-  ret void, !dbg !654
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !624, metadata !DIExpression()), !dbg !625
+  %3 = load i32, ptr %2, align 4, !dbg !626
+  %4 = xor i32 %3, -1, !dbg !627
+  %5 = load volatile i32, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !628
+  %6 = and i32 %5, %4, !dbg !628
+  store volatile i32 %6, ptr inttoptr (i32 1073808384 to ptr), align 4, !dbg !628
+  ret void, !dbg !629
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_stm32_hsem_unlock(i32 noundef %0) #0 !dbg !655 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_stm32_hsem_unlock(i32 noundef %0) #0 !dbg !630 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !657, metadata !DIExpression()), !dbg !658
-  ret void, !dbg !659
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !631, metadata !DIExpression()), !dbg !632
+  ret void, !dbg !633
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @stm32_exti_trigger(i32 noundef %0, i32 noundef %1) #1 !dbg !660 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @stm32_exti_trigger(i32 noundef %0, i32 noundef %1) #0 !dbg !634 {
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store i32 %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !664, metadata !DIExpression()), !dbg !666
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !637, metadata !DIExpression()), !dbg !638
   store i32 %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !665, metadata !DIExpression()), !dbg !667
-  %5 = load i32, ptr %3, align 4, !dbg !668
-  %6 = icmp sge i32 %5, 32, !dbg !670
-  br i1 %6, label %7, label %8, !dbg !671
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !639, metadata !DIExpression()), !dbg !640
+  %5 = load i32, ptr %3, align 4, !dbg !641
+  %6 = icmp sge i32 %5, 32, !dbg !643
+  br i1 %6, label %7, label %8, !dbg !644
 
 7:                                                ; preds = %2
-  br label %8, !dbg !672
+  br label %8, !dbg !645
 
 8:                                                ; preds = %7, %2
-  call void @z_stm32_hsem_lock(i32 noundef 0, i32 noundef 1048576) #5, !dbg !674
-  %9 = load i32, ptr %4, align 4, !dbg !675
+  call void @z_stm32_hsem_lock(i32 noundef 0, i32 noundef 1048576), !dbg !647
+  %9 = load i32, ptr %4, align 4, !dbg !648
   switch i32 %9, label %30 [
     i32 0, label %10
     i32 1, label %15
     i32 2, label %20
     i32 3, label %25
-  ], !dbg !676
+  ], !dbg !649
 
 10:                                               ; preds = %8
-  %11 = load i32, ptr %3, align 4, !dbg !677
-  %12 = shl i32 1, %11, !dbg !679
-  call void @LL_EXTI_DisableRisingTrig_0_31(i32 noundef %12) #5, !dbg !680
-  %13 = load i32, ptr %3, align 4, !dbg !681
-  %14 = shl i32 1, %13, !dbg !682
-  call void @LL_EXTI_DisableFallingTrig_0_31(i32 noundef %14) #5, !dbg !683
-  br label %31, !dbg !684
+  %11 = load i32, ptr %3, align 4, !dbg !650
+  %12 = shl i32 1, %11, !dbg !652
+  call void @LL_EXTI_DisableRisingTrig_0_31(i32 noundef %12), !dbg !653
+  %13 = load i32, ptr %3, align 4, !dbg !654
+  %14 = shl i32 1, %13, !dbg !655
+  call void @LL_EXTI_DisableFallingTrig_0_31(i32 noundef %14), !dbg !656
+  br label %31, !dbg !657
 
 15:                                               ; preds = %8
-  %16 = load i32, ptr %3, align 4, !dbg !685
-  %17 = shl i32 1, %16, !dbg !686
-  call void @LL_EXTI_EnableRisingTrig_0_31(i32 noundef %17) #5, !dbg !687
-  %18 = load i32, ptr %3, align 4, !dbg !688
-  %19 = shl i32 1, %18, !dbg !689
-  call void @LL_EXTI_DisableFallingTrig_0_31(i32 noundef %19) #5, !dbg !690
-  br label %31, !dbg !691
+  %16 = load i32, ptr %3, align 4, !dbg !658
+  %17 = shl i32 1, %16, !dbg !659
+  call void @LL_EXTI_EnableRisingTrig_0_31(i32 noundef %17), !dbg !660
+  %18 = load i32, ptr %3, align 4, !dbg !661
+  %19 = shl i32 1, %18, !dbg !662
+  call void @LL_EXTI_DisableFallingTrig_0_31(i32 noundef %19), !dbg !663
+  br label %31, !dbg !664
 
 20:                                               ; preds = %8
-  %21 = load i32, ptr %3, align 4, !dbg !692
-  %22 = shl i32 1, %21, !dbg !693
-  call void @LL_EXTI_EnableFallingTrig_0_31(i32 noundef %22) #5, !dbg !694
-  %23 = load i32, ptr %3, align 4, !dbg !695
-  %24 = shl i32 1, %23, !dbg !696
-  call void @LL_EXTI_DisableRisingTrig_0_31(i32 noundef %24) #5, !dbg !697
-  br label %31, !dbg !698
+  %21 = load i32, ptr %3, align 4, !dbg !665
+  %22 = shl i32 1, %21, !dbg !666
+  call void @LL_EXTI_EnableFallingTrig_0_31(i32 noundef %22), !dbg !667
+  %23 = load i32, ptr %3, align 4, !dbg !668
+  %24 = shl i32 1, %23, !dbg !669
+  call void @LL_EXTI_DisableRisingTrig_0_31(i32 noundef %24), !dbg !670
+  br label %31, !dbg !671
 
 25:                                               ; preds = %8
-  %26 = load i32, ptr %3, align 4, !dbg !699
-  %27 = shl i32 1, %26, !dbg !700
-  call void @LL_EXTI_EnableRisingTrig_0_31(i32 noundef %27) #5, !dbg !701
-  %28 = load i32, ptr %3, align 4, !dbg !702
-  %29 = shl i32 1, %28, !dbg !703
-  call void @LL_EXTI_EnableFallingTrig_0_31(i32 noundef %29) #5, !dbg !704
-  br label %31, !dbg !705
+  %26 = load i32, ptr %3, align 4, !dbg !672
+  %27 = shl i32 1, %26, !dbg !673
+  call void @LL_EXTI_EnableRisingTrig_0_31(i32 noundef %27), !dbg !674
+  %28 = load i32, ptr %3, align 4, !dbg !675
+  %29 = shl i32 1, %28, !dbg !676
+  call void @LL_EXTI_EnableFallingTrig_0_31(i32 noundef %29), !dbg !677
+  br label %31, !dbg !678
 
 30:                                               ; preds = %8
-  br label %31, !dbg !706
+  br label %31, !dbg !679
 
 31:                                               ; preds = %30, %25, %20, %15, %10
-  call void @z_stm32_hsem_unlock(i32 noundef 0) #5, !dbg !707
-  ret void, !dbg !708
+  call void @z_stm32_hsem_unlock(i32 noundef 0), !dbg !680
+  ret void, !dbg !681
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_DisableRisingTrig_0_31(i32 noundef %0) #0 !dbg !709 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_DisableRisingTrig_0_31(i32 noundef %0) #0 !dbg !682 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !711, metadata !DIExpression()), !dbg !712
-  %3 = load i32, ptr %2, align 4, !dbg !713
-  %4 = xor i32 %3, -1, !dbg !714
-  %5 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !715
-  %6 = and i32 %5, %4, !dbg !715
-  store volatile i32 %6, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !715
-  ret void, !dbg !716
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !683, metadata !DIExpression()), !dbg !684
+  %3 = load i32, ptr %2, align 4, !dbg !685
+  %4 = xor i32 %3, -1, !dbg !686
+  %5 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !687
+  %6 = and i32 %5, %4, !dbg !687
+  store volatile i32 %6, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !687
+  ret void, !dbg !688
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_DisableFallingTrig_0_31(i32 noundef %0) #0 !dbg !717 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_DisableFallingTrig_0_31(i32 noundef %0) #0 !dbg !689 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !719, metadata !DIExpression()), !dbg !720
-  %3 = load i32, ptr %2, align 4, !dbg !721
-  %4 = xor i32 %3, -1, !dbg !722
-  %5 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !723
-  %6 = and i32 %5, %4, !dbg !723
-  store volatile i32 %6, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !723
-  ret void, !dbg !724
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !690, metadata !DIExpression()), !dbg !691
+  %3 = load i32, ptr %2, align 4, !dbg !692
+  %4 = xor i32 %3, -1, !dbg !693
+  %5 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !694
+  %6 = and i32 %5, %4, !dbg !694
+  store volatile i32 %6, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !694
+  ret void, !dbg !695
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_EnableRisingTrig_0_31(i32 noundef %0) #0 !dbg !725 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_EnableRisingTrig_0_31(i32 noundef %0) #0 !dbg !696 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !727, metadata !DIExpression()), !dbg !728
-  %3 = load i32, ptr %2, align 4, !dbg !729
-  %4 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !730
-  %5 = or i32 %4, %3, !dbg !730
-  store volatile i32 %5, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !730
-  ret void, !dbg !731
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !697, metadata !DIExpression()), !dbg !698
+  %3 = load i32, ptr %2, align 4, !dbg !699
+  %4 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !700
+  %5 = or i32 %4, %3, !dbg !700
+  store volatile i32 %5, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 2), align 4, !dbg !700
+  ret void, !dbg !701
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_EnableFallingTrig_0_31(i32 noundef %0) #0 !dbg !732 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_EnableFallingTrig_0_31(i32 noundef %0) #0 !dbg !702 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !734, metadata !DIExpression()), !dbg !735
-  %3 = load i32, ptr %2, align 4, !dbg !736
-  %4 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !737
-  %5 = or i32 %4, %3, !dbg !737
-  store volatile i32 %5, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !737
-  ret void, !dbg !738
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !703, metadata !DIExpression()), !dbg !704
+  %3 = load i32, ptr %2, align 4, !dbg !705
+  %4 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !706
+  %5 = or i32 %4, %3, !dbg !706
+  store volatile i32 %5, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 3), align 4, !dbg !706
+  ret void, !dbg !707
 }
 
-; Function Attrs: nounwind optsize
-define internal i32 @stm32_exti_init(ptr noundef %0) #1 !dbg !221 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @stm32_exti_init(ptr noundef %0) #0 !dbg !221 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !223, metadata !DIExpression()), !dbg !739
-  %3 = load ptr, ptr %2, align 4, !dbg !740
-  %4 = load i8, ptr @stm32_exti_init.line_range_0, align 1, !dbg !741
-  %5 = load i8, ptr getelementptr inbounds (%struct.stm32_exti_range, ptr @stm32_exti_init.line_range_0, i32 0, i32 1), align 1, !dbg !742
-  call void @stm32_fill_irq_table(i8 noundef signext %4, i8 noundef signext %5, i32 noundef 5) #5, !dbg !743
-  call void @z_arm_irq_priority_set(i32 noundef 5, i32 noundef 0, i32 noundef 0) #5, !dbg !744
-  %6 = load i8, ptr @stm32_exti_init.line_range_1, align 1, !dbg !746
-  %7 = load i8, ptr getelementptr inbounds (%struct.stm32_exti_range, ptr @stm32_exti_init.line_range_1, i32 0, i32 1), align 1, !dbg !747
-  call void @stm32_fill_irq_table(i8 noundef signext %6, i8 noundef signext %7, i32 noundef 6) #5, !dbg !748
-  call void @z_arm_irq_priority_set(i32 noundef 6, i32 noundef 0, i32 noundef 0) #5, !dbg !749
-  %8 = load i8, ptr @stm32_exti_init.line_range_2, align 1, !dbg !751
-  %9 = load i8, ptr getelementptr inbounds (%struct.stm32_exti_range, ptr @stm32_exti_init.line_range_2, i32 0, i32 1), align 1, !dbg !752
-  call void @stm32_fill_irq_table(i8 noundef signext %8, i8 noundef signext %9, i32 noundef 7) #5, !dbg !753
-  call void @z_arm_irq_priority_set(i32 noundef 7, i32 noundef 0, i32 noundef 0) #5, !dbg !754
-  ret i32 0, !dbg !756
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !708, metadata !DIExpression()), !dbg !709
+  %3 = load ptr, ptr %2, align 4, !dbg !710
+  %4 = load i8, ptr @stm32_exti_init.line_range_0, align 1, !dbg !711
+  %5 = load i8, ptr getelementptr inbounds (%struct.stm32_exti_range, ptr @stm32_exti_init.line_range_0, i32 0, i32 1), align 1, !dbg !712
+  call void @stm32_fill_irq_table(i8 noundef signext %4, i8 noundef signext %5, i32 noundef 5), !dbg !713
+  call void @z_arm_irq_priority_set(i32 noundef 5, i32 noundef 0, i32 noundef 0), !dbg !714
+  %6 = load i8, ptr @stm32_exti_init.line_range_1, align 1, !dbg !716
+  %7 = load i8, ptr getelementptr inbounds (%struct.stm32_exti_range, ptr @stm32_exti_init.line_range_1, i32 0, i32 1), align 1, !dbg !717
+  call void @stm32_fill_irq_table(i8 noundef signext %6, i8 noundef signext %7, i32 noundef 6), !dbg !718
+  call void @z_arm_irq_priority_set(i32 noundef 6, i32 noundef 0, i32 noundef 0), !dbg !719
+  %8 = load i8, ptr @stm32_exti_init.line_range_2, align 1, !dbg !721
+  %9 = load i8, ptr getelementptr inbounds (%struct.stm32_exti_range, ptr @stm32_exti_init.line_range_2, i32 0, i32 1), align 1, !dbg !722
+  call void @stm32_fill_irq_table(i8 noundef signext %8, i8 noundef signext %9, i32 noundef 7), !dbg !723
+  call void @z_arm_irq_priority_set(i32 noundef 7, i32 noundef 0, i32 noundef 0), !dbg !724
+  ret i32 0, !dbg !726
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @stm32_exti_set_callback(i32 noundef %0, ptr noundef %1, ptr noundef %2) #1 !dbg !757 {
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @stm32_exti_set_callback(i32 noundef %0, ptr noundef %1, ptr noundef %2) #0 !dbg !727 {
   %4 = alloca i32, align 4
   %5 = alloca i32, align 4
   %6 = alloca ptr, align 4
   %7 = alloca ptr, align 4
   %8 = alloca ptr, align 4
   %9 = alloca ptr, align 4
-  %10 = alloca i32, align 4
   store i32 %0, ptr %5, align 4
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !761, metadata !DIExpression()), !dbg !768
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !730, metadata !DIExpression()), !dbg !731
   store ptr %1, ptr %6, align 4
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !762, metadata !DIExpression()), !dbg !769
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !732, metadata !DIExpression()), !dbg !733
   store ptr %2, ptr %7, align 4
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !763, metadata !DIExpression()), !dbg !770
-  call void @llvm.lifetime.start.p0(i64 4, ptr %8) #6, !dbg !771
-  call void @llvm.dbg.declare(metadata ptr %8, metadata !764, metadata !DIExpression()), !dbg !772
-  store ptr @__device_dts_ord_49, ptr %8, align 4, !dbg !772
-  call void @llvm.lifetime.start.p0(i64 4, ptr %9) #6, !dbg !773
-  call void @llvm.dbg.declare(metadata ptr %9, metadata !766, metadata !DIExpression()), !dbg !774
-  %11 = load ptr, ptr getelementptr inbounds (%struct.device, ptr @__device_dts_ord_49, i32 0, i32 4), align 4, !dbg !775
-  store ptr %11, ptr %9, align 4, !dbg !774
-  %12 = load ptr, ptr %9, align 4, !dbg !776
-  %13 = getelementptr inbounds %struct.stm32_exti_data, ptr %12, i32 0, i32 0, !dbg !778
-  %14 = load i32, ptr %5, align 4, !dbg !779
-  %15 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %13, i32 0, i32 %14, !dbg !776
-  %16 = getelementptr inbounds %struct.__exti_cb, ptr %15, i32 0, i32 0, !dbg !780
-  %17 = load ptr, ptr %16, align 4, !dbg !780
-  %18 = load ptr, ptr %6, align 4, !dbg !781
-  %19 = icmp eq ptr %17, %18, !dbg !782
-  br i1 %19, label %20, label %30, !dbg !783
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !734, metadata !DIExpression()), !dbg !735
+  call void @llvm.dbg.declare(metadata ptr %8, metadata !736, metadata !DIExpression()), !dbg !738
+  store ptr @__device_dts_ord_49, ptr %8, align 4, !dbg !738
+  call void @llvm.dbg.declare(metadata ptr %9, metadata !739, metadata !DIExpression()), !dbg !741
+  %10 = load ptr, ptr getelementptr inbounds (%struct.device, ptr @__device_dts_ord_49, i32 0, i32 4), align 4, !dbg !742
+  store ptr %10, ptr %9, align 4, !dbg !741
+  %11 = load ptr, ptr %9, align 4, !dbg !743
+  %12 = getelementptr inbounds %struct.stm32_exti_data, ptr %11, i32 0, i32 0, !dbg !745
+  %13 = load i32, ptr %5, align 4, !dbg !746
+  %14 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %12, i32 0, i32 %13, !dbg !743
+  %15 = getelementptr inbounds %struct.__exti_cb, ptr %14, i32 0, i32 0, !dbg !747
+  %16 = load ptr, ptr %15, align 4, !dbg !747
+  %17 = load ptr, ptr %6, align 4, !dbg !748
+  %18 = icmp eq ptr %16, %17, !dbg !749
+  br i1 %18, label %19, label %29, !dbg !750
 
-20:                                               ; preds = %3
-  %21 = load ptr, ptr %9, align 4, !dbg !784
-  %22 = getelementptr inbounds %struct.stm32_exti_data, ptr %21, i32 0, i32 0, !dbg !785
-  %23 = load i32, ptr %5, align 4, !dbg !786
-  %24 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %22, i32 0, i32 %23, !dbg !784
-  %25 = getelementptr inbounds %struct.__exti_cb, ptr %24, i32 0, i32 1, !dbg !787
-  %26 = load ptr, ptr %25, align 4, !dbg !787
-  %27 = load ptr, ptr %7, align 4, !dbg !788
-  %28 = icmp eq ptr %26, %27, !dbg !789
-  br i1 %28, label %29, label %30, !dbg !790
+19:                                               ; preds = %3
+  %20 = load ptr, ptr %9, align 4, !dbg !751
+  %21 = getelementptr inbounds %struct.stm32_exti_data, ptr %20, i32 0, i32 0, !dbg !752
+  %22 = load i32, ptr %5, align 4, !dbg !753
+  %23 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %21, i32 0, i32 %22, !dbg !751
+  %24 = getelementptr inbounds %struct.__exti_cb, ptr %23, i32 0, i32 1, !dbg !754
+  %25 = load ptr, ptr %24, align 4, !dbg !754
+  %26 = load ptr, ptr %7, align 4, !dbg !755
+  %27 = icmp eq ptr %25, %26, !dbg !756
+  br i1 %27, label %28, label %29, !dbg !757
 
-29:                                               ; preds = %20
-  store i32 0, ptr %4, align 4, !dbg !791
-  store i32 1, ptr %10, align 4
-  br label %52, !dbg !791
+28:                                               ; preds = %19
+  store i32 0, ptr %4, align 4, !dbg !758
+  br label %51, !dbg !758
 
-30:                                               ; preds = %20, %3
-  %31 = load ptr, ptr %9, align 4, !dbg !793
-  %32 = getelementptr inbounds %struct.stm32_exti_data, ptr %31, i32 0, i32 0, !dbg !795
-  %33 = load i32, ptr %5, align 4, !dbg !796
-  %34 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %32, i32 0, i32 %33, !dbg !793
-  %35 = getelementptr inbounds %struct.__exti_cb, ptr %34, i32 0, i32 0, !dbg !797
-  %36 = load ptr, ptr %35, align 4, !dbg !797
-  %37 = icmp ne ptr %36, null, !dbg !798
-  br i1 %37, label %38, label %39, !dbg !799
+29:                                               ; preds = %19, %3
+  %30 = load ptr, ptr %9, align 4, !dbg !760
+  %31 = getelementptr inbounds %struct.stm32_exti_data, ptr %30, i32 0, i32 0, !dbg !762
+  %32 = load i32, ptr %5, align 4, !dbg !763
+  %33 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %31, i32 0, i32 %32, !dbg !760
+  %34 = getelementptr inbounds %struct.__exti_cb, ptr %33, i32 0, i32 0, !dbg !764
+  %35 = load ptr, ptr %34, align 4, !dbg !764
+  %36 = icmp ne ptr %35, null, !dbg !765
+  br i1 %36, label %37, label %38, !dbg !766
 
-38:                                               ; preds = %30
-  store i32 -16, ptr %4, align 4, !dbg !800
-  store i32 1, ptr %10, align 4
-  br label %52, !dbg !800
+37:                                               ; preds = %29
+  store i32 -16, ptr %4, align 4, !dbg !767
+  br label %51, !dbg !767
 
-39:                                               ; preds = %30
-  %40 = load ptr, ptr %6, align 4, !dbg !802
-  %41 = load ptr, ptr %9, align 4, !dbg !803
-  %42 = getelementptr inbounds %struct.stm32_exti_data, ptr %41, i32 0, i32 0, !dbg !804
-  %43 = load i32, ptr %5, align 4, !dbg !805
-  %44 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %42, i32 0, i32 %43, !dbg !803
-  %45 = getelementptr inbounds %struct.__exti_cb, ptr %44, i32 0, i32 0, !dbg !806
-  store ptr %40, ptr %45, align 4, !dbg !807
-  %46 = load ptr, ptr %7, align 4, !dbg !808
-  %47 = load ptr, ptr %9, align 4, !dbg !809
-  %48 = getelementptr inbounds %struct.stm32_exti_data, ptr %47, i32 0, i32 0, !dbg !810
-  %49 = load i32, ptr %5, align 4, !dbg !811
-  %50 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %48, i32 0, i32 %49, !dbg !809
-  %51 = getelementptr inbounds %struct.__exti_cb, ptr %50, i32 0, i32 1, !dbg !812
-  store ptr %46, ptr %51, align 4, !dbg !813
-  store i32 0, ptr %4, align 4, !dbg !814
-  store i32 1, ptr %10, align 4
-  br label %52, !dbg !814
+38:                                               ; preds = %29
+  %39 = load ptr, ptr %6, align 4, !dbg !769
+  %40 = load ptr, ptr %9, align 4, !dbg !770
+  %41 = getelementptr inbounds %struct.stm32_exti_data, ptr %40, i32 0, i32 0, !dbg !771
+  %42 = load i32, ptr %5, align 4, !dbg !772
+  %43 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %41, i32 0, i32 %42, !dbg !770
+  %44 = getelementptr inbounds %struct.__exti_cb, ptr %43, i32 0, i32 0, !dbg !773
+  store ptr %39, ptr %44, align 4, !dbg !774
+  %45 = load ptr, ptr %7, align 4, !dbg !775
+  %46 = load ptr, ptr %9, align 4, !dbg !776
+  %47 = getelementptr inbounds %struct.stm32_exti_data, ptr %46, i32 0, i32 0, !dbg !777
+  %48 = load i32, ptr %5, align 4, !dbg !778
+  %49 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %47, i32 0, i32 %48, !dbg !776
+  %50 = getelementptr inbounds %struct.__exti_cb, ptr %49, i32 0, i32 1, !dbg !779
+  store ptr %45, ptr %50, align 4, !dbg !780
+  store i32 0, ptr %4, align 4, !dbg !781
+  br label %51, !dbg !781
 
-52:                                               ; preds = %39, %38, %29
-  call void @llvm.lifetime.end.p0(i64 4, ptr %9) #6, !dbg !815
-  call void @llvm.lifetime.end.p0(i64 4, ptr %8) #6, !dbg !815
-  %53 = load i32, ptr %4, align 4, !dbg !815
-  ret i32 %53, !dbg !815
+51:                                               ; preds = %38, %37, %28
+  %52 = load i32, ptr %4, align 4, !dbg !782
+  ret i32 %52, !dbg !782
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @stm32_exti_unset_callback(i32 noundef %0) #1 !dbg !816 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @stm32_exti_unset_callback(i32 noundef %0) #0 !dbg !783 {
   %2 = alloca i32, align 4
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !818, metadata !DIExpression()), !dbg !821
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #6, !dbg !822
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !819, metadata !DIExpression()), !dbg !823
-  store ptr @__device_dts_ord_49, ptr %3, align 4, !dbg !823
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #6, !dbg !824
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !820, metadata !DIExpression()), !dbg !825
-  %5 = load ptr, ptr getelementptr inbounds (%struct.device, ptr @__device_dts_ord_49, i32 0, i32 4), align 4, !dbg !826
-  store ptr %5, ptr %4, align 4, !dbg !825
-  %6 = load ptr, ptr %4, align 4, !dbg !827
-  %7 = getelementptr inbounds %struct.stm32_exti_data, ptr %6, i32 0, i32 0, !dbg !828
-  %8 = load i32, ptr %2, align 4, !dbg !829
-  %9 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %7, i32 0, i32 %8, !dbg !827
-  %10 = getelementptr inbounds %struct.__exti_cb, ptr %9, i32 0, i32 0, !dbg !830
-  store ptr null, ptr %10, align 4, !dbg !831
-  %11 = load ptr, ptr %4, align 4, !dbg !832
-  %12 = getelementptr inbounds %struct.stm32_exti_data, ptr %11, i32 0, i32 0, !dbg !833
-  %13 = load i32, ptr %2, align 4, !dbg !834
-  %14 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %12, i32 0, i32 %13, !dbg !832
-  %15 = getelementptr inbounds %struct.__exti_cb, ptr %14, i32 0, i32 1, !dbg !835
-  store ptr null, ptr %15, align 4, !dbg !836
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #6, !dbg !837
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #6, !dbg !837
-  ret void, !dbg !837
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !784, metadata !DIExpression()), !dbg !785
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !786, metadata !DIExpression()), !dbg !787
+  store ptr @__device_dts_ord_49, ptr %3, align 4, !dbg !787
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !788, metadata !DIExpression()), !dbg !789
+  %5 = load ptr, ptr getelementptr inbounds (%struct.device, ptr @__device_dts_ord_49, i32 0, i32 4), align 4, !dbg !790
+  store ptr %5, ptr %4, align 4, !dbg !789
+  %6 = load ptr, ptr %4, align 4, !dbg !791
+  %7 = getelementptr inbounds %struct.stm32_exti_data, ptr %6, i32 0, i32 0, !dbg !792
+  %8 = load i32, ptr %2, align 4, !dbg !793
+  %9 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %7, i32 0, i32 %8, !dbg !791
+  %10 = getelementptr inbounds %struct.__exti_cb, ptr %9, i32 0, i32 0, !dbg !794
+  store ptr null, ptr %10, align 4, !dbg !795
+  %11 = load ptr, ptr %4, align 4, !dbg !796
+  %12 = getelementptr inbounds %struct.stm32_exti_data, ptr %11, i32 0, i32 0, !dbg !797
+  %13 = load i32, ptr %2, align 4, !dbg !798
+  %14 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %12, i32 0, i32 %13, !dbg !796
+  %15 = getelementptr inbounds %struct.__exti_cb, ptr %14, i32 0, i32 1, !dbg !799
+  store ptr null, ptr %15, align 4, !dbg !800
+  ret void, !dbg !801
 }
 
-; Function Attrs: optsize
-declare !dbg !838 dso_local zeroext i1 @z_device_is_ready(ptr noundef) #4
+declare zeroext i1 @z_device_is_ready(ptr noundef) #2
 
-; Function Attrs: optsize
-declare !dbg !839 dso_local i64 @z_timeout_expires(ptr noundef) #4
+declare i64 @z_timeout_expires(ptr noundef) #2
 
-; Function Attrs: optsize
-declare !dbg !844 dso_local i64 @z_timeout_remaining(ptr noundef) #4
+declare i64 @z_timeout_remaining(ptr noundef) #2
 
-; Function Attrs: inlinehint nounwind optsize
-define internal zeroext i1 @sys_sflist_is_empty(ptr noundef %0) #0 !dbg !845 {
+; Function Attrs: noinline nounwind optnone
+define internal zeroext i1 @sys_sflist_is_empty(ptr noundef %0) #0 !dbg !802 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !850, metadata !DIExpression()), !dbg !851
-  %3 = load ptr, ptr %2, align 4, !dbg !852
-  %4 = call ptr @sys_sflist_peek_head(ptr noundef %3) #5, !dbg !853
-  %5 = icmp eq ptr %4, null, !dbg !854
-  ret i1 %5, !dbg !855
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !806, metadata !DIExpression()), !dbg !807
+  %3 = load ptr, ptr %2, align 4, !dbg !808
+  %4 = call ptr @sys_sflist_peek_head(ptr noundef %3), !dbg !809
+  %5 = icmp eq ptr %4, null, !dbg !810
+  ret i1 %5, !dbg !811
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @sys_sflist_peek_head(ptr noundef %0) #0 !dbg !856 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @sys_sflist_peek_head(ptr noundef %0) #0 !dbg !812 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !860, metadata !DIExpression()), !dbg !861
-  %3 = load ptr, ptr %2, align 4, !dbg !862
-  %4 = getelementptr inbounds %struct._sflist, ptr %3, i32 0, i32 0, !dbg !863
-  %5 = load ptr, ptr %4, align 4, !dbg !863
-  ret ptr %5, !dbg !864
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !815, metadata !DIExpression()), !dbg !816
+  %3 = load ptr, ptr %2, align 4, !dbg !817
+  %4 = getelementptr inbounds %struct._sflist, ptr %3, i32 0, i32 0, !dbg !818
+  %5 = load ptr, ptr %4, align 4, !dbg !818
+  ret ptr %5, !dbg !819
 }
 
-; Function Attrs: nounwind optsize
-define internal void @stm32_fill_irq_table(i8 noundef signext %0, i8 noundef signext %1, i32 noundef %2) #1 !dbg !865 {
+; Function Attrs: noinline nounwind optnone
+define internal void @stm32_fill_irq_table(i8 noundef signext %0, i8 noundef signext %1, i32 noundef %2) #0 !dbg !820 {
   %4 = alloca i8, align 1
   %5 = alloca i8, align 1
   %6 = alloca i32, align 4
   %7 = alloca i32, align 4
   store i8 %0, ptr %4, align 1
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !869, metadata !DIExpression()), !dbg !874
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !823, metadata !DIExpression()), !dbg !824
   store i8 %1, ptr %5, align 1
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !870, metadata !DIExpression()), !dbg !875
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !825, metadata !DIExpression()), !dbg !826
   store i32 %2, ptr %6, align 4
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !871, metadata !DIExpression()), !dbg !876
-  call void @llvm.lifetime.start.p0(i64 4, ptr %7) #6, !dbg !877
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !872, metadata !DIExpression()), !dbg !878
-  store i32 0, ptr %7, align 4, !dbg !878
-  br label %8, !dbg !877
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !827, metadata !DIExpression()), !dbg !828
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !829, metadata !DIExpression()), !dbg !831
+  store i32 0, ptr %7, align 4, !dbg !831
+  br label %8, !dbg !832
 
-8:                                                ; preds = %22, %3
-  %9 = load i32, ptr %7, align 4, !dbg !879
-  %10 = load i8, ptr %5, align 1, !dbg !881
-  %11 = sext i8 %10 to i32, !dbg !881
-  %12 = icmp slt i32 %9, %11, !dbg !882
-  br i1 %12, label %14, label %13, !dbg !883
+8:                                                ; preds = %21, %3
+  %9 = load i32, ptr %7, align 4, !dbg !833
+  %10 = load i8, ptr %5, align 1, !dbg !835
+  %11 = sext i8 %10 to i32, !dbg !835
+  %12 = icmp slt i32 %9, %11, !dbg !836
+  br i1 %12, label %13, label %24, !dbg !837
 
 13:                                               ; preds = %8
-  call void @llvm.lifetime.end.p0(i64 4, ptr %7) #6, !dbg !884
-  br label %25
+  %14 = load i32, ptr %6, align 4, !dbg !838
+  %15 = trunc i32 %14 to i8, !dbg !838
+  %16 = load i8, ptr %4, align 1, !dbg !840
+  %17 = sext i8 %16 to i32, !dbg !840
+  %18 = load i32, ptr %7, align 4, !dbg !841
+  %19 = add nsw i32 %17, %18, !dbg !842
+  %20 = getelementptr inbounds [16 x i8], ptr @exti_irq_table, i32 0, i32 %19, !dbg !843
+  store i8 %15, ptr %20, align 1, !dbg !844
+  br label %21, !dbg !845
 
-14:                                               ; preds = %8
-  %15 = load i32, ptr %6, align 4, !dbg !885
-  %16 = trunc i32 %15 to i8, !dbg !885
-  %17 = load i8, ptr %4, align 1, !dbg !887
-  %18 = sext i8 %17 to i32, !dbg !887
-  %19 = load i32, ptr %7, align 4, !dbg !888
-  %20 = add nsw i32 %18, %19, !dbg !889
-  %21 = getelementptr inbounds [16 x i8], ptr @exti_irq_table, i32 0, i32 %20, !dbg !890
-  store i8 %16, ptr %21, align 1, !dbg !891
-  br label %22, !dbg !892
+21:                                               ; preds = %13
+  %22 = load i32, ptr %7, align 4, !dbg !846
+  %23 = add nsw i32 %22, 1, !dbg !846
+  store i32 %23, ptr %7, align 4, !dbg !846
+  br label %8, !dbg !847, !llvm.loop !848
 
-22:                                               ; preds = %14
-  %23 = load i32, ptr %7, align 4, !dbg !893
-  %24 = add nsw i32 %23, 1, !dbg !893
-  store i32 %24, ptr %7, align 4, !dbg !893
-  br label %8, !dbg !884, !llvm.loop !894
-
-25:                                               ; preds = %13
-  ret void, !dbg !896
+24:                                               ; preds = %8
+  ret void, !dbg !850
 }
 
-; Function Attrs: nounwind optsize
-define internal void @stm32_exti_isr(ptr noundef %0) #1 !dbg !897 {
+; Function Attrs: noinline nounwind optnone
+define internal void @stm32_exti_isr(ptr noundef %0) #0 !dbg !851 {
   %2 = alloca ptr, align 4
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
@@ -688,194 +659,176 @@ define internal void @stm32_exti_isr(ptr noundef %0) #1 !dbg !897 {
   %6 = alloca i32, align 4
   %7 = alloca i8, align 1
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !899, metadata !DIExpression()), !dbg !907
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #6, !dbg !908
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !900, metadata !DIExpression()), !dbg !909
-  store ptr @__device_dts_ord_49, ptr %3, align 4, !dbg !909
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #6, !dbg !910
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !901, metadata !DIExpression()), !dbg !911
-  %8 = load ptr, ptr %3, align 4, !dbg !912
-  %9 = getelementptr inbounds %struct.device, ptr %8, i32 0, i32 4, !dbg !913
-  %10 = load ptr, ptr %9, align 4, !dbg !913
-  store ptr %10, ptr %4, align 4, !dbg !911
-  call void @llvm.lifetime.start.p0(i64 4, ptr %5) #6, !dbg !914
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !902, metadata !DIExpression()), !dbg !915
-  %11 = load ptr, ptr %2, align 4, !dbg !916
-  store ptr %11, ptr %5, align 4, !dbg !915
-  call void @llvm.lifetime.start.p0(i64 4, ptr %6) #6, !dbg !917
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !904, metadata !DIExpression()), !dbg !918
-  call void @llvm.lifetime.start.p0(i64 1, ptr %7) #6, !dbg !919
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !905, metadata !DIExpression()), !dbg !920
-  store i8 0, ptr %7, align 1, !dbg !920
-  br label %12, !dbg !919
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !852, metadata !DIExpression()), !dbg !853
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !854, metadata !DIExpression()), !dbg !855
+  store ptr @__device_dts_ord_49, ptr %3, align 4, !dbg !855
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !856, metadata !DIExpression()), !dbg !857
+  %8 = load ptr, ptr %3, align 4, !dbg !858
+  %9 = getelementptr inbounds %struct.device, ptr %8, i32 0, i32 4, !dbg !859
+  %10 = load ptr, ptr %9, align 4, !dbg !859
+  store ptr %10, ptr %4, align 4, !dbg !857
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !860, metadata !DIExpression()), !dbg !862
+  %11 = load ptr, ptr %2, align 4, !dbg !863
+  store ptr %11, ptr %5, align 4, !dbg !862
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !864, metadata !DIExpression()), !dbg !865
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !866, metadata !DIExpression()), !dbg !868
+  store i8 0, ptr %7, align 1, !dbg !868
+  br label %12, !dbg !869
 
-12:                                               ; preds = %57, %1
-  %13 = load i8, ptr %7, align 1, !dbg !921
-  %14 = zext i8 %13 to i32, !dbg !921
-  %15 = load ptr, ptr %5, align 4, !dbg !923
-  %16 = getelementptr inbounds %struct.stm32_exti_range, ptr %15, i32 0, i32 1, !dbg !924
-  %17 = load i8, ptr %16, align 1, !dbg !924
-  %18 = zext i8 %17 to i32, !dbg !923
-  %19 = icmp sle i32 %14, %18, !dbg !925
-  br i1 %19, label %21, label %20, !dbg !926
+12:                                               ; preds = %56, %1
+  %13 = load i8, ptr %7, align 1, !dbg !870
+  %14 = zext i8 %13 to i32, !dbg !870
+  %15 = load ptr, ptr %5, align 4, !dbg !872
+  %16 = getelementptr inbounds %struct.stm32_exti_range, ptr %15, i32 0, i32 1, !dbg !873
+  %17 = load i8, ptr %16, align 1, !dbg !873
+  %18 = zext i8 %17 to i32, !dbg !872
+  %19 = icmp sle i32 %14, %18, !dbg !874
+  br i1 %19, label %20, label %59, !dbg !875
 
 20:                                               ; preds = %12
-  call void @llvm.lifetime.end.p0(i64 1, ptr %7) #6, !dbg !927
-  br label %60
+  %21 = load ptr, ptr %5, align 4, !dbg !876
+  %22 = getelementptr inbounds %struct.stm32_exti_range, ptr %21, i32 0, i32 0, !dbg !878
+  %23 = load i8, ptr %22, align 1, !dbg !878
+  %24 = zext i8 %23 to i32, !dbg !876
+  %25 = load i8, ptr %7, align 1, !dbg !879
+  %26 = zext i8 %25 to i32, !dbg !879
+  %27 = add nsw i32 %24, %26, !dbg !880
+  store i32 %27, ptr %6, align 4, !dbg !881
+  %28 = load i32, ptr %6, align 4, !dbg !882
+  %29 = call i32 @stm32_exti_is_pending(i32 noundef %28), !dbg !884
+  %30 = icmp ne i32 %29, 0, !dbg !885
+  br i1 %30, label %31, label %55, !dbg !886
 
-21:                                               ; preds = %12
-  %22 = load ptr, ptr %5, align 4, !dbg !928
-  %23 = getelementptr inbounds %struct.stm32_exti_range, ptr %22, i32 0, i32 0, !dbg !930
-  %24 = load i8, ptr %23, align 1, !dbg !930
-  %25 = zext i8 %24 to i32, !dbg !928
-  %26 = load i8, ptr %7, align 1, !dbg !931
-  %27 = zext i8 %26 to i32, !dbg !931
-  %28 = add nsw i32 %25, %27, !dbg !932
-  store i32 %28, ptr %6, align 4, !dbg !933
-  %29 = load i32, ptr %6, align 4, !dbg !934
-  %30 = call i32 @stm32_exti_is_pending(i32 noundef %29) #5, !dbg !936
-  %31 = icmp ne i32 %30, 0, !dbg !937
-  br i1 %31, label %32, label %56, !dbg !938
+31:                                               ; preds = %20
+  %32 = load i32, ptr %6, align 4, !dbg !887
+  call void @stm32_exti_clear_pending(i32 noundef %32), !dbg !889
+  %33 = load ptr, ptr %4, align 4, !dbg !890
+  %34 = getelementptr inbounds %struct.stm32_exti_data, ptr %33, i32 0, i32 0, !dbg !892
+  %35 = load i32, ptr %6, align 4, !dbg !893
+  %36 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %34, i32 0, i32 %35, !dbg !890
+  %37 = getelementptr inbounds %struct.__exti_cb, ptr %36, i32 0, i32 0, !dbg !894
+  %38 = load ptr, ptr %37, align 4, !dbg !894
+  %39 = icmp ne ptr %38, null, !dbg !890
+  br i1 %39, label %41, label %40, !dbg !895
 
-32:                                               ; preds = %21
-  %33 = load i32, ptr %6, align 4, !dbg !939
-  call void @stm32_exti_clear_pending(i32 noundef %33) #5, !dbg !941
-  %34 = load ptr, ptr %4, align 4, !dbg !942
-  %35 = getelementptr inbounds %struct.stm32_exti_data, ptr %34, i32 0, i32 0, !dbg !944
-  %36 = load i32, ptr %6, align 4, !dbg !945
-  %37 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %35, i32 0, i32 %36, !dbg !942
-  %38 = getelementptr inbounds %struct.__exti_cb, ptr %37, i32 0, i32 0, !dbg !946
-  %39 = load ptr, ptr %38, align 4, !dbg !946
-  %40 = icmp ne ptr %39, null, !dbg !942
-  br i1 %40, label %42, label %41, !dbg !947
+40:                                               ; preds = %31
+  br label %56, !dbg !896
 
-41:                                               ; preds = %32
-  br label %57, !dbg !948
+41:                                               ; preds = %31
+  %42 = load ptr, ptr %4, align 4, !dbg !898
+  %43 = getelementptr inbounds %struct.stm32_exti_data, ptr %42, i32 0, i32 0, !dbg !899
+  %44 = load i32, ptr %6, align 4, !dbg !900
+  %45 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %43, i32 0, i32 %44, !dbg !898
+  %46 = getelementptr inbounds %struct.__exti_cb, ptr %45, i32 0, i32 0, !dbg !901
+  %47 = load ptr, ptr %46, align 4, !dbg !901
+  %48 = load i32, ptr %6, align 4, !dbg !902
+  %49 = load ptr, ptr %4, align 4, !dbg !903
+  %50 = getelementptr inbounds %struct.stm32_exti_data, ptr %49, i32 0, i32 0, !dbg !904
+  %51 = load i32, ptr %6, align 4, !dbg !905
+  %52 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %50, i32 0, i32 %51, !dbg !903
+  %53 = getelementptr inbounds %struct.__exti_cb, ptr %52, i32 0, i32 1, !dbg !906
+  %54 = load ptr, ptr %53, align 4, !dbg !906
+  call void %47(i32 noundef %48, ptr noundef %54), !dbg !898
+  br label %55, !dbg !907
 
-42:                                               ; preds = %32
-  %43 = load ptr, ptr %4, align 4, !dbg !950
-  %44 = getelementptr inbounds %struct.stm32_exti_data, ptr %43, i32 0, i32 0, !dbg !951
-  %45 = load i32, ptr %6, align 4, !dbg !952
-  %46 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %44, i32 0, i32 %45, !dbg !950
-  %47 = getelementptr inbounds %struct.__exti_cb, ptr %46, i32 0, i32 0, !dbg !953
-  %48 = load ptr, ptr %47, align 4, !dbg !953
-  %49 = load i32, ptr %6, align 4, !dbg !954
-  %50 = load ptr, ptr %4, align 4, !dbg !955
-  %51 = getelementptr inbounds %struct.stm32_exti_data, ptr %50, i32 0, i32 0, !dbg !956
-  %52 = load i32, ptr %6, align 4, !dbg !957
-  %53 = getelementptr inbounds [16 x %struct.__exti_cb], ptr %51, i32 0, i32 %52, !dbg !955
-  %54 = getelementptr inbounds %struct.__exti_cb, ptr %53, i32 0, i32 1, !dbg !958
-  %55 = load ptr, ptr %54, align 4, !dbg !958
-  call void %48(i32 noundef %49, ptr noundef %55) #5, !dbg !950
-  br label %56, !dbg !959
+55:                                               ; preds = %41, %20
+  br label %56, !dbg !908
 
-56:                                               ; preds = %42, %21
-  br label %57, !dbg !960
+56:                                               ; preds = %55, %40
+  %57 = load i8, ptr %7, align 1, !dbg !909
+  %58 = add i8 %57, 1, !dbg !909
+  store i8 %58, ptr %7, align 1, !dbg !909
+  br label %12, !dbg !910, !llvm.loop !911
 
-57:                                               ; preds = %56, %41
-  %58 = load i8, ptr %7, align 1, !dbg !961
-  %59 = add i8 %58, 1, !dbg !961
-  store i8 %59, ptr %7, align 1, !dbg !961
-  br label %12, !dbg !927, !llvm.loop !962
-
-60:                                               ; preds = %20
-  call void @llvm.lifetime.end.p0(i64 4, ptr %6) #6, !dbg !964
-  call void @llvm.lifetime.end.p0(i64 4, ptr %5) #6, !dbg !964
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #6, !dbg !964
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #6, !dbg !964
-  ret void, !dbg !964
+59:                                               ; preds = %12
+  ret void, !dbg !913
 }
 
-; Function Attrs: optsize
-declare !dbg !965 dso_local void @z_arm_irq_priority_set(i32 noundef, i32 noundef, i32 noundef) #4
+declare void @z_arm_irq_priority_set(i32 noundef, i32 noundef, i32 noundef) #2
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @stm32_exti_is_pending(i32 noundef %0) #0 !dbg !968 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @stm32_exti_is_pending(i32 noundef %0) #0 !dbg !914 {
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
   store i32 %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !972, metadata !DIExpression()), !dbg !973
-  %4 = load i32, ptr %3, align 4, !dbg !974
-  %5 = icmp slt i32 %4, 32, !dbg !976
-  br i1 %5, label %6, label %10, !dbg !977
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !917, metadata !DIExpression()), !dbg !918
+  %4 = load i32, ptr %3, align 4, !dbg !919
+  %5 = icmp slt i32 %4, 32, !dbg !921
+  br i1 %5, label %6, label %10, !dbg !922
 
 6:                                                ; preds = %1
-  %7 = load i32, ptr %3, align 4, !dbg !978
-  %8 = shl i32 1, %7, !dbg !980
-  %9 = call i32 @LL_EXTI_IsActiveFlag_0_31(i32 noundef %8) #5, !dbg !981
-  store i32 %9, ptr %2, align 4, !dbg !982
-  br label %11, !dbg !982
+  %7 = load i32, ptr %3, align 4, !dbg !923
+  %8 = shl i32 1, %7, !dbg !925
+  %9 = call i32 @LL_EXTI_IsActiveFlag_0_31(i32 noundef %8), !dbg !926
+  store i32 %9, ptr %2, align 4, !dbg !927
+  br label %11, !dbg !927
 
 10:                                               ; preds = %1
-  store i32 0, ptr %2, align 4, !dbg !983
-  br label %11, !dbg !983
+  store i32 0, ptr %2, align 4, !dbg !928
+  br label %11, !dbg !928
 
 11:                                               ; preds = %10, %6
-  %12 = load i32, ptr %2, align 4, !dbg !985
-  ret i32 %12, !dbg !985
+  %12 = load i32, ptr %2, align 4, !dbg !930
+  ret i32 %12, !dbg !930
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @stm32_exti_clear_pending(i32 noundef %0) #0 !dbg !986 {
+; Function Attrs: noinline nounwind optnone
+define internal void @stm32_exti_clear_pending(i32 noundef %0) #0 !dbg !931 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !988, metadata !DIExpression()), !dbg !989
-  %3 = load i32, ptr %2, align 4, !dbg !990
-  %4 = icmp slt i32 %3, 32, !dbg !992
-  br i1 %4, label %5, label %8, !dbg !993
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !932, metadata !DIExpression()), !dbg !933
+  %3 = load i32, ptr %2, align 4, !dbg !934
+  %4 = icmp slt i32 %3, 32, !dbg !936
+  br i1 %4, label %5, label %8, !dbg !937
 
 5:                                                ; preds = %1
-  %6 = load i32, ptr %2, align 4, !dbg !994
-  %7 = shl i32 1, %6, !dbg !996
-  call void @LL_EXTI_ClearFlag_0_31(i32 noundef %7) #5, !dbg !997
-  br label %9, !dbg !998
+  %6 = load i32, ptr %2, align 4, !dbg !938
+  %7 = shl i32 1, %6, !dbg !940
+  call void @LL_EXTI_ClearFlag_0_31(i32 noundef %7), !dbg !941
+  br label %9, !dbg !942
 
 8:                                                ; preds = %1
   br label %9
 
 9:                                                ; preds = %8, %5
-  ret void, !dbg !999
+  ret void, !dbg !943
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @LL_EXTI_IsActiveFlag_0_31(i32 noundef %0) #0 !dbg !1000 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @LL_EXTI_IsActiveFlag_0_31(i32 noundef %0) #0 !dbg !944 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !1004, metadata !DIExpression()), !dbg !1005
-  %3 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 5), align 4, !dbg !1006
-  %4 = load i32, ptr %2, align 4, !dbg !1007
-  %5 = and i32 %3, %4, !dbg !1008
-  %6 = load i32, ptr %2, align 4, !dbg !1009
-  %7 = icmp eq i32 %5, %6, !dbg !1010
-  %8 = zext i1 %7 to i32, !dbg !1010
-  ret i32 %8, !dbg !1011
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !947, metadata !DIExpression()), !dbg !948
+  %3 = load volatile i32, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 5), align 4, !dbg !949
+  %4 = load i32, ptr %2, align 4, !dbg !950
+  %5 = and i32 %3, %4, !dbg !951
+  %6 = load i32, ptr %2, align 4, !dbg !952
+  %7 = icmp eq i32 %5, %6, !dbg !953
+  %8 = zext i1 %7 to i32, !dbg !953
+  ret i32 %8, !dbg !954
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @LL_EXTI_ClearFlag_0_31(i32 noundef %0) #0 !dbg !1012 {
+; Function Attrs: noinline nounwind optnone
+define internal void @LL_EXTI_ClearFlag_0_31(i32 noundef %0) #0 !dbg !955 {
   %2 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !1014, metadata !DIExpression()), !dbg !1015
-  %3 = load i32, ptr %2, align 4, !dbg !1016
-  store volatile i32 %3, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 5), align 4, !dbg !1017
-  ret void, !dbg !1018
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !956, metadata !DIExpression()), !dbg !957
+  %3 = load i32, ptr %2, align 4, !dbg !958
+  store volatile i32 %3, ptr getelementptr inbounds (%struct.EXTI_TypeDef, ptr inttoptr (i32 1073808384 to ptr), i32 0, i32 5), align 4, !dbg !959
+  ret void, !dbg !960
 }
 
-attributes #0 = { inlinehint nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #1 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #2 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #3 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
-attributes #4 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #5 = { optsize }
-attributes #6 = { nounwind }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 
 !llvm.dbg.cu = !{!2}
-!llvm.module.flags = !{!249, !250, !251, !252, !253, !254}
-!llvm.ident = !{!255}
+!llvm.module.flags = !{!248, !249, !250, !251, !252, !253, !254, !255}
+!llvm.ident = !{!256}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
-!1 = distinct !DIGlobalVariable(name: "exti_irq_table", scope: !2, file: !155, line: 35, type: !247, isLocal: true, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !135, globals: !152, splitDebugInlining: false, nameTableKind: None)
+!1 = distinct !DIGlobalVariable(name: "exti_irq_table", scope: !2, file: !155, line: 35, type: !246, isLocal: true, isDefinition: true)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !135, globals: !152, splitDebugInlining: false, nameTableKind: None)
 !3 = !DIFile(filename: "intc_exti_stm32.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !4 = !{!5, !13, !95}
 !5 = !DICompositeType(tag: DW_TAG_enumeration_type, name: "stm32_exti_trigger", file: !6, line: 45, baseType: !7, size: 8, elements: !8)
@@ -907,43 +860,43 @@ attributes #6 = { nounwind }
 !31 = !DIEnumerator(name: "K_OBJ_FUTEX", value: 15)
 !32 = !DIEnumerator(name: "K_OBJ_CONDVAR", value: 16)
 !33 = !DIEnumerator(name: "K_OBJ_DRIVER_GPIO", value: 17)
-!34 = !DIEnumerator(name: "K_OBJ_DRIVER_RESET", value: 18)
-!35 = !DIEnumerator(name: "K_OBJ_DRIVER_UART", value: 19)
-!36 = !DIEnumerator(name: "K_OBJ_DRIVER_CRYPTO", value: 20)
-!37 = !DIEnumerator(name: "K_OBJ_DRIVER_ADC", value: 21)
-!38 = !DIEnumerator(name: "K_OBJ_DRIVER_AUXDISPLAY", value: 22)
-!39 = !DIEnumerator(name: "K_OBJ_DRIVER_BBRAM", value: 23)
-!40 = !DIEnumerator(name: "K_OBJ_DRIVER_CAN", value: 24)
-!41 = !DIEnumerator(name: "K_OBJ_DRIVER_CHARGER", value: 25)
-!42 = !DIEnumerator(name: "K_OBJ_DRIVER_COREDUMP", value: 26)
-!43 = !DIEnumerator(name: "K_OBJ_DRIVER_COUNTER", value: 27)
-!44 = !DIEnumerator(name: "K_OBJ_DRIVER_DAC", value: 28)
-!45 = !DIEnumerator(name: "K_OBJ_DRIVER_DAI", value: 29)
-!46 = !DIEnumerator(name: "K_OBJ_DRIVER_DMA", value: 30)
-!47 = !DIEnumerator(name: "K_OBJ_DRIVER_EDAC", value: 31)
-!48 = !DIEnumerator(name: "K_OBJ_DRIVER_EEPROM", value: 32)
-!49 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE_EMUL", value: 33)
-!50 = !DIEnumerator(name: "K_OBJ_DRIVER_EMUL_SENSOR_BACKEND_API", value: 34)
-!51 = !DIEnumerator(name: "K_OBJ_DRIVER_ENTROPY", value: 35)
-!52 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI", value: 36)
-!53 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI_SAF", value: 37)
-!54 = !DIEnumerator(name: "K_OBJ_DRIVER_FLASH", value: 38)
-!55 = !DIEnumerator(name: "K_OBJ_DRIVER_FPGA", value: 39)
-!56 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE", value: 40)
-!57 = !DIEnumerator(name: "K_OBJ_DRIVER_HWSPINLOCK", value: 41)
-!58 = !DIEnumerator(name: "K_OBJ_DRIVER_I2C", value: 42)
-!59 = !DIEnumerator(name: "K_OBJ_DRIVER_I2S", value: 43)
-!60 = !DIEnumerator(name: "K_OBJ_DRIVER_I3C", value: 44)
-!61 = !DIEnumerator(name: "K_OBJ_DRIVER_IPM", value: 45)
-!62 = !DIEnumerator(name: "K_OBJ_DRIVER_KSCAN", value: 46)
-!63 = !DIEnumerator(name: "K_OBJ_DRIVER_LED", value: 47)
-!64 = !DIEnumerator(name: "K_OBJ_DRIVER_MBOX", value: 48)
-!65 = !DIEnumerator(name: "K_OBJ_DRIVER_MDIO", value: 49)
-!66 = !DIEnumerator(name: "K_OBJ_DRIVER_MIPI_DSI", value: 50)
-!67 = !DIEnumerator(name: "K_OBJ_DRIVER_PECI", value: 51)
-!68 = !DIEnumerator(name: "K_OBJ_DRIVER_PS2", value: 52)
-!69 = !DIEnumerator(name: "K_OBJ_DRIVER_PTP_CLOCK", value: 53)
-!70 = !DIEnumerator(name: "K_OBJ_DRIVER_PWM", value: 54)
+!34 = !DIEnumerator(name: "K_OBJ_DRIVER_PWM", value: 18)
+!35 = !DIEnumerator(name: "K_OBJ_DRIVER_RESET", value: 19)
+!36 = !DIEnumerator(name: "K_OBJ_DRIVER_UART", value: 20)
+!37 = !DIEnumerator(name: "K_OBJ_DRIVER_CRYPTO", value: 21)
+!38 = !DIEnumerator(name: "K_OBJ_DRIVER_ADC", value: 22)
+!39 = !DIEnumerator(name: "K_OBJ_DRIVER_AUXDISPLAY", value: 23)
+!40 = !DIEnumerator(name: "K_OBJ_DRIVER_BBRAM", value: 24)
+!41 = !DIEnumerator(name: "K_OBJ_DRIVER_CAN", value: 25)
+!42 = !DIEnumerator(name: "K_OBJ_DRIVER_CHARGER", value: 26)
+!43 = !DIEnumerator(name: "K_OBJ_DRIVER_COREDUMP", value: 27)
+!44 = !DIEnumerator(name: "K_OBJ_DRIVER_COUNTER", value: 28)
+!45 = !DIEnumerator(name: "K_OBJ_DRIVER_DAC", value: 29)
+!46 = !DIEnumerator(name: "K_OBJ_DRIVER_DAI", value: 30)
+!47 = !DIEnumerator(name: "K_OBJ_DRIVER_DMA", value: 31)
+!48 = !DIEnumerator(name: "K_OBJ_DRIVER_EDAC", value: 32)
+!49 = !DIEnumerator(name: "K_OBJ_DRIVER_EEPROM", value: 33)
+!50 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE_EMUL", value: 34)
+!51 = !DIEnumerator(name: "K_OBJ_DRIVER_EMUL_SENSOR_BACKEND_API", value: 35)
+!52 = !DIEnumerator(name: "K_OBJ_DRIVER_ENTROPY", value: 36)
+!53 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI", value: 37)
+!54 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI_SAF", value: 38)
+!55 = !DIEnumerator(name: "K_OBJ_DRIVER_FLASH", value: 39)
+!56 = !DIEnumerator(name: "K_OBJ_DRIVER_FPGA", value: 40)
+!57 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE", value: 41)
+!58 = !DIEnumerator(name: "K_OBJ_DRIVER_HWSPINLOCK", value: 42)
+!59 = !DIEnumerator(name: "K_OBJ_DRIVER_I2C", value: 43)
+!60 = !DIEnumerator(name: "K_OBJ_DRIVER_I2S", value: 44)
+!61 = !DIEnumerator(name: "K_OBJ_DRIVER_I3C", value: 45)
+!62 = !DIEnumerator(name: "K_OBJ_DRIVER_IPM", value: 46)
+!63 = !DIEnumerator(name: "K_OBJ_DRIVER_KSCAN", value: 47)
+!64 = !DIEnumerator(name: "K_OBJ_DRIVER_LED", value: 48)
+!65 = !DIEnumerator(name: "K_OBJ_DRIVER_MBOX", value: 49)
+!66 = !DIEnumerator(name: "K_OBJ_DRIVER_MDIO", value: 50)
+!67 = !DIEnumerator(name: "K_OBJ_DRIVER_MIPI_DSI", value: 51)
+!68 = !DIEnumerator(name: "K_OBJ_DRIVER_PECI", value: 52)
+!69 = !DIEnumerator(name: "K_OBJ_DRIVER_PS2", value: 53)
+!70 = !DIEnumerator(name: "K_OBJ_DRIVER_PTP_CLOCK", value: 54)
 !71 = !DIEnumerator(name: "K_OBJ_DRIVER_REGULATOR_PARENT", value: 55)
 !72 = !DIEnumerator(name: "K_OBJ_DRIVER_REGULATOR", value: 56)
 !73 = !DIEnumerator(name: "K_OBJ_DRIVER_RETAINED_MEM", value: 57)
@@ -1025,7 +978,7 @@ attributes #6 = { nounwind }
 !149 = !DIDerivedType(tag: DW_TAG_member, name: "FTSR", scope: !143, file: !96, line: 331, baseType: !146, size: 32, offset: 96)
 !150 = !DIDerivedType(tag: DW_TAG_member, name: "SWIER", scope: !143, file: !96, line: 332, baseType: !146, size: 32, offset: 128)
 !151 = !DIDerivedType(tag: DW_TAG_member, name: "PR", scope: !143, file: !96, line: 333, baseType: !146, size: 32, offset: 160)
-!152 = !{!153, !160, !182, !201, !217, !0, !219, !229, !239, !241, !243, !245}
+!152 = !{!153, !160, !182, !201, !217, !0, !219, !228, !238, !240, !242, !244}
 !153 = !DIGlobalVariableExpression(var: !154, expr: !DIExpression())
 !154 = distinct !DIGlobalVariable(scope: null, file: !155, line: 239, type: !156, isLocal: true, isDefinition: true)
 !155 = !DIFile(filename: "drivers/interrupt_controller/intc_exti_stm32.c", directory: "/home/sri/zephyrproject/zephyr")
@@ -1093,58 +1046,58 @@ attributes #6 = { nounwind }
 !217 = !DIGlobalVariableExpression(var: !218, expr: !DIExpression())
 !218 = distinct !DIGlobalVariable(name: "__devstate_dts_ord_49", scope: !2, file: !155, line: 239, type: !175, isLocal: true, isDefinition: true, align: 8)
 !219 = !DIGlobalVariableExpression(var: !220, expr: !DIExpression())
-!220 = distinct !DIGlobalVariable(name: "line_range_0", scope: !221, file: !155, line: 231, type: !224, isLocal: true, isDefinition: true)
-!221 = distinct !DISubprogram(name: "stm32_exti_init", scope: !155, file: !155, line: 227, type: !197, scopeLine: 228, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !222)
-!222 = !{!223}
-!223 = !DILocalVariable(name: "dev", arg: 1, scope: !221, file: !155, line: 227, type: !199)
-!224 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !225)
-!225 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "stm32_exti_range", file: !155, line: 26, size: 16, elements: !226)
-!226 = !{!227, !228}
-!227 = !DIDerivedType(tag: DW_TAG_member, name: "start", scope: !225, file: !155, line: 28, baseType: !178, size: 8)
-!228 = !DIDerivedType(tag: DW_TAG_member, name: "len", scope: !225, file: !155, line: 30, baseType: !178, size: 8, offset: 8)
-!229 = !DIGlobalVariableExpression(var: !230, expr: !DIExpression())
-!230 = distinct !DIGlobalVariable(name: "__isr_stm32_exti_isr_irq_0", scope: !221, file: !155, line: 231, type: !231, isLocal: true, isDefinition: true, align: 32)
-!231 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_isr_list", file: !232, line: 53, size: 128, elements: !233)
-!232 = !DIFile(filename: "include/zephyr/sw_isr_table.h", directory: "/home/sri/zephyrproject/zephyr")
-!233 = !{!234, !236, !237, !238}
-!234 = !DIDerivedType(tag: DW_TAG_member, name: "irq", scope: !231, file: !232, line: 55, baseType: !235, size: 32)
-!235 = !DIDerivedType(tag: DW_TAG_typedef, name: "int32_t", file: !137, line: 58, baseType: !140)
-!236 = !DIDerivedType(tag: DW_TAG_member, name: "flags", scope: !231, file: !232, line: 57, baseType: !235, size: 32, offset: 32)
-!237 = !DIDerivedType(tag: DW_TAG_member, name: "func", scope: !231, file: !232, line: 59, baseType: !139, size: 32, offset: 64)
-!238 = !DIDerivedType(tag: DW_TAG_member, name: "param", scope: !231, file: !232, line: 61, baseType: !170, size: 32, offset: 96)
-!239 = !DIGlobalVariableExpression(var: !240, expr: !DIExpression())
-!240 = distinct !DIGlobalVariable(name: "line_range_1", scope: !221, file: !155, line: 231, type: !224, isLocal: true, isDefinition: true)
-!241 = !DIGlobalVariableExpression(var: !242, expr: !DIExpression())
-!242 = distinct !DIGlobalVariable(name: "__isr_stm32_exti_isr_irq_1", scope: !221, file: !155, line: 231, type: !231, isLocal: true, isDefinition: true, align: 32)
-!243 = !DIGlobalVariableExpression(var: !244, expr: !DIExpression())
-!244 = distinct !DIGlobalVariable(name: "line_range_2", scope: !221, file: !155, line: 231, type: !224, isLocal: true, isDefinition: true)
-!245 = !DIGlobalVariableExpression(var: !246, expr: !DIExpression())
-!246 = distinct !DIGlobalVariable(name: "__isr_stm32_exti_isr_irq_2", scope: !221, file: !155, line: 231, type: !231, isLocal: true, isDefinition: true, align: 32)
-!247 = !DICompositeType(tag: DW_TAG_array_type, baseType: !248, size: 128, elements: !215)
-!248 = !DIDerivedType(tag: DW_TAG_typedef, name: "IRQn_Type", file: !96, line: 107, baseType: !95)
-!249 = !{i32 7, !"Dwarf Version", i32 4}
-!250 = !{i32 2, !"Debug Info Version", i32 3}
-!251 = !{i32 1, !"wchar_size", i32 4}
-!252 = !{i32 1, !"static_rwdata", i32 1}
-!253 = !{i32 1, !"enumsize_buildattr", i32 1}
-!254 = !{i32 1, !"armlib_unavailable", i32 0}
-!255 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!256 = distinct !DISubprogram(name: "z_impl_device_is_ready", scope: !164, file: !164, line: 744, type: !257, scopeLine: 745, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !259)
-!257 = !DISubroutineType(types: !258)
-!258 = !{!180, !199}
-!259 = !{!260}
-!260 = !DILocalVariable(name: "dev", arg: 1, scope: !256, file: !164, line: 744, type: !199)
-!261 = !DILocation(line: 744, column: 65, scope: !256)
-!262 = !DILocation(line: 746, column: 27, scope: !256)
-!263 = !DILocation(line: 746, column: 9, scope: !256)
-!264 = !DILocation(line: 746, column: 2, scope: !256)
-!265 = distinct !DISubprogram(name: "z_impl_k_object_access_grant", scope: !14, file: !14, line: 223, type: !266, scopeLine: 225, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !382)
+!220 = distinct !DIGlobalVariable(name: "line_range_0", scope: !221, file: !155, line: 231, type: !223, isLocal: true, isDefinition: true)
+!221 = distinct !DISubprogram(name: "stm32_exti_init", scope: !155, file: !155, line: 227, type: !197, scopeLine: 228, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!222 = !{}
+!223 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !224)
+!224 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "stm32_exti_range", file: !155, line: 26, size: 16, elements: !225)
+!225 = !{!226, !227}
+!226 = !DIDerivedType(tag: DW_TAG_member, name: "start", scope: !224, file: !155, line: 28, baseType: !178, size: 8)
+!227 = !DIDerivedType(tag: DW_TAG_member, name: "len", scope: !224, file: !155, line: 30, baseType: !178, size: 8, offset: 8)
+!228 = !DIGlobalVariableExpression(var: !229, expr: !DIExpression())
+!229 = distinct !DIGlobalVariable(name: "__isr_stm32_exti_isr_irq_0", scope: !221, file: !155, line: 231, type: !230, isLocal: true, isDefinition: true, align: 32)
+!230 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_isr_list", file: !231, line: 53, size: 128, elements: !232)
+!231 = !DIFile(filename: "include/zephyr/sw_isr_table.h", directory: "/home/sri/zephyrproject/zephyr")
+!232 = !{!233, !235, !236, !237}
+!233 = !DIDerivedType(tag: DW_TAG_member, name: "irq", scope: !230, file: !231, line: 55, baseType: !234, size: 32)
+!234 = !DIDerivedType(tag: DW_TAG_typedef, name: "int32_t", file: !137, line: 58, baseType: !140)
+!235 = !DIDerivedType(tag: DW_TAG_member, name: "flags", scope: !230, file: !231, line: 57, baseType: !234, size: 32, offset: 32)
+!236 = !DIDerivedType(tag: DW_TAG_member, name: "func", scope: !230, file: !231, line: 59, baseType: !139, size: 32, offset: 64)
+!237 = !DIDerivedType(tag: DW_TAG_member, name: "param", scope: !230, file: !231, line: 61, baseType: !170, size: 32, offset: 96)
+!238 = !DIGlobalVariableExpression(var: !239, expr: !DIExpression())
+!239 = distinct !DIGlobalVariable(name: "line_range_1", scope: !221, file: !155, line: 231, type: !223, isLocal: true, isDefinition: true)
+!240 = !DIGlobalVariableExpression(var: !241, expr: !DIExpression())
+!241 = distinct !DIGlobalVariable(name: "__isr_stm32_exti_isr_irq_1", scope: !221, file: !155, line: 231, type: !230, isLocal: true, isDefinition: true, align: 32)
+!242 = !DIGlobalVariableExpression(var: !243, expr: !DIExpression())
+!243 = distinct !DIGlobalVariable(name: "line_range_2", scope: !221, file: !155, line: 231, type: !223, isLocal: true, isDefinition: true)
+!244 = !DIGlobalVariableExpression(var: !245, expr: !DIExpression())
+!245 = distinct !DIGlobalVariable(name: "__isr_stm32_exti_isr_irq_2", scope: !221, file: !155, line: 231, type: !230, isLocal: true, isDefinition: true, align: 32)
+!246 = !DICompositeType(tag: DW_TAG_array_type, baseType: !247, size: 128, elements: !215)
+!247 = !DIDerivedType(tag: DW_TAG_typedef, name: "IRQn_Type", file: !96, line: 107, baseType: !95)
+!248 = !{i32 7, !"Dwarf Version", i32 4}
+!249 = !{i32 2, !"Debug Info Version", i32 3}
+!250 = !{i32 1, !"wchar_size", i32 4}
+!251 = !{i32 1, !"static_rwdata", i32 1}
+!252 = !{i32 1, !"enumsize_buildattr", i32 1}
+!253 = !{i32 1, !"armlib_unavailable", i32 0}
+!254 = !{i32 8, !"PIC Level", i32 2}
+!255 = !{i32 7, !"PIE Level", i32 2}
+!256 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!257 = distinct !DISubprogram(name: "z_impl_device_is_ready", scope: !164, file: !164, line: 744, type: !258, scopeLine: 745, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!258 = !DISubroutineType(types: !259)
+!259 = !{!180, !199}
+!260 = !DILocalVariable(name: "dev", arg: 1, scope: !257, file: !164, line: 744, type: !199)
+!261 = !DILocation(line: 744, column: 65, scope: !257)
+!262 = !DILocation(line: 746, column: 27, scope: !257)
+!263 = !DILocation(line: 746, column: 9, scope: !257)
+!264 = !DILocation(line: 746, column: 2, scope: !257)
+!265 = distinct !DISubprogram(name: "z_impl_k_object_access_grant", scope: !14, file: !14, line: 223, type: !266, scopeLine: 225, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
 !266 = !DISubroutineType(types: !267)
 !267 = !{null, !170, !268}
 !268 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !269, size: 32)
 !269 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_thread", file: !270, line: 250, size: 896, elements: !271)
 !270 = !DIFile(filename: "include/zephyr/kernel/thread.h", directory: "/home/sri/zephyrproject/zephyr")
-!271 = !{!272, !340, !353, !354, !355, !356, !377}
+!271 = !{!272, !340, !353, !354, !355, !356, !376}
 !272 = !DIDerivedType(tag: DW_TAG_member, name: "base", scope: !269, file: !270, line: 252, baseType: !273, size: 384)
 !273 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_base", file: !270, line: 58, size: 384, elements: !274)
 !274 = !{!275, !303, !311, !312, !313, !325, !326, !327}
@@ -1247,648 +1200,590 @@ attributes #6 = { nounwind }
 !371 = !DIFile(filename: "/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/lib/clang/17/include/stddef.h", directory: "")
 !372 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !358, file: !359, line: 5293, baseType: !305, size: 64, offset: 96)
 !373 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !358, file: !359, line: 5294, baseType: !374, offset: 160)
-!374 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_spinlock", file: !375, line: 45, elements: !376)
+!374 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_spinlock", file: !375, line: 45, elements: !222)
 !375 = !DIFile(filename: "include/zephyr/spinlock.h", directory: "/home/sri/zephyrproject/zephyr")
-!376 = !{}
-!377 = !DIDerivedType(tag: DW_TAG_member, name: "arch", scope: !269, file: !270, line: 355, baseType: !378, size: 64, offset: 832)
-!378 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_arch", file: !342, line: 60, size: 64, elements: !379)
-!379 = !{!380, !381}
-!380 = !DIDerivedType(tag: DW_TAG_member, name: "basepri", scope: !378, file: !342, line: 63, baseType: !136, size: 32)
-!381 = !DIDerivedType(tag: DW_TAG_member, name: "swap_return_value", scope: !378, file: !342, line: 66, baseType: !136, size: 32, offset: 32)
-!382 = !{!383, !384}
-!383 = !DILocalVariable(name: "object", arg: 1, scope: !265, file: !14, line: 223, type: !170)
-!384 = !DILocalVariable(name: "thread", arg: 2, scope: !265, file: !14, line: 224, type: !268)
-!385 = !DILocation(line: 223, column: 61, scope: !265)
-!386 = !DILocation(line: 224, column: 24, scope: !265)
-!387 = !DILocation(line: 226, column: 9, scope: !265)
-!388 = !DILocation(line: 227, column: 9, scope: !265)
-!389 = !DILocation(line: 228, column: 1, scope: !265)
-!390 = distinct !DISubprogram(name: "z_impl_k_object_release", scope: !14, file: !14, line: 243, type: !391, scopeLine: 244, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !393)
-!391 = !DISubroutineType(types: !392)
-!392 = !{null, !170}
-!393 = !{!394}
-!394 = !DILocalVariable(name: "object", arg: 1, scope: !390, file: !14, line: 243, type: !170)
-!395 = !DILocation(line: 243, column: 56, scope: !390)
-!396 = !DILocation(line: 245, column: 9, scope: !390)
-!397 = !DILocation(line: 246, column: 1, scope: !390)
-!398 = distinct !DISubprogram(name: "z_impl_k_object_alloc", scope: !14, file: !14, line: 359, type: !399, scopeLine: 360, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !401)
-!399 = !DISubroutineType(types: !400)
-!400 = !{!139, !13}
-!401 = !{!402}
-!402 = !DILocalVariable(name: "otype", arg: 1, scope: !398, file: !14, line: 359, type: !13)
-!403 = !DILocation(line: 359, column: 58, scope: !398)
-!404 = !DILocation(line: 361, column: 9, scope: !398)
-!405 = !DILocation(line: 363, column: 2, scope: !398)
-!406 = distinct !DISubprogram(name: "z_impl_k_object_alloc_size", scope: !14, file: !14, line: 366, type: !407, scopeLine: 368, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !409)
-!407 = !DISubroutineType(types: !408)
-!408 = !{!139, !13, !370}
-!409 = !{!410, !411}
-!410 = !DILocalVariable(name: "otype", arg: 1, scope: !406, file: !14, line: 366, type: !13)
-!411 = !DILocalVariable(name: "size", arg: 2, scope: !406, file: !14, line: 367, type: !370)
-!412 = !DILocation(line: 366, column: 63, scope: !406)
-!413 = !DILocation(line: 367, column: 13, scope: !406)
-!414 = !DILocation(line: 369, column: 9, scope: !406)
-!415 = !DILocation(line: 370, column: 9, scope: !406)
-!416 = !DILocation(line: 372, column: 2, scope: !406)
-!417 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_expires_ticks", scope: !359, file: !359, line: 656, type: !418, scopeLine: 658, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !424)
-!418 = !DISubroutineType(types: !419)
-!419 = !{!420, !422}
-!420 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_ticks_t", file: !421, line: 46, baseType: !338)
-!421 = !DIFile(filename: "include/zephyr/sys_clock.h", directory: "/home/sri/zephyrproject/zephyr")
-!422 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !423, size: 32)
-!423 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !269)
-!424 = !{!425}
-!425 = !DILocalVariable(name: "t", arg: 1, scope: !417, file: !359, line: 657, type: !422)
-!426 = !DILocation(line: 657, column: 30, scope: !417)
-!427 = !DILocation(line: 659, column: 28, scope: !417)
-!428 = !DILocation(line: 659, column: 31, scope: !417)
-!429 = !DILocation(line: 659, column: 36, scope: !417)
-!430 = !DILocation(line: 659, column: 9, scope: !417)
-!431 = !DILocation(line: 659, column: 2, scope: !417)
-!432 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_remaining_ticks", scope: !359, file: !359, line: 671, type: !418, scopeLine: 673, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !433)
-!433 = !{!434}
-!434 = !DILocalVariable(name: "t", arg: 1, scope: !432, file: !359, line: 672, type: !422)
-!435 = !DILocation(line: 672, column: 30, scope: !432)
-!436 = !DILocation(line: 674, column: 30, scope: !432)
-!437 = !DILocation(line: 674, column: 33, scope: !432)
-!438 = !DILocation(line: 674, column: 38, scope: !432)
-!439 = !DILocation(line: 674, column: 9, scope: !432)
-!440 = !DILocation(line: 674, column: 2, scope: !432)
-!441 = distinct !DISubprogram(name: "z_impl_k_timer_expires_ticks", scope: !359, file: !359, line: 1634, type: !442, scopeLine: 1636, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !463)
-!442 = !DISubroutineType(types: !443)
-!443 = !{!420, !444}
+!376 = !DIDerivedType(tag: DW_TAG_member, name: "arch", scope: !269, file: !270, line: 355, baseType: !377, size: 64, offset: 832)
+!377 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_arch", file: !342, line: 60, size: 64, elements: !378)
+!378 = !{!379, !380}
+!379 = !DIDerivedType(tag: DW_TAG_member, name: "basepri", scope: !377, file: !342, line: 63, baseType: !136, size: 32)
+!380 = !DIDerivedType(tag: DW_TAG_member, name: "swap_return_value", scope: !377, file: !342, line: 66, baseType: !136, size: 32, offset: 32)
+!381 = !DILocalVariable(name: "object", arg: 1, scope: !265, file: !14, line: 223, type: !170)
+!382 = !DILocation(line: 223, column: 61, scope: !265)
+!383 = !DILocalVariable(name: "thread", arg: 2, scope: !265, file: !14, line: 224, type: !268)
+!384 = !DILocation(line: 224, column: 24, scope: !265)
+!385 = !DILocation(line: 226, column: 9, scope: !265)
+!386 = !DILocation(line: 227, column: 9, scope: !265)
+!387 = !DILocation(line: 228, column: 1, scope: !265)
+!388 = distinct !DISubprogram(name: "z_impl_k_object_release", scope: !14, file: !14, line: 243, type: !389, scopeLine: 244, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!389 = !DISubroutineType(types: !390)
+!390 = !{null, !170}
+!391 = !DILocalVariable(name: "object", arg: 1, scope: !388, file: !14, line: 243, type: !170)
+!392 = !DILocation(line: 243, column: 56, scope: !388)
+!393 = !DILocation(line: 245, column: 9, scope: !388)
+!394 = !DILocation(line: 246, column: 1, scope: !388)
+!395 = distinct !DISubprogram(name: "z_impl_k_object_alloc", scope: !14, file: !14, line: 359, type: !396, scopeLine: 360, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!396 = !DISubroutineType(types: !397)
+!397 = !{!139, !13}
+!398 = !DILocalVariable(name: "otype", arg: 1, scope: !395, file: !14, line: 359, type: !13)
+!399 = !DILocation(line: 359, column: 58, scope: !395)
+!400 = !DILocation(line: 361, column: 9, scope: !395)
+!401 = !DILocation(line: 363, column: 2, scope: !395)
+!402 = distinct !DISubprogram(name: "z_impl_k_object_alloc_size", scope: !14, file: !14, line: 366, type: !403, scopeLine: 368, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!403 = !DISubroutineType(types: !404)
+!404 = !{!139, !13, !370}
+!405 = !DILocalVariable(name: "otype", arg: 1, scope: !402, file: !14, line: 366, type: !13)
+!406 = !DILocation(line: 366, column: 63, scope: !402)
+!407 = !DILocalVariable(name: "size", arg: 2, scope: !402, file: !14, line: 367, type: !370)
+!408 = !DILocation(line: 367, column: 13, scope: !402)
+!409 = !DILocation(line: 369, column: 9, scope: !402)
+!410 = !DILocation(line: 370, column: 9, scope: !402)
+!411 = !DILocation(line: 372, column: 2, scope: !402)
+!412 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_expires_ticks", scope: !359, file: !359, line: 656, type: !413, scopeLine: 658, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!413 = !DISubroutineType(types: !414)
+!414 = !{!415, !417}
+!415 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_ticks_t", file: !416, line: 46, baseType: !338)
+!416 = !DIFile(filename: "include/zephyr/sys_clock.h", directory: "/home/sri/zephyrproject/zephyr")
+!417 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !418, size: 32)
+!418 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !269)
+!419 = !DILocalVariable(name: "t", arg: 1, scope: !412, file: !359, line: 657, type: !417)
+!420 = !DILocation(line: 657, column: 30, scope: !412)
+!421 = !DILocation(line: 659, column: 28, scope: !412)
+!422 = !DILocation(line: 659, column: 31, scope: !412)
+!423 = !DILocation(line: 659, column: 36, scope: !412)
+!424 = !DILocation(line: 659, column: 9, scope: !412)
+!425 = !DILocation(line: 659, column: 2, scope: !412)
+!426 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_remaining_ticks", scope: !359, file: !359, line: 671, type: !413, scopeLine: 673, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!427 = !DILocalVariable(name: "t", arg: 1, scope: !426, file: !359, line: 672, type: !417)
+!428 = !DILocation(line: 672, column: 30, scope: !426)
+!429 = !DILocation(line: 674, column: 30, scope: !426)
+!430 = !DILocation(line: 674, column: 33, scope: !426)
+!431 = !DILocation(line: 674, column: 38, scope: !426)
+!432 = !DILocation(line: 674, column: 9, scope: !426)
+!433 = !DILocation(line: 674, column: 2, scope: !426)
+!434 = distinct !DISubprogram(name: "z_impl_k_timer_expires_ticks", scope: !359, file: !359, line: 1634, type: !435, scopeLine: 1636, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!435 = !DISubroutineType(types: !436)
+!436 = !{!415, !437}
+!437 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !438, size: 32)
+!438 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !439)
+!439 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_timer", file: !359, line: 1439, size: 448, elements: !440)
+!440 = !{!441, !442, !443, !448, !449, !454, !455}
+!441 = !DIDerivedType(tag: DW_TAG_member, name: "timeout", scope: !439, file: !359, line: 1445, baseType: !328, size: 192)
+!442 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !439, file: !359, line: 1448, baseType: !305, size: 64, offset: 192)
+!443 = !DIDerivedType(tag: DW_TAG_member, name: "expiry_fn", scope: !439, file: !359, line: 1451, baseType: !444, size: 32, offset: 256)
 !444 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !445, size: 32)
-!445 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !446)
-!446 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_timer", file: !359, line: 1439, size: 448, elements: !447)
-!447 = !{!448, !449, !450, !455, !456, !461, !462}
-!448 = !DIDerivedType(tag: DW_TAG_member, name: "timeout", scope: !446, file: !359, line: 1445, baseType: !328, size: 192)
-!449 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !446, file: !359, line: 1448, baseType: !305, size: 64, offset: 192)
-!450 = !DIDerivedType(tag: DW_TAG_member, name: "expiry_fn", scope: !446, file: !359, line: 1451, baseType: !451, size: 32, offset: 256)
-!451 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !452, size: 32)
-!452 = !DISubroutineType(types: !453)
-!453 = !{null, !454}
-!454 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !446, size: 32)
-!455 = !DIDerivedType(tag: DW_TAG_member, name: "stop_fn", scope: !446, file: !359, line: 1454, baseType: !451, size: 32, offset: 288)
-!456 = !DIDerivedType(tag: DW_TAG_member, name: "period", scope: !446, file: !359, line: 1457, baseType: !457, size: 64, offset: 320)
-!457 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_timeout_t", file: !421, line: 67, baseType: !458)
-!458 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !421, line: 65, size: 64, elements: !459)
-!459 = !{!460}
-!460 = !DIDerivedType(tag: DW_TAG_member, name: "ticks", scope: !458, file: !421, line: 66, baseType: !420, size: 64)
-!461 = !DIDerivedType(tag: DW_TAG_member, name: "status", scope: !446, file: !359, line: 1460, baseType: !136, size: 32, offset: 384)
-!462 = !DIDerivedType(tag: DW_TAG_member, name: "user_data", scope: !446, file: !359, line: 1463, baseType: !139, size: 32, offset: 416)
-!463 = !{!464}
-!464 = !DILocalVariable(name: "timer", arg: 1, scope: !441, file: !359, line: 1635, type: !444)
-!465 = !DILocation(line: 1635, column: 34, scope: !441)
-!466 = !DILocation(line: 1637, column: 28, scope: !441)
-!467 = !DILocation(line: 1637, column: 35, scope: !441)
-!468 = !DILocation(line: 1637, column: 9, scope: !441)
-!469 = !DILocation(line: 1637, column: 2, scope: !441)
-!470 = distinct !DISubprogram(name: "z_impl_k_timer_remaining_ticks", scope: !359, file: !359, line: 1649, type: !442, scopeLine: 1651, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !471)
-!471 = !{!472}
-!472 = !DILocalVariable(name: "timer", arg: 1, scope: !470, file: !359, line: 1650, type: !444)
-!473 = !DILocation(line: 1650, column: 34, scope: !470)
-!474 = !DILocation(line: 1652, column: 30, scope: !470)
-!475 = !DILocation(line: 1652, column: 37, scope: !470)
-!476 = !DILocation(line: 1652, column: 9, scope: !470)
-!477 = !DILocation(line: 1652, column: 2, scope: !470)
-!478 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_set", scope: !359, file: !359, line: 1689, type: !479, scopeLine: 1691, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !481)
-!479 = !DISubroutineType(types: !480)
-!480 = !{null, !454, !139}
-!481 = !{!482, !483}
-!482 = !DILocalVariable(name: "timer", arg: 1, scope: !478, file: !359, line: 1689, type: !454)
-!483 = !DILocalVariable(name: "user_data", arg: 2, scope: !478, file: !359, line: 1690, type: !139)
-!484 = !DILocation(line: 1689, column: 65, scope: !478)
-!485 = !DILocation(line: 1690, column: 19, scope: !478)
-!486 = !DILocation(line: 1692, column: 21, scope: !478)
-!487 = !DILocation(line: 1692, column: 2, scope: !478)
-!488 = !DILocation(line: 1692, column: 9, scope: !478)
-!489 = !DILocation(line: 1692, column: 19, scope: !478)
-!490 = !DILocation(line: 1693, column: 1, scope: !478)
-!491 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_get", scope: !359, file: !359, line: 1704, type: !492, scopeLine: 1705, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !494)
-!492 = !DISubroutineType(types: !493)
-!493 = !{!139, !444}
-!494 = !{!495}
-!495 = !DILocalVariable(name: "timer", arg: 1, scope: !491, file: !359, line: 1704, type: !444)
-!496 = !DILocation(line: 1704, column: 72, scope: !491)
-!497 = !DILocation(line: 1706, column: 9, scope: !491)
-!498 = !DILocation(line: 1706, column: 16, scope: !491)
-!499 = !DILocation(line: 1706, column: 2, scope: !491)
-!500 = distinct !DISubprogram(name: "z_impl_k_queue_is_empty", scope: !359, file: !359, line: 2071, type: !501, scopeLine: 2072, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !521)
-!501 = !DISubroutineType(types: !502)
-!502 = !{!140, !503}
-!503 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !504, size: 32)
-!504 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_queue", file: !359, line: 1830, size: 128, elements: !505)
-!505 = !{!506, !519, !520}
-!506 = !DIDerivedType(tag: DW_TAG_member, name: "data_q", scope: !504, file: !359, line: 1831, baseType: !507, size: 64)
-!507 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sflist_t", file: !508, line: 60, baseType: !509)
-!508 = !DIFile(filename: "include/zephyr/sys/sflist.h", directory: "/home/sri/zephyrproject/zephyr")
-!509 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sflist", file: !508, line: 53, size: 64, elements: !510)
-!510 = !{!511, !518}
-!511 = !DIDerivedType(tag: DW_TAG_member, name: "head", scope: !509, file: !508, line: 54, baseType: !512, size: 32)
-!512 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !513, size: 32)
-!513 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sfnode_t", file: !508, line: 50, baseType: !514)
-!514 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sfnode", file: !508, line: 44, size: 32, elements: !515)
-!515 = !{!516}
-!516 = !DIDerivedType(tag: DW_TAG_member, name: "next_and_flags", scope: !514, file: !508, line: 45, baseType: !517, size: 32)
-!517 = !DIDerivedType(tag: DW_TAG_typedef, name: "unative_t", file: !508, line: 40, baseType: !136)
-!518 = !DIDerivedType(tag: DW_TAG_member, name: "tail", scope: !509, file: !508, line: 55, baseType: !512, size: 32, offset: 32)
-!519 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !504, file: !359, line: 1832, baseType: !374, offset: 64)
-!520 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !504, file: !359, line: 1833, baseType: !305, size: 64, offset: 64)
-!521 = !{!522}
-!522 = !DILocalVariable(name: "queue", arg: 1, scope: !500, file: !359, line: 2071, type: !503)
-!523 = !DILocation(line: 2071, column: 59, scope: !500)
-!524 = !DILocation(line: 2073, column: 35, scope: !500)
-!525 = !DILocation(line: 2073, column: 42, scope: !500)
-!526 = !DILocation(line: 2073, column: 14, scope: !500)
-!527 = !DILocation(line: 2073, column: 9, scope: !500)
-!528 = !DILocation(line: 2073, column: 2, scope: !500)
-!529 = distinct !DISubprogram(name: "z_impl_k_sem_count_get", scope: !359, file: !359, line: 3209, type: !530, scopeLine: 3210, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !538)
-!530 = !DISubroutineType(types: !531)
-!531 = !{!138, !532}
-!532 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !533, size: 32)
-!533 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_sem", file: !359, line: 3092, size: 128, elements: !534)
-!534 = !{!535, !536, !537}
-!535 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !533, file: !359, line: 3093, baseType: !305, size: 64)
-!536 = !DIDerivedType(tag: DW_TAG_member, name: "count", scope: !533, file: !359, line: 3094, baseType: !138, size: 32, offset: 64)
-!537 = !DIDerivedType(tag: DW_TAG_member, name: "limit", scope: !533, file: !359, line: 3095, baseType: !138, size: 32, offset: 96)
-!538 = !{!539}
-!539 = !DILocalVariable(name: "sem", arg: 1, scope: !529, file: !359, line: 3209, type: !532)
-!540 = !DILocation(line: 3209, column: 65, scope: !529)
-!541 = !DILocation(line: 3211, column: 9, scope: !529)
-!542 = !DILocation(line: 3211, column: 14, scope: !529)
-!543 = !DILocation(line: 3211, column: 2, scope: !529)
-!544 = distinct !DISubprogram(name: "z_impl_k_msgq_num_free_get", scope: !359, file: !359, line: 4649, type: !545, scopeLine: 4650, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !561)
-!545 = !DISubroutineType(types: !546)
-!546 = !{!136, !547}
-!547 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !548, size: 32)
-!548 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_msgq", file: !359, line: 4390, size: 320, elements: !549)
-!549 = !{!550, !551, !552, !553, !554, !556, !557, !558, !559, !560}
-!550 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !548, file: !359, line: 4392, baseType: !305, size: 64)
-!551 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !548, file: !359, line: 4394, baseType: !374, offset: 64)
-!552 = !DIDerivedType(tag: DW_TAG_member, name: "msg_size", scope: !548, file: !359, line: 4396, baseType: !370, size: 32, offset: 64)
-!553 = !DIDerivedType(tag: DW_TAG_member, name: "max_msgs", scope: !548, file: !359, line: 4398, baseType: !136, size: 32, offset: 96)
-!554 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_start", scope: !548, file: !359, line: 4400, baseType: !555, size: 32, offset: 128)
-!555 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !157, size: 32)
-!556 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_end", scope: !548, file: !359, line: 4402, baseType: !555, size: 32, offset: 160)
-!557 = !DIDerivedType(tag: DW_TAG_member, name: "read_ptr", scope: !548, file: !359, line: 4404, baseType: !555, size: 32, offset: 192)
-!558 = !DIDerivedType(tag: DW_TAG_member, name: "write_ptr", scope: !548, file: !359, line: 4406, baseType: !555, size: 32, offset: 224)
-!559 = !DIDerivedType(tag: DW_TAG_member, name: "used_msgs", scope: !548, file: !359, line: 4408, baseType: !136, size: 32, offset: 256)
-!560 = !DIDerivedType(tag: DW_TAG_member, name: "flags", scope: !548, file: !359, line: 4413, baseType: !178, size: 8, offset: 288)
-!561 = !{!562}
-!562 = !DILocalVariable(name: "msgq", arg: 1, scope: !544, file: !359, line: 4649, type: !547)
-!563 = !DILocation(line: 4649, column: 66, scope: !544)
-!564 = !DILocation(line: 4651, column: 9, scope: !544)
-!565 = !DILocation(line: 4651, column: 15, scope: !544)
-!566 = !DILocation(line: 4651, column: 26, scope: !544)
-!567 = !DILocation(line: 4651, column: 32, scope: !544)
-!568 = !DILocation(line: 4651, column: 24, scope: !544)
-!569 = !DILocation(line: 4651, column: 2, scope: !544)
-!570 = distinct !DISubprogram(name: "z_impl_k_msgq_num_used_get", scope: !359, file: !359, line: 4665, type: !545, scopeLine: 4666, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !571)
-!571 = !{!572}
-!572 = !DILocalVariable(name: "msgq", arg: 1, scope: !570, file: !359, line: 4665, type: !547)
-!573 = !DILocation(line: 4665, column: 66, scope: !570)
-!574 = !DILocation(line: 4667, column: 9, scope: !570)
-!575 = !DILocation(line: 4667, column: 15, scope: !570)
-!576 = !DILocation(line: 4667, column: 2, scope: !570)
-!577 = distinct !DISubprogram(name: "stm32_exti_enable", scope: !155, file: !155, line: 49, type: !578, scopeLine: 50, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !580)
-!578 = !DISubroutineType(types: !579)
-!579 = !{null, !140}
-!580 = !{!581, !582}
-!581 = !DILocalVariable(name: "line", arg: 1, scope: !577, file: !155, line: 49, type: !140)
-!582 = !DILocalVariable(name: "irqnum", scope: !577, file: !155, line: 51, type: !140)
-!583 = !DILocation(line: 49, column: 28, scope: !577)
-!584 = !DILocation(line: 51, column: 2, scope: !577)
-!585 = !DILocation(line: 51, column: 6, scope: !577)
-!586 = !DILocation(line: 53, column: 6, scope: !587)
-!587 = distinct !DILexicalBlock(scope: !577, file: !155, line: 53, column: 6)
-!588 = !DILocation(line: 53, column: 11, scope: !587)
-!589 = !DILocation(line: 53, column: 6, scope: !577)
-!590 = !DILocation(line: 55, column: 2, scope: !591)
-!591 = distinct !DILexicalBlock(scope: !587, file: !155, line: 53, column: 18)
-!592 = !DILocation(line: 58, column: 26, scope: !577)
-!593 = !DILocation(line: 58, column: 11, scope: !577)
-!594 = !DILocation(line: 58, column: 9, scope: !577)
-!595 = !DILocation(line: 59, column: 6, scope: !596)
-!596 = distinct !DILexicalBlock(scope: !577, file: !155, line: 59, column: 6)
-!597 = !DILocation(line: 59, column: 13, scope: !596)
-!598 = !DILocation(line: 59, column: 6, scope: !577)
-!599 = !DILocation(line: 61, column: 2, scope: !600)
-!600 = distinct !DILexicalBlock(scope: !596, file: !155, line: 59, column: 22)
-!601 = !DILocation(line: 67, column: 43, scope: !577)
-!602 = !DILocation(line: 67, column: 29, scope: !577)
-!603 = !DILocation(line: 67, column: 2, scope: !577)
-!604 = !DILocation(line: 71, column: 18, scope: !577)
-!605 = !DILocation(line: 71, column: 2, scope: !577)
-!606 = !DILocation(line: 72, column: 1, scope: !577)
-!607 = distinct !DISubprogram(name: "LL_EXTI_EnableIT_0_31", scope: !608, file: !608, line: 273, type: !609, scopeLine: 274, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !611)
-!608 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_ll_exti.h", directory: "/home/sri/zephyrproject")
-!609 = !DISubroutineType(types: !610)
-!610 = !{null, !136}
-!611 = !{!612}
-!612 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !607, file: !608, line: 273, type: !136)
-!613 = !DILocation(line: 273, column: 53, scope: !607)
-!614 = !DILocation(line: 275, column: 64, scope: !607)
-!615 = !DILocation(line: 275, column: 60, scope: !607)
-!616 = !DILocation(line: 276, column: 1, scope: !607)
-!617 = !DISubprogram(name: "arch_irq_enable", scope: !618, file: !618, line: 39, type: !619, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !376)
-!618 = !DIFile(filename: "include/zephyr/arch/arm/irq.h", directory: "/home/sri/zephyrproject/zephyr")
-!619 = !DISubroutineType(types: !620)
-!620 = !{null, !138}
-!621 = distinct !DISubprogram(name: "stm32_exti_disable", scope: !155, file: !155, line: 74, type: !578, scopeLine: 75, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !622)
-!622 = !{!623}
-!623 = !DILocalVariable(name: "line", arg: 1, scope: !621, file: !155, line: 74, type: !140)
-!624 = !DILocation(line: 74, column: 29, scope: !621)
-!625 = !DILocation(line: 76, column: 2, scope: !621)
-!626 = !DILocation(line: 78, column: 6, scope: !627)
-!627 = distinct !DILexicalBlock(scope: !621, file: !155, line: 78, column: 6)
-!628 = !DILocation(line: 78, column: 11, scope: !627)
-!629 = !DILocation(line: 78, column: 6, scope: !621)
-!630 = !DILocation(line: 82, column: 45, scope: !631)
-!631 = distinct !DILexicalBlock(scope: !627, file: !155, line: 78, column: 17)
-!632 = !DILocation(line: 82, column: 31, scope: !631)
-!633 = !DILocation(line: 82, column: 3, scope: !631)
-!634 = !DILocation(line: 84, column: 2, scope: !631)
-!635 = !DILocation(line: 87, column: 2, scope: !621)
-!636 = !DILocation(line: 88, column: 1, scope: !621)
-!637 = distinct !DISubprogram(name: "z_stm32_hsem_lock", scope: !638, file: !638, line: 116, type: !639, scopeLine: 117, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !641)
-!638 = !DIFile(filename: "soc/arm/st_stm32/common/stm32_hsem.h", directory: "/home/sri/zephyrproject/zephyr")
-!639 = !DISubroutineType(types: !640)
-!640 = !{null, !136, !136}
-!641 = !{!642, !643}
-!642 = !DILocalVariable(name: "hsem", arg: 1, scope: !637, file: !638, line: 116, type: !136)
-!643 = !DILocalVariable(name: "retry", arg: 2, scope: !637, file: !638, line: 116, type: !136)
-!644 = !DILocation(line: 116, column: 47, scope: !637)
-!645 = !DILocation(line: 116, column: 62, scope: !637)
-!646 = !DILocation(line: 130, column: 1, scope: !637)
-!647 = distinct !DISubprogram(name: "LL_EXTI_DisableIT_0_31", scope: !608, file: !608, line: 321, type: !609, scopeLine: 322, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !648)
-!648 = !{!649}
-!649 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !647, file: !608, line: 321, type: !136)
-!650 = !DILocation(line: 321, column: 54, scope: !647)
-!651 = !DILocation(line: 323, column: 65, scope: !647)
-!652 = !DILocation(line: 323, column: 63, scope: !647)
-!653 = !DILocation(line: 323, column: 60, scope: !647)
-!654 = !DILocation(line: 324, column: 1, scope: !647)
-!655 = distinct !DISubprogram(name: "z_stm32_hsem_unlock", scope: !638, file: !638, line: 151, type: !609, scopeLine: 152, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !656)
-!656 = !{!657}
-!657 = !DILocalVariable(name: "hsem", arg: 1, scope: !655, file: !638, line: 151, type: !136)
-!658 = !DILocation(line: 151, column: 49, scope: !655)
-!659 = !DILocation(line: 157, column: 1, scope: !655)
-!660 = distinct !DISubprogram(name: "stm32_exti_trigger", scope: !155, file: !155, line: 133, type: !661, scopeLine: 134, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !663)
-!661 = !DISubroutineType(types: !662)
-!662 = !{null, !140, !140}
-!663 = !{!664, !665}
-!664 = !DILocalVariable(name: "line", arg: 1, scope: !660, file: !155, line: 133, type: !140)
-!665 = !DILocalVariable(name: "trigger", arg: 2, scope: !660, file: !155, line: 133, type: !140)
-!666 = !DILocation(line: 133, column: 29, scope: !660)
-!667 = !DILocation(line: 133, column: 39, scope: !660)
-!668 = !DILocation(line: 136, column: 6, scope: !669)
-!669 = distinct !DILexicalBlock(scope: !660, file: !155, line: 136, column: 6)
-!670 = !DILocation(line: 136, column: 11, scope: !669)
-!671 = !DILocation(line: 136, column: 6, scope: !660)
-!672 = !DILocation(line: 138, column: 2, scope: !673)
-!673 = distinct !DILexicalBlock(scope: !669, file: !155, line: 136, column: 18)
-!674 = !DILocation(line: 140, column: 2, scope: !660)
-!675 = !DILocation(line: 142, column: 10, scope: !660)
-!676 = !DILocation(line: 142, column: 2, scope: !660)
-!677 = !DILocation(line: 144, column: 53, scope: !678)
-!678 = distinct !DILexicalBlock(scope: !660, file: !155, line: 142, column: 19)
-!679 = !DILocation(line: 144, column: 39, scope: !678)
-!680 = !DILocation(line: 144, column: 3, scope: !678)
-!681 = !DILocation(line: 145, column: 54, scope: !678)
-!682 = !DILocation(line: 145, column: 40, scope: !678)
-!683 = !DILocation(line: 145, column: 3, scope: !678)
-!684 = !DILocation(line: 146, column: 3, scope: !678)
-!685 = !DILocation(line: 148, column: 52, scope: !678)
-!686 = !DILocation(line: 148, column: 38, scope: !678)
-!687 = !DILocation(line: 148, column: 3, scope: !678)
-!688 = !DILocation(line: 149, column: 54, scope: !678)
-!689 = !DILocation(line: 149, column: 40, scope: !678)
-!690 = !DILocation(line: 149, column: 3, scope: !678)
-!691 = !DILocation(line: 150, column: 3, scope: !678)
-!692 = !DILocation(line: 152, column: 53, scope: !678)
-!693 = !DILocation(line: 152, column: 39, scope: !678)
-!694 = !DILocation(line: 152, column: 3, scope: !678)
-!695 = !DILocation(line: 153, column: 53, scope: !678)
-!696 = !DILocation(line: 153, column: 39, scope: !678)
-!697 = !DILocation(line: 153, column: 3, scope: !678)
-!698 = !DILocation(line: 154, column: 3, scope: !678)
-!699 = !DILocation(line: 156, column: 52, scope: !678)
-!700 = !DILocation(line: 156, column: 38, scope: !678)
-!701 = !DILocation(line: 156, column: 3, scope: !678)
-!702 = !DILocation(line: 157, column: 53, scope: !678)
-!703 = !DILocation(line: 157, column: 39, scope: !678)
-!704 = !DILocation(line: 157, column: 3, scope: !678)
-!705 = !DILocation(line: 158, column: 3, scope: !678)
-!706 = !DILocation(line: 161, column: 3, scope: !678)
-!707 = !DILocation(line: 163, column: 2, scope: !660)
-!708 = !DILocation(line: 164, column: 1, scope: !660)
-!709 = distinct !DISubprogram(name: "LL_EXTI_DisableRisingTrig_0_31", scope: !608, file: !608, line: 617, type: !609, scopeLine: 618, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !710)
-!710 = !{!711}
-!711 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !709, file: !608, line: 617, type: !136)
-!712 = !DILocation(line: 617, column: 62, scope: !709)
-!713 = !DILocation(line: 619, column: 66, scope: !709)
-!714 = !DILocation(line: 619, column: 64, scope: !709)
-!715 = !DILocation(line: 619, column: 61, scope: !709)
-!716 = !DILocation(line: 621, column: 1, scope: !709)
-!717 = distinct !DISubprogram(name: "LL_EXTI_DisableFallingTrig_0_31", scope: !608, file: !608, line: 753, type: !609, scopeLine: 754, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !718)
-!718 = !{!719}
-!719 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !717, file: !608, line: 753, type: !136)
-!720 = !DILocation(line: 753, column: 63, scope: !717)
-!721 = !DILocation(line: 755, column: 66, scope: !717)
-!722 = !DILocation(line: 755, column: 64, scope: !717)
-!723 = !DILocation(line: 755, column: 61, scope: !717)
-!724 = !DILocation(line: 756, column: 1, scope: !717)
-!725 = distinct !DISubprogram(name: "LL_EXTI_EnableRisingTrig_0_31", scope: !608, file: !608, line: 571, type: !609, scopeLine: 572, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !726)
-!726 = !{!727}
-!727 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !725, file: !608, line: 571, type: !136)
-!728 = !DILocation(line: 571, column: 61, scope: !725)
-!729 = !DILocation(line: 573, column: 65, scope: !725)
-!730 = !DILocation(line: 573, column: 61, scope: !725)
-!731 = !DILocation(line: 575, column: 1, scope: !725)
-!732 = distinct !DISubprogram(name: "LL_EXTI_EnableFallingTrig_0_31", scope: !608, file: !608, line: 709, type: !609, scopeLine: 710, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !733)
-!733 = !{!734}
-!734 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !732, file: !608, line: 709, type: !136)
-!735 = !DILocation(line: 709, column: 62, scope: !732)
-!736 = !DILocation(line: 711, column: 65, scope: !732)
-!737 = !DILocation(line: 711, column: 61, scope: !732)
-!738 = !DILocation(line: 712, column: 1, scope: !732)
-!739 = !DILocation(line: 227, column: 49, scope: !221)
-!740 = !DILocation(line: 229, column: 9, scope: !221)
-!741 = !DILocation(line: 231, column: 98, scope: !221)
-!742 = !DILocation(line: 231, column: 118, scope: !221)
-!743 = !DILocation(line: 231, column: 64, scope: !221)
-!744 = !DILocation(line: 231, column: 375, scope: !745)
-!745 = distinct !DILexicalBlock(scope: !221, file: !155, line: 231, column: 127)
-!746 = !DILocation(line: 231, column: 507, scope: !221)
-!747 = !DILocation(line: 231, column: 527, scope: !221)
-!748 = !DILocation(line: 231, column: 473, scope: !221)
-!749 = !DILocation(line: 231, column: 784, scope: !750)
-!750 = distinct !DILexicalBlock(scope: !221, file: !155, line: 231, column: 536)
-!751 = !DILocation(line: 231, column: 917, scope: !221)
-!752 = !DILocation(line: 231, column: 937, scope: !221)
-!753 = !DILocation(line: 231, column: 883, scope: !221)
-!754 = !DILocation(line: 231, column: 1194, scope: !755)
-!755 = distinct !DILexicalBlock(scope: !221, file: !155, line: 231, column: 946)
-!756 = !DILocation(line: 235, column: 2, scope: !221)
-!757 = distinct !DISubprogram(name: "stm32_exti_set_callback", scope: !155, file: !155, line: 248, type: !758, scopeLine: 249, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !760)
-!758 = !DISubroutineType(types: !759)
-!759 = !{!140, !140, !210, !139}
-!760 = !{!761, !762, !763, !764, !766}
-!761 = !DILocalVariable(name: "line", arg: 1, scope: !757, file: !155, line: 248, type: !140)
-!762 = !DILocalVariable(name: "cb", arg: 2, scope: !757, file: !155, line: 248, type: !210)
-!763 = !DILocalVariable(name: "arg", arg: 3, scope: !757, file: !155, line: 248, type: !139)
-!764 = !DILocalVariable(name: "dev", scope: !757, file: !155, line: 250, type: !765)
-!765 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !199)
-!766 = !DILocalVariable(name: "data", scope: !757, file: !155, line: 251, type: !767)
-!767 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !203, size: 32)
-!768 = !DILocation(line: 248, column: 33, scope: !757)
-!769 = !DILocation(line: 248, column: 61, scope: !757)
-!770 = !DILocation(line: 248, column: 71, scope: !757)
-!771 = !DILocation(line: 250, column: 2, scope: !757)
-!772 = !DILocation(line: 250, column: 29, scope: !757)
-!773 = !DILocation(line: 251, column: 2, scope: !757)
-!774 = !DILocation(line: 251, column: 26, scope: !757)
-!775 = !DILocation(line: 251, column: 38, scope: !757)
-!776 = !DILocation(line: 253, column: 7, scope: !777)
-!777 = distinct !DILexicalBlock(scope: !757, file: !155, line: 253, column: 6)
-!778 = !DILocation(line: 253, column: 13, scope: !777)
-!779 = !DILocation(line: 253, column: 16, scope: !777)
-!780 = !DILocation(line: 253, column: 22, scope: !777)
-!781 = !DILocation(line: 253, column: 28, scope: !777)
-!782 = !DILocation(line: 253, column: 25, scope: !777)
-!783 = !DILocation(line: 253, column: 32, scope: !777)
-!784 = !DILocation(line: 253, column: 36, scope: !777)
-!785 = !DILocation(line: 253, column: 42, scope: !777)
-!786 = !DILocation(line: 253, column: 45, scope: !777)
-!787 = !DILocation(line: 253, column: 51, scope: !777)
-!788 = !DILocation(line: 253, column: 59, scope: !777)
-!789 = !DILocation(line: 253, column: 56, scope: !777)
-!790 = !DILocation(line: 253, column: 6, scope: !757)
-!791 = !DILocation(line: 254, column: 3, scope: !792)
-!792 = distinct !DILexicalBlock(scope: !777, file: !155, line: 253, column: 65)
-!793 = !DILocation(line: 258, column: 6, scope: !794)
-!794 = distinct !DILexicalBlock(scope: !757, file: !155, line: 258, column: 6)
-!795 = !DILocation(line: 258, column: 12, scope: !794)
-!796 = !DILocation(line: 258, column: 15, scope: !794)
-!797 = !DILocation(line: 258, column: 21, scope: !794)
-!798 = !DILocation(line: 258, column: 24, scope: !794)
-!799 = !DILocation(line: 258, column: 6, scope: !757)
-!800 = !DILocation(line: 259, column: 3, scope: !801)
-!801 = distinct !DILexicalBlock(scope: !794, file: !155, line: 258, column: 39)
-!802 = !DILocation(line: 262, column: 22, scope: !757)
-!803 = !DILocation(line: 262, column: 2, scope: !757)
-!804 = !DILocation(line: 262, column: 8, scope: !757)
-!805 = !DILocation(line: 262, column: 11, scope: !757)
-!806 = !DILocation(line: 262, column: 17, scope: !757)
-!807 = !DILocation(line: 262, column: 20, scope: !757)
-!808 = !DILocation(line: 263, column: 24, scope: !757)
-!809 = !DILocation(line: 263, column: 2, scope: !757)
-!810 = !DILocation(line: 263, column: 8, scope: !757)
-!811 = !DILocation(line: 263, column: 11, scope: !757)
-!812 = !DILocation(line: 263, column: 17, scope: !757)
-!813 = !DILocation(line: 263, column: 22, scope: !757)
-!814 = !DILocation(line: 265, column: 2, scope: !757)
-!815 = !DILocation(line: 266, column: 1, scope: !757)
-!816 = distinct !DISubprogram(name: "stm32_exti_unset_callback", scope: !155, file: !155, line: 268, type: !578, scopeLine: 269, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !817)
-!817 = !{!818, !819, !820}
-!818 = !DILocalVariable(name: "line", arg: 1, scope: !816, file: !155, line: 268, type: !140)
-!819 = !DILocalVariable(name: "dev", scope: !816, file: !155, line: 270, type: !765)
-!820 = !DILocalVariable(name: "data", scope: !816, file: !155, line: 271, type: !767)
-!821 = !DILocation(line: 268, column: 36, scope: !816)
-!822 = !DILocation(line: 270, column: 2, scope: !816)
-!823 = !DILocation(line: 270, column: 29, scope: !816)
-!824 = !DILocation(line: 271, column: 2, scope: !816)
-!825 = !DILocation(line: 271, column: 26, scope: !816)
-!826 = !DILocation(line: 271, column: 38, scope: !816)
-!827 = !DILocation(line: 273, column: 2, scope: !816)
-!828 = !DILocation(line: 273, column: 8, scope: !816)
-!829 = !DILocation(line: 273, column: 11, scope: !816)
-!830 = !DILocation(line: 273, column: 17, scope: !816)
-!831 = !DILocation(line: 273, column: 20, scope: !816)
-!832 = !DILocation(line: 274, column: 2, scope: !816)
-!833 = !DILocation(line: 274, column: 8, scope: !816)
-!834 = !DILocation(line: 274, column: 11, scope: !816)
-!835 = !DILocation(line: 274, column: 17, scope: !816)
-!836 = !DILocation(line: 274, column: 22, scope: !816)
-!837 = !DILocation(line: 275, column: 1, scope: !816)
-!838 = !DISubprogram(name: "z_device_is_ready", scope: !164, file: !164, line: 724, type: !257, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !376)
-!839 = !DISubprogram(name: "z_timeout_expires", scope: !359, file: !359, line: 642, type: !840, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !376)
-!840 = !DISubroutineType(types: !841)
-!841 = !{!420, !842}
-!842 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !843, size: 32)
-!843 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !328)
-!844 = !DISubprogram(name: "z_timeout_remaining", scope: !359, file: !359, line: 643, type: !840, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !376)
-!845 = distinct !DISubprogram(name: "sys_sflist_is_empty", scope: !508, file: !508, line: 335, type: !846, scopeLine: 335, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !849)
-!846 = !DISubroutineType(types: !847)
-!847 = !{!180, !848}
-!848 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !507, size: 32)
-!849 = !{!850}
-!850 = !DILocalVariable(name: "list", arg: 1, scope: !845, file: !508, line: 335, type: !848)
-!851 = !DILocation(line: 335, column: 55, scope: !845)
-!852 = !DILocation(line: 335, column: 92, scope: !845)
-!853 = !DILocation(line: 335, column: 71, scope: !845)
-!854 = !DILocation(line: 335, column: 98, scope: !845)
-!855 = !DILocation(line: 335, column: 63, scope: !845)
-!856 = distinct !DISubprogram(name: "sys_sflist_peek_head", scope: !508, file: !508, line: 255, type: !857, scopeLine: 256, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !859)
-!857 = !DISubroutineType(types: !858)
-!858 = !{!512, !848}
-!859 = !{!860}
-!860 = !DILocalVariable(name: "list", arg: 1, scope: !856, file: !508, line: 255, type: !848)
-!861 = !DILocation(line: 255, column: 64, scope: !856)
-!862 = !DILocation(line: 257, column: 9, scope: !856)
-!863 = !DILocation(line: 257, column: 15, scope: !856)
-!864 = !DILocation(line: 257, column: 2, scope: !856)
-!865 = distinct !DISubprogram(name: "stm32_fill_irq_table", scope: !155, file: !155, line: 198, type: !866, scopeLine: 199, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !868)
-!866 = !DISubroutineType(types: !867)
-!867 = !{null, !320, !320, !235}
-!868 = !{!869, !870, !871, !872}
-!869 = !DILocalVariable(name: "start", arg: 1, scope: !865, file: !155, line: 198, type: !320)
-!870 = !DILocalVariable(name: "len", arg: 2, scope: !865, file: !155, line: 198, type: !320)
-!871 = !DILocalVariable(name: "irqn", arg: 3, scope: !865, file: !155, line: 198, type: !235)
-!872 = !DILocalVariable(name: "i", scope: !873, file: !155, line: 200, type: !140)
-!873 = distinct !DILexicalBlock(scope: !865, file: !155, line: 200, column: 2)
-!874 = !DILocation(line: 198, column: 41, scope: !865)
-!875 = !DILocation(line: 198, column: 55, scope: !865)
-!876 = !DILocation(line: 198, column: 68, scope: !865)
-!877 = !DILocation(line: 200, column: 7, scope: !873)
-!878 = !DILocation(line: 200, column: 11, scope: !873)
-!879 = !DILocation(line: 200, column: 18, scope: !880)
-!880 = distinct !DILexicalBlock(scope: !873, file: !155, line: 200, column: 2)
-!881 = !DILocation(line: 200, column: 22, scope: !880)
-!882 = !DILocation(line: 200, column: 20, scope: !880)
-!883 = !DILocation(line: 200, column: 2, scope: !873)
-!884 = !DILocation(line: 200, column: 2, scope: !880)
-!885 = !DILocation(line: 201, column: 31, scope: !886)
-!886 = distinct !DILexicalBlock(scope: !880, file: !155, line: 200, column: 32)
-!887 = !DILocation(line: 201, column: 18, scope: !886)
-!888 = !DILocation(line: 201, column: 26, scope: !886)
-!889 = !DILocation(line: 201, column: 24, scope: !886)
-!890 = !DILocation(line: 201, column: 3, scope: !886)
-!891 = !DILocation(line: 201, column: 29, scope: !886)
-!892 = !DILocation(line: 202, column: 2, scope: !886)
-!893 = !DILocation(line: 200, column: 28, scope: !880)
-!894 = distinct !{!894, !883, !895}
-!895 = !DILocation(line: 202, column: 2, scope: !873)
-!896 = !DILocation(line: 203, column: 1, scope: !865)
-!897 = distinct !DISubprogram(name: "stm32_exti_isr", scope: !155, file: !155, line: 173, type: !391, scopeLine: 174, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !898)
-!898 = !{!899, !900, !901, !902, !904, !905}
-!899 = !DILocalVariable(name: "exti_range", arg: 1, scope: !897, file: !155, line: 173, type: !170)
-!900 = !DILocalVariable(name: "dev", scope: !897, file: !155, line: 175, type: !199)
-!901 = !DILocalVariable(name: "data", scope: !897, file: !155, line: 176, type: !767)
-!902 = !DILocalVariable(name: "range", scope: !897, file: !155, line: 177, type: !903)
-!903 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !224, size: 32)
-!904 = !DILocalVariable(name: "line", scope: !897, file: !155, line: 178, type: !140)
-!905 = !DILocalVariable(name: "i", scope: !906, file: !155, line: 181, type: !178)
-!906 = distinct !DILexicalBlock(scope: !897, file: !155, line: 181, column: 2)
-!907 = !DILocation(line: 173, column: 40, scope: !897)
-!908 = !DILocation(line: 175, column: 2, scope: !897)
-!909 = !DILocation(line: 175, column: 23, scope: !897)
-!910 = !DILocation(line: 176, column: 2, scope: !897)
-!911 = !DILocation(line: 176, column: 26, scope: !897)
-!912 = !DILocation(line: 176, column: 33, scope: !897)
-!913 = !DILocation(line: 176, column: 38, scope: !897)
-!914 = !DILocation(line: 177, column: 2, scope: !897)
-!915 = !DILocation(line: 177, column: 33, scope: !897)
-!916 = !DILocation(line: 177, column: 41, scope: !897)
-!917 = !DILocation(line: 178, column: 2, scope: !897)
-!918 = !DILocation(line: 178, column: 6, scope: !897)
-!919 = !DILocation(line: 181, column: 7, scope: !906)
-!920 = !DILocation(line: 181, column: 15, scope: !906)
-!921 = !DILocation(line: 181, column: 22, scope: !922)
-!922 = distinct !DILexicalBlock(scope: !906, file: !155, line: 181, column: 2)
-!923 = !DILocation(line: 181, column: 27, scope: !922)
-!924 = !DILocation(line: 181, column: 34, scope: !922)
-!925 = !DILocation(line: 181, column: 24, scope: !922)
-!926 = !DILocation(line: 181, column: 2, scope: !906)
-!927 = !DILocation(line: 181, column: 2, scope: !922)
-!928 = !DILocation(line: 182, column: 10, scope: !929)
-!929 = distinct !DILexicalBlock(scope: !922, file: !155, line: 181, column: 44)
-!930 = !DILocation(line: 182, column: 17, scope: !929)
-!931 = !DILocation(line: 182, column: 25, scope: !929)
-!932 = !DILocation(line: 182, column: 23, scope: !929)
-!933 = !DILocation(line: 182, column: 8, scope: !929)
-!934 = !DILocation(line: 184, column: 29, scope: !935)
-!935 = distinct !DILexicalBlock(scope: !929, file: !155, line: 184, column: 7)
-!936 = !DILocation(line: 184, column: 7, scope: !935)
-!937 = !DILocation(line: 184, column: 35, scope: !935)
-!938 = !DILocation(line: 184, column: 7, scope: !929)
-!939 = !DILocation(line: 186, column: 29, scope: !940)
-!940 = distinct !DILexicalBlock(scope: !935, file: !155, line: 184, column: 41)
-!941 = !DILocation(line: 186, column: 4, scope: !940)
-!942 = !DILocation(line: 189, column: 9, scope: !943)
-!943 = distinct !DILexicalBlock(scope: !940, file: !155, line: 189, column: 8)
-!944 = !DILocation(line: 189, column: 15, scope: !943)
-!945 = !DILocation(line: 189, column: 18, scope: !943)
-!946 = !DILocation(line: 189, column: 24, scope: !943)
-!947 = !DILocation(line: 189, column: 8, scope: !940)
-!948 = !DILocation(line: 190, column: 5, scope: !949)
-!949 = distinct !DILexicalBlock(scope: !943, file: !155, line: 189, column: 28)
-!950 = !DILocation(line: 193, column: 4, scope: !940)
-!951 = !DILocation(line: 193, column: 10, scope: !940)
-!952 = !DILocation(line: 193, column: 13, scope: !940)
-!953 = !DILocation(line: 193, column: 19, scope: !940)
-!954 = !DILocation(line: 193, column: 22, scope: !940)
-!955 = !DILocation(line: 193, column: 28, scope: !940)
-!956 = !DILocation(line: 193, column: 34, scope: !940)
-!957 = !DILocation(line: 193, column: 37, scope: !940)
-!958 = !DILocation(line: 193, column: 43, scope: !940)
-!959 = !DILocation(line: 194, column: 3, scope: !940)
-!960 = !DILocation(line: 195, column: 2, scope: !929)
-!961 = !DILocation(line: 181, column: 40, scope: !922)
-!962 = distinct !{!962, !926, !963}
-!963 = !DILocation(line: 195, column: 2, scope: !906)
-!964 = !DILocation(line: 196, column: 1, scope: !897)
-!965 = !DISubprogram(name: "z_arm_irq_priority_set", scope: !618, file: !618, line: 44, type: !966, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !376)
-!966 = !DISubroutineType(types: !967)
-!967 = !{null, !138, !138, !136}
-!968 = distinct !DISubprogram(name: "stm32_exti_is_pending", scope: !155, file: !155, line: 95, type: !969, scopeLine: 96, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !971)
-!969 = !DISubroutineType(types: !970)
-!970 = !{!140, !140}
-!971 = !{!972}
-!972 = !DILocalVariable(name: "line", arg: 1, scope: !968, file: !155, line: 95, type: !140)
-!973 = !DILocation(line: 95, column: 45, scope: !968)
-!974 = !DILocation(line: 97, column: 6, scope: !975)
-!975 = distinct !DILexicalBlock(scope: !968, file: !155, line: 97, column: 6)
-!976 = !DILocation(line: 97, column: 11, scope: !975)
-!977 = !DILocation(line: 97, column: 6, scope: !968)
-!978 = !DILocation(line: 104, column: 55, scope: !979)
-!979 = distinct !DILexicalBlock(scope: !975, file: !155, line: 97, column: 17)
-!980 = !DILocation(line: 104, column: 41, scope: !979)
-!981 = !DILocation(line: 104, column: 10, scope: !979)
-!982 = !DILocation(line: 104, column: 3, scope: !979)
-!983 = !DILocation(line: 108, column: 3, scope: !984)
-!984 = distinct !DILexicalBlock(scope: !975, file: !155, line: 106, column: 9)
-!985 = !DILocation(line: 110, column: 1, scope: !968)
-!986 = distinct !DISubprogram(name: "stm32_exti_clear_pending", scope: !155, file: !155, line: 117, type: !578, scopeLine: 118, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !987)
-!987 = !{!988}
-!988 = !DILocalVariable(name: "line", arg: 1, scope: !986, file: !155, line: 117, type: !140)
-!989 = !DILocation(line: 117, column: 49, scope: !986)
-!990 = !DILocation(line: 119, column: 6, scope: !991)
-!991 = distinct !DILexicalBlock(scope: !986, file: !155, line: 119, column: 6)
-!992 = !DILocation(line: 119, column: 11, scope: !991)
-!993 = !DILocation(line: 119, column: 6, scope: !986)
-!994 = !DILocation(line: 126, column: 45, scope: !995)
-!995 = distinct !DILexicalBlock(scope: !991, file: !155, line: 119, column: 17)
-!996 = !DILocation(line: 126, column: 31, scope: !995)
-!997 = !DILocation(line: 126, column: 3, scope: !995)
-!998 = !DILocation(line: 128, column: 2, scope: !995)
-!999 = !DILocation(line: 131, column: 1, scope: !986)
-!1000 = distinct !DISubprogram(name: "LL_EXTI_IsActiveFlag_0_31", scope: !608, file: !608, line: 890, type: !1001, scopeLine: 891, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !1003)
-!1001 = !DISubroutineType(types: !1002)
-!1002 = !{!136, !136}
-!1003 = !{!1004}
-!1004 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !1000, file: !608, line: 890, type: !136)
-!1005 = !DILocation(line: 890, column: 61, scope: !1000)
-!1006 = !DILocation(line: 892, column: 63, scope: !1000)
-!1007 = !DILocation(line: 892, column: 70, scope: !1000)
-!1008 = !DILocation(line: 892, column: 67, scope: !1000)
-!1009 = !DILocation(line: 892, column: 85, scope: !1000)
-!1010 = !DILocation(line: 892, column: 81, scope: !1000)
-!1011 = !DILocation(line: 892, column: 3, scope: !1000)
-!1012 = distinct !DISubprogram(name: "LL_EXTI_ClearFlag_0_31", scope: !608, file: !608, line: 970, type: !609, scopeLine: 971, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !1013)
-!1013 = !{!1014}
-!1014 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !1012, file: !608, line: 970, type: !136)
-!1015 = !DILocation(line: 970, column: 54, scope: !1012)
-!1016 = !DILocation(line: 972, column: 62, scope: !1012)
-!1017 = !DILocation(line: 972, column: 59, scope: !1012)
-!1018 = !DILocation(line: 973, column: 1, scope: !1012)
+!445 = !DISubroutineType(types: !446)
+!446 = !{null, !447}
+!447 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !439, size: 32)
+!448 = !DIDerivedType(tag: DW_TAG_member, name: "stop_fn", scope: !439, file: !359, line: 1454, baseType: !444, size: 32, offset: 288)
+!449 = !DIDerivedType(tag: DW_TAG_member, name: "period", scope: !439, file: !359, line: 1457, baseType: !450, size: 64, offset: 320)
+!450 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_timeout_t", file: !416, line: 67, baseType: !451)
+!451 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !416, line: 65, size: 64, elements: !452)
+!452 = !{!453}
+!453 = !DIDerivedType(tag: DW_TAG_member, name: "ticks", scope: !451, file: !416, line: 66, baseType: !415, size: 64)
+!454 = !DIDerivedType(tag: DW_TAG_member, name: "status", scope: !439, file: !359, line: 1460, baseType: !136, size: 32, offset: 384)
+!455 = !DIDerivedType(tag: DW_TAG_member, name: "user_data", scope: !439, file: !359, line: 1463, baseType: !139, size: 32, offset: 416)
+!456 = !DILocalVariable(name: "timer", arg: 1, scope: !434, file: !359, line: 1635, type: !437)
+!457 = !DILocation(line: 1635, column: 34, scope: !434)
+!458 = !DILocation(line: 1637, column: 28, scope: !434)
+!459 = !DILocation(line: 1637, column: 35, scope: !434)
+!460 = !DILocation(line: 1637, column: 9, scope: !434)
+!461 = !DILocation(line: 1637, column: 2, scope: !434)
+!462 = distinct !DISubprogram(name: "z_impl_k_timer_remaining_ticks", scope: !359, file: !359, line: 1649, type: !435, scopeLine: 1651, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!463 = !DILocalVariable(name: "timer", arg: 1, scope: !462, file: !359, line: 1650, type: !437)
+!464 = !DILocation(line: 1650, column: 34, scope: !462)
+!465 = !DILocation(line: 1652, column: 30, scope: !462)
+!466 = !DILocation(line: 1652, column: 37, scope: !462)
+!467 = !DILocation(line: 1652, column: 9, scope: !462)
+!468 = !DILocation(line: 1652, column: 2, scope: !462)
+!469 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_set", scope: !359, file: !359, line: 1689, type: !470, scopeLine: 1691, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!470 = !DISubroutineType(types: !471)
+!471 = !{null, !447, !139}
+!472 = !DILocalVariable(name: "timer", arg: 1, scope: !469, file: !359, line: 1689, type: !447)
+!473 = !DILocation(line: 1689, column: 65, scope: !469)
+!474 = !DILocalVariable(name: "user_data", arg: 2, scope: !469, file: !359, line: 1690, type: !139)
+!475 = !DILocation(line: 1690, column: 19, scope: !469)
+!476 = !DILocation(line: 1692, column: 21, scope: !469)
+!477 = !DILocation(line: 1692, column: 2, scope: !469)
+!478 = !DILocation(line: 1692, column: 9, scope: !469)
+!479 = !DILocation(line: 1692, column: 19, scope: !469)
+!480 = !DILocation(line: 1693, column: 1, scope: !469)
+!481 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_get", scope: !359, file: !359, line: 1704, type: !482, scopeLine: 1705, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!482 = !DISubroutineType(types: !483)
+!483 = !{!139, !437}
+!484 = !DILocalVariable(name: "timer", arg: 1, scope: !481, file: !359, line: 1704, type: !437)
+!485 = !DILocation(line: 1704, column: 72, scope: !481)
+!486 = !DILocation(line: 1706, column: 9, scope: !481)
+!487 = !DILocation(line: 1706, column: 16, scope: !481)
+!488 = !DILocation(line: 1706, column: 2, scope: !481)
+!489 = distinct !DISubprogram(name: "z_impl_k_queue_is_empty", scope: !359, file: !359, line: 2071, type: !490, scopeLine: 2072, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!490 = !DISubroutineType(types: !491)
+!491 = !{!140, !492}
+!492 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !493, size: 32)
+!493 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_queue", file: !359, line: 1830, size: 128, elements: !494)
+!494 = !{!495, !508, !509}
+!495 = !DIDerivedType(tag: DW_TAG_member, name: "data_q", scope: !493, file: !359, line: 1831, baseType: !496, size: 64)
+!496 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sflist_t", file: !497, line: 60, baseType: !498)
+!497 = !DIFile(filename: "include/zephyr/sys/sflist.h", directory: "/home/sri/zephyrproject/zephyr")
+!498 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sflist", file: !497, line: 53, size: 64, elements: !499)
+!499 = !{!500, !507}
+!500 = !DIDerivedType(tag: DW_TAG_member, name: "head", scope: !498, file: !497, line: 54, baseType: !501, size: 32)
+!501 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !502, size: 32)
+!502 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sfnode_t", file: !497, line: 50, baseType: !503)
+!503 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sfnode", file: !497, line: 44, size: 32, elements: !504)
+!504 = !{!505}
+!505 = !DIDerivedType(tag: DW_TAG_member, name: "next_and_flags", scope: !503, file: !497, line: 45, baseType: !506, size: 32)
+!506 = !DIDerivedType(tag: DW_TAG_typedef, name: "unative_t", file: !497, line: 40, baseType: !136)
+!507 = !DIDerivedType(tag: DW_TAG_member, name: "tail", scope: !498, file: !497, line: 55, baseType: !501, size: 32, offset: 32)
+!508 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !493, file: !359, line: 1832, baseType: !374, offset: 64)
+!509 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !493, file: !359, line: 1833, baseType: !305, size: 64, offset: 64)
+!510 = !DILocalVariable(name: "queue", arg: 1, scope: !489, file: !359, line: 2071, type: !492)
+!511 = !DILocation(line: 2071, column: 59, scope: !489)
+!512 = !DILocation(line: 2073, column: 35, scope: !489)
+!513 = !DILocation(line: 2073, column: 42, scope: !489)
+!514 = !DILocation(line: 2073, column: 14, scope: !489)
+!515 = !DILocation(line: 2073, column: 9, scope: !489)
+!516 = !DILocation(line: 2073, column: 2, scope: !489)
+!517 = distinct !DISubprogram(name: "z_impl_k_sem_count_get", scope: !359, file: !359, line: 3209, type: !518, scopeLine: 3210, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!518 = !DISubroutineType(types: !519)
+!519 = !{!138, !520}
+!520 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !521, size: 32)
+!521 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_sem", file: !359, line: 3092, size: 128, elements: !522)
+!522 = !{!523, !524, !525}
+!523 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !521, file: !359, line: 3093, baseType: !305, size: 64)
+!524 = !DIDerivedType(tag: DW_TAG_member, name: "count", scope: !521, file: !359, line: 3094, baseType: !138, size: 32, offset: 64)
+!525 = !DIDerivedType(tag: DW_TAG_member, name: "limit", scope: !521, file: !359, line: 3095, baseType: !138, size: 32, offset: 96)
+!526 = !DILocalVariable(name: "sem", arg: 1, scope: !517, file: !359, line: 3209, type: !520)
+!527 = !DILocation(line: 3209, column: 65, scope: !517)
+!528 = !DILocation(line: 3211, column: 9, scope: !517)
+!529 = !DILocation(line: 3211, column: 14, scope: !517)
+!530 = !DILocation(line: 3211, column: 2, scope: !517)
+!531 = distinct !DISubprogram(name: "z_impl_k_msgq_num_free_get", scope: !359, file: !359, line: 4649, type: !532, scopeLine: 4650, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!532 = !DISubroutineType(types: !533)
+!533 = !{!136, !534}
+!534 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !535, size: 32)
+!535 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_msgq", file: !359, line: 4390, size: 320, elements: !536)
+!536 = !{!537, !538, !539, !540, !541, !543, !544, !545, !546, !547}
+!537 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !535, file: !359, line: 4392, baseType: !305, size: 64)
+!538 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !535, file: !359, line: 4394, baseType: !374, offset: 64)
+!539 = !DIDerivedType(tag: DW_TAG_member, name: "msg_size", scope: !535, file: !359, line: 4396, baseType: !370, size: 32, offset: 64)
+!540 = !DIDerivedType(tag: DW_TAG_member, name: "max_msgs", scope: !535, file: !359, line: 4398, baseType: !136, size: 32, offset: 96)
+!541 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_start", scope: !535, file: !359, line: 4400, baseType: !542, size: 32, offset: 128)
+!542 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !157, size: 32)
+!543 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_end", scope: !535, file: !359, line: 4402, baseType: !542, size: 32, offset: 160)
+!544 = !DIDerivedType(tag: DW_TAG_member, name: "read_ptr", scope: !535, file: !359, line: 4404, baseType: !542, size: 32, offset: 192)
+!545 = !DIDerivedType(tag: DW_TAG_member, name: "write_ptr", scope: !535, file: !359, line: 4406, baseType: !542, size: 32, offset: 224)
+!546 = !DIDerivedType(tag: DW_TAG_member, name: "used_msgs", scope: !535, file: !359, line: 4408, baseType: !136, size: 32, offset: 256)
+!547 = !DIDerivedType(tag: DW_TAG_member, name: "flags", scope: !535, file: !359, line: 4413, baseType: !178, size: 8, offset: 288)
+!548 = !DILocalVariable(name: "msgq", arg: 1, scope: !531, file: !359, line: 4649, type: !534)
+!549 = !DILocation(line: 4649, column: 66, scope: !531)
+!550 = !DILocation(line: 4651, column: 9, scope: !531)
+!551 = !DILocation(line: 4651, column: 15, scope: !531)
+!552 = !DILocation(line: 4651, column: 26, scope: !531)
+!553 = !DILocation(line: 4651, column: 32, scope: !531)
+!554 = !DILocation(line: 4651, column: 24, scope: !531)
+!555 = !DILocation(line: 4651, column: 2, scope: !531)
+!556 = distinct !DISubprogram(name: "z_impl_k_msgq_num_used_get", scope: !359, file: !359, line: 4665, type: !532, scopeLine: 4666, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!557 = !DILocalVariable(name: "msgq", arg: 1, scope: !556, file: !359, line: 4665, type: !534)
+!558 = !DILocation(line: 4665, column: 66, scope: !556)
+!559 = !DILocation(line: 4667, column: 9, scope: !556)
+!560 = !DILocation(line: 4667, column: 15, scope: !556)
+!561 = !DILocation(line: 4667, column: 2, scope: !556)
+!562 = distinct !DISubprogram(name: "stm32_exti_enable", scope: !155, file: !155, line: 49, type: !563, scopeLine: 50, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!563 = !DISubroutineType(types: !564)
+!564 = !{null, !140}
+!565 = !DILocalVariable(name: "line", arg: 1, scope: !562, file: !155, line: 49, type: !140)
+!566 = !DILocation(line: 49, column: 28, scope: !562)
+!567 = !DILocalVariable(name: "irqnum", scope: !562, file: !155, line: 51, type: !140)
+!568 = !DILocation(line: 51, column: 6, scope: !562)
+!569 = !DILocation(line: 53, column: 6, scope: !570)
+!570 = distinct !DILexicalBlock(scope: !562, file: !155, line: 53, column: 6)
+!571 = !DILocation(line: 53, column: 11, scope: !570)
+!572 = !DILocation(line: 53, column: 6, scope: !562)
+!573 = !DILocation(line: 55, column: 2, scope: !574)
+!574 = distinct !DILexicalBlock(scope: !570, file: !155, line: 53, column: 18)
+!575 = !DILocation(line: 58, column: 26, scope: !562)
+!576 = !DILocation(line: 58, column: 11, scope: !562)
+!577 = !DILocation(line: 58, column: 9, scope: !562)
+!578 = !DILocation(line: 59, column: 6, scope: !579)
+!579 = distinct !DILexicalBlock(scope: !562, file: !155, line: 59, column: 6)
+!580 = !DILocation(line: 59, column: 13, scope: !579)
+!581 = !DILocation(line: 59, column: 6, scope: !562)
+!582 = !DILocation(line: 61, column: 2, scope: !583)
+!583 = distinct !DILexicalBlock(scope: !579, file: !155, line: 59, column: 22)
+!584 = !DILocation(line: 67, column: 43, scope: !562)
+!585 = !DILocation(line: 67, column: 29, scope: !562)
+!586 = !DILocation(line: 67, column: 2, scope: !562)
+!587 = !DILocation(line: 71, column: 18, scope: !562)
+!588 = !DILocation(line: 71, column: 2, scope: !562)
+!589 = !DILocation(line: 72, column: 1, scope: !562)
+!590 = distinct !DISubprogram(name: "LL_EXTI_EnableIT_0_31", scope: !591, file: !591, line: 273, type: !592, scopeLine: 274, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!591 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_ll_exti.h", directory: "/home/sri/zephyrproject")
+!592 = !DISubroutineType(types: !593)
+!593 = !{null, !136}
+!594 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !590, file: !591, line: 273, type: !136)
+!595 = !DILocation(line: 273, column: 53, scope: !590)
+!596 = !DILocation(line: 275, column: 64, scope: !590)
+!597 = !DILocation(line: 275, column: 60, scope: !590)
+!598 = !DILocation(line: 276, column: 1, scope: !590)
+!599 = distinct !DISubprogram(name: "stm32_exti_disable", scope: !155, file: !155, line: 74, type: !563, scopeLine: 75, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!600 = !DILocalVariable(name: "line", arg: 1, scope: !599, file: !155, line: 74, type: !140)
+!601 = !DILocation(line: 74, column: 29, scope: !599)
+!602 = !DILocation(line: 76, column: 2, scope: !599)
+!603 = !DILocation(line: 78, column: 6, scope: !604)
+!604 = distinct !DILexicalBlock(scope: !599, file: !155, line: 78, column: 6)
+!605 = !DILocation(line: 78, column: 11, scope: !604)
+!606 = !DILocation(line: 78, column: 6, scope: !599)
+!607 = !DILocation(line: 82, column: 45, scope: !608)
+!608 = distinct !DILexicalBlock(scope: !604, file: !155, line: 78, column: 17)
+!609 = !DILocation(line: 82, column: 31, scope: !608)
+!610 = !DILocation(line: 82, column: 3, scope: !608)
+!611 = !DILocation(line: 84, column: 2, scope: !608)
+!612 = !DILocation(line: 87, column: 2, scope: !599)
+!613 = !DILocation(line: 88, column: 1, scope: !599)
+!614 = distinct !DISubprogram(name: "z_stm32_hsem_lock", scope: !615, file: !615, line: 116, type: !616, scopeLine: 117, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!615 = !DIFile(filename: "soc/arm/st_stm32/common/stm32_hsem.h", directory: "/home/sri/zephyrproject/zephyr")
+!616 = !DISubroutineType(types: !617)
+!617 = !{null, !136, !136}
+!618 = !DILocalVariable(name: "hsem", arg: 1, scope: !614, file: !615, line: 116, type: !136)
+!619 = !DILocation(line: 116, column: 47, scope: !614)
+!620 = !DILocalVariable(name: "retry", arg: 2, scope: !614, file: !615, line: 116, type: !136)
+!621 = !DILocation(line: 116, column: 62, scope: !614)
+!622 = !DILocation(line: 130, column: 1, scope: !614)
+!623 = distinct !DISubprogram(name: "LL_EXTI_DisableIT_0_31", scope: !591, file: !591, line: 321, type: !592, scopeLine: 322, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!624 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !623, file: !591, line: 321, type: !136)
+!625 = !DILocation(line: 321, column: 54, scope: !623)
+!626 = !DILocation(line: 323, column: 65, scope: !623)
+!627 = !DILocation(line: 323, column: 63, scope: !623)
+!628 = !DILocation(line: 323, column: 60, scope: !623)
+!629 = !DILocation(line: 324, column: 1, scope: !623)
+!630 = distinct !DISubprogram(name: "z_stm32_hsem_unlock", scope: !615, file: !615, line: 151, type: !592, scopeLine: 152, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!631 = !DILocalVariable(name: "hsem", arg: 1, scope: !630, file: !615, line: 151, type: !136)
+!632 = !DILocation(line: 151, column: 49, scope: !630)
+!633 = !DILocation(line: 157, column: 1, scope: !630)
+!634 = distinct !DISubprogram(name: "stm32_exti_trigger", scope: !155, file: !155, line: 133, type: !635, scopeLine: 134, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!635 = !DISubroutineType(types: !636)
+!636 = !{null, !140, !140}
+!637 = !DILocalVariable(name: "line", arg: 1, scope: !634, file: !155, line: 133, type: !140)
+!638 = !DILocation(line: 133, column: 29, scope: !634)
+!639 = !DILocalVariable(name: "trigger", arg: 2, scope: !634, file: !155, line: 133, type: !140)
+!640 = !DILocation(line: 133, column: 39, scope: !634)
+!641 = !DILocation(line: 136, column: 6, scope: !642)
+!642 = distinct !DILexicalBlock(scope: !634, file: !155, line: 136, column: 6)
+!643 = !DILocation(line: 136, column: 11, scope: !642)
+!644 = !DILocation(line: 136, column: 6, scope: !634)
+!645 = !DILocation(line: 138, column: 2, scope: !646)
+!646 = distinct !DILexicalBlock(scope: !642, file: !155, line: 136, column: 18)
+!647 = !DILocation(line: 140, column: 2, scope: !634)
+!648 = !DILocation(line: 142, column: 10, scope: !634)
+!649 = !DILocation(line: 142, column: 2, scope: !634)
+!650 = !DILocation(line: 144, column: 53, scope: !651)
+!651 = distinct !DILexicalBlock(scope: !634, file: !155, line: 142, column: 19)
+!652 = !DILocation(line: 144, column: 39, scope: !651)
+!653 = !DILocation(line: 144, column: 3, scope: !651)
+!654 = !DILocation(line: 145, column: 54, scope: !651)
+!655 = !DILocation(line: 145, column: 40, scope: !651)
+!656 = !DILocation(line: 145, column: 3, scope: !651)
+!657 = !DILocation(line: 146, column: 3, scope: !651)
+!658 = !DILocation(line: 148, column: 52, scope: !651)
+!659 = !DILocation(line: 148, column: 38, scope: !651)
+!660 = !DILocation(line: 148, column: 3, scope: !651)
+!661 = !DILocation(line: 149, column: 54, scope: !651)
+!662 = !DILocation(line: 149, column: 40, scope: !651)
+!663 = !DILocation(line: 149, column: 3, scope: !651)
+!664 = !DILocation(line: 150, column: 3, scope: !651)
+!665 = !DILocation(line: 152, column: 53, scope: !651)
+!666 = !DILocation(line: 152, column: 39, scope: !651)
+!667 = !DILocation(line: 152, column: 3, scope: !651)
+!668 = !DILocation(line: 153, column: 53, scope: !651)
+!669 = !DILocation(line: 153, column: 39, scope: !651)
+!670 = !DILocation(line: 153, column: 3, scope: !651)
+!671 = !DILocation(line: 154, column: 3, scope: !651)
+!672 = !DILocation(line: 156, column: 52, scope: !651)
+!673 = !DILocation(line: 156, column: 38, scope: !651)
+!674 = !DILocation(line: 156, column: 3, scope: !651)
+!675 = !DILocation(line: 157, column: 53, scope: !651)
+!676 = !DILocation(line: 157, column: 39, scope: !651)
+!677 = !DILocation(line: 157, column: 3, scope: !651)
+!678 = !DILocation(line: 158, column: 3, scope: !651)
+!679 = !DILocation(line: 161, column: 3, scope: !651)
+!680 = !DILocation(line: 163, column: 2, scope: !634)
+!681 = !DILocation(line: 164, column: 1, scope: !634)
+!682 = distinct !DISubprogram(name: "LL_EXTI_DisableRisingTrig_0_31", scope: !591, file: !591, line: 617, type: !592, scopeLine: 618, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!683 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !682, file: !591, line: 617, type: !136)
+!684 = !DILocation(line: 617, column: 62, scope: !682)
+!685 = !DILocation(line: 619, column: 66, scope: !682)
+!686 = !DILocation(line: 619, column: 64, scope: !682)
+!687 = !DILocation(line: 619, column: 61, scope: !682)
+!688 = !DILocation(line: 621, column: 1, scope: !682)
+!689 = distinct !DISubprogram(name: "LL_EXTI_DisableFallingTrig_0_31", scope: !591, file: !591, line: 753, type: !592, scopeLine: 754, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!690 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !689, file: !591, line: 753, type: !136)
+!691 = !DILocation(line: 753, column: 63, scope: !689)
+!692 = !DILocation(line: 755, column: 66, scope: !689)
+!693 = !DILocation(line: 755, column: 64, scope: !689)
+!694 = !DILocation(line: 755, column: 61, scope: !689)
+!695 = !DILocation(line: 756, column: 1, scope: !689)
+!696 = distinct !DISubprogram(name: "LL_EXTI_EnableRisingTrig_0_31", scope: !591, file: !591, line: 571, type: !592, scopeLine: 572, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!697 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !696, file: !591, line: 571, type: !136)
+!698 = !DILocation(line: 571, column: 61, scope: !696)
+!699 = !DILocation(line: 573, column: 65, scope: !696)
+!700 = !DILocation(line: 573, column: 61, scope: !696)
+!701 = !DILocation(line: 575, column: 1, scope: !696)
+!702 = distinct !DISubprogram(name: "LL_EXTI_EnableFallingTrig_0_31", scope: !591, file: !591, line: 709, type: !592, scopeLine: 710, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!703 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !702, file: !591, line: 709, type: !136)
+!704 = !DILocation(line: 709, column: 62, scope: !702)
+!705 = !DILocation(line: 711, column: 65, scope: !702)
+!706 = !DILocation(line: 711, column: 61, scope: !702)
+!707 = !DILocation(line: 712, column: 1, scope: !702)
+!708 = !DILocalVariable(name: "dev", arg: 1, scope: !221, file: !155, line: 227, type: !199)
+!709 = !DILocation(line: 227, column: 49, scope: !221)
+!710 = !DILocation(line: 229, column: 9, scope: !221)
+!711 = !DILocation(line: 231, column: 98, scope: !221)
+!712 = !DILocation(line: 231, column: 118, scope: !221)
+!713 = !DILocation(line: 231, column: 64, scope: !221)
+!714 = !DILocation(line: 231, column: 375, scope: !715)
+!715 = distinct !DILexicalBlock(scope: !221, file: !155, line: 231, column: 127)
+!716 = !DILocation(line: 231, column: 507, scope: !221)
+!717 = !DILocation(line: 231, column: 527, scope: !221)
+!718 = !DILocation(line: 231, column: 473, scope: !221)
+!719 = !DILocation(line: 231, column: 784, scope: !720)
+!720 = distinct !DILexicalBlock(scope: !221, file: !155, line: 231, column: 536)
+!721 = !DILocation(line: 231, column: 917, scope: !221)
+!722 = !DILocation(line: 231, column: 937, scope: !221)
+!723 = !DILocation(line: 231, column: 883, scope: !221)
+!724 = !DILocation(line: 231, column: 1194, scope: !725)
+!725 = distinct !DILexicalBlock(scope: !221, file: !155, line: 231, column: 946)
+!726 = !DILocation(line: 235, column: 2, scope: !221)
+!727 = distinct !DISubprogram(name: "stm32_exti_set_callback", scope: !155, file: !155, line: 248, type: !728, scopeLine: 249, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!728 = !DISubroutineType(types: !729)
+!729 = !{!140, !140, !210, !139}
+!730 = !DILocalVariable(name: "line", arg: 1, scope: !727, file: !155, line: 248, type: !140)
+!731 = !DILocation(line: 248, column: 33, scope: !727)
+!732 = !DILocalVariable(name: "cb", arg: 2, scope: !727, file: !155, line: 248, type: !210)
+!733 = !DILocation(line: 248, column: 61, scope: !727)
+!734 = !DILocalVariable(name: "arg", arg: 3, scope: !727, file: !155, line: 248, type: !139)
+!735 = !DILocation(line: 248, column: 71, scope: !727)
+!736 = !DILocalVariable(name: "dev", scope: !727, file: !155, line: 250, type: !737)
+!737 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !199)
+!738 = !DILocation(line: 250, column: 29, scope: !727)
+!739 = !DILocalVariable(name: "data", scope: !727, file: !155, line: 251, type: !740)
+!740 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !203, size: 32)
+!741 = !DILocation(line: 251, column: 26, scope: !727)
+!742 = !DILocation(line: 251, column: 38, scope: !727)
+!743 = !DILocation(line: 253, column: 7, scope: !744)
+!744 = distinct !DILexicalBlock(scope: !727, file: !155, line: 253, column: 6)
+!745 = !DILocation(line: 253, column: 13, scope: !744)
+!746 = !DILocation(line: 253, column: 16, scope: !744)
+!747 = !DILocation(line: 253, column: 22, scope: !744)
+!748 = !DILocation(line: 253, column: 28, scope: !744)
+!749 = !DILocation(line: 253, column: 25, scope: !744)
+!750 = !DILocation(line: 253, column: 32, scope: !744)
+!751 = !DILocation(line: 253, column: 36, scope: !744)
+!752 = !DILocation(line: 253, column: 42, scope: !744)
+!753 = !DILocation(line: 253, column: 45, scope: !744)
+!754 = !DILocation(line: 253, column: 51, scope: !744)
+!755 = !DILocation(line: 253, column: 59, scope: !744)
+!756 = !DILocation(line: 253, column: 56, scope: !744)
+!757 = !DILocation(line: 253, column: 6, scope: !727)
+!758 = !DILocation(line: 254, column: 3, scope: !759)
+!759 = distinct !DILexicalBlock(scope: !744, file: !155, line: 253, column: 65)
+!760 = !DILocation(line: 258, column: 6, scope: !761)
+!761 = distinct !DILexicalBlock(scope: !727, file: !155, line: 258, column: 6)
+!762 = !DILocation(line: 258, column: 12, scope: !761)
+!763 = !DILocation(line: 258, column: 15, scope: !761)
+!764 = !DILocation(line: 258, column: 21, scope: !761)
+!765 = !DILocation(line: 258, column: 24, scope: !761)
+!766 = !DILocation(line: 258, column: 6, scope: !727)
+!767 = !DILocation(line: 259, column: 3, scope: !768)
+!768 = distinct !DILexicalBlock(scope: !761, file: !155, line: 258, column: 39)
+!769 = !DILocation(line: 262, column: 22, scope: !727)
+!770 = !DILocation(line: 262, column: 2, scope: !727)
+!771 = !DILocation(line: 262, column: 8, scope: !727)
+!772 = !DILocation(line: 262, column: 11, scope: !727)
+!773 = !DILocation(line: 262, column: 17, scope: !727)
+!774 = !DILocation(line: 262, column: 20, scope: !727)
+!775 = !DILocation(line: 263, column: 24, scope: !727)
+!776 = !DILocation(line: 263, column: 2, scope: !727)
+!777 = !DILocation(line: 263, column: 8, scope: !727)
+!778 = !DILocation(line: 263, column: 11, scope: !727)
+!779 = !DILocation(line: 263, column: 17, scope: !727)
+!780 = !DILocation(line: 263, column: 22, scope: !727)
+!781 = !DILocation(line: 265, column: 2, scope: !727)
+!782 = !DILocation(line: 266, column: 1, scope: !727)
+!783 = distinct !DISubprogram(name: "stm32_exti_unset_callback", scope: !155, file: !155, line: 268, type: !563, scopeLine: 269, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!784 = !DILocalVariable(name: "line", arg: 1, scope: !783, file: !155, line: 268, type: !140)
+!785 = !DILocation(line: 268, column: 36, scope: !783)
+!786 = !DILocalVariable(name: "dev", scope: !783, file: !155, line: 270, type: !737)
+!787 = !DILocation(line: 270, column: 29, scope: !783)
+!788 = !DILocalVariable(name: "data", scope: !783, file: !155, line: 271, type: !740)
+!789 = !DILocation(line: 271, column: 26, scope: !783)
+!790 = !DILocation(line: 271, column: 38, scope: !783)
+!791 = !DILocation(line: 273, column: 2, scope: !783)
+!792 = !DILocation(line: 273, column: 8, scope: !783)
+!793 = !DILocation(line: 273, column: 11, scope: !783)
+!794 = !DILocation(line: 273, column: 17, scope: !783)
+!795 = !DILocation(line: 273, column: 20, scope: !783)
+!796 = !DILocation(line: 274, column: 2, scope: !783)
+!797 = !DILocation(line: 274, column: 8, scope: !783)
+!798 = !DILocation(line: 274, column: 11, scope: !783)
+!799 = !DILocation(line: 274, column: 17, scope: !783)
+!800 = !DILocation(line: 274, column: 22, scope: !783)
+!801 = !DILocation(line: 275, column: 1, scope: !783)
+!802 = distinct !DISubprogram(name: "sys_sflist_is_empty", scope: !497, file: !497, line: 335, type: !803, scopeLine: 335, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!803 = !DISubroutineType(types: !804)
+!804 = !{!180, !805}
+!805 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !496, size: 32)
+!806 = !DILocalVariable(name: "list", arg: 1, scope: !802, file: !497, line: 335, type: !805)
+!807 = !DILocation(line: 335, column: 55, scope: !802)
+!808 = !DILocation(line: 335, column: 92, scope: !802)
+!809 = !DILocation(line: 335, column: 71, scope: !802)
+!810 = !DILocation(line: 335, column: 98, scope: !802)
+!811 = !DILocation(line: 335, column: 63, scope: !802)
+!812 = distinct !DISubprogram(name: "sys_sflist_peek_head", scope: !497, file: !497, line: 255, type: !813, scopeLine: 256, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!813 = !DISubroutineType(types: !814)
+!814 = !{!501, !805}
+!815 = !DILocalVariable(name: "list", arg: 1, scope: !812, file: !497, line: 255, type: !805)
+!816 = !DILocation(line: 255, column: 64, scope: !812)
+!817 = !DILocation(line: 257, column: 9, scope: !812)
+!818 = !DILocation(line: 257, column: 15, scope: !812)
+!819 = !DILocation(line: 257, column: 2, scope: !812)
+!820 = distinct !DISubprogram(name: "stm32_fill_irq_table", scope: !155, file: !155, line: 198, type: !821, scopeLine: 199, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!821 = !DISubroutineType(types: !822)
+!822 = !{null, !320, !320, !234}
+!823 = !DILocalVariable(name: "start", arg: 1, scope: !820, file: !155, line: 198, type: !320)
+!824 = !DILocation(line: 198, column: 41, scope: !820)
+!825 = !DILocalVariable(name: "len", arg: 2, scope: !820, file: !155, line: 198, type: !320)
+!826 = !DILocation(line: 198, column: 55, scope: !820)
+!827 = !DILocalVariable(name: "irqn", arg: 3, scope: !820, file: !155, line: 198, type: !234)
+!828 = !DILocation(line: 198, column: 68, scope: !820)
+!829 = !DILocalVariable(name: "i", scope: !830, file: !155, line: 200, type: !140)
+!830 = distinct !DILexicalBlock(scope: !820, file: !155, line: 200, column: 2)
+!831 = !DILocation(line: 200, column: 11, scope: !830)
+!832 = !DILocation(line: 200, column: 7, scope: !830)
+!833 = !DILocation(line: 200, column: 18, scope: !834)
+!834 = distinct !DILexicalBlock(scope: !830, file: !155, line: 200, column: 2)
+!835 = !DILocation(line: 200, column: 22, scope: !834)
+!836 = !DILocation(line: 200, column: 20, scope: !834)
+!837 = !DILocation(line: 200, column: 2, scope: !830)
+!838 = !DILocation(line: 201, column: 31, scope: !839)
+!839 = distinct !DILexicalBlock(scope: !834, file: !155, line: 200, column: 32)
+!840 = !DILocation(line: 201, column: 18, scope: !839)
+!841 = !DILocation(line: 201, column: 26, scope: !839)
+!842 = !DILocation(line: 201, column: 24, scope: !839)
+!843 = !DILocation(line: 201, column: 3, scope: !839)
+!844 = !DILocation(line: 201, column: 29, scope: !839)
+!845 = !DILocation(line: 202, column: 2, scope: !839)
+!846 = !DILocation(line: 200, column: 28, scope: !834)
+!847 = !DILocation(line: 200, column: 2, scope: !834)
+!848 = distinct !{!848, !837, !849}
+!849 = !DILocation(line: 202, column: 2, scope: !830)
+!850 = !DILocation(line: 203, column: 1, scope: !820)
+!851 = distinct !DISubprogram(name: "stm32_exti_isr", scope: !155, file: !155, line: 173, type: !389, scopeLine: 174, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!852 = !DILocalVariable(name: "exti_range", arg: 1, scope: !851, file: !155, line: 173, type: !170)
+!853 = !DILocation(line: 173, column: 40, scope: !851)
+!854 = !DILocalVariable(name: "dev", scope: !851, file: !155, line: 175, type: !199)
+!855 = !DILocation(line: 175, column: 23, scope: !851)
+!856 = !DILocalVariable(name: "data", scope: !851, file: !155, line: 176, type: !740)
+!857 = !DILocation(line: 176, column: 26, scope: !851)
+!858 = !DILocation(line: 176, column: 33, scope: !851)
+!859 = !DILocation(line: 176, column: 38, scope: !851)
+!860 = !DILocalVariable(name: "range", scope: !851, file: !155, line: 177, type: !861)
+!861 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !223, size: 32)
+!862 = !DILocation(line: 177, column: 33, scope: !851)
+!863 = !DILocation(line: 177, column: 41, scope: !851)
+!864 = !DILocalVariable(name: "line", scope: !851, file: !155, line: 178, type: !140)
+!865 = !DILocation(line: 178, column: 6, scope: !851)
+!866 = !DILocalVariable(name: "i", scope: !867, file: !155, line: 181, type: !178)
+!867 = distinct !DILexicalBlock(scope: !851, file: !155, line: 181, column: 2)
+!868 = !DILocation(line: 181, column: 15, scope: !867)
+!869 = !DILocation(line: 181, column: 7, scope: !867)
+!870 = !DILocation(line: 181, column: 22, scope: !871)
+!871 = distinct !DILexicalBlock(scope: !867, file: !155, line: 181, column: 2)
+!872 = !DILocation(line: 181, column: 27, scope: !871)
+!873 = !DILocation(line: 181, column: 34, scope: !871)
+!874 = !DILocation(line: 181, column: 24, scope: !871)
+!875 = !DILocation(line: 181, column: 2, scope: !867)
+!876 = !DILocation(line: 182, column: 10, scope: !877)
+!877 = distinct !DILexicalBlock(scope: !871, file: !155, line: 181, column: 44)
+!878 = !DILocation(line: 182, column: 17, scope: !877)
+!879 = !DILocation(line: 182, column: 25, scope: !877)
+!880 = !DILocation(line: 182, column: 23, scope: !877)
+!881 = !DILocation(line: 182, column: 8, scope: !877)
+!882 = !DILocation(line: 184, column: 29, scope: !883)
+!883 = distinct !DILexicalBlock(scope: !877, file: !155, line: 184, column: 7)
+!884 = !DILocation(line: 184, column: 7, scope: !883)
+!885 = !DILocation(line: 184, column: 35, scope: !883)
+!886 = !DILocation(line: 184, column: 7, scope: !877)
+!887 = !DILocation(line: 186, column: 29, scope: !888)
+!888 = distinct !DILexicalBlock(scope: !883, file: !155, line: 184, column: 41)
+!889 = !DILocation(line: 186, column: 4, scope: !888)
+!890 = !DILocation(line: 189, column: 9, scope: !891)
+!891 = distinct !DILexicalBlock(scope: !888, file: !155, line: 189, column: 8)
+!892 = !DILocation(line: 189, column: 15, scope: !891)
+!893 = !DILocation(line: 189, column: 18, scope: !891)
+!894 = !DILocation(line: 189, column: 24, scope: !891)
+!895 = !DILocation(line: 189, column: 8, scope: !888)
+!896 = !DILocation(line: 190, column: 5, scope: !897)
+!897 = distinct !DILexicalBlock(scope: !891, file: !155, line: 189, column: 28)
+!898 = !DILocation(line: 193, column: 4, scope: !888)
+!899 = !DILocation(line: 193, column: 10, scope: !888)
+!900 = !DILocation(line: 193, column: 13, scope: !888)
+!901 = !DILocation(line: 193, column: 19, scope: !888)
+!902 = !DILocation(line: 193, column: 22, scope: !888)
+!903 = !DILocation(line: 193, column: 28, scope: !888)
+!904 = !DILocation(line: 193, column: 34, scope: !888)
+!905 = !DILocation(line: 193, column: 37, scope: !888)
+!906 = !DILocation(line: 193, column: 43, scope: !888)
+!907 = !DILocation(line: 194, column: 3, scope: !888)
+!908 = !DILocation(line: 195, column: 2, scope: !877)
+!909 = !DILocation(line: 181, column: 40, scope: !871)
+!910 = !DILocation(line: 181, column: 2, scope: !871)
+!911 = distinct !{!911, !875, !912}
+!912 = !DILocation(line: 195, column: 2, scope: !867)
+!913 = !DILocation(line: 196, column: 1, scope: !851)
+!914 = distinct !DISubprogram(name: "stm32_exti_is_pending", scope: !155, file: !155, line: 95, type: !915, scopeLine: 96, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!915 = !DISubroutineType(types: !916)
+!916 = !{!140, !140}
+!917 = !DILocalVariable(name: "line", arg: 1, scope: !914, file: !155, line: 95, type: !140)
+!918 = !DILocation(line: 95, column: 45, scope: !914)
+!919 = !DILocation(line: 97, column: 6, scope: !920)
+!920 = distinct !DILexicalBlock(scope: !914, file: !155, line: 97, column: 6)
+!921 = !DILocation(line: 97, column: 11, scope: !920)
+!922 = !DILocation(line: 97, column: 6, scope: !914)
+!923 = !DILocation(line: 104, column: 55, scope: !924)
+!924 = distinct !DILexicalBlock(scope: !920, file: !155, line: 97, column: 17)
+!925 = !DILocation(line: 104, column: 41, scope: !924)
+!926 = !DILocation(line: 104, column: 10, scope: !924)
+!927 = !DILocation(line: 104, column: 3, scope: !924)
+!928 = !DILocation(line: 108, column: 3, scope: !929)
+!929 = distinct !DILexicalBlock(scope: !920, file: !155, line: 106, column: 9)
+!930 = !DILocation(line: 110, column: 1, scope: !914)
+!931 = distinct !DISubprogram(name: "stm32_exti_clear_pending", scope: !155, file: !155, line: 117, type: !563, scopeLine: 118, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!932 = !DILocalVariable(name: "line", arg: 1, scope: !931, file: !155, line: 117, type: !140)
+!933 = !DILocation(line: 117, column: 49, scope: !931)
+!934 = !DILocation(line: 119, column: 6, scope: !935)
+!935 = distinct !DILexicalBlock(scope: !931, file: !155, line: 119, column: 6)
+!936 = !DILocation(line: 119, column: 11, scope: !935)
+!937 = !DILocation(line: 119, column: 6, scope: !931)
+!938 = !DILocation(line: 126, column: 45, scope: !939)
+!939 = distinct !DILexicalBlock(scope: !935, file: !155, line: 119, column: 17)
+!940 = !DILocation(line: 126, column: 31, scope: !939)
+!941 = !DILocation(line: 126, column: 3, scope: !939)
+!942 = !DILocation(line: 128, column: 2, scope: !939)
+!943 = !DILocation(line: 131, column: 1, scope: !931)
+!944 = distinct !DISubprogram(name: "LL_EXTI_IsActiveFlag_0_31", scope: !591, file: !591, line: 890, type: !945, scopeLine: 891, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!945 = !DISubroutineType(types: !946)
+!946 = !{!136, !136}
+!947 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !944, file: !591, line: 890, type: !136)
+!948 = !DILocation(line: 890, column: 61, scope: !944)
+!949 = !DILocation(line: 892, column: 63, scope: !944)
+!950 = !DILocation(line: 892, column: 70, scope: !944)
+!951 = !DILocation(line: 892, column: 67, scope: !944)
+!952 = !DILocation(line: 892, column: 85, scope: !944)
+!953 = !DILocation(line: 892, column: 81, scope: !944)
+!954 = !DILocation(line: 892, column: 3, scope: !944)
+!955 = distinct !DISubprogram(name: "LL_EXTI_ClearFlag_0_31", scope: !591, file: !591, line: 970, type: !592, scopeLine: 971, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !222)
+!956 = !DILocalVariable(name: "ExtiLine", arg: 1, scope: !955, file: !591, line: 970, type: !136)
+!957 = !DILocation(line: 970, column: 54, scope: !955)
+!958 = !DILocation(line: 972, column: 62, scope: !955)
+!959 = !DILocation(line: 972, column: 59, scope: !955)
+!960 = !DILocation(line: 973, column: 1, scope: !955)

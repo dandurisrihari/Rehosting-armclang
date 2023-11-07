@@ -10,29 +10,28 @@ target triple = "aarch64-arm-none-eabi"
 @__init_st_stm32_common_config = internal constant %struct.init_entry { %union.init_function { ptr @st_stm32_common_config }, ptr null }, section ".z_init_PRE_KERNEL_11_0_", align 4, !dbg !0
 @llvm.used = appending global [1 x ptr] [ptr @__init_st_stm32_common_config], section "llvm.metadata"
 
-; Function Attrs: inlinehint nounwind optsize
-define internal zeroext i1 @z_impl_device_is_ready(ptr noundef %0) #0 !dbg !68 {
+; Function Attrs: noinline nounwind optnone
+define internal zeroext i1 @z_impl_device_is_ready(ptr noundef %0) #0 !dbg !70 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !72, metadata !DIExpression()), !dbg !73
-  %3 = load ptr, ptr %2, align 4, !dbg !74
-  %4 = call zeroext i1 @z_device_is_ready(ptr noundef %3) #4, !dbg !75
-  ret i1 %4, !dbg !76
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !74, metadata !DIExpression()), !dbg !75
+  %3 = load ptr, ptr %2, align 4, !dbg !76
+  %4 = call zeroext i1 @z_device_is_ready(ptr noundef %3), !dbg !77
+  ret i1 %4, !dbg !78
 }
 
-; Function Attrs: nounwind optsize
-define internal i32 @st_stm32_common_config() #1 !dbg !77 {
-  call void @LL_DBGMCU_DisableDBGStopMode() #4, !dbg !79
-  ret i32 0, !dbg !80
+; Function Attrs: noinline nounwind optnone
+define internal i32 @st_stm32_common_config() #0 !dbg !79 {
+  call void @LL_DBGMCU_DisableDBGStopMode(), !dbg !80
+  ret i32 0, !dbg !81
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #2
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: optsize
-declare !dbg !81 dso_local zeroext i1 @z_device_is_ready(ptr noundef) #3
+declare zeroext i1 @z_device_is_ready(ptr noundef) #2
 
-; Function Attrs: inlinehint nounwind optsize
+; Function Attrs: noinline nounwind optnone
 define internal void @LL_DBGMCU_DisableDBGStopMode() #0 !dbg !82 {
   %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !86
   %2 = and i32 %1, -3, !dbg !86
@@ -40,19 +39,17 @@ define internal void @LL_DBGMCU_DisableDBGStopMode() #0 !dbg !82 {
   ret void, !dbg !87
 }
 
-attributes #0 = { inlinehint nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #1 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #2 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #3 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #4 = { optsize }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 
 !llvm.dbg.cu = !{!2}
-!llvm.module.flags = !{!61, !62, !63, !64, !65, !66}
-!llvm.ident = !{!67}
+!llvm.module.flags = !{!61, !62, !63, !64, !65, !66, !67, !68}
+!llvm.ident = !{!69}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "__init_st_stm32_common_config", scope: !2, file: !19, line: 116, type: !20, isLocal: true, isDefinition: true, align: 32)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !4, globals: !18, splitDebugInlining: false, nameTableKind: None)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !4, globals: !18, splitDebugInlining: false, nameTableKind: None)
 !3 = !DIFile(filename: "soc_config.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !4 = !{!5}
 !5 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !6, size: 32)
@@ -117,22 +114,22 @@ attributes #4 = { optsize }
 !64 = !{i32 1, !"static_rwdata", i32 1}
 !65 = !{i32 1, !"enumsize_buildattr", i32 1}
 !66 = !{i32 1, !"armlib_unavailable", i32 0}
-!67 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!68 = distinct !DISubprogram(name: "z_impl_device_is_ready", scope: !39, file: !39, line: 744, type: !69, scopeLine: 745, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !71)
-!69 = !DISubroutineType(types: !70)
-!70 = !{!57, !36}
-!71 = !{!72}
-!72 = !DILocalVariable(name: "dev", arg: 1, scope: !68, file: !39, line: 744, type: !36)
-!73 = !DILocation(line: 744, column: 65, scope: !68)
-!74 = !DILocation(line: 746, column: 27, scope: !68)
-!75 = !DILocation(line: 746, column: 9, scope: !68)
-!76 = !DILocation(line: 746, column: 2, scope: !68)
-!77 = distinct !DISubprogram(name: "st_stm32_common_config", scope: !19, file: !19, line: 26, type: !29, scopeLine: 27, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !78)
-!78 = !{}
-!79 = !DILocation(line: 107, column: 2, scope: !77)
-!80 = !DILocation(line: 113, column: 2, scope: !77)
-!81 = !DISubprogram(name: "z_device_is_ready", scope: !39, file: !39, line: 724, type: !69, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !78)
-!82 = distinct !DISubprogram(name: "LL_DBGMCU_DisableDBGStopMode", scope: !83, file: !83, line: 1634, type: !84, scopeLine: 1635, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !78)
+!67 = !{i32 8, !"PIC Level", i32 2}
+!68 = !{i32 7, !"PIE Level", i32 2}
+!69 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!70 = distinct !DISubprogram(name: "z_impl_device_is_ready", scope: !39, file: !39, line: 744, type: !71, scopeLine: 745, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !73)
+!71 = !DISubroutineType(types: !72)
+!72 = !{!57, !36}
+!73 = !{}
+!74 = !DILocalVariable(name: "dev", arg: 1, scope: !70, file: !39, line: 744, type: !36)
+!75 = !DILocation(line: 744, column: 65, scope: !70)
+!76 = !DILocation(line: 746, column: 27, scope: !70)
+!77 = !DILocation(line: 746, column: 9, scope: !70)
+!78 = !DILocation(line: 746, column: 2, scope: !70)
+!79 = distinct !DISubprogram(name: "st_stm32_common_config", scope: !19, file: !19, line: 26, type: !29, scopeLine: 27, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !73)
+!80 = !DILocation(line: 107, column: 2, scope: !79)
+!81 = !DILocation(line: 113, column: 2, scope: !79)
+!82 = distinct !DISubprogram(name: "LL_DBGMCU_DisableDBGStopMode", scope: !83, file: !83, line: 1634, type: !84, scopeLine: 1635, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !73)
 !83 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_ll_system.h", directory: "/home/sri/zephyrproject")
 !84 = !DISubroutineType(types: !85)
 !85 = !{null}

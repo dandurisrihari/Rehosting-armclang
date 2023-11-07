@@ -11,21 +11,19 @@ target triple = "aarch64-arm-none-eabi"
 @_sw_isr_table = hidden global [31 x %struct._isr_table_entry] [%struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }, %struct._isr_table_entry { ptr inttoptr (i32 66 to ptr), ptr @z_irq_spurious }], section ".gnu.linkonce.sw_isr_table", align 4, !dbg !14
 @llvm.used = appending global [3 x ptr] [ptr @_iheader, ptr @_irq_vector_table, ptr @_sw_isr_table], section "llvm.metadata"
 
-; Function Attrs: optsize
-declare dso_local void @_isr_wrapper() #0
+declare void @_isr_wrapper() #0
 
-; Function Attrs: optsize
-declare dso_local void @z_irq_spurious(ptr noundef) #0
+declare void @z_irq_spurious(ptr noundef) #0
 
-attributes #0 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #0 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 
 !llvm.dbg.cu = !{!2}
-!llvm.module.flags = !{!32, !33, !34, !35, !36, !37}
-!llvm.ident = !{!38}
+!llvm.module.flags = !{!32, !33, !34, !35, !36, !37, !38, !39}
+!llvm.ident = !{!40}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "_iheader", scope: !2, file: !7, line: 24, type: !27, isLocal: false, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, globals: !4, splitDebugInlining: false, nameTableKind: None)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !4, splitDebugInlining: false, nameTableKind: None)
 !3 = !DIFile(filename: "isr_tables.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !4 = !{!0, !5, !14}
 !5 = !DIGlobalVariableExpression(var: !6, expr: !DIExpression())
@@ -61,4 +59,6 @@ attributes #0 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-i
 !35 = !{i32 1, !"static_rwdata", i32 1}
 !36 = !{i32 1, !"enumsize_buildattr", i32 1}
 !37 = !{i32 1, !"armlib_unavailable", i32 0}
-!38 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!38 = !{i32 8, !"PIC Level", i32 2}
+!39 = !{i32 7, !"PIE Level", i32 2}
+!40 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}

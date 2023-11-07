@@ -6,50 +6,45 @@ target triple = "aarch64-arm-none-eabi"
 %struct.NVIC_Type = type { [1 x i32], [31 x i32], [1 x i32], [31 x i32], [1 x i32], [31 x i32], [1 x i32], [31 x i32], [64 x i32], [8 x i32] }
 %struct.SCB_Type = type { i32, i32, i32, i32, i32, i32, i32, [2 x i32], i32 }
 
-; Function Attrs: nounwind optsize
-define hidden void @z_arm_interrupt_init() #0 !dbg !102 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @z_arm_interrupt_init() #0 !dbg !104 {
   %1 = alloca i32, align 4
-  call void @llvm.lifetime.start.p0(i64 4, ptr %1) #4, !dbg !108
-  call void @llvm.dbg.declare(metadata ptr %1, metadata !107, metadata !DIExpression()), !dbg !109
-  store i32 0, ptr %1, align 4, !dbg !109
-  br label %2, !dbg !110
+  call void @llvm.dbg.declare(metadata ptr %1, metadata !109, metadata !DIExpression()), !dbg !110
+  store i32 0, ptr %1, align 4, !dbg !110
+  br label %2, !dbg !111
 
 2:                                                ; preds = %8, %0
-  %3 = load i32, ptr %1, align 4, !dbg !111
-  %4 = icmp slt i32 %3, 31, !dbg !114
-  br i1 %4, label %5, label %11, !dbg !115
+  %3 = load i32, ptr %1, align 4, !dbg !112
+  %4 = icmp slt i32 %3, 31, !dbg !115
+  br i1 %4, label %5, label %11, !dbg !116
 
 5:                                                ; preds = %2
-  %6 = load i32, ptr %1, align 4, !dbg !116
-  %7 = trunc i32 %6 to i8, !dbg !118
-  call void @__NVIC_SetPriority(i8 noundef signext %7, i32 noundef 0) #5, !dbg !119
-  br label %8, !dbg !120
+  %6 = load i32, ptr %1, align 4, !dbg !117
+  %7 = trunc i32 %6 to i8, !dbg !119
+  call void @__NVIC_SetPriority(i8 noundef signext %7, i32 noundef 0), !dbg !120
+  br label %8, !dbg !121
 
 8:                                                ; preds = %5
-  %9 = load i32, ptr %1, align 4, !dbg !121
-  %10 = add nsw i32 %9, 1, !dbg !121
-  store i32 %10, ptr %1, align 4, !dbg !121
-  br label %2, !dbg !122, !llvm.loop !123
+  %9 = load i32, ptr %1, align 4, !dbg !122
+  %10 = add nsw i32 %9, 1, !dbg !122
+  store i32 %10, ptr %1, align 4, !dbg !122
+  br label %2, !dbg !123, !llvm.loop !124
 
 11:                                               ; preds = %2
-  call void @llvm.lifetime.end.p0(i64 4, ptr %1) #4, !dbg !125
-  ret void, !dbg !125
+  ret void, !dbg !126
 }
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #1
-
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #2
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @__NVIC_SetPriority(i8 noundef signext %0, i32 noundef %1) #3 !dbg !126 {
+; Function Attrs: noinline nounwind optnone
+define internal void @__NVIC_SetPriority(i8 noundef signext %0, i32 noundef %1) #0 !dbg !127 {
   %3 = alloca i8, align 1
   %4 = alloca i32, align 4
   store i8 %0, ptr %3, align 1
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !130, metadata !DIExpression()), !dbg !132
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !130, metadata !DIExpression()), !dbg !131
   store i32 %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !131, metadata !DIExpression()), !dbg !133
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !132, metadata !DIExpression()), !dbg !133
   %5 = load i8, ptr %3, align 1, !dbg !134
   %6 = sext i8 %5 to i32, !dbg !136
   %7 = icmp sge i32 %6, 0, !dbg !137
@@ -121,21 +116,14 @@ define internal void @__NVIC_SetPriority(i8 noundef signext %0, i32 noundef %1) 
   ret void, !dbg !196
 }
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #1
-
-attributes #0 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #1 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
-attributes #2 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #3 = { inlinehint nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #4 = { nounwind }
-attributes #5 = { optsize }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
 
 !llvm.dbg.cu = !{!0}
-!llvm.module.flags = !{!95, !96, !97, !98, !99, !100}
-!llvm.ident = !{!101}
+!llvm.module.flags = !{!95, !96, !97, !98, !99, !100, !101, !102}
+!llvm.ident = !{!103}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !43, splitDebugInlining: false, nameTableKind: None)
+!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !43, splitDebugInlining: false, nameTableKind: None)
 !1 = !DIFile(filename: "irq_init.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !2 = !{!3}
 !3 = !DICompositeType(tag: DW_TAG_enumeration_type, file: !4, line: 66, baseType: !5, size: 8, elements: !6)
@@ -236,44 +224,44 @@ attributes #5 = { optsize }
 !98 = !{i32 1, !"static_rwdata", i32 1}
 !99 = !{i32 1, !"enumsize_buildattr", i32 1}
 !100 = !{i32 1, !"armlib_unavailable", i32 0}
-!101 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!102 = distinct !DISubprogram(name: "z_arm_interrupt_init", scope: !103, file: !103, line: 26, type: !104, scopeLine: 27, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !106)
-!103 = !DIFile(filename: "arch/arm/core/cortex_m/irq_init.c", directory: "/home/sri/zephyrproject/zephyr")
-!104 = !DISubroutineType(types: !105)
-!105 = !{null}
-!106 = !{!107}
-!107 = !DILocalVariable(name: "irq", scope: !102, file: !103, line: 28, type: !47)
-!108 = !DILocation(line: 28, column: 2, scope: !102)
-!109 = !DILocation(line: 28, column: 6, scope: !102)
-!110 = !DILocation(line: 30, column: 2, scope: !102)
-!111 = !DILocation(line: 30, column: 9, scope: !112)
-!112 = distinct !DILexicalBlock(scope: !113, file: !103, line: 30, column: 2)
-!113 = distinct !DILexicalBlock(scope: !102, file: !103, line: 30, column: 2)
-!114 = !DILocation(line: 30, column: 13, scope: !112)
-!115 = !DILocation(line: 30, column: 2, scope: !113)
-!116 = !DILocation(line: 31, column: 33, scope: !117)
-!117 = distinct !DILexicalBlock(scope: !112, file: !103, line: 30, column: 26)
-!118 = !DILocation(line: 31, column: 22, scope: !117)
-!119 = !DILocation(line: 31, column: 3, scope: !117)
-!120 = !DILocation(line: 32, column: 2, scope: !117)
-!121 = !DILocation(line: 30, column: 22, scope: !112)
-!122 = !DILocation(line: 30, column: 2, scope: !112)
-!123 = distinct !{!123, !115, !124}
-!124 = !DILocation(line: 32, column: 2, scope: !113)
-!125 = !DILocation(line: 33, column: 1, scope: !102)
-!126 = distinct !DISubprogram(name: "__NVIC_SetPriority", scope: !52, file: !52, line: 732, type: !127, scopeLine: 733, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !129)
-!127 = !DISubroutineType(types: !128)
-!128 = !{null, !44, !48}
-!129 = !{!130, !131}
-!130 = !DILocalVariable(name: "IRQn", arg: 1, scope: !126, file: !52, line: 732, type: !44)
-!131 = !DILocalVariable(name: "priority", arg: 2, scope: !126, file: !52, line: 732, type: !48)
-!132 = !DILocation(line: 732, column: 51, scope: !126)
-!133 = !DILocation(line: 732, column: 66, scope: !126)
+!101 = !{i32 8, !"PIC Level", i32 2}
+!102 = !{i32 7, !"PIE Level", i32 2}
+!103 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!104 = distinct !DISubprogram(name: "z_arm_interrupt_init", scope: !105, file: !105, line: 26, type: !106, scopeLine: 27, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !108)
+!105 = !DIFile(filename: "arch/arm/core/cortex_m/irq_init.c", directory: "/home/sri/zephyrproject/zephyr")
+!106 = !DISubroutineType(types: !107)
+!107 = !{null}
+!108 = !{}
+!109 = !DILocalVariable(name: "irq", scope: !104, file: !105, line: 28, type: !47)
+!110 = !DILocation(line: 28, column: 6, scope: !104)
+!111 = !DILocation(line: 30, column: 2, scope: !104)
+!112 = !DILocation(line: 30, column: 9, scope: !113)
+!113 = distinct !DILexicalBlock(scope: !114, file: !105, line: 30, column: 2)
+!114 = distinct !DILexicalBlock(scope: !104, file: !105, line: 30, column: 2)
+!115 = !DILocation(line: 30, column: 13, scope: !113)
+!116 = !DILocation(line: 30, column: 2, scope: !114)
+!117 = !DILocation(line: 31, column: 33, scope: !118)
+!118 = distinct !DILexicalBlock(scope: !113, file: !105, line: 30, column: 26)
+!119 = !DILocation(line: 31, column: 22, scope: !118)
+!120 = !DILocation(line: 31, column: 3, scope: !118)
+!121 = !DILocation(line: 32, column: 2, scope: !118)
+!122 = !DILocation(line: 30, column: 22, scope: !113)
+!123 = !DILocation(line: 30, column: 2, scope: !113)
+!124 = distinct !{!124, !116, !125}
+!125 = !DILocation(line: 32, column: 2, scope: !114)
+!126 = !DILocation(line: 33, column: 1, scope: !104)
+!127 = distinct !DISubprogram(name: "__NVIC_SetPriority", scope: !52, file: !52, line: 732, type: !128, scopeLine: 733, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !108)
+!128 = !DISubroutineType(types: !129)
+!129 = !{null, !44, !48}
+!130 = !DILocalVariable(name: "IRQn", arg: 1, scope: !127, file: !52, line: 732, type: !44)
+!131 = !DILocation(line: 732, column: 51, scope: !127)
+!132 = !DILocalVariable(name: "priority", arg: 2, scope: !127, file: !52, line: 732, type: !48)
+!133 = !DILocation(line: 732, column: 66, scope: !127)
 !134 = !DILocation(line: 734, column: 17, scope: !135)
-!135 = distinct !DILexicalBlock(scope: !126, file: !52, line: 734, column: 7)
+!135 = distinct !DILexicalBlock(scope: !127, file: !52, line: 734, column: 7)
 !136 = !DILocation(line: 734, column: 7, scope: !135)
 !137 = !DILocation(line: 734, column: 23, scope: !135)
-!138 = !DILocation(line: 734, column: 7, scope: !126)
+!138 = !DILocation(line: 734, column: 7, scope: !127)
 !139 = !DILocation(line: 736, column: 183, scope: !140)
 !140 = distinct !DILexicalBlock(scope: !135, file: !52, line: 735, column: 3)
 !141 = !DILocation(line: 736, column: 173, scope: !140)
@@ -331,4 +319,4 @@ attributes #5 = { optsize }
 !193 = !DILocation(line: 741, column: 102, scope: !167)
 !194 = !DILocation(line: 741, column: 5, scope: !167)
 !195 = !DILocation(line: 741, column: 113, scope: !167)
-!196 = !DILocation(line: 744, column: 1, scope: !126)
+!196 = !DILocation(line: 744, column: 1, scope: !127)

@@ -1,5 +1,3 @@
-optimized_ll_files/
-optimized_cleaned_ll_files/
-obj/
-llvm_pass/*.o
-llvm_pass/*.so
+output/
+posix/
+ll_files/

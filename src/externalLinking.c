@@ -146,7 +146,6 @@ char __ARM_exidx_load_start;
 
 char __ARM_exidx_end;
 char __ARM_exidx_size;
-char __data_start;
 char __data_load_start;
 
 char __data_end;

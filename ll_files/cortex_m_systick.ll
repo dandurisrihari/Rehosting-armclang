@@ -19,118 +19,100 @@ target triple = "aarch64-arm-none-eabi"
 @__init_sys_clock_driver_init = internal constant %struct.init_entry { %union.init_function { ptr @sys_clock_driver_init }, ptr null }, section ".z_init_PRE_KERNEL_20_0_", align 4, !dbg !109
 @llvm.used = appending global [1 x ptr] [ptr @__init_sys_clock_driver_init], section "llvm.metadata"
 
-; Function Attrs: nounwind optsize
-define hidden void @sys_clock_isr(ptr noundef %0) #0 !dbg !149 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @sys_clock_isr(ptr noundef %0) #0 !dbg !151 {
   %2 = alloca ptr, align 4
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !154, metadata !DIExpression()), !dbg !157
-  %5 = load ptr, ptr %2, align 4, !dbg !158
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #5, !dbg !159
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !155, metadata !DIExpression()), !dbg !160
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #5, !dbg !161
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !156, metadata !DIExpression()), !dbg !162
-  %6 = call i32 @elapsed() #6, !dbg !163
-  %7 = load volatile i32, ptr @overflow_cyc, align 4, !dbg !164
-  %8 = load i32, ptr @cycle_count, align 4, !dbg !165
-  %9 = add i32 %8, %7, !dbg !165
-  store i32 %9, ptr @cycle_count, align 4, !dbg !165
-  store volatile i32 0, ptr @overflow_cyc, align 4, !dbg !166
-  %10 = load i32, ptr @cycle_count, align 4, !dbg !167
-  %11 = load i32, ptr @announced_cycles, align 4, !dbg !170
-  %12 = sub i32 %10, %11, !dbg !171
-  store i32 %12, ptr %3, align 4, !dbg !172
-  %13 = load i32, ptr %3, align 4, !dbg !173
-  %14 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !174
-  %15 = sdiv i32 %14, 10000, !dbg !175
-  %16 = udiv i32 %13, %15, !dbg !176
-  store i32 %16, ptr %4, align 4, !dbg !177
-  %17 = load i32, ptr %4, align 4, !dbg !178
-  %18 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !179
-  %19 = sdiv i32 %18, 10000, !dbg !180
-  %20 = mul i32 %17, %19, !dbg !181
-  %21 = load i32, ptr @announced_cycles, align 4, !dbg !182
-  %22 = add i32 %21, %20, !dbg !182
-  store i32 %22, ptr @announced_cycles, align 4, !dbg !182
-  %23 = load i32, ptr %4, align 4, !dbg !183
-  call void @sys_clock_announce(i32 noundef %23) #6, !dbg !184
-  call void @z_arm_int_exit() #6, !dbg !185
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #5, !dbg !186
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #5, !dbg !186
-  ret void, !dbg !186
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !155, metadata !DIExpression()), !dbg !156
+  %5 = load ptr, ptr %2, align 4, !dbg !157
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !158, metadata !DIExpression()), !dbg !159
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !160, metadata !DIExpression()), !dbg !161
+  %6 = call i32 @elapsed(), !dbg !162
+  %7 = load volatile i32, ptr @overflow_cyc, align 4, !dbg !163
+  %8 = load i32, ptr @cycle_count, align 4, !dbg !164
+  %9 = add i32 %8, %7, !dbg !164
+  store i32 %9, ptr @cycle_count, align 4, !dbg !164
+  store volatile i32 0, ptr @overflow_cyc, align 4, !dbg !165
+  %10 = load i32, ptr @cycle_count, align 4, !dbg !166
+  %11 = load i32, ptr @announced_cycles, align 4, !dbg !169
+  %12 = sub i32 %10, %11, !dbg !170
+  store i32 %12, ptr %3, align 4, !dbg !171
+  %13 = load i32, ptr %3, align 4, !dbg !172
+  %14 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !173
+  %15 = sdiv i32 %14, 10000, !dbg !174
+  %16 = udiv i32 %13, %15, !dbg !175
+  store i32 %16, ptr %4, align 4, !dbg !176
+  %17 = load i32, ptr %4, align 4, !dbg !177
+  %18 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !178
+  %19 = sdiv i32 %18, 10000, !dbg !179
+  %20 = mul i32 %17, %19, !dbg !180
+  %21 = load i32, ptr @announced_cycles, align 4, !dbg !181
+  %22 = add i32 %21, %20, !dbg !181
+  store i32 %22, ptr @announced_cycles, align 4, !dbg !181
+  %23 = load i32, ptr %4, align 4, !dbg !182
+  call void @sys_clock_announce(i32 noundef %23), !dbg !183
+  call void @z_arm_int_exit(), !dbg !184
+  ret void, !dbg !185
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
 declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #2
-
-; Function Attrs: nounwind optsize
-define internal i32 @elapsed() #0 !dbg !187 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @elapsed() #0 !dbg !186 {
   %1 = alloca i32, align 4
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
-  call void @llvm.lifetime.start.p0(i64 4, ptr %1) #5, !dbg !194
-  call void @llvm.dbg.declare(metadata ptr %1, metadata !191, metadata !DIExpression()), !dbg !195
-  %4 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !196
-  store i32 %4, ptr %1, align 4, !dbg !195
-  call void @llvm.lifetime.start.p0(i64 4, ptr %2) #5, !dbg !197
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !192, metadata !DIExpression()), !dbg !198
-  %5 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !199
-  store i32 %5, ptr %2, align 4, !dbg !198
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #5, !dbg !200
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !193, metadata !DIExpression()), !dbg !201
-  %6 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !202
-  store i32 %6, ptr %3, align 4, !dbg !201
-  %7 = load i32, ptr %2, align 4, !dbg !203
-  %8 = and i32 %7, 65536, !dbg !205
-  %9 = icmp ne i32 %8, 0, !dbg !205
-  br i1 %9, label %14, label %10, !dbg !206
+  call void @llvm.dbg.declare(metadata ptr %1, metadata !189, metadata !DIExpression()), !dbg !190
+  %4 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !191
+  store i32 %4, ptr %1, align 4, !dbg !190
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !192, metadata !DIExpression()), !dbg !193
+  %5 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !194
+  store i32 %5, ptr %2, align 4, !dbg !193
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !195, metadata !DIExpression()), !dbg !196
+  %6 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !197
+  store i32 %6, ptr %3, align 4, !dbg !196
+  %7 = load i32, ptr %2, align 4, !dbg !198
+  %8 = and i32 %7, 65536, !dbg !200
+  %9 = icmp ne i32 %8, 0, !dbg !200
+  br i1 %9, label %14, label %10, !dbg !201
 
 10:                                               ; preds = %0
-  %11 = load i32, ptr %1, align 4, !dbg !207
-  %12 = load i32, ptr %3, align 4, !dbg !208
-  %13 = icmp ult i32 %11, %12, !dbg !209
-  br i1 %13, label %14, label %19, !dbg !210
+  %11 = load i32, ptr %1, align 4, !dbg !202
+  %12 = load i32, ptr %3, align 4, !dbg !203
+  %13 = icmp ult i32 %11, %12, !dbg !204
+  br i1 %13, label %14, label %19, !dbg !205
 
 14:                                               ; preds = %10, %0
-  %15 = load i32, ptr @last_load, align 4, !dbg !211
-  %16 = load volatile i32, ptr @overflow_cyc, align 4, !dbg !213
-  %17 = add i32 %16, %15, !dbg !213
-  store volatile i32 %17, ptr @overflow_cyc, align 4, !dbg !213
-  %18 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !214
-  br label %19, !dbg !215
+  %15 = load i32, ptr @last_load, align 4, !dbg !206
+  %16 = load volatile i32, ptr @overflow_cyc, align 4, !dbg !208
+  %17 = add i32 %16, %15, !dbg !208
+  store volatile i32 %17, ptr @overflow_cyc, align 4, !dbg !208
+  %18 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !209
+  br label %19, !dbg !210
 
 19:                                               ; preds = %14, %10
-  %20 = load i32, ptr @last_load, align 4, !dbg !216
-  %21 = load i32, ptr %3, align 4, !dbg !217
-  %22 = sub i32 %20, %21, !dbg !218
-  %23 = load volatile i32, ptr @overflow_cyc, align 4, !dbg !219
-  %24 = add i32 %22, %23, !dbg !220
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #5, !dbg !221
-  call void @llvm.lifetime.end.p0(i64 4, ptr %2) #5, !dbg !221
-  call void @llvm.lifetime.end.p0(i64 4, ptr %1) #5, !dbg !221
-  ret i32 %24, !dbg !222
+  %20 = load i32, ptr @last_load, align 4, !dbg !211
+  %21 = load i32, ptr %3, align 4, !dbg !212
+  %22 = sub i32 %20, %21, !dbg !213
+  %23 = load volatile i32, ptr @overflow_cyc, align 4, !dbg !214
+  %24 = add i32 %22, %23, !dbg !215
+  ret i32 %24, !dbg !216
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @sys_clock_hw_cycles_per_sec() #3 !dbg !223 {
-  ret i32 48000000, !dbg !225
+; Function Attrs: noinline nounwind optnone
+define internal i32 @sys_clock_hw_cycles_per_sec() #0 !dbg !217 {
+  ret i32 48000000, !dbg !219
 }
 
-; Function Attrs: optsize
-declare !dbg !226 dso_local void @sys_clock_announce(i32 noundef) #4
+declare void @sys_clock_announce(i32 noundef) #2
 
-; Function Attrs: optsize
-declare !dbg !230 dso_local void @z_arm_int_exit() #4
+declare void @z_arm_int_exit() #2
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #2
-
-; Function Attrs: nounwind optsize
-define hidden void @sys_clock_set_timeout(i32 noundef %0, i1 noundef zeroext %1) #0 !dbg !234 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @sys_clock_set_timeout(i32 noundef %0, i1 noundef zeroext %1) #0 !dbg !220 {
   %3 = alloca i32, align 4
   %4 = alloca ptr, align 4
   %5 = alloca ptr, align 4
@@ -149,347 +131,331 @@ define hidden void @sys_clock_set_timeout(i32 noundef %0, i1 noundef zeroext %1)
   %18 = alloca i32, align 4
   %19 = alloca i32, align 4
   store i32 %0, ptr %11, align 4
-  call void @llvm.dbg.declare(metadata ptr %11, metadata !239, metadata !DIExpression()), !dbg !252
+  call void @llvm.dbg.declare(metadata ptr %11, metadata !224, metadata !DIExpression()), !dbg !225
   %20 = zext i1 %1 to i8
   store i8 %20, ptr %12, align 1
-  call void @llvm.dbg.declare(metadata ptr %12, metadata !240, metadata !DIExpression()), !dbg !253
-  %21 = load i8, ptr %12, align 1, !dbg !254, !range !256, !noundef !135
-  %22 = trunc i8 %21 to i1, !dbg !254
-  br i1 %22, label %23, label %30, !dbg !257
+  call void @llvm.dbg.declare(metadata ptr %12, metadata !226, metadata !DIExpression()), !dbg !227
+  %21 = load i8, ptr %12, align 1, !dbg !228
+  %22 = trunc i8 %21 to i1, !dbg !228
+  br i1 %22, label %23, label %30, !dbg !230
 
 23:                                               ; preds = %2
-  %24 = load i32, ptr %11, align 4, !dbg !258
-  %25 = sext i32 %24 to i64, !dbg !258
-  %26 = icmp eq i64 %25, -1, !dbg !259
-  br i1 %26, label %27, label %30, !dbg !260
+  %24 = load i32, ptr %11, align 4, !dbg !231
+  %25 = sext i32 %24 to i64, !dbg !231
+  %26 = icmp eq i64 %25, -1, !dbg !232
+  br i1 %26, label %27, label %30, !dbg !233
 
 27:                                               ; preds = %23
-  %28 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !261
-  %29 = and i32 %28, -2, !dbg !261
-  store volatile i32 %29, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !261
-  store i32 -16777216, ptr @last_load, align 4, !dbg !263
-  br label %213, !dbg !264
+  %28 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !234
+  %29 = and i32 %28, -2, !dbg !234
+  store volatile i32 %29, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !234
+  store i32 -16777216, ptr @last_load, align 4, !dbg !236
+  br label %213, !dbg !237
 
 30:                                               ; preds = %23, %2
-  call void @llvm.lifetime.start.p0(i64 4, ptr %13) #5, !dbg !265
-  call void @llvm.dbg.declare(metadata ptr %13, metadata !241, metadata !DIExpression()), !dbg !266
-  call void @llvm.lifetime.start.p0(i64 4, ptr %14) #5, !dbg !267
-  call void @llvm.dbg.declare(metadata ptr %14, metadata !242, metadata !DIExpression()), !dbg !268
-  call void @llvm.lifetime.start.p0(i64 4, ptr %15) #5, !dbg !267
-  call void @llvm.dbg.declare(metadata ptr %15, metadata !243, metadata !DIExpression()), !dbg !269
-  call void @llvm.lifetime.start.p0(i64 4, ptr %16) #5, !dbg !270
-  call void @llvm.dbg.declare(metadata ptr %16, metadata !244, metadata !DIExpression()), !dbg !271
-  %31 = load i32, ptr @last_load, align 4, !dbg !272
-  store i32 %31, ptr %16, align 4, !dbg !271
-  %32 = load i32, ptr %11, align 4, !dbg !273
-  %33 = sext i32 %32 to i64, !dbg !273
-  %34 = icmp eq i64 %33, -1, !dbg !274
-  br i1 %34, label %35, label %41, !dbg !275
+  call void @llvm.dbg.declare(metadata ptr %13, metadata !238, metadata !DIExpression()), !dbg !239
+  call void @llvm.dbg.declare(metadata ptr %14, metadata !240, metadata !DIExpression()), !dbg !241
+  call void @llvm.dbg.declare(metadata ptr %15, metadata !242, metadata !DIExpression()), !dbg !243
+  call void @llvm.dbg.declare(metadata ptr %16, metadata !244, metadata !DIExpression()), !dbg !245
+  %31 = load i32, ptr @last_load, align 4, !dbg !246
+  store i32 %31, ptr %16, align 4, !dbg !245
+  %32 = load i32, ptr %11, align 4, !dbg !247
+  %33 = sext i32 %32 to i64, !dbg !247
+  %34 = icmp eq i64 %33, -1, !dbg !248
+  br i1 %34, label %35, label %41, !dbg !249
 
 35:                                               ; preds = %30
-  %36 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !276
-  %37 = sdiv i32 %36, 10000, !dbg !277
-  %38 = sdiv i32 16777215, %37, !dbg !278
-  %39 = sext i32 %38 to i64, !dbg !279
-  %40 = sub nsw i64 %39, 1, !dbg !280
-  br label %44, !dbg !275
+  %36 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !250
+  %37 = sdiv i32 %36, 10000, !dbg !251
+  %38 = sdiv i32 16777215, %37, !dbg !252
+  %39 = sext i32 %38 to i64, !dbg !253
+  %40 = sub nsw i64 %39, 1, !dbg !254
+  br label %44, !dbg !249
 
 41:                                               ; preds = %30
-  %42 = load i32, ptr %11, align 4, !dbg !281
-  %43 = sext i32 %42 to i64, !dbg !281
-  br label %44, !dbg !275
+  %42 = load i32, ptr %11, align 4, !dbg !255
+  %43 = sext i32 %42 to i64, !dbg !255
+  br label %44, !dbg !249
 
 44:                                               ; preds = %41, %35
-  %45 = phi i64 [ %40, %35 ], [ %43, %41 ], !dbg !275
-  %46 = trunc i64 %45 to i32, !dbg !275
-  store i32 %46, ptr %11, align 4, !dbg !282
-  %47 = load i32, ptr %11, align 4, !dbg !283
-  %48 = sub nsw i32 %47, 1, !dbg !284
-  %49 = icmp sle i32 %48, 0, !dbg !285
-  br i1 %49, label %50, label %51, !dbg !286
+  %45 = phi i64 [ %40, %35 ], [ %43, %41 ], !dbg !249
+  %46 = trunc i64 %45 to i32, !dbg !249
+  store i32 %46, ptr %11, align 4, !dbg !256
+  %47 = load i32, ptr %11, align 4, !dbg !257
+  %48 = sub nsw i32 %47, 1, !dbg !258
+  %49 = icmp sle i32 %48, 0, !dbg !259
+  br i1 %49, label %50, label %51, !dbg !260
 
 50:                                               ; preds = %44
-  br label %73, !dbg !286
+  br label %73, !dbg !260
 
 51:                                               ; preds = %44
-  %52 = load i32, ptr %11, align 4, !dbg !287
-  %53 = sub nsw i32 %52, 1, !dbg !288
-  %54 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !289
-  %55 = sdiv i32 %54, 10000, !dbg !290
-  %56 = sdiv i32 16777215, %55, !dbg !291
-  %57 = sext i32 %56 to i64, !dbg !292
-  %58 = sub nsw i64 %57, 1, !dbg !293
-  %59 = trunc i64 %58 to i32, !dbg !294
-  %60 = icmp slt i32 %53, %59, !dbg !295
-  br i1 %60, label %61, label %64, !dbg !296
+  %52 = load i32, ptr %11, align 4, !dbg !261
+  %53 = sub nsw i32 %52, 1, !dbg !262
+  %54 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !263
+  %55 = sdiv i32 %54, 10000, !dbg !264
+  %56 = sdiv i32 16777215, %55, !dbg !265
+  %57 = sext i32 %56 to i64, !dbg !266
+  %58 = sub nsw i64 %57, 1, !dbg !267
+  %59 = trunc i64 %58 to i32, !dbg !268
+  %60 = icmp slt i32 %53, %59, !dbg !269
+  br i1 %60, label %61, label %64, !dbg !270
 
 61:                                               ; preds = %51
-  %62 = load i32, ptr %11, align 4, !dbg !297
-  %63 = sub nsw i32 %62, 1, !dbg !298
-  br label %71, !dbg !296
+  %62 = load i32, ptr %11, align 4, !dbg !271
+  %63 = sub nsw i32 %62, 1, !dbg !272
+  br label %71, !dbg !270
 
 64:                                               ; preds = %51
-  %65 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !299
-  %66 = sdiv i32 %65, 10000, !dbg !300
-  %67 = sdiv i32 16777215, %66, !dbg !301
-  %68 = sext i32 %67 to i64, !dbg !302
-  %69 = sub nsw i64 %68, 1, !dbg !303
-  %70 = trunc i64 %69 to i32, !dbg !304
-  br label %71, !dbg !296
+  %65 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !273
+  %66 = sdiv i32 %65, 10000, !dbg !274
+  %67 = sdiv i32 16777215, %66, !dbg !275
+  %68 = sext i32 %67 to i64, !dbg !276
+  %69 = sub nsw i64 %68, 1, !dbg !277
+  %70 = trunc i64 %69 to i32, !dbg !278
+  br label %71, !dbg !270
 
 71:                                               ; preds = %64, %61
-  %72 = phi i32 [ %63, %61 ], [ %70, %64 ], !dbg !296
-  br label %73, !dbg !286
+  %72 = phi i32 [ %63, %61 ], [ %70, %64 ], !dbg !270
+  br label %73, !dbg !260
 
 73:                                               ; preds = %71, %50
-  %74 = phi i32 [ 0, %50 ], [ %72, %71 ], !dbg !286
-  store i32 %74, ptr %11, align 4, !dbg !305
-  call void @llvm.lifetime.start.p0(i64 4, ptr %17) #5, !dbg !306
-  call void @llvm.dbg.declare(metadata ptr %17, metadata !245, metadata !DIExpression()), !dbg !307
+  %74 = phi i32 [ 0, %50 ], [ %72, %71 ], !dbg !260
+  store i32 %74, ptr %11, align 4, !dbg !279
+  call void @llvm.dbg.declare(metadata ptr %17, metadata !280, metadata !DIExpression()), !dbg !285
   store ptr @lock, ptr %10, align 4
-  call void @llvm.dbg.declare(metadata ptr %10, metadata !308, metadata !DIExpression()), !dbg !315
-  %75 = load ptr, ptr %10, align 4, !dbg !317
-  call void @llvm.dbg.declare(metadata ptr %9, metadata !314, metadata !DIExpression()), !dbg !318
-  call void @llvm.lifetime.start.p0(i64 4, ptr %6) #5, !dbg !319
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !325, metadata !DIExpression()), !dbg !327
-  %76 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #5, !dbg !328, !srcloc !329
-  store i32 %76, ptr %6, align 4, !dbg !328
-  %77 = load i32, ptr %6, align 4, !dbg !330
-  call void @llvm.lifetime.end.p0(i64 4, ptr %6) #5, !dbg !331
-  store i32 %77, ptr %9, align 4, !dbg !332
-  %78 = load ptr, ptr %10, align 4, !dbg !333
+  call void @llvm.dbg.declare(metadata ptr %10, metadata !286, metadata !DIExpression()), !dbg !291
+  %75 = load ptr, ptr %10, align 4, !dbg !293
+  call void @llvm.dbg.declare(metadata ptr %9, metadata !294, metadata !DIExpression()), !dbg !295
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !296, metadata !DIExpression()), !dbg !301
+  %76 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #3, !dbg !303, !srcloc !304
+  store i32 %76, ptr %6, align 4, !dbg !303
+  %77 = load i32, ptr %6, align 4, !dbg !305
+  store i32 %77, ptr %9, align 4, !dbg !306
+  %78 = load ptr, ptr %10, align 4, !dbg !307
   store ptr %78, ptr %5, align 4
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !334, metadata !DIExpression()), !dbg !339
-  %79 = load ptr, ptr %5, align 4, !dbg !341
-  %80 = load ptr, ptr %10, align 4, !dbg !342
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !308, metadata !DIExpression()), !dbg !312
+  %79 = load ptr, ptr %5, align 4, !dbg !314
+  %80 = load ptr, ptr %10, align 4, !dbg !315
   store ptr %80, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !343, metadata !DIExpression()), !dbg !346
-  %81 = load ptr, ptr %4, align 4, !dbg !348
-  %82 = load i32, ptr %9, align 4, !dbg !349
-  %83 = getelementptr inbounds %struct.z_spinlock_key, ptr %17, i32 0, i32 0, !dbg !350
-  store i32 %82, ptr %83, align 4, !dbg !350
-  call void @llvm.lifetime.start.p0(i64 4, ptr %18) #5, !dbg !351
-  call void @llvm.dbg.declare(metadata ptr %18, metadata !250, metadata !DIExpression()), !dbg !352
-  %84 = call i32 @elapsed() #6, !dbg !353
-  store i32 %84, ptr %18, align 4, !dbg !352
-  %85 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !354
-  store i32 %85, ptr %14, align 4, !dbg !355
-  %86 = load i32, ptr %18, align 4, !dbg !356
-  %87 = load i32, ptr @cycle_count, align 4, !dbg !357
-  %88 = add i32 %87, %86, !dbg !357
-  store i32 %88, ptr @cycle_count, align 4, !dbg !357
-  store volatile i32 0, ptr @overflow_cyc, align 4, !dbg !358
-  call void @llvm.lifetime.start.p0(i64 4, ptr %19) #5, !dbg !359
-  call void @llvm.dbg.declare(metadata ptr %19, metadata !251, metadata !DIExpression()), !dbg !360
-  %89 = load i32, ptr @cycle_count, align 4, !dbg !361
-  %90 = load i32, ptr @announced_cycles, align 4, !dbg !362
-  %91 = sub i32 %89, %90, !dbg !363
-  store i32 %91, ptr %19, align 4, !dbg !360
-  %92 = load i32, ptr %19, align 4, !dbg !364
-  %93 = icmp slt i32 %92, 0, !dbg !366
-  br i1 %93, label %94, label %106, !dbg !367
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !316, metadata !DIExpression()), !dbg !318
+  %81 = load ptr, ptr %4, align 4, !dbg !320
+  %82 = load i32, ptr %9, align 4, !dbg !321
+  %83 = getelementptr inbounds %struct.z_spinlock_key, ptr %17, i32 0, i32 0, !dbg !322
+  store i32 %82, ptr %83, align 4, !dbg !322
+  call void @llvm.dbg.declare(metadata ptr %18, metadata !323, metadata !DIExpression()), !dbg !324
+  %84 = call i32 @elapsed(), !dbg !325
+  store i32 %84, ptr %18, align 4, !dbg !324
+  %85 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !326
+  store i32 %85, ptr %14, align 4, !dbg !327
+  %86 = load i32, ptr %18, align 4, !dbg !328
+  %87 = load i32, ptr @cycle_count, align 4, !dbg !329
+  %88 = add i32 %87, %86, !dbg !329
+  store i32 %88, ptr @cycle_count, align 4, !dbg !329
+  store volatile i32 0, ptr @overflow_cyc, align 4, !dbg !330
+  call void @llvm.dbg.declare(metadata ptr %19, metadata !331, metadata !DIExpression()), !dbg !332
+  %89 = load i32, ptr @cycle_count, align 4, !dbg !333
+  %90 = load i32, ptr @announced_cycles, align 4, !dbg !334
+  %91 = sub i32 %89, %90, !dbg !335
+  store i32 %91, ptr %19, align 4, !dbg !332
+  %92 = load i32, ptr %19, align 4, !dbg !336
+  %93 = icmp slt i32 %92, 0, !dbg !338
+  br i1 %93, label %94, label %106, !dbg !339
 
 94:                                               ; preds = %73
-  %95 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !368
-  %96 = sdiv i32 %95, 10000, !dbg !370
-  %97 = udiv i32 %96, 16, !dbg !371
-  %98 = icmp ugt i32 1024, %97, !dbg !372
-  br i1 %98, label %99, label %100, !dbg !373
+  %95 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !340
+  %96 = sdiv i32 %95, 10000, !dbg !342
+  %97 = udiv i32 %96, 16, !dbg !343
+  %98 = icmp ugt i32 1024, %97, !dbg !344
+  br i1 %98, label %99, label %100, !dbg !345
 
 99:                                               ; preds = %94
-  br label %104, !dbg !373
+  br label %104, !dbg !345
 
 100:                                              ; preds = %94
-  %101 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !374
-  %102 = sdiv i32 %101, 10000, !dbg !375
-  %103 = udiv i32 %102, 16, !dbg !376
-  br label %104, !dbg !373
+  %101 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !346
+  %102 = sdiv i32 %101, 10000, !dbg !347
+  %103 = udiv i32 %102, 16, !dbg !348
+  br label %104, !dbg !345
 
 104:                                              ; preds = %100, %99
-  %105 = phi i32 [ 1024, %99 ], [ %103, %100 ], !dbg !373
-  store i32 %105, ptr @last_load, align 4, !dbg !377
-  br label %183, !dbg !378
+  %105 = phi i32 [ 1024, %99 ], [ %103, %100 ], !dbg !345
+  store i32 %105, ptr @last_load, align 4, !dbg !349
+  br label %183, !dbg !350
 
 106:                                              ; preds = %73
-  %107 = load i32, ptr %11, align 4, !dbg !379
-  %108 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !381
-  %109 = sdiv i32 %108, 10000, !dbg !382
-  %110 = mul nsw i32 %107, %109, !dbg !383
-  store i32 %110, ptr %13, align 4, !dbg !384
-  %111 = load i32, ptr %19, align 4, !dbg !385
-  %112 = load i32, ptr %13, align 4, !dbg !386
-  %113 = add i32 %112, %111, !dbg !386
-  store i32 %113, ptr %13, align 4, !dbg !386
-  %114 = load i32, ptr %13, align 4, !dbg !387
-  %115 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !388
-  %116 = sdiv i32 %115, 10000, !dbg !389
-  %117 = add i32 %114, %116, !dbg !390
-  %118 = sub i32 %117, 1, !dbg !391
-  %119 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !392
-  %120 = sdiv i32 %119, 10000, !dbg !393
-  %121 = udiv i32 %118, %120, !dbg !394
-  %122 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !395
-  %123 = sdiv i32 %122, 10000, !dbg !396
-  %124 = mul i32 %121, %123, !dbg !397
-  store i32 %124, ptr %13, align 4, !dbg !398
-  %125 = load i32, ptr %19, align 4, !dbg !399
-  %126 = load i32, ptr %13, align 4, !dbg !400
-  %127 = sub i32 %126, %125, !dbg !400
-  store i32 %127, ptr %13, align 4, !dbg !400
-  %128 = load i32, ptr %13, align 4, !dbg !401
-  %129 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !402
-  %130 = sdiv i32 %129, 10000, !dbg !403
-  %131 = udiv i32 %130, 16, !dbg !404
-  %132 = icmp ugt i32 1024, %131, !dbg !405
-  br i1 %132, label %133, label %134, !dbg !406
+  %107 = load i32, ptr %11, align 4, !dbg !351
+  %108 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !353
+  %109 = sdiv i32 %108, 10000, !dbg !354
+  %110 = mul nsw i32 %107, %109, !dbg !355
+  store i32 %110, ptr %13, align 4, !dbg !356
+  %111 = load i32, ptr %19, align 4, !dbg !357
+  %112 = load i32, ptr %13, align 4, !dbg !358
+  %113 = add i32 %112, %111, !dbg !358
+  store i32 %113, ptr %13, align 4, !dbg !358
+  %114 = load i32, ptr %13, align 4, !dbg !359
+  %115 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !360
+  %116 = sdiv i32 %115, 10000, !dbg !361
+  %117 = add i32 %114, %116, !dbg !362
+  %118 = sub i32 %117, 1, !dbg !363
+  %119 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !364
+  %120 = sdiv i32 %119, 10000, !dbg !365
+  %121 = udiv i32 %118, %120, !dbg !366
+  %122 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !367
+  %123 = sdiv i32 %122, 10000, !dbg !368
+  %124 = mul i32 %121, %123, !dbg !369
+  store i32 %124, ptr %13, align 4, !dbg !370
+  %125 = load i32, ptr %19, align 4, !dbg !371
+  %126 = load i32, ptr %13, align 4, !dbg !372
+  %127 = sub i32 %126, %125, !dbg !372
+  store i32 %127, ptr %13, align 4, !dbg !372
+  %128 = load i32, ptr %13, align 4, !dbg !373
+  %129 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !374
+  %130 = sdiv i32 %129, 10000, !dbg !375
+  %131 = udiv i32 %130, 16, !dbg !376
+  %132 = icmp ugt i32 1024, %131, !dbg !377
+  br i1 %132, label %133, label %134, !dbg !378
 
 133:                                              ; preds = %106
-  br label %138, !dbg !406
+  br label %138, !dbg !378
 
 134:                                              ; preds = %106
-  %135 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !407
-  %136 = sdiv i32 %135, 10000, !dbg !408
-  %137 = udiv i32 %136, 16, !dbg !409
-  br label %138, !dbg !406
+  %135 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !379
+  %136 = sdiv i32 %135, 10000, !dbg !380
+  %137 = udiv i32 %136, 16, !dbg !381
+  br label %138, !dbg !378
 
 138:                                              ; preds = %134, %133
-  %139 = phi i32 [ 1024, %133 ], [ %137, %134 ], !dbg !406
-  %140 = icmp ugt i32 %128, %139, !dbg !410
-  br i1 %140, label %141, label %143, !dbg !411
+  %139 = phi i32 [ 1024, %133 ], [ %137, %134 ], !dbg !378
+  %140 = icmp ugt i32 %128, %139, !dbg !382
+  br i1 %140, label %141, label %143, !dbg !383
 
 141:                                              ; preds = %138
-  %142 = load i32, ptr %13, align 4, !dbg !412
-  br label %155, !dbg !411
+  %142 = load i32, ptr %13, align 4, !dbg !384
+  br label %155, !dbg !383
 
 143:                                              ; preds = %138
-  %144 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !413
-  %145 = sdiv i32 %144, 10000, !dbg !414
-  %146 = udiv i32 %145, 16, !dbg !415
-  %147 = icmp ugt i32 1024, %146, !dbg !416
-  br i1 %147, label %148, label %149, !dbg !417
+  %144 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !385
+  %145 = sdiv i32 %144, 10000, !dbg !386
+  %146 = udiv i32 %145, 16, !dbg !387
+  %147 = icmp ugt i32 1024, %146, !dbg !388
+  br i1 %147, label %148, label %149, !dbg !389
 
 148:                                              ; preds = %143
-  br label %153, !dbg !417
+  br label %153, !dbg !389
 
 149:                                              ; preds = %143
-  %150 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !418
-  %151 = sdiv i32 %150, 10000, !dbg !419
-  %152 = udiv i32 %151, 16, !dbg !420
-  br label %153, !dbg !417
+  %150 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !390
+  %151 = sdiv i32 %150, 10000, !dbg !391
+  %152 = udiv i32 %151, 16, !dbg !392
+  br label %153, !dbg !389
 
 153:                                              ; preds = %149, %148
-  %154 = phi i32 [ 1024, %148 ], [ %152, %149 ], !dbg !417
-  br label %155, !dbg !411
+  %154 = phi i32 [ 1024, %148 ], [ %152, %149 ], !dbg !389
+  br label %155, !dbg !383
 
 155:                                              ; preds = %153, %141
-  %156 = phi i32 [ %142, %141 ], [ %154, %153 ], !dbg !411
-  store i32 %156, ptr %13, align 4, !dbg !421
-  %157 = load i32, ptr %13, align 4, !dbg !422
-  %158 = zext i32 %157 to i64, !dbg !422
-  %159 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !424
-  %160 = sdiv i32 %159, 10000, !dbg !425
-  %161 = sdiv i32 16777215, %160, !dbg !426
-  %162 = sext i32 %161 to i64, !dbg !427
-  %163 = sub nsw i64 %162, 1, !dbg !428
-  %164 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !429
-  %165 = sdiv i32 %164, 10000, !dbg !430
-  %166 = sext i32 %165 to i64, !dbg !431
-  %167 = mul nsw i64 %163, %166, !dbg !432
-  %168 = icmp sgt i64 %158, %167, !dbg !433
-  br i1 %168, label %169, label %180, !dbg !434
+  %156 = phi i32 [ %142, %141 ], [ %154, %153 ], !dbg !383
+  store i32 %156, ptr %13, align 4, !dbg !393
+  %157 = load i32, ptr %13, align 4, !dbg !394
+  %158 = zext i32 %157 to i64, !dbg !394
+  %159 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !396
+  %160 = sdiv i32 %159, 10000, !dbg !397
+  %161 = sdiv i32 16777215, %160, !dbg !398
+  %162 = sext i32 %161 to i64, !dbg !399
+  %163 = sub nsw i64 %162, 1, !dbg !400
+  %164 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !401
+  %165 = sdiv i32 %164, 10000, !dbg !402
+  %166 = sext i32 %165 to i64, !dbg !403
+  %167 = mul nsw i64 %163, %166, !dbg !404
+  %168 = icmp sgt i64 %158, %167, !dbg !405
+  br i1 %168, label %169, label %180, !dbg !406
 
 169:                                              ; preds = %155
-  %170 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !435
-  %171 = sdiv i32 %170, 10000, !dbg !437
-  %172 = sdiv i32 16777215, %171, !dbg !438
-  %173 = sext i32 %172 to i64, !dbg !439
-  %174 = sub nsw i64 %173, 1, !dbg !440
-  %175 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !441
-  %176 = sdiv i32 %175, 10000, !dbg !442
-  %177 = sext i32 %176 to i64, !dbg !443
-  %178 = mul nsw i64 %174, %177, !dbg !444
-  %179 = trunc i64 %178 to i32, !dbg !445
-  store i32 %179, ptr @last_load, align 4, !dbg !446
-  br label %182, !dbg !447
+  %170 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !407
+  %171 = sdiv i32 %170, 10000, !dbg !409
+  %172 = sdiv i32 16777215, %171, !dbg !410
+  %173 = sext i32 %172 to i64, !dbg !411
+  %174 = sub nsw i64 %173, 1, !dbg !412
+  %175 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !413
+  %176 = sdiv i32 %175, 10000, !dbg !414
+  %177 = sext i32 %176 to i64, !dbg !415
+  %178 = mul nsw i64 %174, %177, !dbg !416
+  %179 = trunc i64 %178 to i32, !dbg !417
+  store i32 %179, ptr @last_load, align 4, !dbg !418
+  br label %182, !dbg !419
 
 180:                                              ; preds = %155
-  %181 = load i32, ptr %13, align 4, !dbg !448
-  store i32 %181, ptr @last_load, align 4, !dbg !450
+  %181 = load i32, ptr %13, align 4, !dbg !420
+  store i32 %181, ptr @last_load, align 4, !dbg !422
   br label %182
 
 182:                                              ; preds = %180, %169
   br label %183
 
 183:                                              ; preds = %182, %104
-  %184 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !451
-  store i32 %184, ptr %15, align 4, !dbg !452
-  %185 = load i32, ptr @last_load, align 4, !dbg !453
-  %186 = sub i32 %185, 1, !dbg !454
-  store volatile i32 %186, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 1), align 4, !dbg !455
-  store volatile i32 0, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !456
-  %187 = load i32, ptr %14, align 4, !dbg !457
-  %188 = load i32, ptr %15, align 4, !dbg !459
-  %189 = icmp ult i32 %187, %188, !dbg !460
-  br i1 %189, label %190, label %198, !dbg !461
+  %184 = load volatile i32, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !423
+  store i32 %184, ptr %15, align 4, !dbg !424
+  %185 = load i32, ptr @last_load, align 4, !dbg !425
+  %186 = sub i32 %185, 1, !dbg !426
+  store volatile i32 %186, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 1), align 4, !dbg !427
+  store volatile i32 0, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !428
+  %187 = load i32, ptr %14, align 4, !dbg !429
+  %188 = load i32, ptr %15, align 4, !dbg !431
+  %189 = icmp ult i32 %187, %188, !dbg !432
+  br i1 %189, label %190, label %198, !dbg !433
 
 190:                                              ; preds = %183
-  %191 = load i32, ptr %14, align 4, !dbg !462
-  %192 = load i32, ptr %16, align 4, !dbg !464
-  %193 = load i32, ptr %15, align 4, !dbg !465
-  %194 = sub i32 %192, %193, !dbg !466
-  %195 = add i32 %191, %194, !dbg !467
-  %196 = load i32, ptr @cycle_count, align 4, !dbg !468
-  %197 = add i32 %196, %195, !dbg !468
-  store i32 %197, ptr @cycle_count, align 4, !dbg !468
-  br label %204, !dbg !469
+  %191 = load i32, ptr %14, align 4, !dbg !434
+  %192 = load i32, ptr %16, align 4, !dbg !436
+  %193 = load i32, ptr %15, align 4, !dbg !437
+  %194 = sub i32 %192, %193, !dbg !438
+  %195 = add i32 %191, %194, !dbg !439
+  %196 = load i32, ptr @cycle_count, align 4, !dbg !440
+  %197 = add i32 %196, %195, !dbg !440
+  store i32 %197, ptr @cycle_count, align 4, !dbg !440
+  br label %204, !dbg !441
 
 198:                                              ; preds = %183
-  %199 = load i32, ptr %14, align 4, !dbg !470
-  %200 = load i32, ptr %15, align 4, !dbg !472
-  %201 = sub i32 %199, %200, !dbg !473
-  %202 = load i32, ptr @cycle_count, align 4, !dbg !474
-  %203 = add i32 %202, %201, !dbg !474
-  store i32 %203, ptr @cycle_count, align 4, !dbg !474
+  %199 = load i32, ptr %14, align 4, !dbg !442
+  %200 = load i32, ptr %15, align 4, !dbg !444
+  %201 = sub i32 %199, %200, !dbg !445
+  %202 = load i32, ptr @cycle_count, align 4, !dbg !446
+  %203 = add i32 %202, %201, !dbg !446
+  store i32 %203, ptr @cycle_count, align 4, !dbg !446
   br label %204
 
 204:                                              ; preds = %198, %190
-  %205 = getelementptr inbounds %struct.z_spinlock_key, ptr %17, i32 0, i32 0, !dbg !475
-  %206 = load [1 x i32], ptr %205, align 4, !dbg !475
+  %205 = getelementptr inbounds %struct.z_spinlock_key, ptr %17, i32 0, i32 0, !dbg !447
+  %206 = load [1 x i32], ptr %205, align 4, !dbg !447
   store [1 x i32] %206, ptr %7, align 4
   store ptr @lock, ptr %8, align 4
-  call void @llvm.dbg.declare(metadata ptr %8, metadata !476, metadata !DIExpression()), !dbg !482
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !481, metadata !DIExpression()), !dbg !484
-  %207 = load ptr, ptr %8, align 4, !dbg !485
-  %208 = load i32, ptr %7, align 4, !dbg !486
+  call void @llvm.dbg.declare(metadata ptr %8, metadata !448, metadata !DIExpression()), !dbg !452
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !454, metadata !DIExpression()), !dbg !455
+  %207 = load ptr, ptr %8, align 4, !dbg !456
+  %208 = load i32, ptr %7, align 4, !dbg !457
   store i32 %208, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !487, metadata !DIExpression()), !dbg !492
-  %209 = load i32, ptr %3, align 4, !dbg !494
-  %210 = icmp ne i32 %209, 0, !dbg !496
-  br i1 %210, label %211, label %212, !dbg !497
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !458, metadata !DIExpression()), !dbg !462
+  %209 = load i32, ptr %3, align 4, !dbg !464
+  %210 = icmp ne i32 %209, 0, !dbg !466
+  br i1 %210, label %211, label %212, !dbg !467
 
 211:                                              ; preds = %204
-  br label %arch_irq_unlock.exit, !dbg !498
+  br label %arch_irq_unlock.exit, !dbg !468
 
 212:                                              ; preds = %204
-  call void asm sideeffect "cpsie i;isb", "~{memory}"() #5, !dbg !500, !srcloc !501
-  br label %arch_irq_unlock.exit, !dbg !502
+  call void asm sideeffect "cpsie i;isb", "~{memory}"() #3, !dbg !470, !srcloc !471
+  br label %arch_irq_unlock.exit, !dbg !472
 
 arch_irq_unlock.exit:                             ; preds = %211, %212
-  call void @llvm.lifetime.end.p0(i64 4, ptr %19) #5, !dbg !503
-  call void @llvm.lifetime.end.p0(i64 4, ptr %18) #5, !dbg !503
-  call void @llvm.lifetime.end.p0(i64 4, ptr %17) #5, !dbg !503
-  call void @llvm.lifetime.end.p0(i64 4, ptr %16) #5, !dbg !503
-  call void @llvm.lifetime.end.p0(i64 4, ptr %15) #5, !dbg !503
-  call void @llvm.lifetime.end.p0(i64 4, ptr %14) #5, !dbg !503
-  call void @llvm.lifetime.end.p0(i64 4, ptr %13) #5, !dbg !503
-  br label %213, !dbg !503
+  br label %213, !dbg !473
 
 213:                                              ; preds = %arch_irq_unlock.exit, %27
-  ret void, !dbg !503
+  ret void, !dbg !473
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @sys_clock_elapsed() #0 !dbg !504 {
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @sys_clock_elapsed() #0 !dbg !474 {
   %1 = alloca i32, align 4
   %2 = alloca ptr, align 4
   %3 = alloca ptr, align 4
@@ -501,76 +467,68 @@ define hidden i32 @sys_clock_elapsed() #0 !dbg !504 {
   %9 = alloca %struct.z_spinlock_key, align 4
   %10 = alloca i32, align 4
   %11 = alloca i32, align 4
-  call void @llvm.lifetime.start.p0(i64 4, ptr %9) #5, !dbg !509
-  call void @llvm.dbg.declare(metadata ptr %9, metadata !506, metadata !DIExpression()), !dbg !510
+  call void @llvm.dbg.declare(metadata ptr %9, metadata !475, metadata !DIExpression()), !dbg !476
   store ptr @lock, ptr %8, align 4
-  call void @llvm.dbg.declare(metadata ptr %8, metadata !308, metadata !DIExpression()), !dbg !511
-  %12 = load ptr, ptr %8, align 4, !dbg !513
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !314, metadata !DIExpression()), !dbg !514
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #5, !dbg !515
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !325, metadata !DIExpression()), !dbg !517
-  %13 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #5, !dbg !518, !srcloc !329
-  store i32 %13, ptr %4, align 4, !dbg !518
-  %14 = load i32, ptr %4, align 4, !dbg !519
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #5, !dbg !520
-  store i32 %14, ptr %7, align 4, !dbg !521
-  %15 = load ptr, ptr %8, align 4, !dbg !522
+  call void @llvm.dbg.declare(metadata ptr %8, metadata !286, metadata !DIExpression()), !dbg !477
+  %12 = load ptr, ptr %8, align 4, !dbg !479
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !294, metadata !DIExpression()), !dbg !480
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !296, metadata !DIExpression()), !dbg !481
+  %13 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #3, !dbg !483, !srcloc !304
+  store i32 %13, ptr %4, align 4, !dbg !483
+  %14 = load i32, ptr %4, align 4, !dbg !484
+  store i32 %14, ptr %7, align 4, !dbg !485
+  %15 = load ptr, ptr %8, align 4, !dbg !486
   store ptr %15, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !334, metadata !DIExpression()), !dbg !523
-  %16 = load ptr, ptr %3, align 4, !dbg !525
-  %17 = load ptr, ptr %8, align 4, !dbg !526
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !308, metadata !DIExpression()), !dbg !487
+  %16 = load ptr, ptr %3, align 4, !dbg !489
+  %17 = load ptr, ptr %8, align 4, !dbg !490
   store ptr %17, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !343, metadata !DIExpression()), !dbg !527
-  %18 = load ptr, ptr %2, align 4, !dbg !529
-  %19 = load i32, ptr %7, align 4, !dbg !530
-  %20 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !531
-  store i32 %19, ptr %20, align 4, !dbg !531
-  call void @llvm.lifetime.start.p0(i64 4, ptr %10) #5, !dbg !532
-  call void @llvm.dbg.declare(metadata ptr %10, metadata !507, metadata !DIExpression()), !dbg !533
-  %21 = load i32, ptr @cycle_count, align 4, !dbg !534
-  %22 = load i32, ptr @announced_cycles, align 4, !dbg !535
-  %23 = sub i32 %21, %22, !dbg !536
-  store i32 %23, ptr %10, align 4, !dbg !533
-  call void @llvm.lifetime.start.p0(i64 4, ptr %11) #5, !dbg !537
-  call void @llvm.dbg.declare(metadata ptr %11, metadata !508, metadata !DIExpression()), !dbg !538
-  %24 = call i32 @elapsed() #6, !dbg !539
-  %25 = load i32, ptr %10, align 4, !dbg !540
-  %26 = add i32 %24, %25, !dbg !541
-  store i32 %26, ptr %11, align 4, !dbg !538
-  %27 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !542
-  %28 = load [1 x i32], ptr %27, align 4, !dbg !542
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !316, metadata !DIExpression()), !dbg !491
+  %18 = load ptr, ptr %2, align 4, !dbg !493
+  %19 = load i32, ptr %7, align 4, !dbg !494
+  %20 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !495
+  store i32 %19, ptr %20, align 4, !dbg !495
+  call void @llvm.dbg.declare(metadata ptr %10, metadata !496, metadata !DIExpression()), !dbg !497
+  %21 = load i32, ptr @cycle_count, align 4, !dbg !498
+  %22 = load i32, ptr @announced_cycles, align 4, !dbg !499
+  %23 = sub i32 %21, %22, !dbg !500
+  store i32 %23, ptr %10, align 4, !dbg !497
+  call void @llvm.dbg.declare(metadata ptr %11, metadata !501, metadata !DIExpression()), !dbg !502
+  %24 = call i32 @elapsed(), !dbg !503
+  %25 = load i32, ptr %10, align 4, !dbg !504
+  %26 = add i32 %24, %25, !dbg !505
+  store i32 %26, ptr %11, align 4, !dbg !502
+  %27 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !506
+  %28 = load [1 x i32], ptr %27, align 4, !dbg !506
   store [1 x i32] %28, ptr %5, align 4
   store ptr @lock, ptr %6, align 4
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !476, metadata !DIExpression()), !dbg !543
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !481, metadata !DIExpression()), !dbg !545
-  %29 = load ptr, ptr %6, align 4, !dbg !546
-  %30 = load i32, ptr %5, align 4, !dbg !547
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !448, metadata !DIExpression()), !dbg !507
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !454, metadata !DIExpression()), !dbg !509
+  %29 = load ptr, ptr %6, align 4, !dbg !510
+  %30 = load i32, ptr %5, align 4, !dbg !511
   store i32 %30, ptr %1, align 4
-  call void @llvm.dbg.declare(metadata ptr %1, metadata !487, metadata !DIExpression()), !dbg !548
-  %31 = load i32, ptr %1, align 4, !dbg !550
-  %32 = icmp ne i32 %31, 0, !dbg !551
-  br i1 %32, label %33, label %34, !dbg !552
+  call void @llvm.dbg.declare(metadata ptr %1, metadata !458, metadata !DIExpression()), !dbg !512
+  %31 = load i32, ptr %1, align 4, !dbg !514
+  %32 = icmp ne i32 %31, 0, !dbg !515
+  br i1 %32, label %33, label %34, !dbg !516
 
 33:                                               ; preds = %0
-  br label %arch_irq_unlock.exit, !dbg !553
+  br label %arch_irq_unlock.exit, !dbg !517
 
 34:                                               ; preds = %0
-  call void asm sideeffect "cpsie i;isb", "~{memory}"() #5, !dbg !554, !srcloc !501
-  br label %arch_irq_unlock.exit, !dbg !555
+  call void asm sideeffect "cpsie i;isb", "~{memory}"() #3, !dbg !518, !srcloc !471
+  br label %arch_irq_unlock.exit, !dbg !519
 
 arch_irq_unlock.exit:                             ; preds = %33, %34
-  %35 = load i32, ptr %11, align 4, !dbg !556
-  %36 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !557
-  %37 = sdiv i32 %36, 10000, !dbg !558
-  %38 = udiv i32 %35, %37, !dbg !559
-  call void @llvm.lifetime.end.p0(i64 4, ptr %11) #5, !dbg !560
-  call void @llvm.lifetime.end.p0(i64 4, ptr %10) #5, !dbg !560
-  call void @llvm.lifetime.end.p0(i64 4, ptr %9) #5, !dbg !560
-  ret i32 %38, !dbg !561
+  %35 = load i32, ptr %11, align 4, !dbg !520
+  %36 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !521
+  %37 = sdiv i32 %36, 10000, !dbg !522
+  %38 = udiv i32 %35, %37, !dbg !523
+  ret i32 %38, !dbg !524
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @sys_clock_cycle_get_32() #0 !dbg !562 {
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @sys_clock_cycle_get_32() #0 !dbg !525 {
   %1 = alloca i32, align 4
   %2 = alloca ptr, align 4
   %3 = alloca ptr, align 4
@@ -581,201 +539,192 @@ define hidden i32 @sys_clock_cycle_get_32() #0 !dbg !562 {
   %8 = alloca ptr, align 4
   %9 = alloca %struct.z_spinlock_key, align 4
   %10 = alloca i32, align 4
-  call void @llvm.lifetime.start.p0(i64 4, ptr %9) #5, !dbg !566
-  call void @llvm.dbg.declare(metadata ptr %9, metadata !564, metadata !DIExpression()), !dbg !567
+  call void @llvm.dbg.declare(metadata ptr %9, metadata !526, metadata !DIExpression()), !dbg !527
   store ptr @lock, ptr %8, align 4
-  call void @llvm.dbg.declare(metadata ptr %8, metadata !308, metadata !DIExpression()), !dbg !568
-  %11 = load ptr, ptr %8, align 4, !dbg !570
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !314, metadata !DIExpression()), !dbg !571
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #5, !dbg !572
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !325, metadata !DIExpression()), !dbg !574
-  %12 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #5, !dbg !575, !srcloc !329
-  store i32 %12, ptr %4, align 4, !dbg !575
-  %13 = load i32, ptr %4, align 4, !dbg !576
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #5, !dbg !577
-  store i32 %13, ptr %7, align 4, !dbg !578
-  %14 = load ptr, ptr %8, align 4, !dbg !579
+  call void @llvm.dbg.declare(metadata ptr %8, metadata !286, metadata !DIExpression()), !dbg !528
+  %11 = load ptr, ptr %8, align 4, !dbg !530
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !294, metadata !DIExpression()), !dbg !531
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !296, metadata !DIExpression()), !dbg !532
+  %12 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #3, !dbg !534, !srcloc !304
+  store i32 %12, ptr %4, align 4, !dbg !534
+  %13 = load i32, ptr %4, align 4, !dbg !535
+  store i32 %13, ptr %7, align 4, !dbg !536
+  %14 = load ptr, ptr %8, align 4, !dbg !537
   store ptr %14, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !334, metadata !DIExpression()), !dbg !580
-  %15 = load ptr, ptr %3, align 4, !dbg !582
-  %16 = load ptr, ptr %8, align 4, !dbg !583
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !308, metadata !DIExpression()), !dbg !538
+  %15 = load ptr, ptr %3, align 4, !dbg !540
+  %16 = load ptr, ptr %8, align 4, !dbg !541
   store ptr %16, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !343, metadata !DIExpression()), !dbg !584
-  %17 = load ptr, ptr %2, align 4, !dbg !586
-  %18 = load i32, ptr %7, align 4, !dbg !587
-  %19 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !588
-  store i32 %18, ptr %19, align 4, !dbg !588
-  call void @llvm.lifetime.start.p0(i64 4, ptr %10) #5, !dbg !589
-  call void @llvm.dbg.declare(metadata ptr %10, metadata !565, metadata !DIExpression()), !dbg !590
-  %20 = load i32, ptr @cycle_count, align 4, !dbg !591
-  store i32 %20, ptr %10, align 4, !dbg !590
-  %21 = call i32 @elapsed() #6, !dbg !592
-  %22 = load i32, ptr %10, align 4, !dbg !593
-  %23 = add i32 %22, %21, !dbg !593
-  store i32 %23, ptr %10, align 4, !dbg !593
-  %24 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !594
-  %25 = load [1 x i32], ptr %24, align 4, !dbg !594
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !316, metadata !DIExpression()), !dbg !542
+  %17 = load ptr, ptr %2, align 4, !dbg !544
+  %18 = load i32, ptr %7, align 4, !dbg !545
+  %19 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !546
+  store i32 %18, ptr %19, align 4, !dbg !546
+  call void @llvm.dbg.declare(metadata ptr %10, metadata !547, metadata !DIExpression()), !dbg !548
+  %20 = load i32, ptr @cycle_count, align 4, !dbg !549
+  store i32 %20, ptr %10, align 4, !dbg !548
+  %21 = call i32 @elapsed(), !dbg !550
+  %22 = load i32, ptr %10, align 4, !dbg !551
+  %23 = add i32 %22, %21, !dbg !551
+  store i32 %23, ptr %10, align 4, !dbg !551
+  %24 = getelementptr inbounds %struct.z_spinlock_key, ptr %9, i32 0, i32 0, !dbg !552
+  %25 = load [1 x i32], ptr %24, align 4, !dbg !552
   store [1 x i32] %25, ptr %5, align 4
   store ptr @lock, ptr %6, align 4
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !476, metadata !DIExpression()), !dbg !595
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !481, metadata !DIExpression()), !dbg !597
-  %26 = load ptr, ptr %6, align 4, !dbg !598
-  %27 = load i32, ptr %5, align 4, !dbg !599
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !448, metadata !DIExpression()), !dbg !553
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !454, metadata !DIExpression()), !dbg !555
+  %26 = load ptr, ptr %6, align 4, !dbg !556
+  %27 = load i32, ptr %5, align 4, !dbg !557
   store i32 %27, ptr %1, align 4
-  call void @llvm.dbg.declare(metadata ptr %1, metadata !487, metadata !DIExpression()), !dbg !600
-  %28 = load i32, ptr %1, align 4, !dbg !602
-  %29 = icmp ne i32 %28, 0, !dbg !603
-  br i1 %29, label %30, label %31, !dbg !604
+  call void @llvm.dbg.declare(metadata ptr %1, metadata !458, metadata !DIExpression()), !dbg !558
+  %28 = load i32, ptr %1, align 4, !dbg !560
+  %29 = icmp ne i32 %28, 0, !dbg !561
+  br i1 %29, label %30, label %31, !dbg !562
 
 30:                                               ; preds = %0
-  br label %arch_irq_unlock.exit, !dbg !605
+  br label %arch_irq_unlock.exit, !dbg !563
 
 31:                                               ; preds = %0
-  call void asm sideeffect "cpsie i;isb", "~{memory}"() #5, !dbg !606, !srcloc !501
-  br label %arch_irq_unlock.exit, !dbg !607
+  call void asm sideeffect "cpsie i;isb", "~{memory}"() #3, !dbg !564, !srcloc !471
+  br label %arch_irq_unlock.exit, !dbg !565
 
 arch_irq_unlock.exit:                             ; preds = %30, %31
-  %32 = load i32, ptr %10, align 4, !dbg !608
-  call void @llvm.lifetime.end.p0(i64 4, ptr %10) #5, !dbg !609
-  call void @llvm.lifetime.end.p0(i64 4, ptr %9) #5, !dbg !609
-  ret i32 %32, !dbg !610
+  %32 = load i32, ptr %10, align 4, !dbg !566
+  ret i32 %32, !dbg !567
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @sys_clock_idle_exit() #0 !dbg !611 {
-  %1 = load i32, ptr @last_load, align 4, !dbg !612
-  %2 = icmp eq i32 %1, -16777216, !dbg !614
-  br i1 %2, label %3, label %6, !dbg !615
+; Function Attrs: noinline nounwind optnone
+define hidden void @sys_clock_idle_exit() #0 !dbg !568 {
+  %1 = load i32, ptr @last_load, align 4, !dbg !571
+  %2 = icmp eq i32 %1, -16777216, !dbg !573
+  br i1 %2, label %3, label %6, !dbg !574
 
 3:                                                ; preds = %0
-  %4 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !616
-  %5 = or i32 %4, 1, !dbg !616
-  store volatile i32 %5, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !616
-  br label %6, !dbg !618
+  %4 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !575
+  %5 = or i32 %4, 1, !dbg !575
+  store volatile i32 %5, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !575
+  br label %6, !dbg !577
 
 6:                                                ; preds = %3, %0
-  ret void, !dbg !619
+  ret void, !dbg !578
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @sys_clock_disable() #0 !dbg !620 {
-  %1 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !621
-  %2 = and i32 %1, -2, !dbg !621
-  store volatile i32 %2, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !621
-  ret void, !dbg !622
+; Function Attrs: noinline nounwind optnone
+define hidden void @sys_clock_disable() #0 !dbg !579 {
+  %1 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !580
+  %2 = and i32 %1, -2, !dbg !580
+  store volatile i32 %2, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !580
+  ret void, !dbg !581
 }
 
-; Function Attrs: nounwind optsize
-define internal i32 @sys_clock_driver_init() #0 !dbg !623 {
-  call void @__NVIC_SetPriority(i8 noundef signext -1, i32 noundef 0) #6, !dbg !624
-  %1 = call i32 @sys_clock_hw_cycles_per_sec() #6, !dbg !625
-  %2 = sdiv i32 %1, 10000, !dbg !626
-  %3 = sub nsw i32 %2, 1, !dbg !627
-  store i32 %3, ptr @last_load, align 4, !dbg !628
-  store volatile i32 0, ptr @overflow_cyc, align 4, !dbg !629
-  %4 = load i32, ptr @last_load, align 4, !dbg !630
-  store volatile i32 %4, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 1), align 4, !dbg !631
-  store volatile i32 0, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !632
-  %5 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !633
-  %6 = or i32 %5, 7, !dbg !633
-  store volatile i32 %6, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !633
-  ret i32 0, !dbg !634
+; Function Attrs: noinline nounwind optnone
+define internal i32 @sys_clock_driver_init() #0 !dbg !582 {
+  call void @__NVIC_SetPriority(i8 noundef signext -1, i32 noundef 0), !dbg !583
+  %1 = call i32 @sys_clock_hw_cycles_per_sec(), !dbg !584
+  %2 = sdiv i32 %1, 10000, !dbg !585
+  %3 = sub nsw i32 %2, 1, !dbg !586
+  store i32 %3, ptr @last_load, align 4, !dbg !587
+  store volatile i32 0, ptr @overflow_cyc, align 4, !dbg !588
+  %4 = load i32, ptr @last_load, align 4, !dbg !589
+  store volatile i32 %4, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 1), align 4, !dbg !590
+  store volatile i32 0, ptr getelementptr inbounds (%struct.SysTick_Type, ptr inttoptr (i32 -536813552 to ptr), i32 0, i32 2), align 4, !dbg !591
+  %5 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !592
+  %6 = or i32 %5, 7, !dbg !592
+  store volatile i32 %6, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !592
+  ret i32 0, !dbg !593
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @__NVIC_SetPriority(i8 noundef signext %0, i32 noundef %1) #3 !dbg !635 {
+; Function Attrs: noinline nounwind optnone
+define internal void @__NVIC_SetPriority(i8 noundef signext %0, i32 noundef %1) #0 !dbg !594 {
   %3 = alloca i8, align 1
   %4 = alloca i32, align 4
   store i8 %0, ptr %3, align 1
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !640, metadata !DIExpression()), !dbg !642
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !598, metadata !DIExpression()), !dbg !599
   store i32 %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !641, metadata !DIExpression()), !dbg !643
-  %5 = load i8, ptr %3, align 1, !dbg !644
-  %6 = sext i8 %5 to i32, !dbg !646
-  %7 = icmp sge i32 %6, 0, !dbg !647
-  br i1 %7, label %8, label %34, !dbg !648
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !600, metadata !DIExpression()), !dbg !601
+  %5 = load i8, ptr %3, align 1, !dbg !602
+  %6 = sext i8 %5 to i32, !dbg !604
+  %7 = icmp sge i32 %6, 0, !dbg !605
+  br i1 %7, label %8, label %34, !dbg !606
 
 8:                                                ; preds = %2
-  %9 = load i8, ptr %3, align 1, !dbg !649
-  %10 = sext i8 %9 to i32, !dbg !651
-  %11 = lshr i32 %10, 2, !dbg !652
-  %12 = getelementptr inbounds [8 x i32], ptr getelementptr inbounds (%struct.NVIC_Type, ptr inttoptr (i32 -536813312 to ptr), i32 0, i32 9), i32 0, i32 %11, !dbg !653
-  %13 = load volatile i32, ptr %12, align 4, !dbg !653
-  %14 = load i8, ptr %3, align 1, !dbg !654
-  %15 = sext i8 %14 to i32, !dbg !655
-  %16 = and i32 %15, 3, !dbg !656
-  %17 = mul i32 %16, 8, !dbg !657
-  %18 = shl i32 255, %17, !dbg !658
-  %19 = xor i32 %18, -1, !dbg !659
-  %20 = and i32 %13, %19, !dbg !660
-  %21 = load i32, ptr %4, align 4, !dbg !661
-  %22 = shl i32 %21, 6, !dbg !662
-  %23 = and i32 %22, 255, !dbg !663
-  %24 = load i8, ptr %3, align 1, !dbg !664
-  %25 = sext i8 %24 to i32, !dbg !665
-  %26 = and i32 %25, 3, !dbg !666
-  %27 = mul i32 %26, 8, !dbg !667
-  %28 = shl i32 %23, %27, !dbg !668
-  %29 = or i32 %20, %28, !dbg !669
-  %30 = load i8, ptr %3, align 1, !dbg !670
-  %31 = sext i8 %30 to i32, !dbg !671
-  %32 = lshr i32 %31, 2, !dbg !672
-  %33 = getelementptr inbounds [8 x i32], ptr getelementptr inbounds (%struct.NVIC_Type, ptr inttoptr (i32 -536813312 to ptr), i32 0, i32 9), i32 0, i32 %32, !dbg !673
-  store volatile i32 %29, ptr %33, align 4, !dbg !674
-  br label %64, !dbg !675
+  %9 = load i8, ptr %3, align 1, !dbg !607
+  %10 = sext i8 %9 to i32, !dbg !609
+  %11 = lshr i32 %10, 2, !dbg !610
+  %12 = getelementptr inbounds [8 x i32], ptr getelementptr inbounds (%struct.NVIC_Type, ptr inttoptr (i32 -536813312 to ptr), i32 0, i32 9), i32 0, i32 %11, !dbg !611
+  %13 = load volatile i32, ptr %12, align 4, !dbg !611
+  %14 = load i8, ptr %3, align 1, !dbg !612
+  %15 = sext i8 %14 to i32, !dbg !613
+  %16 = and i32 %15, 3, !dbg !614
+  %17 = mul i32 %16, 8, !dbg !615
+  %18 = shl i32 255, %17, !dbg !616
+  %19 = xor i32 %18, -1, !dbg !617
+  %20 = and i32 %13, %19, !dbg !618
+  %21 = load i32, ptr %4, align 4, !dbg !619
+  %22 = shl i32 %21, 6, !dbg !620
+  %23 = and i32 %22, 255, !dbg !621
+  %24 = load i8, ptr %3, align 1, !dbg !622
+  %25 = sext i8 %24 to i32, !dbg !623
+  %26 = and i32 %25, 3, !dbg !624
+  %27 = mul i32 %26, 8, !dbg !625
+  %28 = shl i32 %23, %27, !dbg !626
+  %29 = or i32 %20, %28, !dbg !627
+  %30 = load i8, ptr %3, align 1, !dbg !628
+  %31 = sext i8 %30 to i32, !dbg !629
+  %32 = lshr i32 %31, 2, !dbg !630
+  %33 = getelementptr inbounds [8 x i32], ptr getelementptr inbounds (%struct.NVIC_Type, ptr inttoptr (i32 -536813312 to ptr), i32 0, i32 9), i32 0, i32 %32, !dbg !631
+  store volatile i32 %29, ptr %33, align 4, !dbg !632
+  br label %64, !dbg !633
 
 34:                                               ; preds = %2
-  %35 = load i8, ptr %3, align 1, !dbg !676
-  %36 = sext i8 %35 to i32, !dbg !678
-  %37 = and i32 %36, 15, !dbg !679
-  %38 = sub i32 %37, 8, !dbg !680
-  %39 = lshr i32 %38, 2, !dbg !681
-  %40 = getelementptr inbounds [2 x i32], ptr getelementptr inbounds (%struct.SCB_Type, ptr inttoptr (i32 -536810240 to ptr), i32 0, i32 7), i32 0, i32 %39, !dbg !682
-  %41 = load volatile i32, ptr %40, align 4, !dbg !682
-  %42 = load i8, ptr %3, align 1, !dbg !683
-  %43 = sext i8 %42 to i32, !dbg !684
-  %44 = and i32 %43, 3, !dbg !685
-  %45 = mul i32 %44, 8, !dbg !686
-  %46 = shl i32 255, %45, !dbg !687
-  %47 = xor i32 %46, -1, !dbg !688
-  %48 = and i32 %41, %47, !dbg !689
-  %49 = load i32, ptr %4, align 4, !dbg !690
-  %50 = shl i32 %49, 6, !dbg !691
-  %51 = and i32 %50, 255, !dbg !692
-  %52 = load i8, ptr %3, align 1, !dbg !693
-  %53 = sext i8 %52 to i32, !dbg !694
-  %54 = and i32 %53, 3, !dbg !695
-  %55 = mul i32 %54, 8, !dbg !696
-  %56 = shl i32 %51, %55, !dbg !697
-  %57 = or i32 %48, %56, !dbg !698
-  %58 = load i8, ptr %3, align 1, !dbg !699
-  %59 = sext i8 %58 to i32, !dbg !700
-  %60 = and i32 %59, 15, !dbg !701
-  %61 = sub i32 %60, 8, !dbg !702
-  %62 = lshr i32 %61, 2, !dbg !703
-  %63 = getelementptr inbounds [2 x i32], ptr getelementptr inbounds (%struct.SCB_Type, ptr inttoptr (i32 -536810240 to ptr), i32 0, i32 7), i32 0, i32 %62, !dbg !704
-  store volatile i32 %57, ptr %63, align 4, !dbg !705
+  %35 = load i8, ptr %3, align 1, !dbg !634
+  %36 = sext i8 %35 to i32, !dbg !636
+  %37 = and i32 %36, 15, !dbg !637
+  %38 = sub i32 %37, 8, !dbg !638
+  %39 = lshr i32 %38, 2, !dbg !639
+  %40 = getelementptr inbounds [2 x i32], ptr getelementptr inbounds (%struct.SCB_Type, ptr inttoptr (i32 -536810240 to ptr), i32 0, i32 7), i32 0, i32 %39, !dbg !640
+  %41 = load volatile i32, ptr %40, align 4, !dbg !640
+  %42 = load i8, ptr %3, align 1, !dbg !641
+  %43 = sext i8 %42 to i32, !dbg !642
+  %44 = and i32 %43, 3, !dbg !643
+  %45 = mul i32 %44, 8, !dbg !644
+  %46 = shl i32 255, %45, !dbg !645
+  %47 = xor i32 %46, -1, !dbg !646
+  %48 = and i32 %41, %47, !dbg !647
+  %49 = load i32, ptr %4, align 4, !dbg !648
+  %50 = shl i32 %49, 6, !dbg !649
+  %51 = and i32 %50, 255, !dbg !650
+  %52 = load i8, ptr %3, align 1, !dbg !651
+  %53 = sext i8 %52 to i32, !dbg !652
+  %54 = and i32 %53, 3, !dbg !653
+  %55 = mul i32 %54, 8, !dbg !654
+  %56 = shl i32 %51, %55, !dbg !655
+  %57 = or i32 %48, %56, !dbg !656
+  %58 = load i8, ptr %3, align 1, !dbg !657
+  %59 = sext i8 %58 to i32, !dbg !658
+  %60 = and i32 %59, 15, !dbg !659
+  %61 = sub i32 %60, 8, !dbg !660
+  %62 = lshr i32 %61, 2, !dbg !661
+  %63 = getelementptr inbounds [2 x i32], ptr getelementptr inbounds (%struct.SCB_Type, ptr inttoptr (i32 -536810240 to ptr), i32 0, i32 7), i32 0, i32 %62, !dbg !662
+  store volatile i32 %57, ptr %63, align 4, !dbg !663
   br label %64
 
 64:                                               ; preds = %34, %8
-  ret void, !dbg !706
+  ret void, !dbg !664
 }
 
-attributes #0 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
-attributes #3 = { inlinehint nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #4 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #5 = { nounwind }
-attributes #6 = { optsize }
+attributes #2 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #3 = { nounwind }
 
 !llvm.dbg.cu = !{!2}
-!llvm.module.flags = !{!142, !143, !144, !145, !146, !147}
-!llvm.ident = !{!148}
+!llvm.module.flags = !{!142, !143, !144, !145, !146, !147, !148, !149}
+!llvm.ident = !{!150}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "overflow_cyc", scope: !2, file: !111, line: 78, type: !57, isLocal: true, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !45, globals: !108, splitDebugInlining: false, nameTableKind: None)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !45, globals: !108, splitDebugInlining: false, nameTableKind: None)
 !3 = !DIFile(filename: "cortex_m_systick.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !4 = !{!5}
 !5 = !DICompositeType(tag: DW_TAG_enumeration_type, file: !6, line: 66, baseType: !7, size: 8, elements: !8)
@@ -921,562 +870,520 @@ attributes #6 = { optsize }
 !145 = !{i32 1, !"static_rwdata", i32 1}
 !146 = !{i32 1, !"enumsize_buildattr", i32 1}
 !147 = !{i32 1, !"armlib_unavailable", i32 0}
-!148 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!149 = distinct !DISubprogram(name: "sys_clock_isr", scope: !111, file: !111, line: 131, type: !150, scopeLine: 132, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !153)
-!150 = !DISubroutineType(types: !151)
-!151 = !{null, !152}
-!152 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: null, size: 32)
-!153 = !{!154, !155, !156}
-!154 = !DILocalVariable(name: "arg", arg: 1, scope: !149, file: !111, line: 131, type: !152)
-!155 = !DILocalVariable(name: "dcycles", scope: !149, file: !111, line: 134, type: !58)
-!156 = !DILocalVariable(name: "dticks", scope: !149, file: !111, line: 135, type: !58)
-!157 = !DILocation(line: 131, column: 26, scope: !149)
-!158 = !DILocation(line: 133, column: 9, scope: !149)
-!159 = !DILocation(line: 134, column: 2, scope: !149)
-!160 = !DILocation(line: 134, column: 11, scope: !149)
-!161 = !DILocation(line: 135, column: 2, scope: !149)
-!162 = !DILocation(line: 135, column: 11, scope: !149)
-!163 = !DILocation(line: 138, column: 2, scope: !149)
-!164 = !DILocation(line: 143, column: 17, scope: !149)
-!165 = !DILocation(line: 143, column: 14, scope: !149)
-!166 = !DILocation(line: 144, column: 15, scope: !149)
-!167 = !DILocation(line: 159, column: 13, scope: !168)
-!168 = distinct !DILexicalBlock(scope: !169, file: !111, line: 146, column: 11)
-!169 = distinct !DILexicalBlock(scope: !149, file: !111, line: 146, column: 6)
-!170 = !DILocation(line: 159, column: 27, scope: !168)
-!171 = !DILocation(line: 159, column: 25, scope: !168)
-!172 = !DILocation(line: 159, column: 11, scope: !168)
-!173 = !DILocation(line: 160, column: 12, scope: !168)
-!174 = !DILocation(line: 160, column: 23, scope: !168)
-!175 = !DILocation(line: 160, column: 53, scope: !168)
-!176 = !DILocation(line: 160, column: 20, scope: !168)
-!177 = !DILocation(line: 160, column: 10, scope: !168)
-!178 = !DILocation(line: 161, column: 23, scope: !168)
-!179 = !DILocation(line: 161, column: 33, scope: !168)
-!180 = !DILocation(line: 161, column: 63, scope: !168)
-!181 = !DILocation(line: 161, column: 30, scope: !168)
-!182 = !DILocation(line: 161, column: 20, scope: !168)
-!183 = !DILocation(line: 162, column: 22, scope: !168)
-!184 = !DILocation(line: 162, column: 3, scope: !168)
-!185 = !DILocation(line: 166, column: 2, scope: !149)
-!186 = !DILocation(line: 167, column: 1, scope: !149)
-!187 = distinct !DISubprogram(name: "elapsed", scope: !111, file: !111, line: 98, type: !188, scopeLine: 99, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !190)
-!188 = !DISubroutineType(types: !189)
-!189 = !{!58}
-!190 = !{!191, !192, !193}
-!191 = !DILocalVariable(name: "val1", scope: !187, file: !111, line: 100, type: !58)
-!192 = !DILocalVariable(name: "ctrl", scope: !187, file: !111, line: 101, type: !58)
-!193 = !DILocalVariable(name: "val2", scope: !187, file: !111, line: 102, type: !58)
-!194 = !DILocation(line: 100, column: 2, scope: !187)
-!195 = !DILocation(line: 100, column: 11, scope: !187)
-!196 = !DILocation(line: 100, column: 67, scope: !187)
-!197 = !DILocation(line: 101, column: 2, scope: !187)
-!198 = !DILocation(line: 101, column: 11, scope: !187)
-!199 = !DILocation(line: 101, column: 67, scope: !187)
-!200 = !DILocation(line: 102, column: 2, scope: !187)
-!201 = !DILocation(line: 102, column: 11, scope: !187)
-!202 = !DILocation(line: 102, column: 67, scope: !187)
-!203 = !DILocation(line: 118, column: 7, scope: !204)
-!204 = distinct !DILexicalBlock(scope: !187, file: !111, line: 118, column: 6)
-!205 = !DILocation(line: 118, column: 12, scope: !204)
-!206 = !DILocation(line: 119, column: 6, scope: !204)
-!207 = !DILocation(line: 119, column: 10, scope: !204)
-!208 = !DILocation(line: 119, column: 17, scope: !204)
-!209 = !DILocation(line: 119, column: 15, scope: !204)
-!210 = !DILocation(line: 118, column: 6, scope: !187)
-!211 = !DILocation(line: 120, column: 19, scope: !212)
-!212 = distinct !DILexicalBlock(scope: !204, file: !111, line: 119, column: 24)
-!213 = !DILocation(line: 120, column: 16, scope: !212)
-!214 = !DILocation(line: 124, column: 58, scope: !212)
-!215 = !DILocation(line: 125, column: 2, scope: !212)
-!216 = !DILocation(line: 127, column: 10, scope: !187)
-!217 = !DILocation(line: 127, column: 22, scope: !187)
-!218 = !DILocation(line: 127, column: 20, scope: !187)
-!219 = !DILocation(line: 127, column: 30, scope: !187)
-!220 = !DILocation(line: 127, column: 28, scope: !187)
-!221 = !DILocation(line: 128, column: 1, scope: !187)
-!222 = !DILocation(line: 127, column: 2, scope: !187)
-!223 = distinct !DISubprogram(name: "sys_clock_hw_cycles_per_sec", scope: !224, file: !224, line: 73, type: !121, scopeLine: 74, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !135)
-!224 = !DIFile(filename: "include/zephyr/sys/time_units.h", directory: "/home/sri/zephyrproject/zephyr")
-!225 = !DILocation(line: 78, column: 2, scope: !223)
-!226 = !DISubprogram(name: "sys_clock_announce", scope: !227, file: !227, line: 100, type: !228, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !135)
-!227 = !DIFile(filename: "include/zephyr/drivers/timer/system_timer.h", directory: "/home/sri/zephyrproject/zephyr")
-!228 = !DISubroutineType(types: !229)
-!229 = !{null, !64}
-!230 = !DISubprogram(name: "z_arm_int_exit", scope: !231, file: !231, line: 153, type: !232, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !135)
-!231 = !DIFile(filename: "include/zephyr/arch/arm/irq.h", directory: "/home/sri/zephyrproject/zephyr")
-!232 = !DISubroutineType(types: !233)
-!233 = !{null}
-!234 = distinct !DISubprogram(name: "sys_clock_set_timeout", scope: !111, file: !111, line: 169, type: !235, scopeLine: 170, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !238)
-!235 = !DISubroutineType(types: !236)
-!236 = !{null, !64, !237}
-!237 = !DIBasicType(name: "_Bool", size: 8, encoding: DW_ATE_boolean)
-!238 = !{!239, !240, !241, !242, !243, !244, !245, !250, !251}
-!239 = !DILocalVariable(name: "ticks", arg: 1, scope: !234, file: !111, line: 169, type: !64)
-!240 = !DILocalVariable(name: "idle", arg: 2, scope: !234, file: !111, line: 169, type: !237)
-!241 = !DILocalVariable(name: "delay", scope: !234, file: !111, line: 184, type: !58)
-!242 = !DILocalVariable(name: "val1", scope: !234, file: !111, line: 185, type: !58)
-!243 = !DILocalVariable(name: "val2", scope: !234, file: !111, line: 185, type: !58)
-!244 = !DILocalVariable(name: "last_load_", scope: !234, file: !111, line: 186, type: !58)
-!245 = !DILocalVariable(name: "key", scope: !234, file: !111, line: 191, type: !246)
-!246 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_spinlock_key_t", file: !134, line: 108, baseType: !247)
-!247 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "z_spinlock_key", file: !134, line: 34, size: 32, elements: !248)
-!248 = !{!249}
-!249 = !DIDerivedType(tag: DW_TAG_member, name: "key", scope: !247, file: !134, line: 35, baseType: !65, size: 32)
-!250 = !DILocalVariable(name: "pending", scope: !234, file: !111, line: 193, type: !58)
-!251 = !DILocalVariable(name: "unannounced", scope: !234, file: !111, line: 200, type: !58)
-!252 = !DILocation(line: 169, column: 36, scope: !234)
-!253 = !DILocation(line: 169, column: 49, scope: !234)
-!254 = !DILocation(line: 177, column: 11, scope: !255)
-!255 = distinct !DILexicalBlock(scope: !234, file: !111, line: 177, column: 6)
-!256 = !{i8 0, i8 2}
-!257 = !DILocation(line: 177, column: 16, scope: !255)
-!258 = !DILocation(line: 177, column: 19, scope: !255)
-!259 = !DILocation(line: 177, column: 25, scope: !255)
-!260 = !DILocation(line: 177, column: 6, scope: !234)
-!261 = !DILocation(line: 178, column: 57, scope: !262)
-!262 = distinct !DILexicalBlock(scope: !255, file: !111, line: 177, column: 46)
-!263 = !DILocation(line: 179, column: 13, scope: !262)
-!264 = !DILocation(line: 180, column: 3, scope: !262)
-!265 = !DILocation(line: 184, column: 2, scope: !234)
-!266 = !DILocation(line: 184, column: 11, scope: !234)
-!267 = !DILocation(line: 185, column: 2, scope: !234)
-!268 = !DILocation(line: 185, column: 11, scope: !234)
-!269 = !DILocation(line: 185, column: 17, scope: !234)
-!270 = !DILocation(line: 186, column: 2, scope: !234)
-!271 = !DILocation(line: 186, column: 11, scope: !234)
-!272 = !DILocation(line: 186, column: 24, scope: !234)
-!273 = !DILocation(line: 188, column: 11, scope: !234)
-!274 = !DILocation(line: 188, column: 17, scope: !234)
-!275 = !DILocation(line: 188, column: 10, scope: !234)
-!276 = !DILocation(line: 188, column: 67, scope: !234)
-!277 = !DILocation(line: 188, column: 97, scope: !234)
-!278 = !DILocation(line: 188, column: 64, scope: !234)
-!279 = !DILocation(line: 188, column: 41, scope: !234)
-!280 = !DILocation(line: 188, column: 107, scope: !234)
-!281 = !DILocation(line: 188, column: 114, scope: !234)
-!282 = !DILocation(line: 188, column: 8, scope: !234)
-!283 = !DILocation(line: 189, column: 13, scope: !234)
-!284 = !DILocation(line: 189, column: 19, scope: !234)
-!285 = !DILocation(line: 189, column: 24, scope: !234)
-!286 = !DILocation(line: 189, column: 11, scope: !234)
-!287 = !DILocation(line: 189, column: 43, scope: !234)
-!288 = !DILocation(line: 189, column: 49, scope: !234)
-!289 = !DILocation(line: 189, column: 93, scope: !234)
-!290 = !DILocation(line: 189, column: 123, scope: !234)
-!291 = !DILocation(line: 189, column: 90, scope: !234)
-!292 = !DILocation(line: 189, column: 67, scope: !234)
-!293 = !DILocation(line: 189, column: 133, scope: !234)
-!294 = !DILocation(line: 189, column: 57, scope: !234)
-!295 = !DILocation(line: 189, column: 54, scope: !234)
-!296 = !DILocation(line: 189, column: 41, scope: !234)
-!297 = !DILocation(line: 189, column: 143, scope: !234)
-!298 = !DILocation(line: 189, column: 149, scope: !234)
-!299 = !DILocation(line: 189, column: 193, scope: !234)
-!300 = !DILocation(line: 189, column: 223, scope: !234)
-!301 = !DILocation(line: 189, column: 190, scope: !234)
-!302 = !DILocation(line: 189, column: 167, scope: !234)
-!303 = !DILocation(line: 189, column: 233, scope: !234)
-!304 = !DILocation(line: 189, column: 157, scope: !234)
-!305 = !DILocation(line: 189, column: 8, scope: !234)
-!306 = !DILocation(line: 191, column: 2, scope: !234)
-!307 = !DILocation(line: 191, column: 19, scope: !234)
-!308 = !DILocalVariable(name: "l", arg: 1, scope: !309, file: !134, line: 160, type: !312)
-!309 = distinct !DISubprogram(name: "k_spin_lock", scope: !134, file: !134, line: 160, type: !310, scopeLine: 161, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !313)
+!148 = !{i32 8, !"PIC Level", i32 2}
+!149 = !{i32 7, !"PIE Level", i32 2}
+!150 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!151 = distinct !DISubprogram(name: "sys_clock_isr", scope: !111, file: !111, line: 131, type: !152, scopeLine: 132, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!152 = !DISubroutineType(types: !153)
+!153 = !{null, !154}
+!154 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: null, size: 32)
+!155 = !DILocalVariable(name: "arg", arg: 1, scope: !151, file: !111, line: 131, type: !154)
+!156 = !DILocation(line: 131, column: 26, scope: !151)
+!157 = !DILocation(line: 133, column: 9, scope: !151)
+!158 = !DILocalVariable(name: "dcycles", scope: !151, file: !111, line: 134, type: !58)
+!159 = !DILocation(line: 134, column: 11, scope: !151)
+!160 = !DILocalVariable(name: "dticks", scope: !151, file: !111, line: 135, type: !58)
+!161 = !DILocation(line: 135, column: 11, scope: !151)
+!162 = !DILocation(line: 138, column: 2, scope: !151)
+!163 = !DILocation(line: 143, column: 17, scope: !151)
+!164 = !DILocation(line: 143, column: 14, scope: !151)
+!165 = !DILocation(line: 144, column: 15, scope: !151)
+!166 = !DILocation(line: 159, column: 13, scope: !167)
+!167 = distinct !DILexicalBlock(scope: !168, file: !111, line: 146, column: 11)
+!168 = distinct !DILexicalBlock(scope: !151, file: !111, line: 146, column: 6)
+!169 = !DILocation(line: 159, column: 27, scope: !167)
+!170 = !DILocation(line: 159, column: 25, scope: !167)
+!171 = !DILocation(line: 159, column: 11, scope: !167)
+!172 = !DILocation(line: 160, column: 12, scope: !167)
+!173 = !DILocation(line: 160, column: 23, scope: !167)
+!174 = !DILocation(line: 160, column: 53, scope: !167)
+!175 = !DILocation(line: 160, column: 20, scope: !167)
+!176 = !DILocation(line: 160, column: 10, scope: !167)
+!177 = !DILocation(line: 161, column: 23, scope: !167)
+!178 = !DILocation(line: 161, column: 33, scope: !167)
+!179 = !DILocation(line: 161, column: 63, scope: !167)
+!180 = !DILocation(line: 161, column: 30, scope: !167)
+!181 = !DILocation(line: 161, column: 20, scope: !167)
+!182 = !DILocation(line: 162, column: 22, scope: !167)
+!183 = !DILocation(line: 162, column: 3, scope: !167)
+!184 = !DILocation(line: 166, column: 2, scope: !151)
+!185 = !DILocation(line: 167, column: 1, scope: !151)
+!186 = distinct !DISubprogram(name: "elapsed", scope: !111, file: !111, line: 98, type: !187, scopeLine: 99, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!187 = !DISubroutineType(types: !188)
+!188 = !{!58}
+!189 = !DILocalVariable(name: "val1", scope: !186, file: !111, line: 100, type: !58)
+!190 = !DILocation(line: 100, column: 11, scope: !186)
+!191 = !DILocation(line: 100, column: 67, scope: !186)
+!192 = !DILocalVariable(name: "ctrl", scope: !186, file: !111, line: 101, type: !58)
+!193 = !DILocation(line: 101, column: 11, scope: !186)
+!194 = !DILocation(line: 101, column: 67, scope: !186)
+!195 = !DILocalVariable(name: "val2", scope: !186, file: !111, line: 102, type: !58)
+!196 = !DILocation(line: 102, column: 11, scope: !186)
+!197 = !DILocation(line: 102, column: 67, scope: !186)
+!198 = !DILocation(line: 118, column: 7, scope: !199)
+!199 = distinct !DILexicalBlock(scope: !186, file: !111, line: 118, column: 6)
+!200 = !DILocation(line: 118, column: 12, scope: !199)
+!201 = !DILocation(line: 119, column: 6, scope: !199)
+!202 = !DILocation(line: 119, column: 10, scope: !199)
+!203 = !DILocation(line: 119, column: 17, scope: !199)
+!204 = !DILocation(line: 119, column: 15, scope: !199)
+!205 = !DILocation(line: 118, column: 6, scope: !186)
+!206 = !DILocation(line: 120, column: 19, scope: !207)
+!207 = distinct !DILexicalBlock(scope: !199, file: !111, line: 119, column: 24)
+!208 = !DILocation(line: 120, column: 16, scope: !207)
+!209 = !DILocation(line: 124, column: 58, scope: !207)
+!210 = !DILocation(line: 125, column: 2, scope: !207)
+!211 = !DILocation(line: 127, column: 10, scope: !186)
+!212 = !DILocation(line: 127, column: 22, scope: !186)
+!213 = !DILocation(line: 127, column: 20, scope: !186)
+!214 = !DILocation(line: 127, column: 30, scope: !186)
+!215 = !DILocation(line: 127, column: 28, scope: !186)
+!216 = !DILocation(line: 127, column: 2, scope: !186)
+!217 = distinct !DISubprogram(name: "sys_clock_hw_cycles_per_sec", scope: !218, file: !218, line: 73, type: !121, scopeLine: 74, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!218 = !DIFile(filename: "include/zephyr/sys/time_units.h", directory: "/home/sri/zephyrproject/zephyr")
+!219 = !DILocation(line: 78, column: 2, scope: !217)
+!220 = distinct !DISubprogram(name: "sys_clock_set_timeout", scope: !111, file: !111, line: 169, type: !221, scopeLine: 170, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!221 = !DISubroutineType(types: !222)
+!222 = !{null, !64, !223}
+!223 = !DIBasicType(name: "_Bool", size: 8, encoding: DW_ATE_boolean)
+!224 = !DILocalVariable(name: "ticks", arg: 1, scope: !220, file: !111, line: 169, type: !64)
+!225 = !DILocation(line: 169, column: 36, scope: !220)
+!226 = !DILocalVariable(name: "idle", arg: 2, scope: !220, file: !111, line: 169, type: !223)
+!227 = !DILocation(line: 169, column: 49, scope: !220)
+!228 = !DILocation(line: 177, column: 11, scope: !229)
+!229 = distinct !DILexicalBlock(scope: !220, file: !111, line: 177, column: 6)
+!230 = !DILocation(line: 177, column: 16, scope: !229)
+!231 = !DILocation(line: 177, column: 19, scope: !229)
+!232 = !DILocation(line: 177, column: 25, scope: !229)
+!233 = !DILocation(line: 177, column: 6, scope: !220)
+!234 = !DILocation(line: 178, column: 57, scope: !235)
+!235 = distinct !DILexicalBlock(scope: !229, file: !111, line: 177, column: 46)
+!236 = !DILocation(line: 179, column: 13, scope: !235)
+!237 = !DILocation(line: 180, column: 3, scope: !235)
+!238 = !DILocalVariable(name: "delay", scope: !220, file: !111, line: 184, type: !58)
+!239 = !DILocation(line: 184, column: 11, scope: !220)
+!240 = !DILocalVariable(name: "val1", scope: !220, file: !111, line: 185, type: !58)
+!241 = !DILocation(line: 185, column: 11, scope: !220)
+!242 = !DILocalVariable(name: "val2", scope: !220, file: !111, line: 185, type: !58)
+!243 = !DILocation(line: 185, column: 17, scope: !220)
+!244 = !DILocalVariable(name: "last_load_", scope: !220, file: !111, line: 186, type: !58)
+!245 = !DILocation(line: 186, column: 11, scope: !220)
+!246 = !DILocation(line: 186, column: 24, scope: !220)
+!247 = !DILocation(line: 188, column: 11, scope: !220)
+!248 = !DILocation(line: 188, column: 17, scope: !220)
+!249 = !DILocation(line: 188, column: 10, scope: !220)
+!250 = !DILocation(line: 188, column: 67, scope: !220)
+!251 = !DILocation(line: 188, column: 97, scope: !220)
+!252 = !DILocation(line: 188, column: 64, scope: !220)
+!253 = !DILocation(line: 188, column: 41, scope: !220)
+!254 = !DILocation(line: 188, column: 107, scope: !220)
+!255 = !DILocation(line: 188, column: 114, scope: !220)
+!256 = !DILocation(line: 188, column: 8, scope: !220)
+!257 = !DILocation(line: 189, column: 13, scope: !220)
+!258 = !DILocation(line: 189, column: 19, scope: !220)
+!259 = !DILocation(line: 189, column: 24, scope: !220)
+!260 = !DILocation(line: 189, column: 11, scope: !220)
+!261 = !DILocation(line: 189, column: 43, scope: !220)
+!262 = !DILocation(line: 189, column: 49, scope: !220)
+!263 = !DILocation(line: 189, column: 93, scope: !220)
+!264 = !DILocation(line: 189, column: 123, scope: !220)
+!265 = !DILocation(line: 189, column: 90, scope: !220)
+!266 = !DILocation(line: 189, column: 67, scope: !220)
+!267 = !DILocation(line: 189, column: 133, scope: !220)
+!268 = !DILocation(line: 189, column: 57, scope: !220)
+!269 = !DILocation(line: 189, column: 54, scope: !220)
+!270 = !DILocation(line: 189, column: 41, scope: !220)
+!271 = !DILocation(line: 189, column: 143, scope: !220)
+!272 = !DILocation(line: 189, column: 149, scope: !220)
+!273 = !DILocation(line: 189, column: 193, scope: !220)
+!274 = !DILocation(line: 189, column: 223, scope: !220)
+!275 = !DILocation(line: 189, column: 190, scope: !220)
+!276 = !DILocation(line: 189, column: 167, scope: !220)
+!277 = !DILocation(line: 189, column: 233, scope: !220)
+!278 = !DILocation(line: 189, column: 157, scope: !220)
+!279 = !DILocation(line: 189, column: 8, scope: !220)
+!280 = !DILocalVariable(name: "key", scope: !220, file: !111, line: 191, type: !281)
+!281 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_spinlock_key_t", file: !134, line: 108, baseType: !282)
+!282 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "z_spinlock_key", file: !134, line: 34, size: 32, elements: !283)
+!283 = !{!284}
+!284 = !DIDerivedType(tag: DW_TAG_member, name: "key", scope: !282, file: !134, line: 35, baseType: !65, size: 32)
+!285 = !DILocation(line: 191, column: 19, scope: !220)
+!286 = !DILocalVariable(name: "l", arg: 1, scope: !287, file: !134, line: 160, type: !290)
+!287 = distinct !DISubprogram(name: "k_spin_lock", scope: !134, file: !134, line: 160, type: !288, scopeLine: 161, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!288 = !DISubroutineType(types: !289)
+!289 = !{!281, !290}
+!290 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !133, size: 32)
+!291 = !DILocation(line: 160, column: 94, scope: !287, inlinedAt: !292)
+!292 = distinct !DILocation(line: 191, column: 25, scope: !220)
+!293 = !DILocation(line: 162, column: 9, scope: !287, inlinedAt: !292)
+!294 = !DILocalVariable(name: "k", scope: !287, file: !134, line: 163, type: !281)
+!295 = !DILocation(line: 163, column: 19, scope: !287, inlinedAt: !292)
+!296 = !DILocalVariable(name: "key", scope: !297, file: !298, line: 44, type: !59)
+!297 = distinct !DISubprogram(name: "arch_irq_lock", scope: !298, file: !298, line: 42, type: !299, scopeLine: 43, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!298 = !DIFile(filename: "include/zephyr/arch/arm/asm_inline_gcc.h", directory: "/home/sri/zephyrproject/zephyr")
+!299 = !DISubroutineType(types: !300)
+!300 = !{!59}
+!301 = !DILocation(line: 44, column: 15, scope: !297, inlinedAt: !302)
+!302 = distinct !DILocation(line: 169, column: 10, scope: !287, inlinedAt: !292)
+!303 = !DILocation(line: 48, column: 2, scope: !297, inlinedAt: !302)
+!304 = !{i64 60017}
+!305 = !DILocation(line: 80, column: 9, scope: !297, inlinedAt: !302)
+!306 = !DILocation(line: 169, column: 8, scope: !287, inlinedAt: !292)
+!307 = !DILocation(line: 171, column: 26, scope: !287, inlinedAt: !292)
+!308 = !DILocalVariable(name: "l", arg: 1, scope: !309, file: !134, line: 110, type: !290)
+!309 = distinct !DISubprogram(name: "z_spinlock_validate_pre", scope: !134, file: !134, line: 110, type: !310, scopeLine: 111, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
 !310 = !DISubroutineType(types: !311)
-!311 = !{!246, !312}
-!312 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !133, size: 32)
-!313 = !{!308, !314}
-!314 = !DILocalVariable(name: "k", scope: !309, file: !134, line: 163, type: !246)
-!315 = !DILocation(line: 160, column: 94, scope: !309, inlinedAt: !316)
-!316 = distinct !DILocation(line: 191, column: 25, scope: !234)
-!317 = !DILocation(line: 162, column: 9, scope: !309, inlinedAt: !316)
-!318 = !DILocation(line: 163, column: 19, scope: !309, inlinedAt: !316)
-!319 = !DILocation(line: 44, column: 2, scope: !320, inlinedAt: !326)
-!320 = distinct !DISubprogram(name: "arch_irq_lock", scope: !321, file: !321, line: 42, type: !322, scopeLine: 43, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !324)
-!321 = !DIFile(filename: "include/zephyr/arch/arm/asm_inline_gcc.h", directory: "/home/sri/zephyrproject/zephyr")
-!322 = !DISubroutineType(types: !323)
-!323 = !{!59}
-!324 = !{!325}
-!325 = !DILocalVariable(name: "key", scope: !320, file: !321, line: 44, type: !59)
-!326 = distinct !DILocation(line: 169, column: 10, scope: !309, inlinedAt: !316)
-!327 = !DILocation(line: 44, column: 15, scope: !320, inlinedAt: !326)
-!328 = !DILocation(line: 48, column: 2, scope: !320, inlinedAt: !326)
-!329 = !{i64 60017}
-!330 = !DILocation(line: 80, column: 9, scope: !320, inlinedAt: !326)
-!331 = !DILocation(line: 81, column: 1, scope: !320, inlinedAt: !326)
-!332 = !DILocation(line: 169, column: 8, scope: !309, inlinedAt: !316)
-!333 = !DILocation(line: 171, column: 26, scope: !309, inlinedAt: !316)
-!334 = !DILocalVariable(name: "l", arg: 1, scope: !335, file: !134, line: 110, type: !312)
-!335 = distinct !DISubprogram(name: "z_spinlock_validate_pre", scope: !134, file: !134, line: 110, type: !336, scopeLine: 111, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !338)
-!336 = !DISubroutineType(types: !337)
-!337 = !{null, !312}
-!338 = !{!334}
-!339 = !DILocation(line: 110, column: 94, scope: !335, inlinedAt: !340)
-!340 = distinct !DILocation(line: 171, column: 2, scope: !309, inlinedAt: !316)
-!341 = !DILocation(line: 112, column: 9, scope: !335, inlinedAt: !340)
-!342 = !DILocation(line: 177, column: 27, scope: !309, inlinedAt: !316)
-!343 = !DILocalVariable(name: "l", arg: 1, scope: !344, file: !134, line: 121, type: !312)
-!344 = distinct !DISubprogram(name: "z_spinlock_validate_post", scope: !134, file: !134, line: 121, type: !336, scopeLine: 122, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !345)
-!345 = !{!343}
-!346 = !DILocation(line: 121, column: 95, scope: !344, inlinedAt: !347)
-!347 = distinct !DILocation(line: 177, column: 2, scope: !309, inlinedAt: !316)
-!348 = !DILocation(line: 123, column: 9, scope: !344, inlinedAt: !347)
-!349 = !DILocation(line: 179, column: 2, scope: !309, inlinedAt: !316)
-!350 = !DILocation(line: 191, column: 25, scope: !234)
-!351 = !DILocation(line: 193, column: 2, scope: !234)
-!352 = !DILocation(line: 193, column: 11, scope: !234)
-!353 = !DILocation(line: 193, column: 21, scope: !234)
-!354 = !DILocation(line: 195, column: 58, scope: !234)
-!355 = !DILocation(line: 195, column: 7, scope: !234)
-!356 = !DILocation(line: 197, column: 17, scope: !234)
-!357 = !DILocation(line: 197, column: 14, scope: !234)
-!358 = !DILocation(line: 198, column: 15, scope: !234)
-!359 = !DILocation(line: 200, column: 2, scope: !234)
-!360 = !DILocation(line: 200, column: 11, scope: !234)
-!361 = !DILocation(line: 200, column: 25, scope: !234)
-!362 = !DILocation(line: 200, column: 39, scope: !234)
-!363 = !DILocation(line: 200, column: 37, scope: !234)
-!364 = !DILocation(line: 202, column: 15, scope: !365)
-!365 = distinct !DILexicalBlock(scope: !234, file: !111, line: 202, column: 6)
-!366 = !DILocation(line: 202, column: 27, scope: !365)
-!367 = !DILocation(line: 202, column: 6, scope: !234)
-!368 = !DILocation(line: 209, column: 40, scope: !369)
-!369 = distinct !DILexicalBlock(scope: !365, file: !111, line: 202, column: 32)
-!370 = !DILocation(line: 209, column: 70, scope: !369)
-!371 = !DILocation(line: 209, column: 78, scope: !369)
-!372 = !DILocation(line: 209, column: 25, scope: !369)
-!373 = !DILocation(line: 209, column: 16, scope: !369)
-!374 = !DILocation(line: 209, column: 111, scope: !369)
-!375 = !DILocation(line: 209, column: 141, scope: !369)
-!376 = !DILocation(line: 209, column: 149, scope: !369)
-!377 = !DILocation(line: 209, column: 13, scope: !369)
-!378 = !DILocation(line: 210, column: 2, scope: !369)
-!379 = !DILocation(line: 212, column: 11, scope: !380)
-!380 = distinct !DILexicalBlock(scope: !365, file: !111, line: 210, column: 9)
-!381 = !DILocation(line: 212, column: 20, scope: !380)
-!382 = !DILocation(line: 212, column: 50, scope: !380)
-!383 = !DILocation(line: 212, column: 17, scope: !380)
-!384 = !DILocation(line: 212, column: 9, scope: !380)
-!385 = !DILocation(line: 215, column: 12, scope: !380)
-!386 = !DILocation(line: 215, column: 9, scope: !380)
-!387 = !DILocation(line: 216, column: 14, scope: !380)
-!388 = !DILocation(line: 216, column: 25, scope: !380)
-!389 = !DILocation(line: 216, column: 55, scope: !380)
-!390 = !DILocation(line: 216, column: 21, scope: !380)
-!391 = !DILocation(line: 216, column: 65, scope: !380)
-!392 = !DILocation(line: 216, column: 74, scope: !380)
-!393 = !DILocation(line: 216, column: 104, scope: !380)
-!394 = !DILocation(line: 216, column: 70, scope: !380)
-!395 = !DILocation(line: 216, column: 118, scope: !380)
-!396 = !DILocation(line: 216, column: 148, scope: !380)
-!397 = !DILocation(line: 216, column: 115, scope: !380)
-!398 = !DILocation(line: 216, column: 9, scope: !380)
-!399 = !DILocation(line: 217, column: 12, scope: !380)
-!400 = !DILocation(line: 217, column: 9, scope: !380)
-!401 = !DILocation(line: 218, column: 14, scope: !380)
-!402 = !DILocation(line: 218, column: 49, scope: !380)
-!403 = !DILocation(line: 218, column: 79, scope: !380)
-!404 = !DILocation(line: 218, column: 87, scope: !380)
-!405 = !DILocation(line: 218, column: 34, scope: !380)
-!406 = !DILocation(line: 218, column: 25, scope: !380)
-!407 = !DILocation(line: 218, column: 120, scope: !380)
-!408 = !DILocation(line: 218, column: 150, scope: !380)
-!409 = !DILocation(line: 218, column: 158, scope: !380)
-!410 = !DILocation(line: 218, column: 21, scope: !380)
-!411 = !DILocation(line: 218, column: 12, scope: !380)
-!412 = !DILocation(line: 218, column: 171, scope: !380)
-!413 = !DILocation(line: 218, column: 206, scope: !380)
-!414 = !DILocation(line: 218, column: 236, scope: !380)
-!415 = !DILocation(line: 218, column: 244, scope: !380)
-!416 = !DILocation(line: 218, column: 191, scope: !380)
-!417 = !DILocation(line: 218, column: 182, scope: !380)
-!418 = !DILocation(line: 218, column: 277, scope: !380)
-!419 = !DILocation(line: 218, column: 307, scope: !380)
-!420 = !DILocation(line: 218, column: 315, scope: !380)
-!421 = !DILocation(line: 218, column: 9, scope: !380)
-!422 = !DILocation(line: 219, column: 7, scope: !423)
-!423 = distinct !DILexicalBlock(scope: !380, file: !111, line: 219, column: 7)
-!424 = !DILocation(line: 219, column: 43, scope: !423)
-!425 = !DILocation(line: 219, column: 73, scope: !423)
-!426 = !DILocation(line: 219, column: 40, scope: !423)
-!427 = !DILocation(line: 219, column: 17, scope: !423)
-!428 = !DILocation(line: 219, column: 83, scope: !423)
-!429 = !DILocation(line: 219, column: 91, scope: !423)
-!430 = !DILocation(line: 219, column: 121, scope: !423)
-!431 = !DILocation(line: 219, column: 90, scope: !423)
-!432 = !DILocation(line: 219, column: 88, scope: !423)
-!433 = !DILocation(line: 219, column: 13, scope: !423)
-!434 = !DILocation(line: 219, column: 7, scope: !380)
-!435 = !DILocation(line: 220, column: 44, scope: !436)
-!436 = distinct !DILexicalBlock(scope: !423, file: !111, line: 219, column: 132)
-!437 = !DILocation(line: 220, column: 74, scope: !436)
-!438 = !DILocation(line: 220, column: 41, scope: !436)
-!439 = !DILocation(line: 220, column: 18, scope: !436)
-!440 = !DILocation(line: 220, column: 84, scope: !436)
-!441 = !DILocation(line: 220, column: 92, scope: !436)
-!442 = !DILocation(line: 220, column: 122, scope: !436)
-!443 = !DILocation(line: 220, column: 91, scope: !436)
-!444 = !DILocation(line: 220, column: 89, scope: !436)
-!445 = !DILocation(line: 220, column: 16, scope: !436)
-!446 = !DILocation(line: 220, column: 14, scope: !436)
-!447 = !DILocation(line: 221, column: 3, scope: !436)
-!448 = !DILocation(line: 222, column: 16, scope: !449)
-!449 = distinct !DILexicalBlock(scope: !423, file: !111, line: 221, column: 10)
-!450 = !DILocation(line: 222, column: 14, scope: !449)
-!451 = !DILocation(line: 226, column: 58, scope: !234)
-!452 = !DILocation(line: 226, column: 7, scope: !234)
-!453 = !DILocation(line: 228, column: 58, scope: !234)
-!454 = !DILocation(line: 228, column: 68, scope: !234)
-!455 = !DILocation(line: 228, column: 56, scope: !234)
-!456 = !DILocation(line: 229, column: 55, scope: !234)
-!457 = !DILocation(line: 241, column: 6, scope: !458)
-!458 = distinct !DILexicalBlock(scope: !234, file: !111, line: 241, column: 6)
-!459 = !DILocation(line: 241, column: 13, scope: !458)
-!460 = !DILocation(line: 241, column: 11, scope: !458)
-!461 = !DILocation(line: 241, column: 6, scope: !234)
-!462 = !DILocation(line: 242, column: 19, scope: !463)
-!463 = distinct !DILexicalBlock(scope: !458, file: !111, line: 241, column: 19)
-!464 = !DILocation(line: 242, column: 27, scope: !463)
-!465 = !DILocation(line: 242, column: 40, scope: !463)
-!466 = !DILocation(line: 242, column: 38, scope: !463)
-!467 = !DILocation(line: 242, column: 24, scope: !463)
-!468 = !DILocation(line: 242, column: 15, scope: !463)
-!469 = !DILocation(line: 243, column: 2, scope: !463)
-!470 = !DILocation(line: 244, column: 19, scope: !471)
-!471 = distinct !DILexicalBlock(scope: !458, file: !111, line: 243, column: 9)
-!472 = !DILocation(line: 244, column: 26, scope: !471)
-!473 = !DILocation(line: 244, column: 24, scope: !471)
-!474 = !DILocation(line: 244, column: 15, scope: !471)
-!475 = !DILocation(line: 246, column: 2, scope: !234)
-!476 = !DILocalVariable(name: "l", arg: 1, scope: !477, file: !134, line: 235, type: !312)
-!477 = distinct !DISubprogram(name: "k_spin_unlock", scope: !134, file: !134, line: 235, type: !478, scopeLine: 237, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !480)
-!478 = !DISubroutineType(types: !479)
-!479 = !{null, !312, !246}
-!480 = !{!476, !481}
-!481 = !DILocalVariable(name: "key", arg: 2, scope: !477, file: !134, line: 236, type: !246)
-!482 = !DILocation(line: 235, column: 84, scope: !477, inlinedAt: !483)
-!483 = distinct !DILocation(line: 246, column: 2, scope: !234)
-!484 = !DILocation(line: 236, column: 23, scope: !477, inlinedAt: !483)
-!485 = !DILocation(line: 238, column: 9, scope: !477, inlinedAt: !483)
-!486 = !DILocation(line: 261, column: 22, scope: !477, inlinedAt: !483)
-!487 = !DILocalVariable(name: "key", arg: 1, scope: !488, file: !321, line: 88, type: !59)
-!488 = distinct !DISubprogram(name: "arch_irq_unlock", scope: !321, file: !321, line: 88, type: !489, scopeLine: 89, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !491)
-!489 = !DISubroutineType(types: !490)
-!490 = !{null, !59}
-!491 = !{!487}
-!492 = !DILocation(line: 88, column: 80, scope: !488, inlinedAt: !493)
-!493 = distinct !DILocation(line: 261, column: 2, scope: !477, inlinedAt: !483)
-!494 = !DILocation(line: 91, column: 6, scope: !495, inlinedAt: !493)
-!495 = distinct !DILexicalBlock(scope: !488, file: !321, line: 91, column: 6)
-!496 = !DILocation(line: 91, column: 10, scope: !495, inlinedAt: !493)
-!497 = !DILocation(line: 91, column: 6, scope: !488, inlinedAt: !493)
-!498 = !DILocation(line: 92, column: 3, scope: !499, inlinedAt: !493)
-!499 = distinct !DILexicalBlock(scope: !495, file: !321, line: 91, column: 17)
-!500 = !DILocation(line: 94, column: 2, scope: !488, inlinedAt: !493)
-!501 = !{i64 60321}
-!502 = !DILocation(line: 114, column: 1, scope: !488, inlinedAt: !493)
-!503 = !DILocation(line: 248, column: 1, scope: !234)
-!504 = distinct !DISubprogram(name: "sys_clock_elapsed", scope: !111, file: !111, line: 250, type: !188, scopeLine: 251, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !505)
-!505 = !{!506, !507, !508}
-!506 = !DILocalVariable(name: "key", scope: !504, file: !111, line: 256, type: !246)
-!507 = !DILocalVariable(name: "unannounced", scope: !504, file: !111, line: 257, type: !58)
-!508 = !DILocalVariable(name: "cyc", scope: !504, file: !111, line: 258, type: !58)
-!509 = !DILocation(line: 256, column: 2, scope: !504)
-!510 = !DILocation(line: 256, column: 19, scope: !504)
-!511 = !DILocation(line: 160, column: 94, scope: !309, inlinedAt: !512)
-!512 = distinct !DILocation(line: 256, column: 25, scope: !504)
-!513 = !DILocation(line: 162, column: 9, scope: !309, inlinedAt: !512)
-!514 = !DILocation(line: 163, column: 19, scope: !309, inlinedAt: !512)
-!515 = !DILocation(line: 44, column: 2, scope: !320, inlinedAt: !516)
-!516 = distinct !DILocation(line: 169, column: 10, scope: !309, inlinedAt: !512)
-!517 = !DILocation(line: 44, column: 15, scope: !320, inlinedAt: !516)
-!518 = !DILocation(line: 48, column: 2, scope: !320, inlinedAt: !516)
-!519 = !DILocation(line: 80, column: 9, scope: !320, inlinedAt: !516)
-!520 = !DILocation(line: 81, column: 1, scope: !320, inlinedAt: !516)
-!521 = !DILocation(line: 169, column: 8, scope: !309, inlinedAt: !512)
-!522 = !DILocation(line: 171, column: 26, scope: !309, inlinedAt: !512)
-!523 = !DILocation(line: 110, column: 94, scope: !335, inlinedAt: !524)
-!524 = distinct !DILocation(line: 171, column: 2, scope: !309, inlinedAt: !512)
-!525 = !DILocation(line: 112, column: 9, scope: !335, inlinedAt: !524)
-!526 = !DILocation(line: 177, column: 27, scope: !309, inlinedAt: !512)
-!527 = !DILocation(line: 121, column: 95, scope: !344, inlinedAt: !528)
-!528 = distinct !DILocation(line: 177, column: 2, scope: !309, inlinedAt: !512)
-!529 = !DILocation(line: 123, column: 9, scope: !344, inlinedAt: !528)
-!530 = !DILocation(line: 179, column: 2, scope: !309, inlinedAt: !512)
-!531 = !DILocation(line: 256, column: 25, scope: !504)
-!532 = !DILocation(line: 257, column: 2, scope: !504)
-!533 = !DILocation(line: 257, column: 11, scope: !504)
-!534 = !DILocation(line: 257, column: 25, scope: !504)
-!535 = !DILocation(line: 257, column: 39, scope: !504)
-!536 = !DILocation(line: 257, column: 37, scope: !504)
-!537 = !DILocation(line: 258, column: 2, scope: !504)
-!538 = !DILocation(line: 258, column: 11, scope: !504)
-!539 = !DILocation(line: 258, column: 17, scope: !504)
-!540 = !DILocation(line: 258, column: 29, scope: !504)
-!541 = !DILocation(line: 258, column: 27, scope: !504)
-!542 = !DILocation(line: 260, column: 2, scope: !504)
-!543 = !DILocation(line: 235, column: 84, scope: !477, inlinedAt: !544)
-!544 = distinct !DILocation(line: 260, column: 2, scope: !504)
-!545 = !DILocation(line: 236, column: 23, scope: !477, inlinedAt: !544)
-!546 = !DILocation(line: 238, column: 9, scope: !477, inlinedAt: !544)
-!547 = !DILocation(line: 261, column: 22, scope: !477, inlinedAt: !544)
-!548 = !DILocation(line: 88, column: 80, scope: !488, inlinedAt: !549)
-!549 = distinct !DILocation(line: 261, column: 2, scope: !477, inlinedAt: !544)
-!550 = !DILocation(line: 91, column: 6, scope: !495, inlinedAt: !549)
-!551 = !DILocation(line: 91, column: 10, scope: !495, inlinedAt: !549)
-!552 = !DILocation(line: 91, column: 6, scope: !488, inlinedAt: !549)
-!553 = !DILocation(line: 92, column: 3, scope: !499, inlinedAt: !549)
-!554 = !DILocation(line: 94, column: 2, scope: !488, inlinedAt: !549)
-!555 = !DILocation(line: 114, column: 1, scope: !488, inlinedAt: !549)
-!556 = !DILocation(line: 261, column: 9, scope: !504)
-!557 = !DILocation(line: 261, column: 16, scope: !504)
-!558 = !DILocation(line: 261, column: 46, scope: !504)
-!559 = !DILocation(line: 261, column: 13, scope: !504)
-!560 = !DILocation(line: 262, column: 1, scope: !504)
-!561 = !DILocation(line: 261, column: 2, scope: !504)
-!562 = distinct !DISubprogram(name: "sys_clock_cycle_get_32", scope: !111, file: !111, line: 264, type: !188, scopeLine: 265, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !563)
-!563 = !{!564, !565}
-!564 = !DILocalVariable(name: "key", scope: !562, file: !111, line: 266, type: !246)
-!565 = !DILocalVariable(name: "ret", scope: !562, file: !111, line: 267, type: !58)
-!566 = !DILocation(line: 266, column: 2, scope: !562)
-!567 = !DILocation(line: 266, column: 19, scope: !562)
-!568 = !DILocation(line: 160, column: 94, scope: !309, inlinedAt: !569)
-!569 = distinct !DILocation(line: 266, column: 25, scope: !562)
-!570 = !DILocation(line: 162, column: 9, scope: !309, inlinedAt: !569)
-!571 = !DILocation(line: 163, column: 19, scope: !309, inlinedAt: !569)
-!572 = !DILocation(line: 44, column: 2, scope: !320, inlinedAt: !573)
-!573 = distinct !DILocation(line: 169, column: 10, scope: !309, inlinedAt: !569)
-!574 = !DILocation(line: 44, column: 15, scope: !320, inlinedAt: !573)
-!575 = !DILocation(line: 48, column: 2, scope: !320, inlinedAt: !573)
-!576 = !DILocation(line: 80, column: 9, scope: !320, inlinedAt: !573)
-!577 = !DILocation(line: 81, column: 1, scope: !320, inlinedAt: !573)
-!578 = !DILocation(line: 169, column: 8, scope: !309, inlinedAt: !569)
-!579 = !DILocation(line: 171, column: 26, scope: !309, inlinedAt: !569)
-!580 = !DILocation(line: 110, column: 94, scope: !335, inlinedAt: !581)
-!581 = distinct !DILocation(line: 171, column: 2, scope: !309, inlinedAt: !569)
-!582 = !DILocation(line: 112, column: 9, scope: !335, inlinedAt: !581)
-!583 = !DILocation(line: 177, column: 27, scope: !309, inlinedAt: !569)
-!584 = !DILocation(line: 121, column: 95, scope: !344, inlinedAt: !585)
-!585 = distinct !DILocation(line: 177, column: 2, scope: !309, inlinedAt: !569)
-!586 = !DILocation(line: 123, column: 9, scope: !344, inlinedAt: !585)
-!587 = !DILocation(line: 179, column: 2, scope: !309, inlinedAt: !569)
-!588 = !DILocation(line: 266, column: 25, scope: !562)
-!589 = !DILocation(line: 267, column: 2, scope: !562)
-!590 = !DILocation(line: 267, column: 11, scope: !562)
-!591 = !DILocation(line: 267, column: 17, scope: !562)
-!592 = !DILocation(line: 269, column: 9, scope: !562)
-!593 = !DILocation(line: 269, column: 6, scope: !562)
-!594 = !DILocation(line: 270, column: 2, scope: !562)
-!595 = !DILocation(line: 235, column: 84, scope: !477, inlinedAt: !596)
-!596 = distinct !DILocation(line: 270, column: 2, scope: !562)
-!597 = !DILocation(line: 236, column: 23, scope: !477, inlinedAt: !596)
-!598 = !DILocation(line: 238, column: 9, scope: !477, inlinedAt: !596)
-!599 = !DILocation(line: 261, column: 22, scope: !477, inlinedAt: !596)
-!600 = !DILocation(line: 88, column: 80, scope: !488, inlinedAt: !601)
-!601 = distinct !DILocation(line: 261, column: 2, scope: !477, inlinedAt: !596)
-!602 = !DILocation(line: 91, column: 6, scope: !495, inlinedAt: !601)
-!603 = !DILocation(line: 91, column: 10, scope: !495, inlinedAt: !601)
-!604 = !DILocation(line: 91, column: 6, scope: !488, inlinedAt: !601)
-!605 = !DILocation(line: 92, column: 3, scope: !499, inlinedAt: !601)
-!606 = !DILocation(line: 94, column: 2, scope: !488, inlinedAt: !601)
-!607 = !DILocation(line: 114, column: 1, scope: !488, inlinedAt: !601)
-!608 = !DILocation(line: 271, column: 9, scope: !562)
-!609 = !DILocation(line: 272, column: 1, scope: !562)
-!610 = !DILocation(line: 271, column: 2, scope: !562)
-!611 = distinct !DISubprogram(name: "sys_clock_idle_exit", scope: !111, file: !111, line: 285, type: !232, scopeLine: 286, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !135)
-!612 = !DILocation(line: 287, column: 6, scope: !613)
-!613 = distinct !DILexicalBlock(scope: !611, file: !111, line: 287, column: 6)
-!614 = !DILocation(line: 287, column: 16, scope: !613)
-!615 = !DILocation(line: 287, column: 6, scope: !611)
-!616 = !DILocation(line: 288, column: 57, scope: !617)
-!617 = distinct !DILexicalBlock(scope: !613, file: !111, line: 287, column: 31)
-!618 = !DILocation(line: 289, column: 2, scope: !617)
-!619 = !DILocation(line: 290, column: 1, scope: !611)
-!620 = distinct !DISubprogram(name: "sys_clock_disable", scope: !111, file: !111, line: 292, type: !232, scopeLine: 293, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !135)
-!621 = !DILocation(line: 294, column: 56, scope: !620)
-!622 = !DILocation(line: 295, column: 1, scope: !620)
-!623 = distinct !DISubprogram(name: "sys_clock_driver_init", scope: !111, file: !111, line: 297, type: !121, scopeLine: 298, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !135)
-!624 = !DILocation(line: 300, column: 2, scope: !623)
-!625 = !DILocation(line: 301, column: 15, scope: !623)
-!626 = !DILocation(line: 301, column: 45, scope: !623)
-!627 = !DILocation(line: 301, column: 54, scope: !623)
-!628 = !DILocation(line: 301, column: 12, scope: !623)
-!629 = !DILocation(line: 302, column: 15, scope: !623)
-!630 = !DILocation(line: 303, column: 58, scope: !623)
-!631 = !DILocation(line: 303, column: 56, scope: !623)
-!632 = !DILocation(line: 304, column: 55, scope: !623)
-!633 = !DILocation(line: 305, column: 56, scope: !623)
-!634 = !DILocation(line: 308, column: 2, scope: !623)
-!635 = distinct !DISubprogram(name: "__NVIC_SetPriority", scope: !53, file: !53, line: 732, type: !636, scopeLine: 733, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !639)
-!636 = !DISubroutineType(types: !637)
-!637 = !{null, !638, !58}
-!638 = !DIDerivedType(tag: DW_TAG_typedef, name: "IRQn_Type", file: !6, line: 107, baseType: !5)
-!639 = !{!640, !641}
-!640 = !DILocalVariable(name: "IRQn", arg: 1, scope: !635, file: !53, line: 732, type: !638)
-!641 = !DILocalVariable(name: "priority", arg: 2, scope: !635, file: !53, line: 732, type: !58)
-!642 = !DILocation(line: 732, column: 51, scope: !635)
-!643 = !DILocation(line: 732, column: 66, scope: !635)
-!644 = !DILocation(line: 734, column: 17, scope: !645)
-!645 = distinct !DILexicalBlock(scope: !635, file: !53, line: 734, column: 7)
-!646 = !DILocation(line: 734, column: 7, scope: !645)
-!647 = !DILocation(line: 734, column: 23, scope: !645)
-!648 = !DILocation(line: 734, column: 7, scope: !635)
-!649 = !DILocation(line: 736, column: 183, scope: !650)
-!650 = distinct !DILexicalBlock(scope: !645, file: !53, line: 735, column: 3)
-!651 = !DILocation(line: 736, column: 173, scope: !650)
-!652 = !DILocation(line: 736, column: 190, scope: !650)
-!653 = !DILocation(line: 736, column: 110, scope: !650)
-!654 = !DILocation(line: 736, column: 240, scope: !650)
-!655 = !DILocation(line: 736, column: 230, scope: !650)
-!656 = !DILocation(line: 736, column: 249, scope: !650)
-!657 = !DILocation(line: 736, column: 259, scope: !650)
-!658 = !DILocation(line: 736, column: 212, scope: !650)
-!659 = !DILocation(line: 736, column: 203, scope: !650)
-!660 = !DILocation(line: 736, column: 201, scope: !650)
-!661 = !DILocation(line: 737, column: 11, scope: !650)
-!662 = !DILocation(line: 737, column: 20, scope: !650)
-!663 = !DILocation(line: 737, column: 33, scope: !650)
-!664 = !DILocation(line: 737, column: 81, scope: !650)
-!665 = !DILocation(line: 737, column: 71, scope: !650)
-!666 = !DILocation(line: 737, column: 90, scope: !650)
-!667 = !DILocation(line: 737, column: 100, scope: !650)
-!668 = !DILocation(line: 737, column: 53, scope: !650)
-!669 = !DILocation(line: 736, column: 268, scope: !650)
-!670 = !DILocation(line: 736, column: 78, scope: !650)
-!671 = !DILocation(line: 736, column: 68, scope: !650)
-!672 = !DILocation(line: 736, column: 85, scope: !650)
-!673 = !DILocation(line: 736, column: 5, scope: !650)
-!674 = !DILocation(line: 736, column: 96, scope: !650)
-!675 = !DILocation(line: 738, column: 3, scope: !650)
-!676 = !DILocation(line: 741, column: 202, scope: !677)
-!677 = distinct !DILexicalBlock(scope: !645, file: !53, line: 740, column: 3)
-!678 = !DILocation(line: 741, column: 192, scope: !677)
-!679 = !DILocation(line: 741, column: 209, scope: !677)
-!680 = !DILocation(line: 741, column: 218, scope: !677)
-!681 = !DILocation(line: 741, column: 224, scope: !677)
-!682 = !DILocation(line: 741, column: 127, scope: !677)
-!683 = !DILocation(line: 741, column: 274, scope: !677)
-!684 = !DILocation(line: 741, column: 264, scope: !677)
-!685 = !DILocation(line: 741, column: 283, scope: !677)
-!686 = !DILocation(line: 741, column: 293, scope: !677)
-!687 = !DILocation(line: 741, column: 246, scope: !677)
-!688 = !DILocation(line: 741, column: 237, scope: !677)
-!689 = !DILocation(line: 741, column: 235, scope: !677)
-!690 = !DILocation(line: 742, column: 11, scope: !677)
-!691 = !DILocation(line: 742, column: 20, scope: !677)
-!692 = !DILocation(line: 742, column: 33, scope: !677)
-!693 = !DILocation(line: 742, column: 81, scope: !677)
-!694 = !DILocation(line: 742, column: 71, scope: !677)
-!695 = !DILocation(line: 742, column: 90, scope: !677)
-!696 = !DILocation(line: 742, column: 100, scope: !677)
-!697 = !DILocation(line: 742, column: 53, scope: !677)
-!698 = !DILocation(line: 741, column: 302, scope: !677)
-!699 = !DILocation(line: 741, column: 80, scope: !677)
-!700 = !DILocation(line: 741, column: 70, scope: !677)
-!701 = !DILocation(line: 741, column: 87, scope: !677)
-!702 = !DILocation(line: 741, column: 96, scope: !677)
-!703 = !DILocation(line: 741, column: 102, scope: !677)
-!704 = !DILocation(line: 741, column: 5, scope: !677)
-!705 = !DILocation(line: 741, column: 113, scope: !677)
-!706 = !DILocation(line: 744, column: 1, scope: !635)
+!311 = !{null, !290}
+!312 = !DILocation(line: 110, column: 94, scope: !309, inlinedAt: !313)
+!313 = distinct !DILocation(line: 171, column: 2, scope: !287, inlinedAt: !292)
+!314 = !DILocation(line: 112, column: 9, scope: !309, inlinedAt: !313)
+!315 = !DILocation(line: 177, column: 27, scope: !287, inlinedAt: !292)
+!316 = !DILocalVariable(name: "l", arg: 1, scope: !317, file: !134, line: 121, type: !290)
+!317 = distinct !DISubprogram(name: "z_spinlock_validate_post", scope: !134, file: !134, line: 121, type: !310, scopeLine: 122, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!318 = !DILocation(line: 121, column: 95, scope: !317, inlinedAt: !319)
+!319 = distinct !DILocation(line: 177, column: 2, scope: !287, inlinedAt: !292)
+!320 = !DILocation(line: 123, column: 9, scope: !317, inlinedAt: !319)
+!321 = !DILocation(line: 179, column: 2, scope: !287, inlinedAt: !292)
+!322 = !DILocation(line: 191, column: 25, scope: !220)
+!323 = !DILocalVariable(name: "pending", scope: !220, file: !111, line: 193, type: !58)
+!324 = !DILocation(line: 193, column: 11, scope: !220)
+!325 = !DILocation(line: 193, column: 21, scope: !220)
+!326 = !DILocation(line: 195, column: 58, scope: !220)
+!327 = !DILocation(line: 195, column: 7, scope: !220)
+!328 = !DILocation(line: 197, column: 17, scope: !220)
+!329 = !DILocation(line: 197, column: 14, scope: !220)
+!330 = !DILocation(line: 198, column: 15, scope: !220)
+!331 = !DILocalVariable(name: "unannounced", scope: !220, file: !111, line: 200, type: !58)
+!332 = !DILocation(line: 200, column: 11, scope: !220)
+!333 = !DILocation(line: 200, column: 25, scope: !220)
+!334 = !DILocation(line: 200, column: 39, scope: !220)
+!335 = !DILocation(line: 200, column: 37, scope: !220)
+!336 = !DILocation(line: 202, column: 15, scope: !337)
+!337 = distinct !DILexicalBlock(scope: !220, file: !111, line: 202, column: 6)
+!338 = !DILocation(line: 202, column: 27, scope: !337)
+!339 = !DILocation(line: 202, column: 6, scope: !220)
+!340 = !DILocation(line: 209, column: 40, scope: !341)
+!341 = distinct !DILexicalBlock(scope: !337, file: !111, line: 202, column: 32)
+!342 = !DILocation(line: 209, column: 70, scope: !341)
+!343 = !DILocation(line: 209, column: 78, scope: !341)
+!344 = !DILocation(line: 209, column: 25, scope: !341)
+!345 = !DILocation(line: 209, column: 16, scope: !341)
+!346 = !DILocation(line: 209, column: 111, scope: !341)
+!347 = !DILocation(line: 209, column: 141, scope: !341)
+!348 = !DILocation(line: 209, column: 149, scope: !341)
+!349 = !DILocation(line: 209, column: 13, scope: !341)
+!350 = !DILocation(line: 210, column: 2, scope: !341)
+!351 = !DILocation(line: 212, column: 11, scope: !352)
+!352 = distinct !DILexicalBlock(scope: !337, file: !111, line: 210, column: 9)
+!353 = !DILocation(line: 212, column: 20, scope: !352)
+!354 = !DILocation(line: 212, column: 50, scope: !352)
+!355 = !DILocation(line: 212, column: 17, scope: !352)
+!356 = !DILocation(line: 212, column: 9, scope: !352)
+!357 = !DILocation(line: 215, column: 12, scope: !352)
+!358 = !DILocation(line: 215, column: 9, scope: !352)
+!359 = !DILocation(line: 216, column: 14, scope: !352)
+!360 = !DILocation(line: 216, column: 25, scope: !352)
+!361 = !DILocation(line: 216, column: 55, scope: !352)
+!362 = !DILocation(line: 216, column: 21, scope: !352)
+!363 = !DILocation(line: 216, column: 65, scope: !352)
+!364 = !DILocation(line: 216, column: 74, scope: !352)
+!365 = !DILocation(line: 216, column: 104, scope: !352)
+!366 = !DILocation(line: 216, column: 70, scope: !352)
+!367 = !DILocation(line: 216, column: 118, scope: !352)
+!368 = !DILocation(line: 216, column: 148, scope: !352)
+!369 = !DILocation(line: 216, column: 115, scope: !352)
+!370 = !DILocation(line: 216, column: 9, scope: !352)
+!371 = !DILocation(line: 217, column: 12, scope: !352)
+!372 = !DILocation(line: 217, column: 9, scope: !352)
+!373 = !DILocation(line: 218, column: 14, scope: !352)
+!374 = !DILocation(line: 218, column: 49, scope: !352)
+!375 = !DILocation(line: 218, column: 79, scope: !352)
+!376 = !DILocation(line: 218, column: 87, scope: !352)
+!377 = !DILocation(line: 218, column: 34, scope: !352)
+!378 = !DILocation(line: 218, column: 25, scope: !352)
+!379 = !DILocation(line: 218, column: 120, scope: !352)
+!380 = !DILocation(line: 218, column: 150, scope: !352)
+!381 = !DILocation(line: 218, column: 158, scope: !352)
+!382 = !DILocation(line: 218, column: 21, scope: !352)
+!383 = !DILocation(line: 218, column: 12, scope: !352)
+!384 = !DILocation(line: 218, column: 171, scope: !352)
+!385 = !DILocation(line: 218, column: 206, scope: !352)
+!386 = !DILocation(line: 218, column: 236, scope: !352)
+!387 = !DILocation(line: 218, column: 244, scope: !352)
+!388 = !DILocation(line: 218, column: 191, scope: !352)
+!389 = !DILocation(line: 218, column: 182, scope: !352)
+!390 = !DILocation(line: 218, column: 277, scope: !352)
+!391 = !DILocation(line: 218, column: 307, scope: !352)
+!392 = !DILocation(line: 218, column: 315, scope: !352)
+!393 = !DILocation(line: 218, column: 9, scope: !352)
+!394 = !DILocation(line: 219, column: 7, scope: !395)
+!395 = distinct !DILexicalBlock(scope: !352, file: !111, line: 219, column: 7)
+!396 = !DILocation(line: 219, column: 43, scope: !395)
+!397 = !DILocation(line: 219, column: 73, scope: !395)
+!398 = !DILocation(line: 219, column: 40, scope: !395)
+!399 = !DILocation(line: 219, column: 17, scope: !395)
+!400 = !DILocation(line: 219, column: 83, scope: !395)
+!401 = !DILocation(line: 219, column: 91, scope: !395)
+!402 = !DILocation(line: 219, column: 121, scope: !395)
+!403 = !DILocation(line: 219, column: 90, scope: !395)
+!404 = !DILocation(line: 219, column: 88, scope: !395)
+!405 = !DILocation(line: 219, column: 13, scope: !395)
+!406 = !DILocation(line: 219, column: 7, scope: !352)
+!407 = !DILocation(line: 220, column: 44, scope: !408)
+!408 = distinct !DILexicalBlock(scope: !395, file: !111, line: 219, column: 132)
+!409 = !DILocation(line: 220, column: 74, scope: !408)
+!410 = !DILocation(line: 220, column: 41, scope: !408)
+!411 = !DILocation(line: 220, column: 18, scope: !408)
+!412 = !DILocation(line: 220, column: 84, scope: !408)
+!413 = !DILocation(line: 220, column: 92, scope: !408)
+!414 = !DILocation(line: 220, column: 122, scope: !408)
+!415 = !DILocation(line: 220, column: 91, scope: !408)
+!416 = !DILocation(line: 220, column: 89, scope: !408)
+!417 = !DILocation(line: 220, column: 16, scope: !408)
+!418 = !DILocation(line: 220, column: 14, scope: !408)
+!419 = !DILocation(line: 221, column: 3, scope: !408)
+!420 = !DILocation(line: 222, column: 16, scope: !421)
+!421 = distinct !DILexicalBlock(scope: !395, file: !111, line: 221, column: 10)
+!422 = !DILocation(line: 222, column: 14, scope: !421)
+!423 = !DILocation(line: 226, column: 58, scope: !220)
+!424 = !DILocation(line: 226, column: 7, scope: !220)
+!425 = !DILocation(line: 228, column: 58, scope: !220)
+!426 = !DILocation(line: 228, column: 68, scope: !220)
+!427 = !DILocation(line: 228, column: 56, scope: !220)
+!428 = !DILocation(line: 229, column: 55, scope: !220)
+!429 = !DILocation(line: 241, column: 6, scope: !430)
+!430 = distinct !DILexicalBlock(scope: !220, file: !111, line: 241, column: 6)
+!431 = !DILocation(line: 241, column: 13, scope: !430)
+!432 = !DILocation(line: 241, column: 11, scope: !430)
+!433 = !DILocation(line: 241, column: 6, scope: !220)
+!434 = !DILocation(line: 242, column: 19, scope: !435)
+!435 = distinct !DILexicalBlock(scope: !430, file: !111, line: 241, column: 19)
+!436 = !DILocation(line: 242, column: 27, scope: !435)
+!437 = !DILocation(line: 242, column: 40, scope: !435)
+!438 = !DILocation(line: 242, column: 38, scope: !435)
+!439 = !DILocation(line: 242, column: 24, scope: !435)
+!440 = !DILocation(line: 242, column: 15, scope: !435)
+!441 = !DILocation(line: 243, column: 2, scope: !435)
+!442 = !DILocation(line: 244, column: 19, scope: !443)
+!443 = distinct !DILexicalBlock(scope: !430, file: !111, line: 243, column: 9)
+!444 = !DILocation(line: 244, column: 26, scope: !443)
+!445 = !DILocation(line: 244, column: 24, scope: !443)
+!446 = !DILocation(line: 244, column: 15, scope: !443)
+!447 = !DILocation(line: 246, column: 2, scope: !220)
+!448 = !DILocalVariable(name: "l", arg: 1, scope: !449, file: !134, line: 235, type: !290)
+!449 = distinct !DISubprogram(name: "k_spin_unlock", scope: !134, file: !134, line: 235, type: !450, scopeLine: 237, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!450 = !DISubroutineType(types: !451)
+!451 = !{null, !290, !281}
+!452 = !DILocation(line: 235, column: 84, scope: !449, inlinedAt: !453)
+!453 = distinct !DILocation(line: 246, column: 2, scope: !220)
+!454 = !DILocalVariable(name: "key", arg: 2, scope: !449, file: !134, line: 236, type: !281)
+!455 = !DILocation(line: 236, column: 23, scope: !449, inlinedAt: !453)
+!456 = !DILocation(line: 238, column: 9, scope: !449, inlinedAt: !453)
+!457 = !DILocation(line: 261, column: 22, scope: !449, inlinedAt: !453)
+!458 = !DILocalVariable(name: "key", arg: 1, scope: !459, file: !298, line: 88, type: !59)
+!459 = distinct !DISubprogram(name: "arch_irq_unlock", scope: !298, file: !298, line: 88, type: !460, scopeLine: 89, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!460 = !DISubroutineType(types: !461)
+!461 = !{null, !59}
+!462 = !DILocation(line: 88, column: 80, scope: !459, inlinedAt: !463)
+!463 = distinct !DILocation(line: 261, column: 2, scope: !449, inlinedAt: !453)
+!464 = !DILocation(line: 91, column: 6, scope: !465, inlinedAt: !463)
+!465 = distinct !DILexicalBlock(scope: !459, file: !298, line: 91, column: 6)
+!466 = !DILocation(line: 91, column: 10, scope: !465, inlinedAt: !463)
+!467 = !DILocation(line: 91, column: 6, scope: !459, inlinedAt: !463)
+!468 = !DILocation(line: 92, column: 3, scope: !469, inlinedAt: !463)
+!469 = distinct !DILexicalBlock(scope: !465, file: !298, line: 91, column: 17)
+!470 = !DILocation(line: 94, column: 2, scope: !459, inlinedAt: !463)
+!471 = !{i64 60321}
+!472 = !DILocation(line: 114, column: 1, scope: !459, inlinedAt: !463)
+!473 = !DILocation(line: 248, column: 1, scope: !220)
+!474 = distinct !DISubprogram(name: "sys_clock_elapsed", scope: !111, file: !111, line: 250, type: !187, scopeLine: 251, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!475 = !DILocalVariable(name: "key", scope: !474, file: !111, line: 256, type: !281)
+!476 = !DILocation(line: 256, column: 19, scope: !474)
+!477 = !DILocation(line: 160, column: 94, scope: !287, inlinedAt: !478)
+!478 = distinct !DILocation(line: 256, column: 25, scope: !474)
+!479 = !DILocation(line: 162, column: 9, scope: !287, inlinedAt: !478)
+!480 = !DILocation(line: 163, column: 19, scope: !287, inlinedAt: !478)
+!481 = !DILocation(line: 44, column: 15, scope: !297, inlinedAt: !482)
+!482 = distinct !DILocation(line: 169, column: 10, scope: !287, inlinedAt: !478)
+!483 = !DILocation(line: 48, column: 2, scope: !297, inlinedAt: !482)
+!484 = !DILocation(line: 80, column: 9, scope: !297, inlinedAt: !482)
+!485 = !DILocation(line: 169, column: 8, scope: !287, inlinedAt: !478)
+!486 = !DILocation(line: 171, column: 26, scope: !287, inlinedAt: !478)
+!487 = !DILocation(line: 110, column: 94, scope: !309, inlinedAt: !488)
+!488 = distinct !DILocation(line: 171, column: 2, scope: !287, inlinedAt: !478)
+!489 = !DILocation(line: 112, column: 9, scope: !309, inlinedAt: !488)
+!490 = !DILocation(line: 177, column: 27, scope: !287, inlinedAt: !478)
+!491 = !DILocation(line: 121, column: 95, scope: !317, inlinedAt: !492)
+!492 = distinct !DILocation(line: 177, column: 2, scope: !287, inlinedAt: !478)
+!493 = !DILocation(line: 123, column: 9, scope: !317, inlinedAt: !492)
+!494 = !DILocation(line: 179, column: 2, scope: !287, inlinedAt: !478)
+!495 = !DILocation(line: 256, column: 25, scope: !474)
+!496 = !DILocalVariable(name: "unannounced", scope: !474, file: !111, line: 257, type: !58)
+!497 = !DILocation(line: 257, column: 11, scope: !474)
+!498 = !DILocation(line: 257, column: 25, scope: !474)
+!499 = !DILocation(line: 257, column: 39, scope: !474)
+!500 = !DILocation(line: 257, column: 37, scope: !474)
+!501 = !DILocalVariable(name: "cyc", scope: !474, file: !111, line: 258, type: !58)
+!502 = !DILocation(line: 258, column: 11, scope: !474)
+!503 = !DILocation(line: 258, column: 17, scope: !474)
+!504 = !DILocation(line: 258, column: 29, scope: !474)
+!505 = !DILocation(line: 258, column: 27, scope: !474)
+!506 = !DILocation(line: 260, column: 2, scope: !474)
+!507 = !DILocation(line: 235, column: 84, scope: !449, inlinedAt: !508)
+!508 = distinct !DILocation(line: 260, column: 2, scope: !474)
+!509 = !DILocation(line: 236, column: 23, scope: !449, inlinedAt: !508)
+!510 = !DILocation(line: 238, column: 9, scope: !449, inlinedAt: !508)
+!511 = !DILocation(line: 261, column: 22, scope: !449, inlinedAt: !508)
+!512 = !DILocation(line: 88, column: 80, scope: !459, inlinedAt: !513)
+!513 = distinct !DILocation(line: 261, column: 2, scope: !449, inlinedAt: !508)
+!514 = !DILocation(line: 91, column: 6, scope: !465, inlinedAt: !513)
+!515 = !DILocation(line: 91, column: 10, scope: !465, inlinedAt: !513)
+!516 = !DILocation(line: 91, column: 6, scope: !459, inlinedAt: !513)
+!517 = !DILocation(line: 92, column: 3, scope: !469, inlinedAt: !513)
+!518 = !DILocation(line: 94, column: 2, scope: !459, inlinedAt: !513)
+!519 = !DILocation(line: 114, column: 1, scope: !459, inlinedAt: !513)
+!520 = !DILocation(line: 261, column: 9, scope: !474)
+!521 = !DILocation(line: 261, column: 16, scope: !474)
+!522 = !DILocation(line: 261, column: 46, scope: !474)
+!523 = !DILocation(line: 261, column: 13, scope: !474)
+!524 = !DILocation(line: 261, column: 2, scope: !474)
+!525 = distinct !DISubprogram(name: "sys_clock_cycle_get_32", scope: !111, file: !111, line: 264, type: !187, scopeLine: 265, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!526 = !DILocalVariable(name: "key", scope: !525, file: !111, line: 266, type: !281)
+!527 = !DILocation(line: 266, column: 19, scope: !525)
+!528 = !DILocation(line: 160, column: 94, scope: !287, inlinedAt: !529)
+!529 = distinct !DILocation(line: 266, column: 25, scope: !525)
+!530 = !DILocation(line: 162, column: 9, scope: !287, inlinedAt: !529)
+!531 = !DILocation(line: 163, column: 19, scope: !287, inlinedAt: !529)
+!532 = !DILocation(line: 44, column: 15, scope: !297, inlinedAt: !533)
+!533 = distinct !DILocation(line: 169, column: 10, scope: !287, inlinedAt: !529)
+!534 = !DILocation(line: 48, column: 2, scope: !297, inlinedAt: !533)
+!535 = !DILocation(line: 80, column: 9, scope: !297, inlinedAt: !533)
+!536 = !DILocation(line: 169, column: 8, scope: !287, inlinedAt: !529)
+!537 = !DILocation(line: 171, column: 26, scope: !287, inlinedAt: !529)
+!538 = !DILocation(line: 110, column: 94, scope: !309, inlinedAt: !539)
+!539 = distinct !DILocation(line: 171, column: 2, scope: !287, inlinedAt: !529)
+!540 = !DILocation(line: 112, column: 9, scope: !309, inlinedAt: !539)
+!541 = !DILocation(line: 177, column: 27, scope: !287, inlinedAt: !529)
+!542 = !DILocation(line: 121, column: 95, scope: !317, inlinedAt: !543)
+!543 = distinct !DILocation(line: 177, column: 2, scope: !287, inlinedAt: !529)
+!544 = !DILocation(line: 123, column: 9, scope: !317, inlinedAt: !543)
+!545 = !DILocation(line: 179, column: 2, scope: !287, inlinedAt: !529)
+!546 = !DILocation(line: 266, column: 25, scope: !525)
+!547 = !DILocalVariable(name: "ret", scope: !525, file: !111, line: 267, type: !58)
+!548 = !DILocation(line: 267, column: 11, scope: !525)
+!549 = !DILocation(line: 267, column: 17, scope: !525)
+!550 = !DILocation(line: 269, column: 9, scope: !525)
+!551 = !DILocation(line: 269, column: 6, scope: !525)
+!552 = !DILocation(line: 270, column: 2, scope: !525)
+!553 = !DILocation(line: 235, column: 84, scope: !449, inlinedAt: !554)
+!554 = distinct !DILocation(line: 270, column: 2, scope: !525)
+!555 = !DILocation(line: 236, column: 23, scope: !449, inlinedAt: !554)
+!556 = !DILocation(line: 238, column: 9, scope: !449, inlinedAt: !554)
+!557 = !DILocation(line: 261, column: 22, scope: !449, inlinedAt: !554)
+!558 = !DILocation(line: 88, column: 80, scope: !459, inlinedAt: !559)
+!559 = distinct !DILocation(line: 261, column: 2, scope: !449, inlinedAt: !554)
+!560 = !DILocation(line: 91, column: 6, scope: !465, inlinedAt: !559)
+!561 = !DILocation(line: 91, column: 10, scope: !465, inlinedAt: !559)
+!562 = !DILocation(line: 91, column: 6, scope: !459, inlinedAt: !559)
+!563 = !DILocation(line: 92, column: 3, scope: !469, inlinedAt: !559)
+!564 = !DILocation(line: 94, column: 2, scope: !459, inlinedAt: !559)
+!565 = !DILocation(line: 114, column: 1, scope: !459, inlinedAt: !559)
+!566 = !DILocation(line: 271, column: 9, scope: !525)
+!567 = !DILocation(line: 271, column: 2, scope: !525)
+!568 = distinct !DISubprogram(name: "sys_clock_idle_exit", scope: !111, file: !111, line: 285, type: !569, scopeLine: 286, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!569 = !DISubroutineType(types: !570)
+!570 = !{null}
+!571 = !DILocation(line: 287, column: 6, scope: !572)
+!572 = distinct !DILexicalBlock(scope: !568, file: !111, line: 287, column: 6)
+!573 = !DILocation(line: 287, column: 16, scope: !572)
+!574 = !DILocation(line: 287, column: 6, scope: !568)
+!575 = !DILocation(line: 288, column: 57, scope: !576)
+!576 = distinct !DILexicalBlock(scope: !572, file: !111, line: 287, column: 31)
+!577 = !DILocation(line: 289, column: 2, scope: !576)
+!578 = !DILocation(line: 290, column: 1, scope: !568)
+!579 = distinct !DISubprogram(name: "sys_clock_disable", scope: !111, file: !111, line: 292, type: !569, scopeLine: 293, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!580 = !DILocation(line: 294, column: 56, scope: !579)
+!581 = !DILocation(line: 295, column: 1, scope: !579)
+!582 = distinct !DISubprogram(name: "sys_clock_driver_init", scope: !111, file: !111, line: 297, type: !121, scopeLine: 298, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!583 = !DILocation(line: 300, column: 2, scope: !582)
+!584 = !DILocation(line: 301, column: 15, scope: !582)
+!585 = !DILocation(line: 301, column: 45, scope: !582)
+!586 = !DILocation(line: 301, column: 54, scope: !582)
+!587 = !DILocation(line: 301, column: 12, scope: !582)
+!588 = !DILocation(line: 302, column: 15, scope: !582)
+!589 = !DILocation(line: 303, column: 58, scope: !582)
+!590 = !DILocation(line: 303, column: 56, scope: !582)
+!591 = !DILocation(line: 304, column: 55, scope: !582)
+!592 = !DILocation(line: 305, column: 56, scope: !582)
+!593 = !DILocation(line: 308, column: 2, scope: !582)
+!594 = distinct !DISubprogram(name: "__NVIC_SetPriority", scope: !53, file: !53, line: 732, type: !595, scopeLine: 733, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!595 = !DISubroutineType(types: !596)
+!596 = !{null, !597, !58}
+!597 = !DIDerivedType(tag: DW_TAG_typedef, name: "IRQn_Type", file: !6, line: 107, baseType: !5)
+!598 = !DILocalVariable(name: "IRQn", arg: 1, scope: !594, file: !53, line: 732, type: !597)
+!599 = !DILocation(line: 732, column: 51, scope: !594)
+!600 = !DILocalVariable(name: "priority", arg: 2, scope: !594, file: !53, line: 732, type: !58)
+!601 = !DILocation(line: 732, column: 66, scope: !594)
+!602 = !DILocation(line: 734, column: 17, scope: !603)
+!603 = distinct !DILexicalBlock(scope: !594, file: !53, line: 734, column: 7)
+!604 = !DILocation(line: 734, column: 7, scope: !603)
+!605 = !DILocation(line: 734, column: 23, scope: !603)
+!606 = !DILocation(line: 734, column: 7, scope: !594)
+!607 = !DILocation(line: 736, column: 183, scope: !608)
+!608 = distinct !DILexicalBlock(scope: !603, file: !53, line: 735, column: 3)
+!609 = !DILocation(line: 736, column: 173, scope: !608)
+!610 = !DILocation(line: 736, column: 190, scope: !608)
+!611 = !DILocation(line: 736, column: 110, scope: !608)
+!612 = !DILocation(line: 736, column: 240, scope: !608)
+!613 = !DILocation(line: 736, column: 230, scope: !608)
+!614 = !DILocation(line: 736, column: 249, scope: !608)
+!615 = !DILocation(line: 736, column: 259, scope: !608)
+!616 = !DILocation(line: 736, column: 212, scope: !608)
+!617 = !DILocation(line: 736, column: 203, scope: !608)
+!618 = !DILocation(line: 736, column: 201, scope: !608)
+!619 = !DILocation(line: 737, column: 11, scope: !608)
+!620 = !DILocation(line: 737, column: 20, scope: !608)
+!621 = !DILocation(line: 737, column: 33, scope: !608)
+!622 = !DILocation(line: 737, column: 81, scope: !608)
+!623 = !DILocation(line: 737, column: 71, scope: !608)
+!624 = !DILocation(line: 737, column: 90, scope: !608)
+!625 = !DILocation(line: 737, column: 100, scope: !608)
+!626 = !DILocation(line: 737, column: 53, scope: !608)
+!627 = !DILocation(line: 736, column: 268, scope: !608)
+!628 = !DILocation(line: 736, column: 78, scope: !608)
+!629 = !DILocation(line: 736, column: 68, scope: !608)
+!630 = !DILocation(line: 736, column: 85, scope: !608)
+!631 = !DILocation(line: 736, column: 5, scope: !608)
+!632 = !DILocation(line: 736, column: 96, scope: !608)
+!633 = !DILocation(line: 738, column: 3, scope: !608)
+!634 = !DILocation(line: 741, column: 202, scope: !635)
+!635 = distinct !DILexicalBlock(scope: !603, file: !53, line: 740, column: 3)
+!636 = !DILocation(line: 741, column: 192, scope: !635)
+!637 = !DILocation(line: 741, column: 209, scope: !635)
+!638 = !DILocation(line: 741, column: 218, scope: !635)
+!639 = !DILocation(line: 741, column: 224, scope: !635)
+!640 = !DILocation(line: 741, column: 127, scope: !635)
+!641 = !DILocation(line: 741, column: 274, scope: !635)
+!642 = !DILocation(line: 741, column: 264, scope: !635)
+!643 = !DILocation(line: 741, column: 283, scope: !635)
+!644 = !DILocation(line: 741, column: 293, scope: !635)
+!645 = !DILocation(line: 741, column: 246, scope: !635)
+!646 = !DILocation(line: 741, column: 237, scope: !635)
+!647 = !DILocation(line: 741, column: 235, scope: !635)
+!648 = !DILocation(line: 742, column: 11, scope: !635)
+!649 = !DILocation(line: 742, column: 20, scope: !635)
+!650 = !DILocation(line: 742, column: 33, scope: !635)
+!651 = !DILocation(line: 742, column: 81, scope: !635)
+!652 = !DILocation(line: 742, column: 71, scope: !635)
+!653 = !DILocation(line: 742, column: 90, scope: !635)
+!654 = !DILocation(line: 742, column: 100, scope: !635)
+!655 = !DILocation(line: 742, column: 53, scope: !635)
+!656 = !DILocation(line: 741, column: 302, scope: !635)
+!657 = !DILocation(line: 741, column: 80, scope: !635)
+!658 = !DILocation(line: 741, column: 70, scope: !635)
+!659 = !DILocation(line: 741, column: 87, scope: !635)
+!660 = !DILocation(line: 741, column: 96, scope: !635)
+!661 = !DILocation(line: 741, column: 102, scope: !635)
+!662 = !DILocation(line: 741, column: 5, scope: !635)
+!663 = !DILocation(line: 741, column: 113, scope: !635)
+!664 = !DILocation(line: 744, column: 1, scope: !594)

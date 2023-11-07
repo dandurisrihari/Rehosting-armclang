@@ -1,2 +1,7 @@
-armclang -c -target arm-none-linux-gnueabi assert.ll -o assert.o
-llc -march=x86 assert.o -o assert.ll
+export ZEPHYR_TOOLCHAIN_VARIANT=armclang
+export ARMCLANG_TOOLCHAIN_PATH=/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/
+export ARM_PRODUCT_DEF=/opt/arm/developmentstudio-2023.0/sw/mappings/gold.elmap
+export PATH="$PATH:/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/bin"
+
+export ZEPHYR_TOOLCHAIN_VARIANT=llvm
+export LLVM_TOOLCHAIN_PATH=/usr/lib/llvm-17

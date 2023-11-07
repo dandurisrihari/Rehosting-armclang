@@ -8,321 +8,302 @@ target triple = "aarch64-arm-none-eabi"
 
 @uwTickPrio = hidden global i32 4, align 4, !dbg !0
 @uwTickFreq = hidden global i8 1, align 1, !dbg !116
-@SystemCoreClock = external dso_local global i32, align 4
+@SystemCoreClock = external global i32, align 4
 @uwTick = hidden global i32 0, align 4, !dbg !120
 
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_Init() #0 !dbg !129 {
-  %1 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !134
-  %2 = or i32 %1, 16, !dbg !134
-  store volatile i32 %2, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !134
-  %3 = call zeroext i8 @HAL_InitTick(i32 noundef 3) #4, !dbg !135
-  call void @HAL_MspInit() #4, !dbg !136
-  ret i8 0, !dbg !137
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_Init() #0 !dbg !131 {
+  %1 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !136
+  %2 = or i32 %1, 16, !dbg !136
+  store volatile i32 %2, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !136
+  %3 = call zeroext i8 @HAL_InitTick(i32 noundef 3), !dbg !137
+  call void @HAL_MspInit(), !dbg !138
+  ret i8 0, !dbg !139
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden zeroext i8 @HAL_InitTick(i32 noundef %0) #0 !dbg !138 {
+; Function Attrs: noinline nounwind optnone
+define weak hidden zeroext i8 @HAL_InitTick(i32 noundef %0) #0 !dbg !140 {
   %2 = alloca i8, align 1
   %3 = alloca i32, align 4
   store i32 %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !142, metadata !DIExpression()), !dbg !143
-  %4 = load i32, ptr @SystemCoreClock, align 4, !dbg !144
-  %5 = load i8, ptr @uwTickFreq, align 1, !dbg !146
-  %6 = zext i8 %5 to i32, !dbg !146
-  %7 = udiv i32 1000, %6, !dbg !147
-  %8 = udiv i32 %4, %7, !dbg !148
-  %9 = call i32 @HAL_SYSTICK_Config(i32 noundef %8) #4, !dbg !149
-  %10 = icmp ugt i32 %9, 0, !dbg !150
-  br i1 %10, label %11, label %12, !dbg !151
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !143, metadata !DIExpression()), !dbg !144
+  %4 = load i32, ptr @SystemCoreClock, align 4, !dbg !145
+  %5 = load i8, ptr @uwTickFreq, align 1, !dbg !147
+  %6 = zext i8 %5 to i32, !dbg !147
+  %7 = udiv i32 1000, %6, !dbg !148
+  %8 = udiv i32 %4, %7, !dbg !149
+  %9 = call i32 @HAL_SYSTICK_Config(i32 noundef %8), !dbg !150
+  %10 = icmp ugt i32 %9, 0, !dbg !151
+  br i1 %10, label %11, label %12, !dbg !152
 
 11:                                               ; preds = %1
-  store i8 1, ptr %2, align 1, !dbg !152
-  br label %20, !dbg !152
+  store i8 1, ptr %2, align 1, !dbg !153
+  br label %20, !dbg !153
 
 12:                                               ; preds = %1
-  %13 = load i32, ptr %3, align 4, !dbg !154
-  %14 = icmp ult i32 %13, 4, !dbg !156
-  br i1 %14, label %15, label %18, !dbg !157
+  %13 = load i32, ptr %3, align 4, !dbg !155
+  %14 = icmp ult i32 %13, 4, !dbg !157
+  br i1 %14, label %15, label %18, !dbg !158
 
 15:                                               ; preds = %12
-  %16 = load i32, ptr %3, align 4, !dbg !158
-  call void @HAL_NVIC_SetPriority(i8 noundef signext -1, i32 noundef %16, i32 noundef 0) #4, !dbg !160
-  %17 = load i32, ptr %3, align 4, !dbg !161
-  store i32 %17, ptr @uwTickPrio, align 4, !dbg !162
-  br label %19, !dbg !163
+  %16 = load i32, ptr %3, align 4, !dbg !159
+  call void @HAL_NVIC_SetPriority(i8 noundef signext -1, i32 noundef %16, i32 noundef 0), !dbg !161
+  %17 = load i32, ptr %3, align 4, !dbg !162
+  store i32 %17, ptr @uwTickPrio, align 4, !dbg !163
+  br label %19, !dbg !164
 
 18:                                               ; preds = %12
-  store i8 1, ptr %2, align 1, !dbg !164
-  br label %20, !dbg !164
+  store i8 1, ptr %2, align 1, !dbg !165
+  br label %20, !dbg !165
 
 19:                                               ; preds = %15
-  store i8 0, ptr %2, align 1, !dbg !166
-  br label %20, !dbg !166
+  store i8 0, ptr %2, align 1, !dbg !167
+  br label %20, !dbg !167
 
 20:                                               ; preds = %19, %18, %11
-  %21 = load i8, ptr %2, align 1, !dbg !167
-  ret i8 %21, !dbg !167
+  %21 = load i8, ptr %2, align 1, !dbg !168
+  ret i8 %21, !dbg !168
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_MspInit() #0 !dbg !168 {
-  ret void, !dbg !171
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_MspInit() #0 !dbg !169 {
+  ret void, !dbg !172
 }
 
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_DeInit() #0 !dbg !172 {
-  store volatile i32 -1, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 4), align 4, !dbg !173
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 4), align 4, !dbg !174
-  store volatile i32 -1, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 3), align 4, !dbg !175
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 3), align 4, !dbg !176
-  store volatile i32 -1, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 10), align 4, !dbg !177
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 10), align 4, !dbg !178
-  call void @HAL_MspDeInit() #4, !dbg !179
-  ret i8 0, !dbg !180
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_DeInit() #0 !dbg !173 {
+  store volatile i32 -1, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 4), align 4, !dbg !174
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 4), align 4, !dbg !175
+  store volatile i32 -1, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 3), align 4, !dbg !176
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 3), align 4, !dbg !177
+  store volatile i32 -1, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 10), align 4, !dbg !178
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 10), align 4, !dbg !179
+  call void @HAL_MspDeInit(), !dbg !180
+  ret i8 0, !dbg !181
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_MspDeInit() #0 !dbg !181 {
-  ret void, !dbg !182
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_MspDeInit() #0 !dbg !182 {
+  ret void, !dbg !183
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
 declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: optsize
-declare !dbg !183 dso_local i32 @HAL_SYSTICK_Config(i32 noundef) #2
+declare i32 @HAL_SYSTICK_Config(i32 noundef) #2
 
-; Function Attrs: optsize
-declare !dbg !187 dso_local void @HAL_NVIC_SetPriority(i8 noundef signext, i32 noundef, i32 noundef) #2
+declare void @HAL_NVIC_SetPriority(i8 noundef signext, i32 noundef, i32 noundef) #2
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_IncTick() #0 !dbg !191 {
-  %1 = load i8, ptr @uwTickFreq, align 1, !dbg !192
-  %2 = zext i8 %1 to i32, !dbg !192
-  %3 = load volatile i32, ptr @uwTick, align 4, !dbg !193
-  %4 = add i32 %3, %2, !dbg !193
-  store volatile i32 %4, ptr @uwTick, align 4, !dbg !193
-  ret void, !dbg !194
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_IncTick() #0 !dbg !184 {
+  %1 = load i8, ptr @uwTickFreq, align 1, !dbg !185
+  %2 = zext i8 %1 to i32, !dbg !185
+  %3 = load volatile i32, ptr @uwTick, align 4, !dbg !186
+  %4 = add i32 %3, %2, !dbg !186
+  store volatile i32 %4, ptr @uwTick, align 4, !dbg !186
+  ret void, !dbg !187
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden i32 @HAL_GetTick() #0 !dbg !195 {
-  %1 = load volatile i32, ptr @uwTick, align 4, !dbg !198
-  ret i32 %1, !dbg !199
+; Function Attrs: noinline nounwind optnone
+define weak hidden i32 @HAL_GetTick() #0 !dbg !188 {
+  %1 = load volatile i32, ptr @uwTick, align 4, !dbg !191
+  ret i32 %1, !dbg !192
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetTickPrio() #0 !dbg !200 {
-  %1 = load i32, ptr @uwTickPrio, align 4, !dbg !201
-  ret i32 %1, !dbg !202
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetTickPrio() #0 !dbg !193 {
+  %1 = load i32, ptr @uwTickPrio, align 4, !dbg !194
+  ret i32 %1, !dbg !195
 }
 
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_SetTickFreq(i8 noundef zeroext %0) #0 !dbg !203 {
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_SetTickFreq(i8 noundef zeroext %0) #0 !dbg !196 {
   %2 = alloca i8, align 1
   %3 = alloca i8, align 1
   %4 = alloca i8, align 1
   store i8 %0, ptr %2, align 1
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !207, metadata !DIExpression()), !dbg !210
-  call void @llvm.lifetime.start.p0(i64 1, ptr %3) #5, !dbg !211
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !208, metadata !DIExpression()), !dbg !212
-  store i8 0, ptr %3, align 1, !dbg !212
-  call void @llvm.lifetime.start.p0(i64 1, ptr %4) #5, !dbg !213
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !209, metadata !DIExpression()), !dbg !214
-  %5 = load i8, ptr @uwTickFreq, align 1, !dbg !215
-  %6 = zext i8 %5 to i32, !dbg !215
-  %7 = load i8, ptr %2, align 1, !dbg !217
-  %8 = zext i8 %7 to i32, !dbg !217
-  %9 = icmp ne i32 %6, %8, !dbg !218
-  br i1 %9, label %10, label %21, !dbg !219
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !199, metadata !DIExpression()), !dbg !200
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !201, metadata !DIExpression()), !dbg !202
+  store i8 0, ptr %3, align 1, !dbg !202
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !203, metadata !DIExpression()), !dbg !204
+  %5 = load i8, ptr @uwTickFreq, align 1, !dbg !205
+  %6 = zext i8 %5 to i32, !dbg !205
+  %7 = load i8, ptr %2, align 1, !dbg !207
+  %8 = zext i8 %7 to i32, !dbg !207
+  %9 = icmp ne i32 %6, %8, !dbg !208
+  br i1 %9, label %10, label %21, !dbg !209
 
 10:                                               ; preds = %1
-  %11 = load i8, ptr @uwTickFreq, align 1, !dbg !220
-  store i8 %11, ptr %4, align 1, !dbg !222
-  %12 = load i8, ptr %2, align 1, !dbg !223
-  store i8 %12, ptr @uwTickFreq, align 1, !dbg !224
-  %13 = load i32, ptr @uwTickPrio, align 4, !dbg !225
-  %14 = call zeroext i8 @HAL_InitTick(i32 noundef %13) #4, !dbg !226
-  store i8 %14, ptr %3, align 1, !dbg !227
-  %15 = load i8, ptr %3, align 1, !dbg !228
-  %16 = zext i8 %15 to i32, !dbg !228
-  %17 = icmp ne i32 %16, 0, !dbg !230
-  br i1 %17, label %18, label %20, !dbg !231
+  %11 = load i8, ptr @uwTickFreq, align 1, !dbg !210
+  store i8 %11, ptr %4, align 1, !dbg !212
+  %12 = load i8, ptr %2, align 1, !dbg !213
+  store i8 %12, ptr @uwTickFreq, align 1, !dbg !214
+  %13 = load i32, ptr @uwTickPrio, align 4, !dbg !215
+  %14 = call zeroext i8 @HAL_InitTick(i32 noundef %13), !dbg !216
+  store i8 %14, ptr %3, align 1, !dbg !217
+  %15 = load i8, ptr %3, align 1, !dbg !218
+  %16 = zext i8 %15 to i32, !dbg !218
+  %17 = icmp ne i32 %16, 0, !dbg !220
+  br i1 %17, label %18, label %20, !dbg !221
 
 18:                                               ; preds = %10
-  %19 = load i8, ptr %4, align 1, !dbg !232
-  store i8 %19, ptr @uwTickFreq, align 1, !dbg !234
-  br label %20, !dbg !235
+  %19 = load i8, ptr %4, align 1, !dbg !222
+  store i8 %19, ptr @uwTickFreq, align 1, !dbg !224
+  br label %20, !dbg !225
 
 20:                                               ; preds = %18, %10
-  br label %21, !dbg !236
+  br label %21, !dbg !226
 
 21:                                               ; preds = %20, %1
-  %22 = load i8, ptr %3, align 1, !dbg !237
-  call void @llvm.lifetime.end.p0(i64 1, ptr %4) #5, !dbg !238
-  call void @llvm.lifetime.end.p0(i64 1, ptr %3) #5, !dbg !238
-  ret i8 %22, !dbg !239
+  %22 = load i8, ptr %3, align 1, !dbg !227
+  ret i8 %22, !dbg !228
 }
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #3
-
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #3
-
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_GetTickFreq() #0 !dbg !240 {
-  %1 = load i8, ptr @uwTickFreq, align 1, !dbg !243
-  ret i8 %1, !dbg !244
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_GetTickFreq() #0 !dbg !229 {
+  %1 = load i8, ptr @uwTickFreq, align 1, !dbg !232
+  ret i8 %1, !dbg !233
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_Delay(i32 noundef %0) #0 !dbg !245 {
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_Delay(i32 noundef %0) #0 !dbg !234 {
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store i32 %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !249, metadata !DIExpression()), !dbg !252
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #5, !dbg !253
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !250, metadata !DIExpression()), !dbg !254
-  %5 = call i32 @HAL_GetTick() #4, !dbg !255
-  store i32 %5, ptr %3, align 4, !dbg !254
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #5, !dbg !256
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !251, metadata !DIExpression()), !dbg !257
-  %6 = load i32, ptr %2, align 4, !dbg !258
-  store i32 %6, ptr %4, align 4, !dbg !257
-  %7 = load i32, ptr %4, align 4, !dbg !259
-  %8 = icmp ult i32 %7, -1, !dbg !261
-  br i1 %8, label %9, label %14, !dbg !262
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !237, metadata !DIExpression()), !dbg !238
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !239, metadata !DIExpression()), !dbg !240
+  %5 = call i32 @HAL_GetTick(), !dbg !241
+  store i32 %5, ptr %3, align 4, !dbg !240
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !242, metadata !DIExpression()), !dbg !243
+  %6 = load i32, ptr %2, align 4, !dbg !244
+  store i32 %6, ptr %4, align 4, !dbg !243
+  %7 = load i32, ptr %4, align 4, !dbg !245
+  %8 = icmp ult i32 %7, -1, !dbg !247
+  br i1 %8, label %9, label %14, !dbg !248
 
 9:                                                ; preds = %1
-  %10 = load i8, ptr @uwTickFreq, align 1, !dbg !263
-  %11 = zext i8 %10 to i32, !dbg !265
-  %12 = load i32, ptr %4, align 4, !dbg !266
-  %13 = add i32 %12, %11, !dbg !266
-  store i32 %13, ptr %4, align 4, !dbg !266
-  br label %14, !dbg !267
+  %10 = load i8, ptr @uwTickFreq, align 1, !dbg !249
+  %11 = zext i8 %10 to i32, !dbg !251
+  %12 = load i32, ptr %4, align 4, !dbg !252
+  %13 = add i32 %12, %11, !dbg !252
+  store i32 %13, ptr %4, align 4, !dbg !252
+  br label %14, !dbg !253
 
 14:                                               ; preds = %9, %1
-  br label %15, !dbg !268
+  br label %15, !dbg !254
 
 15:                                               ; preds = %21, %14
-  %16 = call i32 @HAL_GetTick() #4, !dbg !269
-  %17 = load i32, ptr %3, align 4, !dbg !270
-  %18 = sub i32 %16, %17, !dbg !271
-  %19 = load i32, ptr %4, align 4, !dbg !272
-  %20 = icmp ult i32 %18, %19, !dbg !273
-  br i1 %20, label %21, label %22, !dbg !268
+  %16 = call i32 @HAL_GetTick(), !dbg !255
+  %17 = load i32, ptr %3, align 4, !dbg !256
+  %18 = sub i32 %16, %17, !dbg !257
+  %19 = load i32, ptr %4, align 4, !dbg !258
+  %20 = icmp ult i32 %18, %19, !dbg !259
+  br i1 %20, label %21, label %22, !dbg !254
 
 21:                                               ; preds = %15
-  br label %15, !dbg !268, !llvm.loop !274
+  br label %15, !dbg !254, !llvm.loop !260
 
 22:                                               ; preds = %15
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #5, !dbg !276
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #5, !dbg !276
-  ret void, !dbg !276
+  ret void, !dbg !262
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_SuspendTick() #0 !dbg !277 {
-  %1 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !278
-  %2 = and i32 %1, -3, !dbg !278
-  store volatile i32 %2, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !278
-  ret void, !dbg !279
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_SuspendTick() #0 !dbg !263 {
+  %1 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !264
+  %2 = and i32 %1, -3, !dbg !264
+  store volatile i32 %2, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !264
+  ret void, !dbg !265
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_ResumeTick() #0 !dbg !280 {
-  %1 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !281
-  %2 = or i32 %1, 2, !dbg !281
-  store volatile i32 %2, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !281
-  ret void, !dbg !282
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_ResumeTick() #0 !dbg !266 {
+  %1 = load volatile i32, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !267
+  %2 = or i32 %1, 2, !dbg !267
+  store volatile i32 %2, ptr inttoptr (i32 -536813552 to ptr), align 4, !dbg !267
+  ret void, !dbg !268
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetHalVersion() #0 !dbg !283 {
-  ret i32 17237760, !dbg !284
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetHalVersion() #0 !dbg !269 {
+  ret i32 17237760, !dbg !270
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetREVID() #0 !dbg !285 {
-  %1 = load volatile i32, ptr inttoptr (i32 1073829888 to ptr), align 4, !dbg !286
-  %2 = lshr i32 %1, 16, !dbg !287
-  ret i32 %2, !dbg !288
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetREVID() #0 !dbg !271 {
+  %1 = load volatile i32, ptr inttoptr (i32 1073829888 to ptr), align 4, !dbg !272
+  %2 = lshr i32 %1, 16, !dbg !273
+  ret i32 %2, !dbg !274
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetDEVID() #0 !dbg !289 {
-  %1 = load volatile i32, ptr inttoptr (i32 1073829888 to ptr), align 4, !dbg !290
-  %2 = and i32 %1, 4095, !dbg !291
-  ret i32 %2, !dbg !292
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetDEVID() #0 !dbg !275 {
+  %1 = load volatile i32, ptr inttoptr (i32 1073829888 to ptr), align 4, !dbg !276
+  %2 = and i32 %1, 4095, !dbg !277
+  ret i32 %2, !dbg !278
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetUIDw0() #0 !dbg !293 {
-  %1 = load i32, ptr inttoptr (i32 536868780 to ptr), align 4, !dbg !294
-  ret i32 %1, !dbg !295
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetUIDw0() #0 !dbg !279 {
+  %1 = load i32, ptr inttoptr (i32 536868780 to ptr), align 4, !dbg !280
+  ret i32 %1, !dbg !281
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetUIDw1() #0 !dbg !296 {
-  %1 = load i32, ptr inttoptr (i32 536868784 to ptr), align 4, !dbg !297
-  ret i32 %1, !dbg !298
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetUIDw1() #0 !dbg !282 {
+  %1 = load i32, ptr inttoptr (i32 536868784 to ptr), align 4, !dbg !283
+  ret i32 %1, !dbg !284
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_GetUIDw2() #0 !dbg !299 {
-  %1 = load i32, ptr inttoptr (i32 536868788 to ptr), align 4, !dbg !300
-  ret i32 %1, !dbg !301
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_GetUIDw2() #0 !dbg !285 {
+  %1 = load i32, ptr inttoptr (i32 536868788 to ptr), align 4, !dbg !286
+  ret i32 %1, !dbg !287
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_DBGMCU_EnableDBGStopMode() #0 !dbg !302 {
-  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !303
-  %2 = or i32 %1, 2, !dbg !303
-  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !303
-  ret void, !dbg !304
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_DBGMCU_EnableDBGStopMode() #0 !dbg !288 {
+  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !289
+  %2 = or i32 %1, 2, !dbg !289
+  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !289
+  ret void, !dbg !290
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_DBGMCU_DisableDBGStopMode() #0 !dbg !305 {
-  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !306
-  %2 = and i32 %1, -3, !dbg !306
-  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !306
-  ret void, !dbg !307
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_DBGMCU_DisableDBGStopMode() #0 !dbg !291 {
+  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !292
+  %2 = and i32 %1, -3, !dbg !292
+  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !292
+  ret void, !dbg !293
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_DBGMCU_EnableDBGStandbyMode() #0 !dbg !308 {
-  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !309
-  %2 = or i32 %1, 4, !dbg !309
-  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !309
-  ret void, !dbg !310
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_DBGMCU_EnableDBGStandbyMode() #0 !dbg !294 {
+  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !295
+  %2 = or i32 %1, 4, !dbg !295
+  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !295
+  ret void, !dbg !296
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_DBGMCU_DisableDBGStandbyMode() #0 !dbg !311 {
-  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !312
-  %2 = and i32 %1, -5, !dbg !312
-  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !312
-  ret void, !dbg !313
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_DBGMCU_DisableDBGStandbyMode() #0 !dbg !297 {
+  %1 = load volatile i32, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !298
+  %2 = and i32 %1, -5, !dbg !298
+  store volatile i32 %2, ptr getelementptr inbounds (%struct.DBGMCU_TypeDef, ptr inttoptr (i32 1073829888 to ptr), i32 0, i32 1), align 4, !dbg !298
+  ret void, !dbg !299
 }
 
-attributes #0 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #3 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
-attributes #4 = { optsize }
-attributes #5 = { nounwind }
+attributes #2 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 
 !llvm.dbg.cu = !{!2}
-!llvm.module.flags = !{!122, !123, !124, !125, !126, !127}
-!llvm.ident = !{!128}
+!llvm.module.flags = !{!122, !123, !124, !125, !126, !127, !128, !129}
+!llvm.ident = !{!130}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "uwTickPrio", scope: !2, file: !118, line: 84, type: !67, isLocal: false, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !60, globals: !115, splitDebugInlining: false, nameTableKind: None)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !60, globals: !115, splitDebugInlining: false, nameTableKind: None)
 !3 = !DIFile(filename: "stm32f0xx_hal.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !4 = !{!5, !13, !20}
 !5 = !DICompositeType(tag: DW_TAG_enumeration_type, file: !6, line: 79, baseType: !7, size: 8, elements: !8)
@@ -448,189 +429,175 @@ attributes #5 = { nounwind }
 !125 = !{i32 1, !"static_rwdata", i32 1}
 !126 = !{i32 1, !"enumsize_buildattr", i32 1}
 !127 = !{i32 1, !"armlib_unavailable", i32 0}
-!128 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!129 = distinct !DISubprogram(name: "HAL_Init", scope: !118, file: !118, line: 141, type: !130, scopeLine: 142, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!130 = !DISubroutineType(types: !131)
-!131 = !{!132}
-!132 = !DIDerivedType(tag: DW_TAG_typedef, name: "HAL_StatusTypeDef", file: !14, line: 44, baseType: !13)
-!133 = !{}
-!134 = !DILocation(line: 145, column: 76, scope: !129)
-!135 = !DILocation(line: 150, column: 3, scope: !129)
-!136 = !DILocation(line: 153, column: 3, scope: !129)
-!137 = !DILocation(line: 156, column: 3, scope: !129)
-!138 = distinct !DISubprogram(name: "HAL_InitTick", scope: !118, file: !118, line: 222, type: !139, scopeLine: 223, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !141)
-!139 = !DISubroutineType(types: !140)
-!140 = !{!132, !67}
-!141 = !{!142}
-!142 = !DILocalVariable(name: "TickPriority", arg: 1, scope: !138, file: !118, line: 222, type: !67)
-!143 = !DILocation(line: 222, column: 63, scope: !138)
-!144 = !DILocation(line: 225, column: 26, scope: !145)
-!145 = distinct !DILexicalBlock(scope: !138, file: !118, line: 225, column: 7)
-!146 = !DILocation(line: 225, column: 53, scope: !145)
-!147 = !DILocation(line: 225, column: 51, scope: !145)
-!148 = !DILocation(line: 225, column: 42, scope: !145)
-!149 = !DILocation(line: 225, column: 7, scope: !145)
-!150 = !DILocation(line: 225, column: 66, scope: !145)
-!151 = !DILocation(line: 225, column: 7, scope: !138)
-!152 = !DILocation(line: 227, column: 5, scope: !153)
-!153 = distinct !DILexicalBlock(scope: !145, file: !118, line: 226, column: 3)
-!154 = !DILocation(line: 231, column: 7, scope: !155)
-!155 = distinct !DILexicalBlock(scope: !138, file: !118, line: 231, column: 7)
-!156 = !DILocation(line: 231, column: 20, scope: !155)
-!157 = !DILocation(line: 231, column: 7, scope: !138)
-!158 = !DILocation(line: 233, column: 40, scope: !159)
-!159 = distinct !DILexicalBlock(scope: !155, file: !118, line: 232, column: 3)
-!160 = !DILocation(line: 233, column: 5, scope: !159)
-!161 = !DILocation(line: 234, column: 18, scope: !159)
-!162 = !DILocation(line: 234, column: 16, scope: !159)
-!163 = !DILocation(line: 235, column: 3, scope: !159)
-!164 = !DILocation(line: 238, column: 5, scope: !165)
-!165 = distinct !DILexicalBlock(scope: !155, file: !118, line: 237, column: 3)
-!166 = !DILocation(line: 242, column: 3, scope: !138)
-!167 = !DILocation(line: 243, column: 1, scope: !138)
-!168 = distinct !DISubprogram(name: "HAL_MspInit", scope: !118, file: !118, line: 188, type: !169, scopeLine: 189, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!169 = !DISubroutineType(types: !170)
-!170 = !{null}
-!171 = !DILocation(line: 193, column: 1, scope: !168)
-!172 = distinct !DISubprogram(name: "HAL_DeInit", scope: !118, file: !118, line: 165, type: !130, scopeLine: 166, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!173 = !DILocation(line: 168, column: 79, scope: !172)
-!174 = !DILocation(line: 169, column: 79, scope: !172)
-!175 = !DILocation(line: 171, column: 79, scope: !172)
-!176 = !DILocation(line: 172, column: 79, scope: !172)
-!177 = !DILocation(line: 174, column: 78, scope: !172)
-!178 = !DILocation(line: 175, column: 78, scope: !172)
-!179 = !DILocation(line: 178, column: 3, scope: !172)
-!180 = !DILocation(line: 181, column: 3, scope: !172)
-!181 = distinct !DISubprogram(name: "HAL_MspDeInit", scope: !118, file: !118, line: 199, type: !169, scopeLine: 200, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!182 = !DILocation(line: 204, column: 1, scope: !181)
-!183 = !DISubprogram(name: "HAL_SYSTICK_Config", scope: !184, file: !184, line: 73, type: !185, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !133)
-!184 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_hal_cortex.h", directory: "/home/sri/zephyrproject")
-!185 = !DISubroutineType(types: !186)
-!186 = !{!67, !67}
-!187 = !DISubprogram(name: "HAL_NVIC_SetPriority", scope: !184, file: !184, line: 69, type: !188, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !133)
-!188 = !DISubroutineType(types: !189)
-!189 = !{null, !190, !67, !67}
-!190 = !DIDerivedType(tag: DW_TAG_typedef, name: "IRQn_Type", file: !21, line: 107, baseType: !20)
-!191 = distinct !DISubprogram(name: "HAL_IncTick", scope: !118, file: !118, line: 281, type: !169, scopeLine: 282, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!192 = !DILocation(line: 283, column: 13, scope: !191)
-!193 = !DILocation(line: 283, column: 10, scope: !191)
-!194 = !DILocation(line: 284, column: 1, scope: !191)
-!195 = distinct !DISubprogram(name: "HAL_GetTick", scope: !118, file: !118, line: 292, type: !196, scopeLine: 293, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!196 = !DISubroutineType(types: !197)
-!197 = !{!67}
-!198 = !DILocation(line: 294, column: 10, scope: !195)
-!199 = !DILocation(line: 294, column: 3, scope: !195)
-!200 = distinct !DISubprogram(name: "HAL_GetTickPrio", scope: !118, file: !118, line: 301, type: !196, scopeLine: 302, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!201 = !DILocation(line: 303, column: 10, scope: !200)
-!202 = !DILocation(line: 303, column: 3, scope: !200)
-!203 = distinct !DISubprogram(name: "HAL_SetTickFreq", scope: !118, file: !118, line: 310, type: !204, scopeLine: 311, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !206)
-!204 = !DISubroutineType(types: !205)
-!205 = !{!132, !119}
-!206 = !{!207, !208, !209}
-!207 = !DILocalVariable(name: "Freq", arg: 1, scope: !203, file: !118, line: 310, type: !119)
-!208 = !DILocalVariable(name: "status", scope: !203, file: !118, line: 312, type: !132)
-!209 = !DILocalVariable(name: "prevTickFreq", scope: !203, file: !118, line: 313, type: !119)
-!210 = !DILocation(line: 310, column: 55, scope: !203)
-!211 = !DILocation(line: 312, column: 3, scope: !203)
-!212 = !DILocation(line: 312, column: 21, scope: !203)
-!213 = !DILocation(line: 313, column: 3, scope: !203)
-!214 = !DILocation(line: 313, column: 23, scope: !203)
-!215 = !DILocation(line: 317, column: 7, scope: !216)
-!216 = distinct !DILexicalBlock(scope: !203, file: !118, line: 317, column: 7)
-!217 = !DILocation(line: 317, column: 21, scope: !216)
-!218 = !DILocation(line: 317, column: 18, scope: !216)
-!219 = !DILocation(line: 317, column: 7, scope: !203)
-!220 = !DILocation(line: 320, column: 20, scope: !221)
-!221 = distinct !DILexicalBlock(scope: !216, file: !118, line: 318, column: 3)
-!222 = !DILocation(line: 320, column: 18, scope: !221)
-!223 = !DILocation(line: 323, column: 18, scope: !221)
-!224 = !DILocation(line: 323, column: 16, scope: !221)
-!225 = !DILocation(line: 326, column: 27, scope: !221)
-!226 = !DILocation(line: 326, column: 14, scope: !221)
-!227 = !DILocation(line: 326, column: 12, scope: !221)
-!228 = !DILocation(line: 328, column: 9, scope: !229)
-!229 = distinct !DILexicalBlock(scope: !221, file: !118, line: 328, column: 9)
-!230 = !DILocation(line: 328, column: 16, scope: !229)
-!231 = !DILocation(line: 328, column: 9, scope: !221)
-!232 = !DILocation(line: 331, column: 20, scope: !233)
-!233 = distinct !DILexicalBlock(scope: !229, file: !118, line: 329, column: 5)
-!234 = !DILocation(line: 331, column: 18, scope: !233)
-!235 = !DILocation(line: 332, column: 5, scope: !233)
-!236 = !DILocation(line: 333, column: 3, scope: !221)
-!237 = !DILocation(line: 335, column: 10, scope: !203)
-!238 = !DILocation(line: 336, column: 1, scope: !203)
-!239 = !DILocation(line: 335, column: 3, scope: !203)
-!240 = distinct !DISubprogram(name: "HAL_GetTickFreq", scope: !118, file: !118, line: 343, type: !241, scopeLine: 344, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!241 = !DISubroutineType(types: !242)
-!242 = !{!119}
-!243 = !DILocation(line: 345, column: 10, scope: !240)
-!244 = !DILocation(line: 345, column: 3, scope: !240)
-!245 = distinct !DISubprogram(name: "HAL_Delay", scope: !118, file: !118, line: 359, type: !246, scopeLine: 360, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !248)
-!246 = !DISubroutineType(types: !247)
-!247 = !{null, !67}
-!248 = !{!249, !250, !251}
-!249 = !DILocalVariable(name: "Delay", arg: 1, scope: !245, file: !118, line: 359, type: !67)
-!250 = !DILocalVariable(name: "tickstart", scope: !245, file: !118, line: 361, type: !67)
-!251 = !DILocalVariable(name: "wait", scope: !245, file: !118, line: 362, type: !67)
-!252 = !DILocation(line: 359, column: 47, scope: !245)
-!253 = !DILocation(line: 361, column: 3, scope: !245)
-!254 = !DILocation(line: 361, column: 12, scope: !245)
-!255 = !DILocation(line: 361, column: 24, scope: !245)
-!256 = !DILocation(line: 362, column: 3, scope: !245)
-!257 = !DILocation(line: 362, column: 12, scope: !245)
-!258 = !DILocation(line: 362, column: 19, scope: !245)
-!259 = !DILocation(line: 365, column: 7, scope: !260)
-!260 = distinct !DILexicalBlock(scope: !245, file: !118, line: 365, column: 7)
-!261 = !DILocation(line: 365, column: 12, scope: !260)
-!262 = !DILocation(line: 365, column: 7, scope: !245)
-!263 = !DILocation(line: 367, column: 24, scope: !264)
-!264 = distinct !DILexicalBlock(scope: !260, file: !118, line: 366, column: 3)
-!265 = !DILocation(line: 367, column: 13, scope: !264)
-!266 = !DILocation(line: 367, column: 10, scope: !264)
-!267 = !DILocation(line: 368, column: 3, scope: !264)
-!268 = !DILocation(line: 370, column: 3, scope: !245)
-!269 = !DILocation(line: 370, column: 10, scope: !245)
-!270 = !DILocation(line: 370, column: 26, scope: !245)
-!271 = !DILocation(line: 370, column: 24, scope: !245)
-!272 = !DILocation(line: 370, column: 39, scope: !245)
-!273 = !DILocation(line: 370, column: 37, scope: !245)
-!274 = distinct !{!274, !268, !275}
-!275 = !DILocation(line: 372, column: 3, scope: !245)
-!276 = !DILocation(line: 373, column: 1, scope: !245)
-!277 = distinct !DISubprogram(name: "HAL_SuspendTick", scope: !118, file: !118, line: 385, type: !169, scopeLine: 387, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!278 = !DILocation(line: 389, column: 60, scope: !277)
-!279 = !DILocation(line: 390, column: 1, scope: !277)
-!280 = distinct !DISubprogram(name: "HAL_ResumeTick", scope: !118, file: !118, line: 402, type: !169, scopeLine: 403, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!281 = !DILocation(line: 405, column: 60, scope: !280)
-!282 = !DILocation(line: 406, column: 1, scope: !280)
-!283 = distinct !DISubprogram(name: "HAL_GetHalVersion", scope: !118, file: !118, line: 412, type: !196, scopeLine: 413, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!284 = !DILocation(line: 414, column: 2, scope: !283)
-!285 = distinct !DISubprogram(name: "HAL_GetREVID", scope: !118, file: !118, line: 421, type: !196, scopeLine: 422, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!286 = !DILocation(line: 423, column: 64, scope: !285)
-!287 = !DILocation(line: 423, column: 72, scope: !285)
-!288 = !DILocation(line: 423, column: 4, scope: !285)
-!289 = distinct !DISubprogram(name: "HAL_GetDEVID", scope: !118, file: !118, line: 430, type: !196, scopeLine: 431, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!290 = !DILocation(line: 432, column: 64, scope: !289)
-!291 = !DILocation(line: 432, column: 72, scope: !289)
-!292 = !DILocation(line: 432, column: 4, scope: !289)
-!293 = distinct !DISubprogram(name: "HAL_GetUIDw0", scope: !118, file: !118, line: 439, type: !196, scopeLine: 440, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!294 = !DILocation(line: 441, column: 13, scope: !293)
-!295 = !DILocation(line: 441, column: 4, scope: !293)
-!296 = distinct !DISubprogram(name: "HAL_GetUIDw1", scope: !118, file: !118, line: 448, type: !196, scopeLine: 449, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!297 = !DILocation(line: 450, column: 13, scope: !296)
-!298 = !DILocation(line: 450, column: 4, scope: !296)
-!299 = distinct !DISubprogram(name: "HAL_GetUIDw2", scope: !118, file: !118, line: 457, type: !196, scopeLine: 458, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!300 = !DILocation(line: 459, column: 13, scope: !299)
-!301 = !DILocation(line: 459, column: 4, scope: !299)
-!302 = distinct !DISubprogram(name: "HAL_DBGMCU_EnableDBGStopMode", scope: !118, file: !118, line: 466, type: !169, scopeLine: 467, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!303 = !DILocation(line: 468, column: 61, scope: !302)
-!304 = !DILocation(line: 469, column: 1, scope: !302)
-!305 = distinct !DISubprogram(name: "HAL_DBGMCU_DisableDBGStopMode", scope: !118, file: !118, line: 475, type: !169, scopeLine: 476, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!306 = !DILocation(line: 477, column: 61, scope: !305)
-!307 = !DILocation(line: 478, column: 1, scope: !305)
-!308 = distinct !DISubprogram(name: "HAL_DBGMCU_EnableDBGStandbyMode", scope: !118, file: !118, line: 484, type: !169, scopeLine: 485, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!309 = !DILocation(line: 486, column: 61, scope: !308)
-!310 = !DILocation(line: 487, column: 1, scope: !308)
-!311 = distinct !DISubprogram(name: "HAL_DBGMCU_DisableDBGStandbyMode", scope: !118, file: !118, line: 493, type: !169, scopeLine: 494, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !133)
-!312 = !DILocation(line: 495, column: 61, scope: !311)
-!313 = !DILocation(line: 496, column: 1, scope: !311)
+!128 = !{i32 8, !"PIC Level", i32 2}
+!129 = !{i32 7, !"PIE Level", i32 2}
+!130 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!131 = distinct !DISubprogram(name: "HAL_Init", scope: !118, file: !118, line: 141, type: !132, scopeLine: 142, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!132 = !DISubroutineType(types: !133)
+!133 = !{!134}
+!134 = !DIDerivedType(tag: DW_TAG_typedef, name: "HAL_StatusTypeDef", file: !14, line: 44, baseType: !13)
+!135 = !{}
+!136 = !DILocation(line: 145, column: 76, scope: !131)
+!137 = !DILocation(line: 150, column: 3, scope: !131)
+!138 = !DILocation(line: 153, column: 3, scope: !131)
+!139 = !DILocation(line: 156, column: 3, scope: !131)
+!140 = distinct !DISubprogram(name: "HAL_InitTick", scope: !118, file: !118, line: 222, type: !141, scopeLine: 223, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!141 = !DISubroutineType(types: !142)
+!142 = !{!134, !67}
+!143 = !DILocalVariable(name: "TickPriority", arg: 1, scope: !140, file: !118, line: 222, type: !67)
+!144 = !DILocation(line: 222, column: 63, scope: !140)
+!145 = !DILocation(line: 225, column: 26, scope: !146)
+!146 = distinct !DILexicalBlock(scope: !140, file: !118, line: 225, column: 7)
+!147 = !DILocation(line: 225, column: 53, scope: !146)
+!148 = !DILocation(line: 225, column: 51, scope: !146)
+!149 = !DILocation(line: 225, column: 42, scope: !146)
+!150 = !DILocation(line: 225, column: 7, scope: !146)
+!151 = !DILocation(line: 225, column: 66, scope: !146)
+!152 = !DILocation(line: 225, column: 7, scope: !140)
+!153 = !DILocation(line: 227, column: 5, scope: !154)
+!154 = distinct !DILexicalBlock(scope: !146, file: !118, line: 226, column: 3)
+!155 = !DILocation(line: 231, column: 7, scope: !156)
+!156 = distinct !DILexicalBlock(scope: !140, file: !118, line: 231, column: 7)
+!157 = !DILocation(line: 231, column: 20, scope: !156)
+!158 = !DILocation(line: 231, column: 7, scope: !140)
+!159 = !DILocation(line: 233, column: 40, scope: !160)
+!160 = distinct !DILexicalBlock(scope: !156, file: !118, line: 232, column: 3)
+!161 = !DILocation(line: 233, column: 5, scope: !160)
+!162 = !DILocation(line: 234, column: 18, scope: !160)
+!163 = !DILocation(line: 234, column: 16, scope: !160)
+!164 = !DILocation(line: 235, column: 3, scope: !160)
+!165 = !DILocation(line: 238, column: 5, scope: !166)
+!166 = distinct !DILexicalBlock(scope: !156, file: !118, line: 237, column: 3)
+!167 = !DILocation(line: 242, column: 3, scope: !140)
+!168 = !DILocation(line: 243, column: 1, scope: !140)
+!169 = distinct !DISubprogram(name: "HAL_MspInit", scope: !118, file: !118, line: 188, type: !170, scopeLine: 189, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!170 = !DISubroutineType(types: !171)
+!171 = !{null}
+!172 = !DILocation(line: 193, column: 1, scope: !169)
+!173 = distinct !DISubprogram(name: "HAL_DeInit", scope: !118, file: !118, line: 165, type: !132, scopeLine: 166, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!174 = !DILocation(line: 168, column: 79, scope: !173)
+!175 = !DILocation(line: 169, column: 79, scope: !173)
+!176 = !DILocation(line: 171, column: 79, scope: !173)
+!177 = !DILocation(line: 172, column: 79, scope: !173)
+!178 = !DILocation(line: 174, column: 78, scope: !173)
+!179 = !DILocation(line: 175, column: 78, scope: !173)
+!180 = !DILocation(line: 178, column: 3, scope: !173)
+!181 = !DILocation(line: 181, column: 3, scope: !173)
+!182 = distinct !DISubprogram(name: "HAL_MspDeInit", scope: !118, file: !118, line: 199, type: !170, scopeLine: 200, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!183 = !DILocation(line: 204, column: 1, scope: !182)
+!184 = distinct !DISubprogram(name: "HAL_IncTick", scope: !118, file: !118, line: 281, type: !170, scopeLine: 282, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!185 = !DILocation(line: 283, column: 13, scope: !184)
+!186 = !DILocation(line: 283, column: 10, scope: !184)
+!187 = !DILocation(line: 284, column: 1, scope: !184)
+!188 = distinct !DISubprogram(name: "HAL_GetTick", scope: !118, file: !118, line: 292, type: !189, scopeLine: 293, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!189 = !DISubroutineType(types: !190)
+!190 = !{!67}
+!191 = !DILocation(line: 294, column: 10, scope: !188)
+!192 = !DILocation(line: 294, column: 3, scope: !188)
+!193 = distinct !DISubprogram(name: "HAL_GetTickPrio", scope: !118, file: !118, line: 301, type: !189, scopeLine: 302, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!194 = !DILocation(line: 303, column: 10, scope: !193)
+!195 = !DILocation(line: 303, column: 3, scope: !193)
+!196 = distinct !DISubprogram(name: "HAL_SetTickFreq", scope: !118, file: !118, line: 310, type: !197, scopeLine: 311, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!197 = !DISubroutineType(types: !198)
+!198 = !{!134, !119}
+!199 = !DILocalVariable(name: "Freq", arg: 1, scope: !196, file: !118, line: 310, type: !119)
+!200 = !DILocation(line: 310, column: 55, scope: !196)
+!201 = !DILocalVariable(name: "status", scope: !196, file: !118, line: 312, type: !134)
+!202 = !DILocation(line: 312, column: 21, scope: !196)
+!203 = !DILocalVariable(name: "prevTickFreq", scope: !196, file: !118, line: 313, type: !119)
+!204 = !DILocation(line: 313, column: 23, scope: !196)
+!205 = !DILocation(line: 317, column: 7, scope: !206)
+!206 = distinct !DILexicalBlock(scope: !196, file: !118, line: 317, column: 7)
+!207 = !DILocation(line: 317, column: 21, scope: !206)
+!208 = !DILocation(line: 317, column: 18, scope: !206)
+!209 = !DILocation(line: 317, column: 7, scope: !196)
+!210 = !DILocation(line: 320, column: 20, scope: !211)
+!211 = distinct !DILexicalBlock(scope: !206, file: !118, line: 318, column: 3)
+!212 = !DILocation(line: 320, column: 18, scope: !211)
+!213 = !DILocation(line: 323, column: 18, scope: !211)
+!214 = !DILocation(line: 323, column: 16, scope: !211)
+!215 = !DILocation(line: 326, column: 27, scope: !211)
+!216 = !DILocation(line: 326, column: 14, scope: !211)
+!217 = !DILocation(line: 326, column: 12, scope: !211)
+!218 = !DILocation(line: 328, column: 9, scope: !219)
+!219 = distinct !DILexicalBlock(scope: !211, file: !118, line: 328, column: 9)
+!220 = !DILocation(line: 328, column: 16, scope: !219)
+!221 = !DILocation(line: 328, column: 9, scope: !211)
+!222 = !DILocation(line: 331, column: 20, scope: !223)
+!223 = distinct !DILexicalBlock(scope: !219, file: !118, line: 329, column: 5)
+!224 = !DILocation(line: 331, column: 18, scope: !223)
+!225 = !DILocation(line: 332, column: 5, scope: !223)
+!226 = !DILocation(line: 333, column: 3, scope: !211)
+!227 = !DILocation(line: 335, column: 10, scope: !196)
+!228 = !DILocation(line: 335, column: 3, scope: !196)
+!229 = distinct !DISubprogram(name: "HAL_GetTickFreq", scope: !118, file: !118, line: 343, type: !230, scopeLine: 344, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!230 = !DISubroutineType(types: !231)
+!231 = !{!119}
+!232 = !DILocation(line: 345, column: 10, scope: !229)
+!233 = !DILocation(line: 345, column: 3, scope: !229)
+!234 = distinct !DISubprogram(name: "HAL_Delay", scope: !118, file: !118, line: 359, type: !235, scopeLine: 360, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!235 = !DISubroutineType(types: !236)
+!236 = !{null, !67}
+!237 = !DILocalVariable(name: "Delay", arg: 1, scope: !234, file: !118, line: 359, type: !67)
+!238 = !DILocation(line: 359, column: 47, scope: !234)
+!239 = !DILocalVariable(name: "tickstart", scope: !234, file: !118, line: 361, type: !67)
+!240 = !DILocation(line: 361, column: 12, scope: !234)
+!241 = !DILocation(line: 361, column: 24, scope: !234)
+!242 = !DILocalVariable(name: "wait", scope: !234, file: !118, line: 362, type: !67)
+!243 = !DILocation(line: 362, column: 12, scope: !234)
+!244 = !DILocation(line: 362, column: 19, scope: !234)
+!245 = !DILocation(line: 365, column: 7, scope: !246)
+!246 = distinct !DILexicalBlock(scope: !234, file: !118, line: 365, column: 7)
+!247 = !DILocation(line: 365, column: 12, scope: !246)
+!248 = !DILocation(line: 365, column: 7, scope: !234)
+!249 = !DILocation(line: 367, column: 24, scope: !250)
+!250 = distinct !DILexicalBlock(scope: !246, file: !118, line: 366, column: 3)
+!251 = !DILocation(line: 367, column: 13, scope: !250)
+!252 = !DILocation(line: 367, column: 10, scope: !250)
+!253 = !DILocation(line: 368, column: 3, scope: !250)
+!254 = !DILocation(line: 370, column: 3, scope: !234)
+!255 = !DILocation(line: 370, column: 10, scope: !234)
+!256 = !DILocation(line: 370, column: 26, scope: !234)
+!257 = !DILocation(line: 370, column: 24, scope: !234)
+!258 = !DILocation(line: 370, column: 39, scope: !234)
+!259 = !DILocation(line: 370, column: 37, scope: !234)
+!260 = distinct !{!260, !254, !261}
+!261 = !DILocation(line: 372, column: 3, scope: !234)
+!262 = !DILocation(line: 373, column: 1, scope: !234)
+!263 = distinct !DISubprogram(name: "HAL_SuspendTick", scope: !118, file: !118, line: 385, type: !170, scopeLine: 387, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!264 = !DILocation(line: 389, column: 60, scope: !263)
+!265 = !DILocation(line: 390, column: 1, scope: !263)
+!266 = distinct !DISubprogram(name: "HAL_ResumeTick", scope: !118, file: !118, line: 402, type: !170, scopeLine: 403, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!267 = !DILocation(line: 405, column: 60, scope: !266)
+!268 = !DILocation(line: 406, column: 1, scope: !266)
+!269 = distinct !DISubprogram(name: "HAL_GetHalVersion", scope: !118, file: !118, line: 412, type: !189, scopeLine: 413, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!270 = !DILocation(line: 414, column: 2, scope: !269)
+!271 = distinct !DISubprogram(name: "HAL_GetREVID", scope: !118, file: !118, line: 421, type: !189, scopeLine: 422, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!272 = !DILocation(line: 423, column: 64, scope: !271)
+!273 = !DILocation(line: 423, column: 72, scope: !271)
+!274 = !DILocation(line: 423, column: 4, scope: !271)
+!275 = distinct !DISubprogram(name: "HAL_GetDEVID", scope: !118, file: !118, line: 430, type: !189, scopeLine: 431, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!276 = !DILocation(line: 432, column: 64, scope: !275)
+!277 = !DILocation(line: 432, column: 72, scope: !275)
+!278 = !DILocation(line: 432, column: 4, scope: !275)
+!279 = distinct !DISubprogram(name: "HAL_GetUIDw0", scope: !118, file: !118, line: 439, type: !189, scopeLine: 440, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!280 = !DILocation(line: 441, column: 13, scope: !279)
+!281 = !DILocation(line: 441, column: 4, scope: !279)
+!282 = distinct !DISubprogram(name: "HAL_GetUIDw1", scope: !118, file: !118, line: 448, type: !189, scopeLine: 449, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!283 = !DILocation(line: 450, column: 13, scope: !282)
+!284 = !DILocation(line: 450, column: 4, scope: !282)
+!285 = distinct !DISubprogram(name: "HAL_GetUIDw2", scope: !118, file: !118, line: 457, type: !189, scopeLine: 458, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!286 = !DILocation(line: 459, column: 13, scope: !285)
+!287 = !DILocation(line: 459, column: 4, scope: !285)
+!288 = distinct !DISubprogram(name: "HAL_DBGMCU_EnableDBGStopMode", scope: !118, file: !118, line: 466, type: !170, scopeLine: 467, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!289 = !DILocation(line: 468, column: 61, scope: !288)
+!290 = !DILocation(line: 469, column: 1, scope: !288)
+!291 = distinct !DISubprogram(name: "HAL_DBGMCU_DisableDBGStopMode", scope: !118, file: !118, line: 475, type: !170, scopeLine: 476, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!292 = !DILocation(line: 477, column: 61, scope: !291)
+!293 = !DILocation(line: 478, column: 1, scope: !291)
+!294 = distinct !DISubprogram(name: "HAL_DBGMCU_EnableDBGStandbyMode", scope: !118, file: !118, line: 484, type: !170, scopeLine: 485, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!295 = !DILocation(line: 486, column: 61, scope: !294)
+!296 = !DILocation(line: 487, column: 1, scope: !294)
+!297 = distinct !DISubprogram(name: "HAL_DBGMCU_DisableDBGStandbyMode", scope: !118, file: !118, line: 493, type: !170, scopeLine: 494, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !2, retainedNodes: !135)
+!298 = !DILocation(line: 495, column: 61, scope: !297)
+!299 = !DILocation(line: 496, column: 1, scope: !297)

@@ -9,2069 +9,1964 @@ target triple = "aarch64-arm-none-eabi"
 %struct.RCC_ClkInitTypeDef = type { i32, i32, i32, i32 }
 %struct.GPIO_InitTypeDef = type { i32, i32, i32, i32, i32 }
 
-@SystemCoreClock = external dso_local global i32, align 4
-@uwTickPrio = external dso_local global i32, align 4
-@AHBPrescTable = external dso_local constant [16 x i8], align 1
+@SystemCoreClock = external global i32, align 4
+@uwTickPrio = external global i32, align 4
+@AHBPrescTable = external constant [16 x i8], align 1
 @HAL_RCC_GetSysClockFreq.aPLLMULFactorTable = internal constant [16 x i8] c"\02\03\04\05\06\07\08\09\0A\0B\0C\0D\0E\0F\10\10", align 1, !dbg !0
 @HAL_RCC_GetSysClockFreq.aPredivFactorTable = internal constant [16 x i8] c"\01\02\03\04\05\06\07\08\09\0A\0B\0C\0D\0E\0F\10", align 1, !dbg !91
-@APBPrescTable = external dso_local constant [8 x i8], align 1
+@APBPrescTable = external constant [8 x i8], align 1
 
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_RCC_DeInit() #0 !dbg !110 {
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_RCC_DeInit() #0 !dbg !107 {
   %1 = alloca i8, align 1
   %2 = alloca i32, align 4
-  %3 = alloca i32, align 4
-  call void @llvm.lifetime.start.p0(i64 4, ptr %2) #4, !dbg !116
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !115, metadata !DIExpression()), !dbg !117
-  %4 = call i32 @HAL_GetTick() #5, !dbg !118
-  store i32 %4, ptr %2, align 4, !dbg !119
-  %5 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !120
-  %6 = or i32 %5, 129, !dbg !120
-  store volatile i32 %6, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !120
-  br label %7, !dbg !121
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !111, metadata !DIExpression()), !dbg !112
+  %3 = call i32 @HAL_GetTick(), !dbg !113
+  store i32 %3, ptr %2, align 4, !dbg !114
+  %4 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !115
+  %5 = or i32 %4, 129, !dbg !115
+  store volatile i32 %5, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !115
+  br label %6, !dbg !116
 
-7:                                                ; preds = %17, %0
-  %8 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !122
-  %9 = and i32 %8, 2, !dbg !123
-  %10 = icmp eq i32 %9, 0, !dbg !124
-  br i1 %10, label %11, label %18, !dbg !121
+6:                                                ; preds = %16, %0
+  %7 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !117
+  %8 = and i32 %7, 2, !dbg !118
+  %9 = icmp eq i32 %8, 0, !dbg !119
+  br i1 %9, label %10, label %17, !dbg !116
 
-11:                                               ; preds = %7
-  %12 = call i32 @HAL_GetTick() #5, !dbg !125
-  %13 = load i32, ptr %2, align 4, !dbg !128
-  %14 = sub i32 %12, %13, !dbg !129
-  %15 = icmp ugt i32 %14, 2, !dbg !130
-  br i1 %15, label %16, label %17, !dbg !131
+10:                                               ; preds = %6
+  %11 = call i32 @HAL_GetTick(), !dbg !120
+  %12 = load i32, ptr %2, align 4, !dbg !123
+  %13 = sub i32 %11, %12, !dbg !124
+  %14 = icmp ugt i32 %13, 2, !dbg !125
+  br i1 %14, label %15, label %16, !dbg !126
 
-16:                                               ; preds = %11
-  store i8 3, ptr %1, align 1, !dbg !132
-  store i32 1, ptr %3, align 4
-  br label %58, !dbg !132
+15:                                               ; preds = %10
+  store i8 3, ptr %1, align 1, !dbg !127
+  br label %57, !dbg !127
 
-17:                                               ; preds = %11
-  br label %7, !dbg !121, !llvm.loop !134
+16:                                               ; preds = %10
+  br label %6, !dbg !116, !llvm.loop !129
 
-18:                                               ; preds = %7
-  %19 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !136
-  %20 = and i32 %19, -251660276, !dbg !136
-  store volatile i32 %20, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !136
-  br label %21, !dbg !137
+17:                                               ; preds = %6
+  %18 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !131
+  %19 = and i32 %18, -251660276, !dbg !131
+  store volatile i32 %19, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !131
+  br label %20, !dbg !132
 
-21:                                               ; preds = %31, %18
-  %22 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !138
-  %23 = and i32 %22, 12, !dbg !139
-  %24 = icmp ne i32 %23, 0, !dbg !140
-  br i1 %24, label %25, label %32, !dbg !137
+20:                                               ; preds = %30, %17
+  %21 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !133
+  %22 = and i32 %21, 12, !dbg !134
+  %23 = icmp ne i32 %22, 0, !dbg !135
+  br i1 %23, label %24, label %31, !dbg !132
 
-25:                                               ; preds = %21
-  %26 = call i32 @HAL_GetTick() #5, !dbg !141
-  %27 = load i32, ptr %2, align 4, !dbg !144
-  %28 = sub i32 %26, %27, !dbg !145
-  %29 = icmp ugt i32 %28, 5000, !dbg !146
-  br i1 %29, label %30, label %31, !dbg !147
+24:                                               ; preds = %20
+  %25 = call i32 @HAL_GetTick(), !dbg !136
+  %26 = load i32, ptr %2, align 4, !dbg !139
+  %27 = sub i32 %25, %26, !dbg !140
+  %28 = icmp ugt i32 %27, 5000, !dbg !141
+  br i1 %28, label %29, label %30, !dbg !142
 
-30:                                               ; preds = %25
-  store i8 3, ptr %1, align 1, !dbg !148
-  store i32 1, ptr %3, align 4
-  br label %58, !dbg !148
+29:                                               ; preds = %24
+  store i8 3, ptr %1, align 1, !dbg !143
+  br label %57, !dbg !143
 
-31:                                               ; preds = %25
-  br label %21, !dbg !137, !llvm.loop !150
+30:                                               ; preds = %24
+  br label %20, !dbg !132, !llvm.loop !145
 
-32:                                               ; preds = %21
-  store i32 8000000, ptr @SystemCoreClock, align 4, !dbg !152
-  %33 = load i32, ptr @uwTickPrio, align 4, !dbg !153
-  %34 = call zeroext i8 @HAL_InitTick(i32 noundef %33) #5, !dbg !155
-  %35 = zext i8 %34 to i32, !dbg !155
-  %36 = icmp ne i32 %35, 0, !dbg !156
-  br i1 %36, label %37, label %38, !dbg !157
+31:                                               ; preds = %20
+  store i32 8000000, ptr @SystemCoreClock, align 4, !dbg !147
+  %32 = load i32, ptr @uwTickPrio, align 4, !dbg !148
+  %33 = call zeroext i8 @HAL_InitTick(i32 noundef %32), !dbg !150
+  %34 = zext i8 %33 to i32, !dbg !150
+  %35 = icmp ne i32 %34, 0, !dbg !151
+  br i1 %35, label %36, label %37, !dbg !152
 
-37:                                               ; preds = %32
-  store i8 1, ptr %1, align 1, !dbg !158
-  store i32 1, ptr %3, align 4
-  br label %58, !dbg !158
+36:                                               ; preds = %31
+  store i8 1, ptr %1, align 1, !dbg !153
+  br label %57, !dbg !153
 
-38:                                               ; preds = %32
-  %39 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !160
-  %40 = and i32 %39, -17367041, !dbg !160
-  store volatile i32 %40, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !160
-  %41 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !161
-  %42 = and i32 %41, -262145, !dbg !161
-  store volatile i32 %42, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !161
-  %43 = call i32 @HAL_GetTick() #5, !dbg !162
-  store i32 %43, ptr %2, align 4, !dbg !163
-  br label %44, !dbg !164
+37:                                               ; preds = %31
+  %38 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !155
+  %39 = and i32 %38, -17367041, !dbg !155
+  store volatile i32 %39, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !155
+  %40 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !156
+  %41 = and i32 %40, -262145, !dbg !156
+  store volatile i32 %41, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !156
+  %42 = call i32 @HAL_GetTick(), !dbg !157
+  store i32 %42, ptr %2, align 4, !dbg !158
+  br label %43, !dbg !159
 
-44:                                               ; preds = %54, %38
-  %45 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !165
-  %46 = and i32 %45, 33554432, !dbg !166
-  %47 = icmp ne i32 %46, 0, !dbg !167
-  br i1 %47, label %48, label %55, !dbg !164
+43:                                               ; preds = %53, %37
+  %44 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !160
+  %45 = and i32 %44, 33554432, !dbg !161
+  %46 = icmp ne i32 %45, 0, !dbg !162
+  br i1 %46, label %47, label %54, !dbg !159
 
-48:                                               ; preds = %44
-  %49 = call i32 @HAL_GetTick() #5, !dbg !168
-  %50 = load i32, ptr %2, align 4, !dbg !171
-  %51 = sub i32 %49, %50, !dbg !172
-  %52 = icmp ugt i32 %51, 2, !dbg !173
-  br i1 %52, label %53, label %54, !dbg !174
+47:                                               ; preds = %43
+  %48 = call i32 @HAL_GetTick(), !dbg !163
+  %49 = load i32, ptr %2, align 4, !dbg !166
+  %50 = sub i32 %48, %49, !dbg !167
+  %51 = icmp ugt i32 %50, 2, !dbg !168
+  br i1 %51, label %52, label %53, !dbg !169
 
-53:                                               ; preds = %48
-  store i8 3, ptr %1, align 1, !dbg !175
-  store i32 1, ptr %3, align 4
-  br label %58, !dbg !175
+52:                                               ; preds = %47
+  store i8 3, ptr %1, align 1, !dbg !170
+  br label %57, !dbg !170
 
-54:                                               ; preds = %48
-  br label %44, !dbg !164, !llvm.loop !177
+53:                                               ; preds = %47
+  br label %43, !dbg !159, !llvm.loop !172
 
-55:                                               ; preds = %44
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !179
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !180
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 12), align 4, !dbg !181
-  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 2), align 4, !dbg !182
-  %56 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !183
-  %57 = or i32 %56, 16777216, !dbg !183
-  store volatile i32 %57, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !183
-  store i8 0, ptr %1, align 1, !dbg !184
-  store i32 1, ptr %3, align 4
-  br label %58, !dbg !184
+54:                                               ; preds = %43
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !174
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !175
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 12), align 4, !dbg !176
+  store volatile i32 0, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 2), align 4, !dbg !177
+  %55 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !178
+  %56 = or i32 %55, 16777216, !dbg !178
+  store volatile i32 %56, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !178
+  store i8 0, ptr %1, align 1, !dbg !179
+  br label %57, !dbg !179
 
-58:                                               ; preds = %55, %53, %37, %30, %16
-  call void @llvm.lifetime.end.p0(i64 4, ptr %2) #4, !dbg !185
-  %59 = load i8, ptr %1, align 1, !dbg !185
-  ret i8 %59, !dbg !185
+57:                                               ; preds = %54, %52, %36, %29, %15
+  %58 = load i8, ptr %1, align 1, !dbg !180
+  ret i8 %58, !dbg !180
 }
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #1
-
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #2
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: optsize
-declare !dbg !186 dso_local i32 @HAL_GetTick() #3
+declare i32 @HAL_GetTick() #2
 
-; Function Attrs: optsize
-declare !dbg !189 dso_local zeroext i8 @HAL_InitTick(i32 noundef) #3
+declare zeroext i8 @HAL_InitTick(i32 noundef) #2
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #1
-
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_RCC_OscConfig(ptr noundef %0) #0 !dbg !192 {
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_RCC_OscConfig(ptr noundef %0) #0 !dbg !181 {
   %2 = alloca i8, align 1
   %3 = alloca ptr, align 4
   %4 = alloca i32, align 4
   %5 = alloca i32, align 4
   %6 = alloca i32, align 4
-  %7 = alloca i32, align 4
-  %8 = alloca i8, align 1
-  %9 = alloca i32, align 4
+  %7 = alloca i8, align 1
+  %8 = alloca i32, align 4
   store ptr %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !218, metadata !DIExpression()), !dbg !230
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #4, !dbg !231
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !219, metadata !DIExpression()), !dbg !232
-  call void @llvm.lifetime.start.p0(i64 4, ptr %5) #4, !dbg !233
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !220, metadata !DIExpression()), !dbg !234
-  call void @llvm.lifetime.start.p0(i64 4, ptr %6) #4, !dbg !235
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !221, metadata !DIExpression()), !dbg !236
-  %10 = load ptr, ptr %3, align 4, !dbg !237
-  %11 = icmp eq ptr %10, null, !dbg !239
-  br i1 %11, label %12, label %13, !dbg !240
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !206, metadata !DIExpression()), !dbg !207
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !208, metadata !DIExpression()), !dbg !209
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !210, metadata !DIExpression()), !dbg !211
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !212, metadata !DIExpression()), !dbg !213
+  %9 = load ptr, ptr %3, align 4, !dbg !214
+  %10 = icmp eq ptr %9, null, !dbg !216
+  br i1 %10, label %11, label %12, !dbg !217
+
+11:                                               ; preds = %1
+  store i8 1, ptr %2, align 1, !dbg !218
+  br label %618, !dbg !218
 
 12:                                               ; preds = %1
-  store i8 1, ptr %2, align 1, !dbg !241
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !241
+  %13 = load ptr, ptr %3, align 4, !dbg !220
+  %14 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %13, i32 0, i32 0, !dbg !222
+  %15 = load i32, ptr %14, align 4, !dbg !222
+  %16 = and i32 %15, 1, !dbg !223
+  %17 = icmp eq i32 %16, 1, !dbg !224
+  br i1 %17, label %18, label %113, !dbg !225
 
-13:                                               ; preds = %1
-  %14 = load ptr, ptr %3, align 4, !dbg !243
-  %15 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %14, i32 0, i32 0, !dbg !245
-  %16 = load i32, ptr %15, align 4, !dbg !245
-  %17 = and i32 %16, 1, !dbg !246
-  %18 = icmp eq i32 %17, 1, !dbg !247
-  br i1 %18, label %19, label %115, !dbg !248
+18:                                               ; preds = %12
+  %19 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !226
+  %20 = and i32 %19, 12, !dbg !229
+  %21 = icmp eq i32 %20, 4, !dbg !230
+  br i1 %21, label %30, label %22, !dbg !231
 
-19:                                               ; preds = %13
-  %20 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !249
-  %21 = and i32 %20, 12, !dbg !252
-  %22 = icmp eq i32 %21, 4, !dbg !253
-  br i1 %22, label %31, label %23, !dbg !254
+22:                                               ; preds = %18
+  %23 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !232
+  %24 = and i32 %23, 12, !dbg !233
+  %25 = icmp eq i32 %24, 8, !dbg !234
+  br i1 %25, label %26, label %41, !dbg !235
 
-23:                                               ; preds = %19
-  %24 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !255
-  %25 = and i32 %24, 12, !dbg !256
-  %26 = icmp eq i32 %25, 8, !dbg !257
-  br i1 %26, label %27, label %42, !dbg !258
+26:                                               ; preds = %22
+  %27 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !236
+  %28 = and i32 %27, 98304, !dbg !237
+  %29 = icmp eq i32 %28, 65536, !dbg !238
+  br i1 %29, label %30, label %41, !dbg !239
 
-27:                                               ; preds = %23
-  %28 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !259
-  %29 = and i32 %28, 98304, !dbg !260
-  %30 = icmp eq i32 %29, 65536, !dbg !261
-  br i1 %30, label %31, label %42, !dbg !262
+30:                                               ; preds = %26, %18
+  %31 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !240
+  %32 = and i32 %31, 131072, !dbg !243
+  %33 = icmp ne i32 %32, 0, !dbg !244
+  br i1 %33, label %34, label %40, !dbg !245
 
-31:                                               ; preds = %27, %19
-  %32 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !263
-  %33 = and i32 %32, 131072, !dbg !266
-  %34 = icmp ne i32 %33, 0, !dbg !267
-  br i1 %34, label %35, label %41, !dbg !268
+34:                                               ; preds = %30
+  %35 = load ptr, ptr %3, align 4, !dbg !246
+  %36 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %35, i32 0, i32 1, !dbg !247
+  %37 = load i32, ptr %36, align 4, !dbg !247
+  %38 = icmp eq i32 %37, 0, !dbg !248
+  br i1 %38, label %39, label %40, !dbg !249
 
-35:                                               ; preds = %31
-  %36 = load ptr, ptr %3, align 4, !dbg !269
-  %37 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %36, i32 0, i32 1, !dbg !270
-  %38 = load i32, ptr %37, align 4, !dbg !270
-  %39 = icmp eq i32 %38, 0, !dbg !271
-  br i1 %39, label %40, label %41, !dbg !272
+39:                                               ; preds = %34
+  store i8 1, ptr %2, align 1, !dbg !250
+  br label %618, !dbg !250
 
-40:                                               ; preds = %35
-  store i8 1, ptr %2, align 1, !dbg !273
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !273
+40:                                               ; preds = %34, %30
+  br label %112, !dbg !252
 
-41:                                               ; preds = %35, %31
-  br label %114, !dbg !275
+41:                                               ; preds = %26, %22
+  br label %42, !dbg !253
 
-42:                                               ; preds = %27, %23
-  br label %43, !dbg !276
+42:                                               ; preds = %41
+  %43 = load ptr, ptr %3, align 4, !dbg !255
+  %44 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %43, i32 0, i32 1, !dbg !258
+  %45 = load i32, ptr %44, align 4, !dbg !258
+  %46 = icmp eq i32 %45, 1, !dbg !259
+  br i1 %46, label %47, label %50, !dbg !260
 
-43:                                               ; preds = %42
-  %44 = load ptr, ptr %3, align 4, !dbg !278
-  %45 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %44, i32 0, i32 1, !dbg !281
-  %46 = load i32, ptr %45, align 4, !dbg !281
-  %47 = icmp eq i32 %46, 1, !dbg !282
-  br i1 %47, label %48, label %51, !dbg !283
+47:                                               ; preds = %42
+  %48 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !261
+  %49 = or i32 %48, 65536, !dbg !261
+  store volatile i32 %49, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !261
+  br label %77, !dbg !263
 
-48:                                               ; preds = %43
-  %49 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !284
-  %50 = or i32 %49, 65536, !dbg !284
-  store volatile i32 %50, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !284
-  br label %78, !dbg !286
+50:                                               ; preds = %42
+  %51 = load ptr, ptr %3, align 4, !dbg !264
+  %52 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %51, i32 0, i32 1, !dbg !266
+  %53 = load i32, ptr %52, align 4, !dbg !266
+  %54 = icmp eq i32 %53, 0, !dbg !267
+  br i1 %54, label %55, label %60, !dbg !268
 
-51:                                               ; preds = %43
-  %52 = load ptr, ptr %3, align 4, !dbg !287
-  %53 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %52, i32 0, i32 1, !dbg !289
-  %54 = load i32, ptr %53, align 4, !dbg !289
-  %55 = icmp eq i32 %54, 0, !dbg !290
-  br i1 %55, label %56, label %61, !dbg !291
+55:                                               ; preds = %50
+  %56 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !269
+  %57 = and i32 %56, -65537, !dbg !269
+  store volatile i32 %57, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !269
+  %58 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !271
+  %59 = and i32 %58, -262145, !dbg !271
+  store volatile i32 %59, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !271
+  br label %76, !dbg !272
 
-56:                                               ; preds = %51
-  %57 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !292
-  %58 = and i32 %57, -65537, !dbg !292
-  store volatile i32 %58, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !292
-  %59 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !294
-  %60 = and i32 %59, -262145, !dbg !294
-  store volatile i32 %60, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !294
-  br label %77, !dbg !295
+60:                                               ; preds = %50
+  %61 = load ptr, ptr %3, align 4, !dbg !273
+  %62 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %61, i32 0, i32 1, !dbg !275
+  %63 = load i32, ptr %62, align 4, !dbg !275
+  %64 = icmp eq i32 %63, 5, !dbg !276
+  br i1 %64, label %65, label %70, !dbg !277
 
-61:                                               ; preds = %51
-  %62 = load ptr, ptr %3, align 4, !dbg !296
-  %63 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %62, i32 0, i32 1, !dbg !298
-  %64 = load i32, ptr %63, align 4, !dbg !298
-  %65 = icmp eq i32 %64, 5, !dbg !299
-  br i1 %65, label %66, label %71, !dbg !300
+65:                                               ; preds = %60
+  %66 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !278
+  %67 = or i32 %66, 262144, !dbg !278
+  store volatile i32 %67, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !278
+  %68 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !280
+  %69 = or i32 %68, 65536, !dbg !280
+  store volatile i32 %69, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !280
+  br label %75, !dbg !281
 
-66:                                               ; preds = %61
-  %67 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !301
-  %68 = or i32 %67, 262144, !dbg !301
-  store volatile i32 %68, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !301
-  %69 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !303
-  %70 = or i32 %69, 65536, !dbg !303
-  store volatile i32 %70, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !303
-  br label %76, !dbg !304
+70:                                               ; preds = %60
+  %71 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !282
+  %72 = and i32 %71, -65537, !dbg !282
+  store volatile i32 %72, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !282
+  %73 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !284
+  %74 = and i32 %73, -262145, !dbg !284
+  store volatile i32 %74, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !284
+  br label %75
 
-71:                                               ; preds = %61
-  %72 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !305
-  %73 = and i32 %72, -65537, !dbg !305
-  store volatile i32 %73, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !305
-  %74 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !307
-  %75 = and i32 %74, -262145, !dbg !307
-  store volatile i32 %75, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !307
+75:                                               ; preds = %70, %65
   br label %76
 
-76:                                               ; preds = %71, %66
+76:                                               ; preds = %75, %55
   br label %77
 
-77:                                               ; preds = %76, %56
-  br label %78
-
-78:                                               ; preds = %77, %48
-  br label %79, !dbg !308
-
-79:                                               ; preds = %78
-  br label %80, !dbg !308
-
-80:                                               ; preds = %79
-  %81 = load ptr, ptr %3, align 4, !dbg !309
-  %82 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %81, i32 0, i32 1, !dbg !311
-  %83 = load i32, ptr %82, align 4, !dbg !311
-  %84 = icmp ne i32 %83, 0, !dbg !312
-  br i1 %84, label %85, label %99, !dbg !313
-
-85:                                               ; preds = %80
-  %86 = call i32 @HAL_GetTick() #5, !dbg !314
-  store i32 %86, ptr %4, align 4, !dbg !316
-  br label %87, !dbg !317
-
-87:                                               ; preds = %97, %85
-  %88 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !318
-  %89 = and i32 %88, 131072, !dbg !319
-  %90 = icmp eq i32 %89, 0, !dbg !320
-  br i1 %90, label %91, label %98, !dbg !317
-
-91:                                               ; preds = %87
-  %92 = call i32 @HAL_GetTick() #5, !dbg !321
-  %93 = load i32, ptr %4, align 4, !dbg !324
-  %94 = sub i32 %92, %93, !dbg !325
-  %95 = icmp ugt i32 %94, 100, !dbg !326
-  br i1 %95, label %96, label %97, !dbg !327
-
-96:                                               ; preds = %91
-  store i8 3, ptr %2, align 1, !dbg !328
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !328
-
-97:                                               ; preds = %91
-  br label %87, !dbg !317, !llvm.loop !330
-
-98:                                               ; preds = %87
-  br label %113, !dbg !332
-
-99:                                               ; preds = %80
-  %100 = call i32 @HAL_GetTick() #5, !dbg !333
-  store i32 %100, ptr %4, align 4, !dbg !335
-  br label %101, !dbg !336
-
-101:                                              ; preds = %111, %99
-  %102 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !337
-  %103 = and i32 %102, 131072, !dbg !338
-  %104 = icmp ne i32 %103, 0, !dbg !339
-  br i1 %104, label %105, label %112, !dbg !336
-
-105:                                              ; preds = %101
-  %106 = call i32 @HAL_GetTick() #5, !dbg !340
-  %107 = load i32, ptr %4, align 4, !dbg !343
-  %108 = sub i32 %106, %107, !dbg !344
-  %109 = icmp ugt i32 %108, 100, !dbg !345
-  br i1 %109, label %110, label %111, !dbg !346
-
-110:                                              ; preds = %105
-  store i8 3, ptr %2, align 1, !dbg !347
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !347
-
-111:                                              ; preds = %105
-  br label %101, !dbg !336, !llvm.loop !349
-
-112:                                              ; preds = %101
-  br label %113
-
-113:                                              ; preds = %112, %98
-  br label %114
-
-114:                                              ; preds = %113, %41
-  br label %115, !dbg !351
-
-115:                                              ; preds = %114, %13
-  %116 = load ptr, ptr %3, align 4, !dbg !352
-  %117 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %116, i32 0, i32 0, !dbg !354
-  %118 = load i32, ptr %117, align 4, !dbg !354
-  %119 = and i32 %118, 2, !dbg !355
-  %120 = icmp eq i32 %119, 2, !dbg !356
-  br i1 %120, label %121, label %198, !dbg !357
-
-121:                                              ; preds = %115
-  %122 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !358
-  %123 = and i32 %122, 12, !dbg !361
-  %124 = icmp eq i32 %123, 0, !dbg !362
-  br i1 %124, label %133, label %125, !dbg !363
-
-125:                                              ; preds = %121
-  %126 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !364
-  %127 = and i32 %126, 12, !dbg !365
-  %128 = icmp eq i32 %127, 8, !dbg !366
-  br i1 %128, label %129, label %152, !dbg !367
-
-129:                                              ; preds = %125
-  %130 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !368
-  %131 = and i32 %130, 98304, !dbg !369
-  %132 = icmp eq i32 %131, 32768, !dbg !370
-  br i1 %132, label %133, label %152, !dbg !371
-
-133:                                              ; preds = %129, %121
-  %134 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !372
-  %135 = and i32 %134, 2, !dbg !375
-  %136 = icmp ne i32 %135, 0, !dbg !376
-  br i1 %136, label %137, label %143, !dbg !377
-
-137:                                              ; preds = %133
-  %138 = load ptr, ptr %3, align 4, !dbg !378
-  %139 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %138, i32 0, i32 3, !dbg !379
-  %140 = load i32, ptr %139, align 4, !dbg !379
-  %141 = icmp ne i32 %140, 1, !dbg !380
-  br i1 %141, label %142, label %143, !dbg !381
-
-142:                                              ; preds = %137
-  store i8 1, ptr %2, align 1, !dbg !382
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !382
-
-143:                                              ; preds = %137, %133
-  %144 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !384
-  %145 = and i32 %144, -249, !dbg !386
-  %146 = load ptr, ptr %3, align 4, !dbg !387
-  %147 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %146, i32 0, i32 4, !dbg !388
-  %148 = load i32, ptr %147, align 4, !dbg !388
-  %149 = shl i32 %148, 3, !dbg !389
-  %150 = or i32 %145, %149, !dbg !390
-  store volatile i32 %150, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !391
-  br label %151
-
-151:                                              ; preds = %143
-  br label %197, !dbg !392
-
-152:                                              ; preds = %129, %125
-  %153 = load ptr, ptr %3, align 4, !dbg !393
-  %154 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %153, i32 0, i32 3, !dbg !396
-  %155 = load i32, ptr %154, align 4, !dbg !396
-  %156 = icmp ne i32 %155, 0, !dbg !397
-  br i1 %156, label %157, label %180, !dbg !398
-
-157:                                              ; preds = %152
-  %158 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !399
-  %159 = or i32 %158, 1, !dbg !399
-  store volatile i32 %159, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !399
-  %160 = call i32 @HAL_GetTick() #5, !dbg !401
-  store i32 %160, ptr %4, align 4, !dbg !402
-  br label %161, !dbg !403
-
-161:                                              ; preds = %171, %157
-  %162 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !404
-  %163 = and i32 %162, 2, !dbg !405
-  %164 = icmp eq i32 %163, 0, !dbg !406
-  br i1 %164, label %165, label %172, !dbg !403
-
-165:                                              ; preds = %161
-  %166 = call i32 @HAL_GetTick() #5, !dbg !407
-  %167 = load i32, ptr %4, align 4, !dbg !410
-  %168 = sub i32 %166, %167, !dbg !411
-  %169 = icmp ugt i32 %168, 2, !dbg !412
-  br i1 %169, label %170, label %171, !dbg !413
-
-170:                                              ; preds = %165
-  store i8 3, ptr %2, align 1, !dbg !414
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !414
-
-171:                                              ; preds = %165
-  br label %161, !dbg !403, !llvm.loop !416
-
-172:                                              ; preds = %161
-  %173 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !418
-  %174 = and i32 %173, -249, !dbg !419
-  %175 = load ptr, ptr %3, align 4, !dbg !420
-  %176 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %175, i32 0, i32 4, !dbg !421
-  %177 = load i32, ptr %176, align 4, !dbg !421
-  %178 = shl i32 %177, 3, !dbg !422
-  %179 = or i32 %174, %178, !dbg !423
-  store volatile i32 %179, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !424
-  br label %196, !dbg !425
-
-180:                                              ; preds = %152
-  %181 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !426
-  %182 = and i32 %181, -2, !dbg !426
-  store volatile i32 %182, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !426
-  %183 = call i32 @HAL_GetTick() #5, !dbg !428
-  store i32 %183, ptr %4, align 4, !dbg !429
-  br label %184, !dbg !430
-
-184:                                              ; preds = %194, %180
-  %185 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !431
-  %186 = and i32 %185, 2, !dbg !432
-  %187 = icmp ne i32 %186, 0, !dbg !433
-  br i1 %187, label %188, label %195, !dbg !430
-
-188:                                              ; preds = %184
-  %189 = call i32 @HAL_GetTick() #5, !dbg !434
-  %190 = load i32, ptr %4, align 4, !dbg !437
-  %191 = sub i32 %189, %190, !dbg !438
-  %192 = icmp ugt i32 %191, 2, !dbg !439
-  br i1 %192, label %193, label %194, !dbg !440
-
-193:                                              ; preds = %188
-  store i8 3, ptr %2, align 1, !dbg !441
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !441
-
-194:                                              ; preds = %188
-  br label %184, !dbg !430, !llvm.loop !443
-
-195:                                              ; preds = %184
-  br label %196
-
-196:                                              ; preds = %195, %172
-  br label %197
-
-197:                                              ; preds = %196, %151
-  br label %198, !dbg !445
-
-198:                                              ; preds = %197, %115
-  %199 = load ptr, ptr %3, align 4, !dbg !446
-  %200 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %199, i32 0, i32 0, !dbg !448
-  %201 = load i32, ptr %200, align 4, !dbg !448
-  %202 = and i32 %201, 8, !dbg !449
-  %203 = icmp eq i32 %202, 8, !dbg !450
-  br i1 %203, label %204, label %242, !dbg !451
-
-204:                                              ; preds = %198
-  %205 = load ptr, ptr %3, align 4, !dbg !452
-  %206 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %205, i32 0, i32 7, !dbg !455
-  %207 = load i32, ptr %206, align 4, !dbg !455
-  %208 = icmp ne i32 %207, 0, !dbg !456
-  br i1 %208, label %209, label %225, !dbg !457
-
-209:                                              ; preds = %204
-  %210 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !458
-  %211 = or i32 %210, 1, !dbg !458
-  store volatile i32 %211, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !458
-  %212 = call i32 @HAL_GetTick() #5, !dbg !460
-  store i32 %212, ptr %4, align 4, !dbg !461
-  br label %213, !dbg !462
-
-213:                                              ; preds = %223, %209
-  %214 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !463
-  %215 = and i32 %214, 2, !dbg !464
-  %216 = icmp eq i32 %215, 0, !dbg !465
-  br i1 %216, label %217, label %224, !dbg !462
-
-217:                                              ; preds = %213
-  %218 = call i32 @HAL_GetTick() #5, !dbg !466
-  %219 = load i32, ptr %4, align 4, !dbg !469
-  %220 = sub i32 %218, %219, !dbg !470
-  %221 = icmp ugt i32 %220, 2, !dbg !471
-  br i1 %221, label %222, label %223, !dbg !472
-
-222:                                              ; preds = %217
-  store i8 3, ptr %2, align 1, !dbg !473
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !473
-
-223:                                              ; preds = %217
-  br label %213, !dbg !462, !llvm.loop !475
-
-224:                                              ; preds = %213
-  br label %241, !dbg !477
-
-225:                                              ; preds = %204
-  %226 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !478
-  %227 = and i32 %226, -2, !dbg !478
-  store volatile i32 %227, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !478
-  %228 = call i32 @HAL_GetTick() #5, !dbg !480
-  store i32 %228, ptr %4, align 4, !dbg !481
-  br label %229, !dbg !482
-
-229:                                              ; preds = %239, %225
-  %230 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !483
-  %231 = and i32 %230, 2, !dbg !484
-  %232 = icmp ne i32 %231, 0, !dbg !485
-  br i1 %232, label %233, label %240, !dbg !482
-
-233:                                              ; preds = %229
-  %234 = call i32 @HAL_GetTick() #5, !dbg !486
-  %235 = load i32, ptr %4, align 4, !dbg !489
-  %236 = sub i32 %234, %235, !dbg !490
-  %237 = icmp ugt i32 %236, 2, !dbg !491
-  br i1 %237, label %238, label %239, !dbg !492
-
-238:                                              ; preds = %233
-  store i8 3, ptr %2, align 1, !dbg !493
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !493
-
-239:                                              ; preds = %233
-  br label %229, !dbg !482, !llvm.loop !495
-
-240:                                              ; preds = %229
-  br label %241
-
-241:                                              ; preds = %240, %224
-  br label %242, !dbg !497
-
-242:                                              ; preds = %241, %198
-  %243 = load ptr, ptr %3, align 4, !dbg !498
-  %244 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %243, i32 0, i32 0, !dbg !499
-  %245 = load i32, ptr %244, align 4, !dbg !499
-  %246 = and i32 %245, 4, !dbg !500
-  %247 = icmp eq i32 %246, 4, !dbg !501
-  br i1 %247, label %248, label %363, !dbg !502
-
-248:                                              ; preds = %242
-  call void @llvm.lifetime.start.p0(i64 1, ptr %8) #4, !dbg !503
-  call void @llvm.dbg.declare(metadata ptr %8, metadata !222, metadata !DIExpression()), !dbg !504
-  store i8 0, ptr %8, align 1, !dbg !504
-  %249 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !505
-  %250 = and i32 %249, 268435456, !dbg !506
-  %251 = icmp eq i32 %250, 0, !dbg !507
-  br i1 %251, label %252, label %261, !dbg !508
-
-252:                                              ; preds = %248
-  br label %253, !dbg !509
-
-253:                                              ; preds = %252
-  call void @llvm.lifetime.start.p0(i64 4, ptr %9) #4, !dbg !510
-  call void @llvm.dbg.declare(metadata ptr %9, metadata !226, metadata !DIExpression()), !dbg !511
-  %254 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !512
-  %255 = or i32 %254, 268435456, !dbg !512
-  store volatile i32 %255, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !512
-  %256 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !513
-  %257 = and i32 %256, 268435456, !dbg !514
-  store volatile i32 %257, ptr %9, align 4, !dbg !515
-  %258 = load volatile i32, ptr %9, align 4, !dbg !516
-  call void @llvm.lifetime.end.p0(i64 4, ptr %9) #4, !dbg !517
-  br label %259, !dbg !518
-
-259:                                              ; preds = %253
-  br label %260, !dbg !518
-
-260:                                              ; preds = %259
-  store i8 1, ptr %8, align 1, !dbg !519
-  br label %261, !dbg !520
-
-261:                                              ; preds = %260, %248
-  %262 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !521
-  %263 = and i32 %262, 256, !dbg !523
-  %264 = icmp eq i32 %263, 0, !dbg !524
-  br i1 %264, label %265, label %281, !dbg !525
-
-265:                                              ; preds = %261
-  %266 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !526
-  %267 = or i32 %266, 256, !dbg !526
-  store volatile i32 %267, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !526
-  %268 = call i32 @HAL_GetTick() #5, !dbg !528
-  store i32 %268, ptr %4, align 4, !dbg !529
-  br label %269, !dbg !530
-
-269:                                              ; preds = %279, %265
-  %270 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !531
-  %271 = and i32 %270, 256, !dbg !532
-  %272 = icmp eq i32 %271, 0, !dbg !533
-  br i1 %272, label %273, label %280, !dbg !530
-
-273:                                              ; preds = %269
-  %274 = call i32 @HAL_GetTick() #5, !dbg !534
-  %275 = load i32, ptr %4, align 4, !dbg !537
-  %276 = sub i32 %274, %275, !dbg !538
-  %277 = icmp ugt i32 %276, 100, !dbg !539
-  br i1 %277, label %278, label %279, !dbg !540
-
-278:                                              ; preds = %273
-  store i8 3, ptr %2, align 1, !dbg !541
-  store i32 1, ptr %7, align 4
-  br label %360, !dbg !541
-
-279:                                              ; preds = %273
-  br label %269, !dbg !530, !llvm.loop !543
-
-280:                                              ; preds = %269
-  br label %281, !dbg !545
-
-281:                                              ; preds = %280, %261
-  br label %282, !dbg !546
-
-282:                                              ; preds = %281
-  %283 = load ptr, ptr %3, align 4, !dbg !547
-  %284 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %283, i32 0, i32 2, !dbg !550
-  %285 = load i32, ptr %284, align 4, !dbg !550
-  %286 = icmp eq i32 %285, 1, !dbg !551
-  br i1 %286, label %287, label %290, !dbg !552
-
-287:                                              ; preds = %282
-  %288 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !553
-  %289 = or i32 %288, 1, !dbg !553
-  store volatile i32 %289, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !553
-  br label %317, !dbg !555
-
-290:                                              ; preds = %282
-  %291 = load ptr, ptr %3, align 4, !dbg !556
-  %292 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %291, i32 0, i32 2, !dbg !558
-  %293 = load i32, ptr %292, align 4, !dbg !558
-  %294 = icmp eq i32 %293, 0, !dbg !559
-  br i1 %294, label %295, label %300, !dbg !560
-
-295:                                              ; preds = %290
-  %296 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !561
-  %297 = and i32 %296, -2, !dbg !561
-  store volatile i32 %297, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !561
-  %298 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !563
-  %299 = and i32 %298, -5, !dbg !563
-  store volatile i32 %299, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !563
-  br label %316, !dbg !564
-
-300:                                              ; preds = %290
-  %301 = load ptr, ptr %3, align 4, !dbg !565
-  %302 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %301, i32 0, i32 2, !dbg !567
-  %303 = load i32, ptr %302, align 4, !dbg !567
-  %304 = icmp eq i32 %303, 5, !dbg !568
-  br i1 %304, label %305, label %310, !dbg !569
-
-305:                                              ; preds = %300
-  %306 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !570
-  %307 = or i32 %306, 4, !dbg !570
-  store volatile i32 %307, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !570
-  %308 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !572
-  %309 = or i32 %308, 1, !dbg !572
-  store volatile i32 %309, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !572
-  br label %315, !dbg !573
-
-310:                                              ; preds = %300
-  %311 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !574
-  %312 = and i32 %311, -2, !dbg !574
-  store volatile i32 %312, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !574
-  %313 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !576
-  %314 = and i32 %313, -5, !dbg !576
-  store volatile i32 %314, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !576
-  br label %315
-
-315:                                              ; preds = %310, %305
-  br label %316
-
-316:                                              ; preds = %315, %295
-  br label %317
-
-317:                                              ; preds = %316, %287
-  br label %318, !dbg !577
-
-318:                                              ; preds = %317
-  br label %319, !dbg !577
-
-319:                                              ; preds = %318
-  %320 = load ptr, ptr %3, align 4, !dbg !578
-  %321 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %320, i32 0, i32 2, !dbg !580
-  %322 = load i32, ptr %321, align 4, !dbg !580
-  %323 = icmp ne i32 %322, 0, !dbg !581
-  br i1 %323, label %324, label %338, !dbg !582
-
-324:                                              ; preds = %319
-  %325 = call i32 @HAL_GetTick() #5, !dbg !583
-  store i32 %325, ptr %4, align 4, !dbg !585
-  br label %326, !dbg !586
-
-326:                                              ; preds = %336, %324
-  %327 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !587
-  %328 = and i32 %327, 2, !dbg !588
-  %329 = icmp eq i32 %328, 0, !dbg !589
-  br i1 %329, label %330, label %337, !dbg !586
-
-330:                                              ; preds = %326
-  %331 = call i32 @HAL_GetTick() #5, !dbg !590
-  %332 = load i32, ptr %4, align 4, !dbg !593
-  %333 = sub i32 %331, %332, !dbg !594
-  %334 = icmp ugt i32 %333, 5000, !dbg !595
-  br i1 %334, label %335, label %336, !dbg !596
-
-335:                                              ; preds = %330
-  store i8 3, ptr %2, align 1, !dbg !597
-  store i32 1, ptr %7, align 4
-  br label %360, !dbg !597
-
-336:                                              ; preds = %330
-  br label %326, !dbg !586, !llvm.loop !599
-
-337:                                              ; preds = %326
-  br label %352, !dbg !601
-
-338:                                              ; preds = %319
-  %339 = call i32 @HAL_GetTick() #5, !dbg !602
-  store i32 %339, ptr %4, align 4, !dbg !604
-  br label %340, !dbg !605
-
-340:                                              ; preds = %350, %338
-  %341 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !606
-  %342 = and i32 %341, 2, !dbg !607
-  %343 = icmp ne i32 %342, 0, !dbg !608
-  br i1 %343, label %344, label %351, !dbg !605
-
-344:                                              ; preds = %340
-  %345 = call i32 @HAL_GetTick() #5, !dbg !609
-  %346 = load i32, ptr %4, align 4, !dbg !612
-  %347 = sub i32 %345, %346, !dbg !613
-  %348 = icmp ugt i32 %347, 5000, !dbg !614
-  br i1 %348, label %349, label %350, !dbg !615
-
-349:                                              ; preds = %344
-  store i8 3, ptr %2, align 1, !dbg !616
-  store i32 1, ptr %7, align 4
-  br label %360, !dbg !616
-
-350:                                              ; preds = %344
-  br label %340, !dbg !605, !llvm.loop !618
-
-351:                                              ; preds = %340
-  br label %352
-
-352:                                              ; preds = %351, %337
-  %353 = load i8, ptr %8, align 1, !dbg !620
-  %354 = zext i8 %353 to i32, !dbg !620
-  %355 = icmp eq i32 %354, 1, !dbg !622
-  br i1 %355, label %356, label %359, !dbg !623
-
-356:                                              ; preds = %352
-  %357 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !624
-  %358 = and i32 %357, -268435457, !dbg !624
-  store volatile i32 %358, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !624
-  br label %359, !dbg !626
-
-359:                                              ; preds = %356, %352
-  store i32 0, ptr %7, align 4, !dbg !627
-  br label %360, !dbg !627
-
-360:                                              ; preds = %359, %349, %335, %278
-  call void @llvm.lifetime.end.p0(i64 1, ptr %8) #4, !dbg !627
-  %361 = load i32, ptr %7, align 4
-  switch i32 %361, label %626 [
-    i32 0, label %362
-  ]
-
-362:                                              ; preds = %360
-  br label %363, !dbg !628
-
-363:                                              ; preds = %362, %242
-  %364 = load ptr, ptr %3, align 4, !dbg !629
-  %365 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %364, i32 0, i32 0, !dbg !631
-  %366 = load i32, ptr %365, align 4, !dbg !631
-  %367 = and i32 %366, 16, !dbg !632
-  %368 = icmp eq i32 %367, 16, !dbg !633
-  br i1 %368, label %369, label %434, !dbg !634
-
-369:                                              ; preds = %363
-  %370 = load ptr, ptr %3, align 4, !dbg !635
-  %371 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %370, i32 0, i32 5, !dbg !638
-  %372 = load i32, ptr %371, align 4, !dbg !638
-  %373 = icmp eq i32 %372, 1, !dbg !639
-  br i1 %373, label %374, label %399, !dbg !640
-
-374:                                              ; preds = %369
-  %375 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !641
-  %376 = or i32 %375, 4, !dbg !641
-  store volatile i32 %376, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !641
-  %377 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !643
-  %378 = or i32 %377, 1, !dbg !643
-  store volatile i32 %378, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !643
-  %379 = call i32 @HAL_GetTick() #5, !dbg !644
-  store i32 %379, ptr %4, align 4, !dbg !645
-  br label %380, !dbg !646
-
-380:                                              ; preds = %390, %374
-  %381 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !647
-  %382 = and i32 %381, 2, !dbg !648
-  %383 = icmp eq i32 %382, 0, !dbg !649
-  br i1 %383, label %384, label %391, !dbg !646
-
-384:                                              ; preds = %380
-  %385 = call i32 @HAL_GetTick() #5, !dbg !650
-  %386 = load i32, ptr %4, align 4, !dbg !653
-  %387 = sub i32 %385, %386, !dbg !654
-  %388 = icmp ugt i32 %387, 2, !dbg !655
-  br i1 %388, label %389, label %390, !dbg !656
-
-389:                                              ; preds = %384
-  store i8 3, ptr %2, align 1, !dbg !657
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !657
-
-390:                                              ; preds = %384
-  br label %380, !dbg !646, !llvm.loop !659
-
-391:                                              ; preds = %380
-  %392 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !661
-  %393 = and i32 %392, -249, !dbg !662
-  %394 = load ptr, ptr %3, align 4, !dbg !663
-  %395 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %394, i32 0, i32 6, !dbg !664
-  %396 = load i32, ptr %395, align 4, !dbg !664
-  %397 = shl i32 %396, 3, !dbg !665
-  %398 = or i32 %393, %397, !dbg !666
-  store volatile i32 %398, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !667
-  br label %433, !dbg !668
-
-399:                                              ; preds = %369
-  %400 = load ptr, ptr %3, align 4, !dbg !669
-  %401 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %400, i32 0, i32 5, !dbg !671
-  %402 = load i32, ptr %401, align 4, !dbg !671
-  %403 = icmp eq i32 %402, -5, !dbg !672
-  br i1 %403, label %404, label %414, !dbg !673
-
-404:                                              ; preds = %399
-  %405 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !674
-  %406 = and i32 %405, -5, !dbg !674
-  store volatile i32 %406, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !674
-  %407 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !676
-  %408 = and i32 %407, -249, !dbg !677
-  %409 = load ptr, ptr %3, align 4, !dbg !678
-  %410 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %409, i32 0, i32 6, !dbg !679
-  %411 = load i32, ptr %410, align 4, !dbg !679
-  %412 = shl i32 %411, 3, !dbg !680
-  %413 = or i32 %408, %412, !dbg !681
-  store volatile i32 %413, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !682
-  br label %432, !dbg !683
-
-414:                                              ; preds = %399
-  %415 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !684
-  %416 = or i32 %415, 4, !dbg !684
-  store volatile i32 %416, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !684
-  %417 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !686
-  %418 = and i32 %417, -2, !dbg !686
-  store volatile i32 %418, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !686
-  %419 = call i32 @HAL_GetTick() #5, !dbg !687
-  store i32 %419, ptr %4, align 4, !dbg !688
-  br label %420, !dbg !689
-
-420:                                              ; preds = %430, %414
-  %421 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !690
-  %422 = and i32 %421, 2, !dbg !691
-  %423 = icmp ne i32 %422, 0, !dbg !692
-  br i1 %423, label %424, label %431, !dbg !689
-
-424:                                              ; preds = %420
-  %425 = call i32 @HAL_GetTick() #5, !dbg !693
-  %426 = load i32, ptr %4, align 4, !dbg !696
-  %427 = sub i32 %425, %426, !dbg !697
-  %428 = icmp ugt i32 %427, 2, !dbg !698
-  br i1 %428, label %429, label %430, !dbg !699
-
-429:                                              ; preds = %424
-  store i8 3, ptr %2, align 1, !dbg !700
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !700
-
-430:                                              ; preds = %424
-  br label %420, !dbg !689, !llvm.loop !702
-
-431:                                              ; preds = %420
-  br label %432
-
-432:                                              ; preds = %431, %404
-  br label %433
-
-433:                                              ; preds = %432, %391
-  br label %434, !dbg !704
-
-434:                                              ; preds = %433, %363
-  %435 = load ptr, ptr %3, align 4, !dbg !705
-  %436 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %435, i32 0, i32 0, !dbg !707
-  %437 = load i32, ptr %436, align 4, !dbg !707
-  %438 = and i32 %437, 32, !dbg !708
-  %439 = icmp eq i32 %438, 32, !dbg !709
-  br i1 %439, label %440, label %502, !dbg !710
-
-440:                                              ; preds = %434
-  %441 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !711
-  %442 = and i32 %441, 12, !dbg !714
-  %443 = icmp eq i32 %442, 12, !dbg !715
-  br i1 %443, label %452, label %444, !dbg !716
-
-444:                                              ; preds = %440
-  %445 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !717
-  %446 = and i32 %445, 12, !dbg !718
-  %447 = icmp eq i32 %446, 8, !dbg !719
-  br i1 %447, label %448, label %463, !dbg !720
-
-448:                                              ; preds = %444
-  %449 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !721
-  %450 = and i32 %449, 98304, !dbg !722
-  %451 = icmp eq i32 %450, 98304, !dbg !723
-  br i1 %451, label %452, label %463, !dbg !724
-
-452:                                              ; preds = %448, %440
-  %453 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !725
-  %454 = and i32 %453, 131072, !dbg !728
-  %455 = icmp ne i32 %454, 0, !dbg !729
-  br i1 %455, label %456, label %462, !dbg !730
-
-456:                                              ; preds = %452
-  %457 = load ptr, ptr %3, align 4, !dbg !731
-  %458 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %457, i32 0, i32 8, !dbg !732
-  %459 = load i32, ptr %458, align 4, !dbg !732
-  %460 = icmp ne i32 %459, 1, !dbg !733
-  br i1 %460, label %461, label %462, !dbg !734
+77:                                               ; preds = %76, %47
+  br label %78, !dbg !285
+
+78:                                               ; preds = %77
+  %79 = load ptr, ptr %3, align 4, !dbg !286
+  %80 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %79, i32 0, i32 1, !dbg !288
+  %81 = load i32, ptr %80, align 4, !dbg !288
+  %82 = icmp ne i32 %81, 0, !dbg !289
+  br i1 %82, label %83, label %97, !dbg !290
+
+83:                                               ; preds = %78
+  %84 = call i32 @HAL_GetTick(), !dbg !291
+  store i32 %84, ptr %4, align 4, !dbg !293
+  br label %85, !dbg !294
+
+85:                                               ; preds = %95, %83
+  %86 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !295
+  %87 = and i32 %86, 131072, !dbg !296
+  %88 = icmp eq i32 %87, 0, !dbg !297
+  br i1 %88, label %89, label %96, !dbg !294
+
+89:                                               ; preds = %85
+  %90 = call i32 @HAL_GetTick(), !dbg !298
+  %91 = load i32, ptr %4, align 4, !dbg !301
+  %92 = sub i32 %90, %91, !dbg !302
+  %93 = icmp ugt i32 %92, 100, !dbg !303
+  br i1 %93, label %94, label %95, !dbg !304
+
+94:                                               ; preds = %89
+  store i8 3, ptr %2, align 1, !dbg !305
+  br label %618, !dbg !305
+
+95:                                               ; preds = %89
+  br label %85, !dbg !294, !llvm.loop !307
+
+96:                                               ; preds = %85
+  br label %111, !dbg !309
+
+97:                                               ; preds = %78
+  %98 = call i32 @HAL_GetTick(), !dbg !310
+  store i32 %98, ptr %4, align 4, !dbg !312
+  br label %99, !dbg !313
+
+99:                                               ; preds = %109, %97
+  %100 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !314
+  %101 = and i32 %100, 131072, !dbg !315
+  %102 = icmp ne i32 %101, 0, !dbg !316
+  br i1 %102, label %103, label %110, !dbg !313
+
+103:                                              ; preds = %99
+  %104 = call i32 @HAL_GetTick(), !dbg !317
+  %105 = load i32, ptr %4, align 4, !dbg !320
+  %106 = sub i32 %104, %105, !dbg !321
+  %107 = icmp ugt i32 %106, 100, !dbg !322
+  br i1 %107, label %108, label %109, !dbg !323
+
+108:                                              ; preds = %103
+  store i8 3, ptr %2, align 1, !dbg !324
+  br label %618, !dbg !324
+
+109:                                              ; preds = %103
+  br label %99, !dbg !313, !llvm.loop !326
+
+110:                                              ; preds = %99
+  br label %111
+
+111:                                              ; preds = %110, %96
+  br label %112
+
+112:                                              ; preds = %111, %40
+  br label %113, !dbg !328
+
+113:                                              ; preds = %112, %12
+  %114 = load ptr, ptr %3, align 4, !dbg !329
+  %115 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %114, i32 0, i32 0, !dbg !331
+  %116 = load i32, ptr %115, align 4, !dbg !331
+  %117 = and i32 %116, 2, !dbg !332
+  %118 = icmp eq i32 %117, 2, !dbg !333
+  br i1 %118, label %119, label %196, !dbg !334
+
+119:                                              ; preds = %113
+  %120 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !335
+  %121 = and i32 %120, 12, !dbg !338
+  %122 = icmp eq i32 %121, 0, !dbg !339
+  br i1 %122, label %131, label %123, !dbg !340
+
+123:                                              ; preds = %119
+  %124 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !341
+  %125 = and i32 %124, 12, !dbg !342
+  %126 = icmp eq i32 %125, 8, !dbg !343
+  br i1 %126, label %127, label %150, !dbg !344
+
+127:                                              ; preds = %123
+  %128 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !345
+  %129 = and i32 %128, 98304, !dbg !346
+  %130 = icmp eq i32 %129, 32768, !dbg !347
+  br i1 %130, label %131, label %150, !dbg !348
+
+131:                                              ; preds = %127, %119
+  %132 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !349
+  %133 = and i32 %132, 2, !dbg !352
+  %134 = icmp ne i32 %133, 0, !dbg !353
+  br i1 %134, label %135, label %141, !dbg !354
+
+135:                                              ; preds = %131
+  %136 = load ptr, ptr %3, align 4, !dbg !355
+  %137 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %136, i32 0, i32 3, !dbg !356
+  %138 = load i32, ptr %137, align 4, !dbg !356
+  %139 = icmp ne i32 %138, 1, !dbg !357
+  br i1 %139, label %140, label %141, !dbg !358
+
+140:                                              ; preds = %135
+  store i8 1, ptr %2, align 1, !dbg !359
+  br label %618, !dbg !359
+
+141:                                              ; preds = %135, %131
+  %142 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !361
+  %143 = and i32 %142, -249, !dbg !363
+  %144 = load ptr, ptr %3, align 4, !dbg !364
+  %145 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %144, i32 0, i32 4, !dbg !365
+  %146 = load i32, ptr %145, align 4, !dbg !365
+  %147 = shl i32 %146, 3, !dbg !366
+  %148 = or i32 %143, %147, !dbg !367
+  store volatile i32 %148, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !368
+  br label %149
+
+149:                                              ; preds = %141
+  br label %195, !dbg !369
+
+150:                                              ; preds = %127, %123
+  %151 = load ptr, ptr %3, align 4, !dbg !370
+  %152 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %151, i32 0, i32 3, !dbg !373
+  %153 = load i32, ptr %152, align 4, !dbg !373
+  %154 = icmp ne i32 %153, 0, !dbg !374
+  br i1 %154, label %155, label %178, !dbg !375
+
+155:                                              ; preds = %150
+  %156 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !376
+  %157 = or i32 %156, 1, !dbg !376
+  store volatile i32 %157, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !376
+  %158 = call i32 @HAL_GetTick(), !dbg !378
+  store i32 %158, ptr %4, align 4, !dbg !379
+  br label %159, !dbg !380
+
+159:                                              ; preds = %169, %155
+  %160 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !381
+  %161 = and i32 %160, 2, !dbg !382
+  %162 = icmp eq i32 %161, 0, !dbg !383
+  br i1 %162, label %163, label %170, !dbg !380
+
+163:                                              ; preds = %159
+  %164 = call i32 @HAL_GetTick(), !dbg !384
+  %165 = load i32, ptr %4, align 4, !dbg !387
+  %166 = sub i32 %164, %165, !dbg !388
+  %167 = icmp ugt i32 %166, 2, !dbg !389
+  br i1 %167, label %168, label %169, !dbg !390
+
+168:                                              ; preds = %163
+  store i8 3, ptr %2, align 1, !dbg !391
+  br label %618, !dbg !391
+
+169:                                              ; preds = %163
+  br label %159, !dbg !380, !llvm.loop !393
+
+170:                                              ; preds = %159
+  %171 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !395
+  %172 = and i32 %171, -249, !dbg !396
+  %173 = load ptr, ptr %3, align 4, !dbg !397
+  %174 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %173, i32 0, i32 4, !dbg !398
+  %175 = load i32, ptr %174, align 4, !dbg !398
+  %176 = shl i32 %175, 3, !dbg !399
+  %177 = or i32 %172, %176, !dbg !400
+  store volatile i32 %177, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !401
+  br label %194, !dbg !402
+
+178:                                              ; preds = %150
+  %179 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !403
+  %180 = and i32 %179, -2, !dbg !403
+  store volatile i32 %180, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !403
+  %181 = call i32 @HAL_GetTick(), !dbg !405
+  store i32 %181, ptr %4, align 4, !dbg !406
+  br label %182, !dbg !407
+
+182:                                              ; preds = %192, %178
+  %183 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !408
+  %184 = and i32 %183, 2, !dbg !409
+  %185 = icmp ne i32 %184, 0, !dbg !410
+  br i1 %185, label %186, label %193, !dbg !407
+
+186:                                              ; preds = %182
+  %187 = call i32 @HAL_GetTick(), !dbg !411
+  %188 = load i32, ptr %4, align 4, !dbg !414
+  %189 = sub i32 %187, %188, !dbg !415
+  %190 = icmp ugt i32 %189, 2, !dbg !416
+  br i1 %190, label %191, label %192, !dbg !417
+
+191:                                              ; preds = %186
+  store i8 3, ptr %2, align 1, !dbg !418
+  br label %618, !dbg !418
+
+192:                                              ; preds = %186
+  br label %182, !dbg !407, !llvm.loop !420
+
+193:                                              ; preds = %182
+  br label %194
+
+194:                                              ; preds = %193, %170
+  br label %195
+
+195:                                              ; preds = %194, %149
+  br label %196, !dbg !422
+
+196:                                              ; preds = %195, %113
+  %197 = load ptr, ptr %3, align 4, !dbg !423
+  %198 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %197, i32 0, i32 0, !dbg !425
+  %199 = load i32, ptr %198, align 4, !dbg !425
+  %200 = and i32 %199, 8, !dbg !426
+  %201 = icmp eq i32 %200, 8, !dbg !427
+  br i1 %201, label %202, label %240, !dbg !428
+
+202:                                              ; preds = %196
+  %203 = load ptr, ptr %3, align 4, !dbg !429
+  %204 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %203, i32 0, i32 7, !dbg !432
+  %205 = load i32, ptr %204, align 4, !dbg !432
+  %206 = icmp ne i32 %205, 0, !dbg !433
+  br i1 %206, label %207, label %223, !dbg !434
+
+207:                                              ; preds = %202
+  %208 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !435
+  %209 = or i32 %208, 1, !dbg !435
+  store volatile i32 %209, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !435
+  %210 = call i32 @HAL_GetTick(), !dbg !437
+  store i32 %210, ptr %4, align 4, !dbg !438
+  br label %211, !dbg !439
+
+211:                                              ; preds = %221, %207
+  %212 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !440
+  %213 = and i32 %212, 2, !dbg !441
+  %214 = icmp eq i32 %213, 0, !dbg !442
+  br i1 %214, label %215, label %222, !dbg !439
+
+215:                                              ; preds = %211
+  %216 = call i32 @HAL_GetTick(), !dbg !443
+  %217 = load i32, ptr %4, align 4, !dbg !446
+  %218 = sub i32 %216, %217, !dbg !447
+  %219 = icmp ugt i32 %218, 2, !dbg !448
+  br i1 %219, label %220, label %221, !dbg !449
+
+220:                                              ; preds = %215
+  store i8 3, ptr %2, align 1, !dbg !450
+  br label %618, !dbg !450
+
+221:                                              ; preds = %215
+  br label %211, !dbg !439, !llvm.loop !452
+
+222:                                              ; preds = %211
+  br label %239, !dbg !454
+
+223:                                              ; preds = %202
+  %224 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !455
+  %225 = and i32 %224, -2, !dbg !455
+  store volatile i32 %225, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !455
+  %226 = call i32 @HAL_GetTick(), !dbg !457
+  store i32 %226, ptr %4, align 4, !dbg !458
+  br label %227, !dbg !459
+
+227:                                              ; preds = %237, %223
+  %228 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !460
+  %229 = and i32 %228, 2, !dbg !461
+  %230 = icmp ne i32 %229, 0, !dbg !462
+  br i1 %230, label %231, label %238, !dbg !459
+
+231:                                              ; preds = %227
+  %232 = call i32 @HAL_GetTick(), !dbg !463
+  %233 = load i32, ptr %4, align 4, !dbg !466
+  %234 = sub i32 %232, %233, !dbg !467
+  %235 = icmp ugt i32 %234, 2, !dbg !468
+  br i1 %235, label %236, label %237, !dbg !469
+
+236:                                              ; preds = %231
+  store i8 3, ptr %2, align 1, !dbg !470
+  br label %618, !dbg !470
+
+237:                                              ; preds = %231
+  br label %227, !dbg !459, !llvm.loop !472
+
+238:                                              ; preds = %227
+  br label %239
+
+239:                                              ; preds = %238, %222
+  br label %240, !dbg !474
+
+240:                                              ; preds = %239, %196
+  %241 = load ptr, ptr %3, align 4, !dbg !475
+  %242 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %241, i32 0, i32 0, !dbg !477
+  %243 = load i32, ptr %242, align 4, !dbg !477
+  %244 = and i32 %243, 4, !dbg !478
+  %245 = icmp eq i32 %244, 4, !dbg !479
+  br i1 %245, label %246, label %356, !dbg !480
+
+246:                                              ; preds = %240
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !481, metadata !DIExpression()), !dbg !484
+  store i8 0, ptr %7, align 1, !dbg !484
+  %247 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !485
+  %248 = and i32 %247, 268435456, !dbg !487
+  %249 = icmp eq i32 %248, 0, !dbg !488
+  br i1 %249, label %250, label %258, !dbg !489
+
+250:                                              ; preds = %246
+  br label %251, !dbg !490
+
+251:                                              ; preds = %250
+  call void @llvm.dbg.declare(metadata ptr %8, metadata !492, metadata !DIExpression()), !dbg !494
+  %252 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !495
+  %253 = or i32 %252, 268435456, !dbg !495
+  store volatile i32 %253, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !495
+  %254 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !496
+  %255 = and i32 %254, 268435456, !dbg !497
+  store volatile i32 %255, ptr %8, align 4, !dbg !498
+  %256 = load volatile i32, ptr %8, align 4, !dbg !499
+  br label %257, !dbg !500
+
+257:                                              ; preds = %251
+  store i8 1, ptr %7, align 1, !dbg !501
+  br label %258, !dbg !502
+
+258:                                              ; preds = %257, %246
+  %259 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !503
+  %260 = and i32 %259, 256, !dbg !505
+  %261 = icmp eq i32 %260, 0, !dbg !506
+  br i1 %261, label %262, label %278, !dbg !507
+
+262:                                              ; preds = %258
+  %263 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !508
+  %264 = or i32 %263, 256, !dbg !508
+  store volatile i32 %264, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !508
+  %265 = call i32 @HAL_GetTick(), !dbg !510
+  store i32 %265, ptr %4, align 4, !dbg !511
+  br label %266, !dbg !512
+
+266:                                              ; preds = %276, %262
+  %267 = load volatile i32, ptr inttoptr (i32 1073770496 to ptr), align 4, !dbg !513
+  %268 = and i32 %267, 256, !dbg !514
+  %269 = icmp eq i32 %268, 0, !dbg !515
+  br i1 %269, label %270, label %277, !dbg !512
+
+270:                                              ; preds = %266
+  %271 = call i32 @HAL_GetTick(), !dbg !516
+  %272 = load i32, ptr %4, align 4, !dbg !519
+  %273 = sub i32 %271, %272, !dbg !520
+  %274 = icmp ugt i32 %273, 100, !dbg !521
+  br i1 %274, label %275, label %276, !dbg !522
+
+275:                                              ; preds = %270
+  store i8 3, ptr %2, align 1, !dbg !523
+  br label %618, !dbg !523
+
+276:                                              ; preds = %270
+  br label %266, !dbg !512, !llvm.loop !525
+
+277:                                              ; preds = %266
+  br label %278, !dbg !527
+
+278:                                              ; preds = %277, %258
+  br label %279, !dbg !528
+
+279:                                              ; preds = %278
+  %280 = load ptr, ptr %3, align 4, !dbg !529
+  %281 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %280, i32 0, i32 2, !dbg !532
+  %282 = load i32, ptr %281, align 4, !dbg !532
+  %283 = icmp eq i32 %282, 1, !dbg !533
+  br i1 %283, label %284, label %287, !dbg !534
+
+284:                                              ; preds = %279
+  %285 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !535
+  %286 = or i32 %285, 1, !dbg !535
+  store volatile i32 %286, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !535
+  br label %314, !dbg !537
+
+287:                                              ; preds = %279
+  %288 = load ptr, ptr %3, align 4, !dbg !538
+  %289 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %288, i32 0, i32 2, !dbg !540
+  %290 = load i32, ptr %289, align 4, !dbg !540
+  %291 = icmp eq i32 %290, 0, !dbg !541
+  br i1 %291, label %292, label %297, !dbg !542
+
+292:                                              ; preds = %287
+  %293 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !543
+  %294 = and i32 %293, -2, !dbg !543
+  store volatile i32 %294, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !543
+  %295 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !545
+  %296 = and i32 %295, -5, !dbg !545
+  store volatile i32 %296, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !545
+  br label %313, !dbg !546
+
+297:                                              ; preds = %287
+  %298 = load ptr, ptr %3, align 4, !dbg !547
+  %299 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %298, i32 0, i32 2, !dbg !549
+  %300 = load i32, ptr %299, align 4, !dbg !549
+  %301 = icmp eq i32 %300, 5, !dbg !550
+  br i1 %301, label %302, label %307, !dbg !551
+
+302:                                              ; preds = %297
+  %303 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !552
+  %304 = or i32 %303, 4, !dbg !552
+  store volatile i32 %304, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !552
+  %305 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !554
+  %306 = or i32 %305, 1, !dbg !554
+  store volatile i32 %306, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !554
+  br label %312, !dbg !555
+
+307:                                              ; preds = %297
+  %308 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !556
+  %309 = and i32 %308, -2, !dbg !556
+  store volatile i32 %309, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !556
+  %310 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !558
+  %311 = and i32 %310, -5, !dbg !558
+  store volatile i32 %311, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !558
+  br label %312
+
+312:                                              ; preds = %307, %302
+  br label %313
+
+313:                                              ; preds = %312, %292
+  br label %314
+
+314:                                              ; preds = %313, %284
+  br label %315, !dbg !559
+
+315:                                              ; preds = %314
+  %316 = load ptr, ptr %3, align 4, !dbg !560
+  %317 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %316, i32 0, i32 2, !dbg !562
+  %318 = load i32, ptr %317, align 4, !dbg !562
+  %319 = icmp ne i32 %318, 0, !dbg !563
+  br i1 %319, label %320, label %334, !dbg !564
+
+320:                                              ; preds = %315
+  %321 = call i32 @HAL_GetTick(), !dbg !565
+  store i32 %321, ptr %4, align 4, !dbg !567
+  br label %322, !dbg !568
+
+322:                                              ; preds = %332, %320
+  %323 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !569
+  %324 = and i32 %323, 2, !dbg !570
+  %325 = icmp eq i32 %324, 0, !dbg !571
+  br i1 %325, label %326, label %333, !dbg !568
+
+326:                                              ; preds = %322
+  %327 = call i32 @HAL_GetTick(), !dbg !572
+  %328 = load i32, ptr %4, align 4, !dbg !575
+  %329 = sub i32 %327, %328, !dbg !576
+  %330 = icmp ugt i32 %329, 5000, !dbg !577
+  br i1 %330, label %331, label %332, !dbg !578
+
+331:                                              ; preds = %326
+  store i8 3, ptr %2, align 1, !dbg !579
+  br label %618, !dbg !579
+
+332:                                              ; preds = %326
+  br label %322, !dbg !568, !llvm.loop !581
+
+333:                                              ; preds = %322
+  br label %348, !dbg !583
+
+334:                                              ; preds = %315
+  %335 = call i32 @HAL_GetTick(), !dbg !584
+  store i32 %335, ptr %4, align 4, !dbg !586
+  br label %336, !dbg !587
+
+336:                                              ; preds = %346, %334
+  %337 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !588
+  %338 = and i32 %337, 2, !dbg !589
+  %339 = icmp ne i32 %338, 0, !dbg !590
+  br i1 %339, label %340, label %347, !dbg !587
+
+340:                                              ; preds = %336
+  %341 = call i32 @HAL_GetTick(), !dbg !591
+  %342 = load i32, ptr %4, align 4, !dbg !594
+  %343 = sub i32 %341, %342, !dbg !595
+  %344 = icmp ugt i32 %343, 5000, !dbg !596
+  br i1 %344, label %345, label %346, !dbg !597
+
+345:                                              ; preds = %340
+  store i8 3, ptr %2, align 1, !dbg !598
+  br label %618, !dbg !598
+
+346:                                              ; preds = %340
+  br label %336, !dbg !587, !llvm.loop !600
+
+347:                                              ; preds = %336
+  br label %348
+
+348:                                              ; preds = %347, %333
+  %349 = load i8, ptr %7, align 1, !dbg !602
+  %350 = zext i8 %349 to i32, !dbg !602
+  %351 = icmp eq i32 %350, 1, !dbg !604
+  br i1 %351, label %352, label %355, !dbg !605
+
+352:                                              ; preds = %348
+  %353 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !606
+  %354 = and i32 %353, -268435457, !dbg !606
+  store volatile i32 %354, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 7), align 4, !dbg !606
+  br label %355, !dbg !608
+
+355:                                              ; preds = %352, %348
+  br label %356, !dbg !609
+
+356:                                              ; preds = %355, %240
+  %357 = load ptr, ptr %3, align 4, !dbg !610
+  %358 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %357, i32 0, i32 0, !dbg !612
+  %359 = load i32, ptr %358, align 4, !dbg !612
+  %360 = and i32 %359, 16, !dbg !613
+  %361 = icmp eq i32 %360, 16, !dbg !614
+  br i1 %361, label %362, label %427, !dbg !615
+
+362:                                              ; preds = %356
+  %363 = load ptr, ptr %3, align 4, !dbg !616
+  %364 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %363, i32 0, i32 5, !dbg !619
+  %365 = load i32, ptr %364, align 4, !dbg !619
+  %366 = icmp eq i32 %365, 1, !dbg !620
+  br i1 %366, label %367, label %392, !dbg !621
+
+367:                                              ; preds = %362
+  %368 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !622
+  %369 = or i32 %368, 4, !dbg !622
+  store volatile i32 %369, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !622
+  %370 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !624
+  %371 = or i32 %370, 1, !dbg !624
+  store volatile i32 %371, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !624
+  %372 = call i32 @HAL_GetTick(), !dbg !625
+  store i32 %372, ptr %4, align 4, !dbg !626
+  br label %373, !dbg !627
+
+373:                                              ; preds = %383, %367
+  %374 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !628
+  %375 = and i32 %374, 2, !dbg !629
+  %376 = icmp eq i32 %375, 0, !dbg !630
+  br i1 %376, label %377, label %384, !dbg !627
+
+377:                                              ; preds = %373
+  %378 = call i32 @HAL_GetTick(), !dbg !631
+  %379 = load i32, ptr %4, align 4, !dbg !634
+  %380 = sub i32 %378, %379, !dbg !635
+  %381 = icmp ugt i32 %380, 2, !dbg !636
+  br i1 %381, label %382, label %383, !dbg !637
+
+382:                                              ; preds = %377
+  store i8 3, ptr %2, align 1, !dbg !638
+  br label %618, !dbg !638
+
+383:                                              ; preds = %377
+  br label %373, !dbg !627, !llvm.loop !640
+
+384:                                              ; preds = %373
+  %385 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !642
+  %386 = and i32 %385, -249, !dbg !643
+  %387 = load ptr, ptr %3, align 4, !dbg !644
+  %388 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %387, i32 0, i32 6, !dbg !645
+  %389 = load i32, ptr %388, align 4, !dbg !645
+  %390 = shl i32 %389, 3, !dbg !646
+  %391 = or i32 %386, %390, !dbg !647
+  store volatile i32 %391, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !648
+  br label %426, !dbg !649
+
+392:                                              ; preds = %362
+  %393 = load ptr, ptr %3, align 4, !dbg !650
+  %394 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %393, i32 0, i32 5, !dbg !652
+  %395 = load i32, ptr %394, align 4, !dbg !652
+  %396 = icmp eq i32 %395, -5, !dbg !653
+  br i1 %396, label %397, label %407, !dbg !654
+
+397:                                              ; preds = %392
+  %398 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !655
+  %399 = and i32 %398, -5, !dbg !655
+  store volatile i32 %399, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !655
+  %400 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !657
+  %401 = and i32 %400, -249, !dbg !658
+  %402 = load ptr, ptr %3, align 4, !dbg !659
+  %403 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %402, i32 0, i32 6, !dbg !660
+  %404 = load i32, ptr %403, align 4, !dbg !660
+  %405 = shl i32 %404, 3, !dbg !661
+  %406 = or i32 %401, %405, !dbg !662
+  store volatile i32 %406, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !663
+  br label %425, !dbg !664
+
+407:                                              ; preds = %392
+  %408 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !665
+  %409 = or i32 %408, 4, !dbg !665
+  store volatile i32 %409, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !665
+  %410 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !667
+  %411 = and i32 %410, -2, !dbg !667
+  store volatile i32 %411, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !667
+  %412 = call i32 @HAL_GetTick(), !dbg !668
+  store i32 %412, ptr %4, align 4, !dbg !669
+  br label %413, !dbg !670
+
+413:                                              ; preds = %423, %407
+  %414 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !671
+  %415 = and i32 %414, 2, !dbg !672
+  %416 = icmp ne i32 %415, 0, !dbg !673
+  br i1 %416, label %417, label %424, !dbg !670
+
+417:                                              ; preds = %413
+  %418 = call i32 @HAL_GetTick(), !dbg !674
+  %419 = load i32, ptr %4, align 4, !dbg !677
+  %420 = sub i32 %418, %419, !dbg !678
+  %421 = icmp ugt i32 %420, 2, !dbg !679
+  br i1 %421, label %422, label %423, !dbg !680
+
+422:                                              ; preds = %417
+  store i8 3, ptr %2, align 1, !dbg !681
+  br label %618, !dbg !681
+
+423:                                              ; preds = %417
+  br label %413, !dbg !670, !llvm.loop !683
+
+424:                                              ; preds = %413
+  br label %425
+
+425:                                              ; preds = %424, %397
+  br label %426
+
+426:                                              ; preds = %425, %384
+  br label %427, !dbg !685
+
+427:                                              ; preds = %426, %356
+  %428 = load ptr, ptr %3, align 4, !dbg !686
+  %429 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %428, i32 0, i32 0, !dbg !688
+  %430 = load i32, ptr %429, align 4, !dbg !688
+  %431 = and i32 %430, 32, !dbg !689
+  %432 = icmp eq i32 %431, 32, !dbg !690
+  br i1 %432, label %433, label %495, !dbg !691
+
+433:                                              ; preds = %427
+  %434 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !692
+  %435 = and i32 %434, 12, !dbg !695
+  %436 = icmp eq i32 %435, 12, !dbg !696
+  br i1 %436, label %445, label %437, !dbg !697
+
+437:                                              ; preds = %433
+  %438 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !698
+  %439 = and i32 %438, 12, !dbg !699
+  %440 = icmp eq i32 %439, 8, !dbg !700
+  br i1 %440, label %441, label %456, !dbg !701
+
+441:                                              ; preds = %437
+  %442 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !702
+  %443 = and i32 %442, 98304, !dbg !703
+  %444 = icmp eq i32 %443, 98304, !dbg !704
+  br i1 %444, label %445, label %456, !dbg !705
+
+445:                                              ; preds = %441, %433
+  %446 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !706
+  %447 = and i32 %446, 131072, !dbg !709
+  %448 = icmp ne i32 %447, 0, !dbg !710
+  br i1 %448, label %449, label %455, !dbg !711
+
+449:                                              ; preds = %445
+  %450 = load ptr, ptr %3, align 4, !dbg !712
+  %451 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %450, i32 0, i32 8, !dbg !713
+  %452 = load i32, ptr %451, align 4, !dbg !713
+  %453 = icmp ne i32 %452, 1, !dbg !714
+  br i1 %453, label %454, label %455, !dbg !715
+
+454:                                              ; preds = %449
+  store i8 1, ptr %2, align 1, !dbg !716
+  br label %618, !dbg !716
+
+455:                                              ; preds = %449, %445
+  br label %494, !dbg !718
+
+456:                                              ; preds = %441, %437
+  %457 = load ptr, ptr %3, align 4, !dbg !719
+  %458 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %457, i32 0, i32 8, !dbg !722
+  %459 = load i32, ptr %458, align 4, !dbg !722
+  %460 = icmp ne i32 %459, 0, !dbg !723
+  br i1 %460, label %461, label %477, !dbg !724
 
 461:                                              ; preds = %456
-  store i8 1, ptr %2, align 1, !dbg !735
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !735
+  %462 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !725
+  %463 = or i32 %462, 65536, !dbg !725
+  store volatile i32 %463, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !725
+  %464 = call i32 @HAL_GetTick(), !dbg !727
+  store i32 %464, ptr %4, align 4, !dbg !728
+  br label %465, !dbg !729
 
-462:                                              ; preds = %456, %452
-  br label %501, !dbg !737
+465:                                              ; preds = %475, %461
+  %466 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !730
+  %467 = and i32 %466, 131072, !dbg !731
+  %468 = icmp eq i32 %467, 0, !dbg !732
+  br i1 %468, label %469, label %476, !dbg !729
 
-463:                                              ; preds = %448, %444
-  %464 = load ptr, ptr %3, align 4, !dbg !738
-  %465 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %464, i32 0, i32 8, !dbg !741
-  %466 = load i32, ptr %465, align 4, !dbg !741
-  %467 = icmp ne i32 %466, 0, !dbg !742
-  br i1 %467, label %468, label %484, !dbg !743
+469:                                              ; preds = %465
+  %470 = call i32 @HAL_GetTick(), !dbg !733
+  %471 = load i32, ptr %4, align 4, !dbg !736
+  %472 = sub i32 %470, %471, !dbg !737
+  %473 = icmp ugt i32 %472, 2, !dbg !738
+  br i1 %473, label %474, label %475, !dbg !739
 
-468:                                              ; preds = %463
-  %469 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !744
-  %470 = or i32 %469, 65536, !dbg !744
-  store volatile i32 %470, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !744
-  %471 = call i32 @HAL_GetTick() #5, !dbg !746
-  store i32 %471, ptr %4, align 4, !dbg !747
-  br label %472, !dbg !748
+474:                                              ; preds = %469
+  store i8 3, ptr %2, align 1, !dbg !740
+  br label %618, !dbg !740
 
-472:                                              ; preds = %482, %468
-  %473 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !749
-  %474 = and i32 %473, 131072, !dbg !750
-  %475 = icmp eq i32 %474, 0, !dbg !751
-  br i1 %475, label %476, label %483, !dbg !748
+475:                                              ; preds = %469
+  br label %465, !dbg !729, !llvm.loop !742
 
-476:                                              ; preds = %472
-  %477 = call i32 @HAL_GetTick() #5, !dbg !752
-  %478 = load i32, ptr %4, align 4, !dbg !755
-  %479 = sub i32 %477, %478, !dbg !756
-  %480 = icmp ugt i32 %479, 2, !dbg !757
-  br i1 %480, label %481, label %482, !dbg !758
+476:                                              ; preds = %465
+  br label %493, !dbg !744
 
-481:                                              ; preds = %476
-  store i8 3, ptr %2, align 1, !dbg !759
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !759
+477:                                              ; preds = %456
+  %478 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !745
+  %479 = and i32 %478, -65537, !dbg !745
+  store volatile i32 %479, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !745
+  %480 = call i32 @HAL_GetTick(), !dbg !747
+  store i32 %480, ptr %4, align 4, !dbg !748
+  br label %481, !dbg !749
 
-482:                                              ; preds = %476
-  br label %472, !dbg !748, !llvm.loop !761
+481:                                              ; preds = %491, %477
+  %482 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !750
+  %483 = and i32 %482, 131072, !dbg !751
+  %484 = icmp ne i32 %483, 0, !dbg !752
+  br i1 %484, label %485, label %492, !dbg !749
 
-483:                                              ; preds = %472
-  br label %500, !dbg !763
+485:                                              ; preds = %481
+  %486 = call i32 @HAL_GetTick(), !dbg !753
+  %487 = load i32, ptr %4, align 4, !dbg !756
+  %488 = sub i32 %486, %487, !dbg !757
+  %489 = icmp ugt i32 %488, 2, !dbg !758
+  br i1 %489, label %490, label %491, !dbg !759
 
-484:                                              ; preds = %463
-  %485 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !764
-  %486 = and i32 %485, -65537, !dbg !764
-  store volatile i32 %486, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !764
-  %487 = call i32 @HAL_GetTick() #5, !dbg !766
-  store i32 %487, ptr %4, align 4, !dbg !767
-  br label %488, !dbg !768
+490:                                              ; preds = %485
+  store i8 3, ptr %2, align 1, !dbg !760
+  br label %618, !dbg !760
 
-488:                                              ; preds = %498, %484
-  %489 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !769
-  %490 = and i32 %489, 131072, !dbg !770
-  %491 = icmp ne i32 %490, 0, !dbg !771
-  br i1 %491, label %492, label %499, !dbg !768
+491:                                              ; preds = %485
+  br label %481, !dbg !749, !llvm.loop !762
 
-492:                                              ; preds = %488
-  %493 = call i32 @HAL_GetTick() #5, !dbg !772
-  %494 = load i32, ptr %4, align 4, !dbg !775
-  %495 = sub i32 %493, %494, !dbg !776
-  %496 = icmp ugt i32 %495, 2, !dbg !777
-  br i1 %496, label %497, label %498, !dbg !778
+492:                                              ; preds = %481
+  br label %493
 
-497:                                              ; preds = %492
-  store i8 3, ptr %2, align 1, !dbg !779
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !779
+493:                                              ; preds = %492, %476
+  br label %494
 
-498:                                              ; preds = %492
-  br label %488, !dbg !768, !llvm.loop !781
+494:                                              ; preds = %493, %455
+  br label %495, !dbg !764
 
-499:                                              ; preds = %488
-  br label %500
+495:                                              ; preds = %494, %427
+  %496 = load ptr, ptr %3, align 4, !dbg !765
+  %497 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %496, i32 0, i32 9, !dbg !767
+  %498 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %497, i32 0, i32 0, !dbg !768
+  %499 = load i32, ptr %498, align 4, !dbg !768
+  %500 = icmp ne i32 %499, 0, !dbg !769
+  br i1 %500, label %501, label %617, !dbg !770
 
-500:                                              ; preds = %499, %483
-  br label %501
+501:                                              ; preds = %495
+  %502 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !771
+  %503 = and i32 %502, 12, !dbg !774
+  %504 = icmp ne i32 %503, 8, !dbg !775
+  br i1 %504, label %505, label %580, !dbg !776
 
-501:                                              ; preds = %500, %462
-  br label %502, !dbg !783
+505:                                              ; preds = %501
+  %506 = load ptr, ptr %3, align 4, !dbg !777
+  %507 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %506, i32 0, i32 9, !dbg !780
+  %508 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %507, i32 0, i32 0, !dbg !781
+  %509 = load i32, ptr %508, align 4, !dbg !781
+  %510 = icmp eq i32 %509, 2, !dbg !782
+  br i1 %510, label %511, label %563, !dbg !783
 
-502:                                              ; preds = %501, %434
-  %503 = load ptr, ptr %3, align 4, !dbg !784
-  %504 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %503, i32 0, i32 9, !dbg !786
-  %505 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %504, i32 0, i32 0, !dbg !787
-  %506 = load i32, ptr %505, align 4, !dbg !787
-  %507 = icmp ne i32 %506, 0, !dbg !788
-  br i1 %507, label %508, label %625, !dbg !789
+511:                                              ; preds = %505
+  %512 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !784
+  %513 = and i32 %512, -16777217, !dbg !784
+  store volatile i32 %513, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !784
+  %514 = call i32 @HAL_GetTick(), !dbg !786
+  store i32 %514, ptr %4, align 4, !dbg !787
+  br label %515, !dbg !788
 
-508:                                              ; preds = %502
-  %509 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !790
-  %510 = and i32 %509, 12, !dbg !793
-  %511 = icmp ne i32 %510, 8, !dbg !794
-  br i1 %511, label %512, label %588, !dbg !795
+515:                                              ; preds = %525, %511
+  %516 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !789
+  %517 = and i32 %516, 33554432, !dbg !790
+  %518 = icmp ne i32 %517, 0, !dbg !791
+  br i1 %518, label %519, label %526, !dbg !788
 
-512:                                              ; preds = %508
-  %513 = load ptr, ptr %3, align 4, !dbg !796
-  %514 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %513, i32 0, i32 9, !dbg !799
-  %515 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %514, i32 0, i32 0, !dbg !800
-  %516 = load i32, ptr %515, align 4, !dbg !800
-  %517 = icmp eq i32 %516, 2, !dbg !801
-  br i1 %517, label %518, label %571, !dbg !802
+519:                                              ; preds = %515
+  %520 = call i32 @HAL_GetTick(), !dbg !792
+  %521 = load i32, ptr %4, align 4, !dbg !795
+  %522 = sub i32 %520, %521, !dbg !796
+  %523 = icmp ugt i32 %522, 2, !dbg !797
+  br i1 %523, label %524, label %525, !dbg !798
 
-518:                                              ; preds = %512
-  %519 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !803
-  %520 = and i32 %519, -16777217, !dbg !803
-  store volatile i32 %520, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !803
-  %521 = call i32 @HAL_GetTick() #5, !dbg !805
-  store i32 %521, ptr %4, align 4, !dbg !806
-  br label %522, !dbg !807
+524:                                              ; preds = %519
+  store i8 3, ptr %2, align 1, !dbg !799
+  br label %618, !dbg !799
 
-522:                                              ; preds = %532, %518
-  %523 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !808
-  %524 = and i32 %523, 33554432, !dbg !809
-  %525 = icmp ne i32 %524, 0, !dbg !810
-  br i1 %525, label %526, label %533, !dbg !807
+525:                                              ; preds = %519
+  br label %515, !dbg !788, !llvm.loop !801
 
-526:                                              ; preds = %522
-  %527 = call i32 @HAL_GetTick() #5, !dbg !811
-  %528 = load i32, ptr %4, align 4, !dbg !814
-  %529 = sub i32 %527, %528, !dbg !815
-  %530 = icmp ugt i32 %529, 2, !dbg !816
-  br i1 %530, label %531, label %532, !dbg !817
+526:                                              ; preds = %515
+  br label %527, !dbg !803
 
-531:                                              ; preds = %526
-  store i8 3, ptr %2, align 1, !dbg !818
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !818
+527:                                              ; preds = %526
+  %528 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !804
+  %529 = and i32 %528, -16, !dbg !806
+  %530 = load ptr, ptr %3, align 4, !dbg !807
+  %531 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %530, i32 0, i32 9, !dbg !808
+  %532 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %531, i32 0, i32 3, !dbg !809
+  %533 = load i32, ptr %532, align 4, !dbg !809
+  %534 = or i32 %529, %533, !dbg !810
+  store volatile i32 %534, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !811
+  %535 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !812
+  %536 = and i32 %535, -4030465, !dbg !813
+  %537 = load ptr, ptr %3, align 4, !dbg !814
+  %538 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %537, i32 0, i32 9, !dbg !815
+  %539 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %538, i32 0, i32 2, !dbg !816
+  %540 = load i32, ptr %539, align 4, !dbg !816
+  %541 = load ptr, ptr %3, align 4, !dbg !817
+  %542 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %541, i32 0, i32 9, !dbg !818
+  %543 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %542, i32 0, i32 1, !dbg !819
+  %544 = load i32, ptr %543, align 4, !dbg !819
+  %545 = or i32 %540, %544, !dbg !820
+  %546 = or i32 %536, %545, !dbg !821
+  store volatile i32 %546, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !822
+  br label %547, !dbg !823
 
-532:                                              ; preds = %526
-  br label %522, !dbg !807, !llvm.loop !820
+547:                                              ; preds = %527
+  %548 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !824
+  %549 = or i32 %548, 16777216, !dbg !824
+  store volatile i32 %549, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !824
+  %550 = call i32 @HAL_GetTick(), !dbg !825
+  store i32 %550, ptr %4, align 4, !dbg !826
+  br label %551, !dbg !827
 
-533:                                              ; preds = %522
-  br label %534, !dbg !822
+551:                                              ; preds = %561, %547
+  %552 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !828
+  %553 = and i32 %552, 33554432, !dbg !829
+  %554 = icmp eq i32 %553, 0, !dbg !830
+  br i1 %554, label %555, label %562, !dbg !827
 
-534:                                              ; preds = %533
-  %535 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !823
-  %536 = and i32 %535, -16, !dbg !825
-  %537 = load ptr, ptr %3, align 4, !dbg !826
-  %538 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %537, i32 0, i32 9, !dbg !827
-  %539 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %538, i32 0, i32 3, !dbg !828
-  %540 = load i32, ptr %539, align 4, !dbg !828
-  %541 = or i32 %536, %540, !dbg !829
-  store volatile i32 %541, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !830
-  %542 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !831
-  %543 = and i32 %542, -4030465, !dbg !832
-  %544 = load ptr, ptr %3, align 4, !dbg !833
-  %545 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %544, i32 0, i32 9, !dbg !834
-  %546 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %545, i32 0, i32 2, !dbg !835
-  %547 = load i32, ptr %546, align 4, !dbg !835
-  %548 = load ptr, ptr %3, align 4, !dbg !836
-  %549 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %548, i32 0, i32 9, !dbg !837
-  %550 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %549, i32 0, i32 1, !dbg !838
-  %551 = load i32, ptr %550, align 4, !dbg !838
-  %552 = or i32 %547, %551, !dbg !839
-  %553 = or i32 %543, %552, !dbg !840
-  store volatile i32 %553, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !841
-  br label %554, !dbg !842
+555:                                              ; preds = %551
+  %556 = call i32 @HAL_GetTick(), !dbg !831
+  %557 = load i32, ptr %4, align 4, !dbg !834
+  %558 = sub i32 %556, %557, !dbg !835
+  %559 = icmp ugt i32 %558, 2, !dbg !836
+  br i1 %559, label %560, label %561, !dbg !837
 
-554:                                              ; preds = %534
-  br label %555, !dbg !842
+560:                                              ; preds = %555
+  store i8 3, ptr %2, align 1, !dbg !838
+  br label %618, !dbg !838
 
-555:                                              ; preds = %554
-  %556 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !843
-  %557 = or i32 %556, 16777216, !dbg !843
-  store volatile i32 %557, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !843
-  %558 = call i32 @HAL_GetTick() #5, !dbg !844
-  store i32 %558, ptr %4, align 4, !dbg !845
-  br label %559, !dbg !846
+561:                                              ; preds = %555
+  br label %551, !dbg !827, !llvm.loop !840
 
-559:                                              ; preds = %569, %555
-  %560 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !847
-  %561 = and i32 %560, 33554432, !dbg !848
-  %562 = icmp eq i32 %561, 0, !dbg !849
-  br i1 %562, label %563, label %570, !dbg !846
+562:                                              ; preds = %551
+  br label %579, !dbg !842
 
-563:                                              ; preds = %559
-  %564 = call i32 @HAL_GetTick() #5, !dbg !850
-  %565 = load i32, ptr %4, align 4, !dbg !853
-  %566 = sub i32 %564, %565, !dbg !854
-  %567 = icmp ugt i32 %566, 2, !dbg !855
-  br i1 %567, label %568, label %569, !dbg !856
+563:                                              ; preds = %505
+  %564 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !843
+  %565 = and i32 %564, -16777217, !dbg !843
+  store volatile i32 %565, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !843
+  %566 = call i32 @HAL_GetTick(), !dbg !845
+  store i32 %566, ptr %4, align 4, !dbg !846
+  br label %567, !dbg !847
 
-568:                                              ; preds = %563
-  store i8 3, ptr %2, align 1, !dbg !857
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !857
+567:                                              ; preds = %577, %563
+  %568 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !848
+  %569 = and i32 %568, 33554432, !dbg !849
+  %570 = icmp ne i32 %569, 0, !dbg !850
+  br i1 %570, label %571, label %578, !dbg !847
 
-569:                                              ; preds = %563
-  br label %559, !dbg !846, !llvm.loop !859
+571:                                              ; preds = %567
+  %572 = call i32 @HAL_GetTick(), !dbg !851
+  %573 = load i32, ptr %4, align 4, !dbg !854
+  %574 = sub i32 %572, %573, !dbg !855
+  %575 = icmp ugt i32 %574, 2, !dbg !856
+  br i1 %575, label %576, label %577, !dbg !857
 
-570:                                              ; preds = %559
-  br label %587, !dbg !861
+576:                                              ; preds = %571
+  store i8 3, ptr %2, align 1, !dbg !858
+  br label %618, !dbg !858
 
-571:                                              ; preds = %512
-  %572 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !862
-  %573 = and i32 %572, -16777217, !dbg !862
-  store volatile i32 %573, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !862
-  %574 = call i32 @HAL_GetTick() #5, !dbg !864
-  store i32 %574, ptr %4, align 4, !dbg !865
-  br label %575, !dbg !866
+577:                                              ; preds = %571
+  br label %567, !dbg !847, !llvm.loop !860
 
-575:                                              ; preds = %585, %571
-  %576 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !867
-  %577 = and i32 %576, 33554432, !dbg !868
-  %578 = icmp ne i32 %577, 0, !dbg !869
-  br i1 %578, label %579, label %586, !dbg !866
+578:                                              ; preds = %567
+  br label %579
 
-579:                                              ; preds = %575
-  %580 = call i32 @HAL_GetTick() #5, !dbg !870
-  %581 = load i32, ptr %4, align 4, !dbg !873
-  %582 = sub i32 %580, %581, !dbg !874
-  %583 = icmp ugt i32 %582, 2, !dbg !875
-  br i1 %583, label %584, label %585, !dbg !876
+579:                                              ; preds = %578, %562
+  br label %616, !dbg !862
 
-584:                                              ; preds = %579
-  store i8 3, ptr %2, align 1, !dbg !877
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !877
+580:                                              ; preds = %501
+  %581 = load ptr, ptr %3, align 4, !dbg !863
+  %582 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %581, i32 0, i32 9, !dbg !866
+  %583 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %582, i32 0, i32 0, !dbg !867
+  %584 = load i32, ptr %583, align 4, !dbg !867
+  %585 = icmp eq i32 %584, 1, !dbg !868
+  br i1 %585, label %586, label %587, !dbg !869
 
-585:                                              ; preds = %579
-  br label %575, !dbg !866, !llvm.loop !879
+586:                                              ; preds = %580
+  store i8 1, ptr %2, align 1, !dbg !870
+  br label %618, !dbg !870
 
-586:                                              ; preds = %575
-  br label %587
+587:                                              ; preds = %580
+  %588 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !872
+  store i32 %588, ptr %5, align 4, !dbg !874
+  %589 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !875
+  store i32 %589, ptr %6, align 4, !dbg !876
+  %590 = load i32, ptr %5, align 4, !dbg !877
+  %591 = and i32 %590, 98304, !dbg !879
+  %592 = load ptr, ptr %3, align 4, !dbg !880
+  %593 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %592, i32 0, i32 9, !dbg !881
+  %594 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %593, i32 0, i32 1, !dbg !882
+  %595 = load i32, ptr %594, align 4, !dbg !882
+  %596 = icmp ne i32 %591, %595, !dbg !883
+  br i1 %596, label %613, label %597, !dbg !884
 
-587:                                              ; preds = %586, %570
-  br label %624, !dbg !881
+597:                                              ; preds = %587
+  %598 = load i32, ptr %6, align 4, !dbg !885
+  %599 = and i32 %598, 15, !dbg !886
+  %600 = load ptr, ptr %3, align 4, !dbg !887
+  %601 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %600, i32 0, i32 9, !dbg !888
+  %602 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %601, i32 0, i32 3, !dbg !889
+  %603 = load i32, ptr %602, align 4, !dbg !889
+  %604 = icmp ne i32 %599, %603, !dbg !890
+  br i1 %604, label %613, label %605, !dbg !891
 
-588:                                              ; preds = %508
-  %589 = load ptr, ptr %3, align 4, !dbg !882
-  %590 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %589, i32 0, i32 9, !dbg !885
-  %591 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %590, i32 0, i32 0, !dbg !886
-  %592 = load i32, ptr %591, align 4, !dbg !886
-  %593 = icmp eq i32 %592, 1, !dbg !887
-  br i1 %593, label %594, label %595, !dbg !888
+605:                                              ; preds = %597
+  %606 = load i32, ptr %5, align 4, !dbg !892
+  %607 = and i32 %606, 3932160, !dbg !893
+  %608 = load ptr, ptr %3, align 4, !dbg !894
+  %609 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %608, i32 0, i32 9, !dbg !895
+  %610 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %609, i32 0, i32 2, !dbg !896
+  %611 = load i32, ptr %610, align 4, !dbg !896
+  %612 = icmp ne i32 %607, %611, !dbg !897
+  br i1 %612, label %613, label %614, !dbg !898
 
-594:                                              ; preds = %588
-  store i8 1, ptr %2, align 1, !dbg !889
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !889
+613:                                              ; preds = %605, %597, %587
+  store i8 1, ptr %2, align 1, !dbg !899
+  br label %618, !dbg !899
 
-595:                                              ; preds = %588
-  %596 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !891
-  store i32 %596, ptr %5, align 4, !dbg !893
-  %597 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !894
-  store i32 %597, ptr %6, align 4, !dbg !895
-  %598 = load i32, ptr %5, align 4, !dbg !896
-  %599 = and i32 %598, 98304, !dbg !898
-  %600 = load ptr, ptr %3, align 4, !dbg !899
-  %601 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %600, i32 0, i32 9, !dbg !900
-  %602 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %601, i32 0, i32 1, !dbg !901
-  %603 = load i32, ptr %602, align 4, !dbg !901
-  %604 = icmp ne i32 %599, %603, !dbg !902
-  br i1 %604, label %621, label %605, !dbg !903
+614:                                              ; preds = %605
+  br label %615
 
-605:                                              ; preds = %595
-  %606 = load i32, ptr %6, align 4, !dbg !904
-  %607 = and i32 %606, 15, !dbg !905
-  %608 = load ptr, ptr %3, align 4, !dbg !906
-  %609 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %608, i32 0, i32 9, !dbg !907
-  %610 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %609, i32 0, i32 3, !dbg !908
-  %611 = load i32, ptr %610, align 4, !dbg !908
-  %612 = icmp ne i32 %607, %611, !dbg !909
-  br i1 %612, label %621, label %613, !dbg !910
+615:                                              ; preds = %614
+  br label %616
 
-613:                                              ; preds = %605
-  %614 = load i32, ptr %5, align 4, !dbg !911
-  %615 = and i32 %614, 3932160, !dbg !912
-  %616 = load ptr, ptr %3, align 4, !dbg !913
-  %617 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %616, i32 0, i32 9, !dbg !914
-  %618 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %617, i32 0, i32 2, !dbg !915
-  %619 = load i32, ptr %618, align 4, !dbg !915
-  %620 = icmp ne i32 %615, %619, !dbg !916
-  br i1 %620, label %621, label %622, !dbg !917
+616:                                              ; preds = %615, %579
+  br label %617, !dbg !901
 
-621:                                              ; preds = %613, %605, %595
-  store i8 1, ptr %2, align 1, !dbg !918
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !918
+617:                                              ; preds = %616, %495
+  store i8 0, ptr %2, align 1, !dbg !902
+  br label %618, !dbg !902
 
-622:                                              ; preds = %613
-  br label %623
-
-623:                                              ; preds = %622
-  br label %624
-
-624:                                              ; preds = %623, %587
-  br label %625, !dbg !920
-
-625:                                              ; preds = %624, %502
-  store i8 0, ptr %2, align 1, !dbg !921
-  store i32 1, ptr %7, align 4
-  br label %626, !dbg !921
-
-626:                                              ; preds = %625, %621, %594, %584, %568, %531, %497, %481, %461, %429, %389, %360, %238, %222, %193, %170, %142, %110, %96, %40, %12
-  call void @llvm.lifetime.end.p0(i64 4, ptr %6) #4, !dbg !922
-  call void @llvm.lifetime.end.p0(i64 4, ptr %5) #4, !dbg !922
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #4, !dbg !922
-  %627 = load i8, ptr %2, align 1, !dbg !922
-  ret i8 %627, !dbg !922
+618:                                              ; preds = %617, %613, %586, %576, %560, %524, %490, %474, %454, %422, %382, %345, %331, %275, %236, %220, %191, %168, %140, %108, %94, %39, %11
+  %619 = load i8, ptr %2, align 1, !dbg !903
+  ret i8 %619, !dbg !903
 }
 
-; Function Attrs: nounwind optsize
-define hidden zeroext i8 @HAL_RCC_ClockConfig(ptr noundef %0, i32 noundef %1) #0 !dbg !923 {
+; Function Attrs: noinline nounwind optnone
+define hidden zeroext i8 @HAL_RCC_ClockConfig(ptr noundef %0, i32 noundef %1) #0 !dbg !904 {
   %3 = alloca i8, align 1
   %4 = alloca ptr, align 4
   %5 = alloca i32, align 4
   %6 = alloca i32, align 4
-  %7 = alloca i32, align 4
   store ptr %0, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !935, metadata !DIExpression()), !dbg !938
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !915, metadata !DIExpression()), !dbg !916
   store i32 %1, ptr %5, align 4
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !936, metadata !DIExpression()), !dbg !939
-  call void @llvm.lifetime.start.p0(i64 4, ptr %6) #4, !dbg !940
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !937, metadata !DIExpression()), !dbg !941
-  %8 = load ptr, ptr %4, align 4, !dbg !942
-  %9 = icmp eq ptr %8, null, !dbg !944
-  br i1 %9, label %10, label %11, !dbg !945
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !917, metadata !DIExpression()), !dbg !918
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !919, metadata !DIExpression()), !dbg !920
+  %7 = load ptr, ptr %4, align 4, !dbg !921
+  %8 = icmp eq ptr %7, null, !dbg !923
+  br i1 %8, label %9, label %10, !dbg !924
+
+9:                                                ; preds = %2
+  store i8 1, ptr %3, align 1, !dbg !925
+  br label %159, !dbg !925
 
 10:                                               ; preds = %2
-  store i8 1, ptr %3, align 1, !dbg !946
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !946
+  %11 = load i32, ptr %5, align 4, !dbg !927
+  %12 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !929
+  %13 = and i32 %12, 1, !dbg !930
+  %14 = icmp ugt i32 %11, %13, !dbg !931
+  br i1 %14, label %15, label %26, !dbg !932
 
-11:                                               ; preds = %2
-  %12 = load i32, ptr %5, align 4, !dbg !948
-  %13 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !950
-  %14 = and i32 %13, 1, !dbg !951
-  %15 = icmp ugt i32 %12, %14, !dbg !952
-  br i1 %15, label %16, label %27, !dbg !953
+15:                                               ; preds = %10
+  %16 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !933
+  %17 = and i32 %16, -2, !dbg !935
+  %18 = load i32, ptr %5, align 4, !dbg !936
+  %19 = or i32 %17, %18, !dbg !937
+  store volatile i32 %19, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !938
+  %20 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !939
+  %21 = and i32 %20, 1, !dbg !941
+  %22 = load i32, ptr %5, align 4, !dbg !942
+  %23 = icmp ne i32 %21, %22, !dbg !943
+  br i1 %23, label %24, label %25, !dbg !944
 
-16:                                               ; preds = %11
-  %17 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !954
-  %18 = and i32 %17, -2, !dbg !956
-  %19 = load i32, ptr %5, align 4, !dbg !957
-  %20 = or i32 %18, %19, !dbg !958
-  store volatile i32 %20, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !959
-  %21 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !960
-  %22 = and i32 %21, 1, !dbg !962
-  %23 = load i32, ptr %5, align 4, !dbg !963
-  %24 = icmp ne i32 %22, %23, !dbg !964
-  br i1 %24, label %25, label %26, !dbg !965
+24:                                               ; preds = %15
+  store i8 1, ptr %3, align 1, !dbg !945
+  br label %159, !dbg !945
 
-25:                                               ; preds = %16
-  store i8 1, ptr %3, align 1, !dbg !966
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !966
+25:                                               ; preds = %15
+  br label %26, !dbg !947
 
-26:                                               ; preds = %16
-  br label %27, !dbg !968
+26:                                               ; preds = %25, %10
+  %27 = load ptr, ptr %4, align 4, !dbg !948
+  %28 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %27, i32 0, i32 0, !dbg !950
+  %29 = load i32, ptr %28, align 4, !dbg !950
+  %30 = and i32 %29, 2, !dbg !951
+  %31 = icmp eq i32 %30, 2, !dbg !952
+  br i1 %31, label %32, label %49, !dbg !953
 
-27:                                               ; preds = %26, %11
-  %28 = load ptr, ptr %4, align 4, !dbg !969
-  %29 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %28, i32 0, i32 0, !dbg !971
-  %30 = load i32, ptr %29, align 4, !dbg !971
-  %31 = and i32 %30, 2, !dbg !972
-  %32 = icmp eq i32 %31, 2, !dbg !973
-  br i1 %32, label %33, label %50, !dbg !974
+32:                                               ; preds = %26
+  %33 = load ptr, ptr %4, align 4, !dbg !954
+  %34 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %33, i32 0, i32 0, !dbg !957
+  %35 = load i32, ptr %34, align 4, !dbg !957
+  %36 = and i32 %35, 4, !dbg !958
+  %37 = icmp eq i32 %36, 4, !dbg !959
+  br i1 %37, label %38, label %42, !dbg !960
 
-33:                                               ; preds = %27
-  %34 = load ptr, ptr %4, align 4, !dbg !975
-  %35 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %34, i32 0, i32 0, !dbg !978
-  %36 = load i32, ptr %35, align 4, !dbg !978
-  %37 = and i32 %36, 4, !dbg !979
-  %38 = icmp eq i32 %37, 4, !dbg !980
-  br i1 %38, label %39, label %43, !dbg !981
+38:                                               ; preds = %32
+  %39 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !961
+  %40 = and i32 %39, -1793, !dbg !963
+  %41 = or i32 %40, 1792, !dbg !964
+  store volatile i32 %41, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !965
+  br label %42, !dbg !966
 
-39:                                               ; preds = %33
-  %40 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !982
-  %41 = and i32 %40, -1793, !dbg !984
-  %42 = or i32 %41, 1792, !dbg !985
-  store volatile i32 %42, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !986
-  br label %43, !dbg !987
+42:                                               ; preds = %38, %32
+  %43 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !967
+  %44 = and i32 %43, -241, !dbg !968
+  %45 = load ptr, ptr %4, align 4, !dbg !969
+  %46 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %45, i32 0, i32 2, !dbg !970
+  %47 = load i32, ptr %46, align 4, !dbg !970
+  %48 = or i32 %44, %47, !dbg !971
+  store volatile i32 %48, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !972
+  br label %49, !dbg !973
 
-43:                                               ; preds = %39, %33
-  %44 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !988
-  %45 = and i32 %44, -241, !dbg !989
-  %46 = load ptr, ptr %4, align 4, !dbg !990
-  %47 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %46, i32 0, i32 2, !dbg !991
-  %48 = load i32, ptr %47, align 4, !dbg !991
-  %49 = or i32 %45, %48, !dbg !992
-  store volatile i32 %49, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !993
-  br label %50, !dbg !994
+49:                                               ; preds = %42, %26
+  %50 = load ptr, ptr %4, align 4, !dbg !974
+  %51 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %50, i32 0, i32 0, !dbg !976
+  %52 = load i32, ptr %51, align 4, !dbg !976
+  %53 = and i32 %52, 1, !dbg !977
+  %54 = icmp eq i32 %53, 1, !dbg !978
+  br i1 %54, label %55, label %120, !dbg !979
 
-50:                                               ; preds = %43, %27
-  %51 = load ptr, ptr %4, align 4, !dbg !995
-  %52 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %51, i32 0, i32 0, !dbg !997
-  %53 = load i32, ptr %52, align 4, !dbg !997
-  %54 = and i32 %53, 1, !dbg !998
-  %55 = icmp eq i32 %54, 1, !dbg !999
-  br i1 %55, label %56, label %121, !dbg !1000
+55:                                               ; preds = %49
+  %56 = load ptr, ptr %4, align 4, !dbg !980
+  %57 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %56, i32 0, i32 1, !dbg !983
+  %58 = load i32, ptr %57, align 4, !dbg !983
+  %59 = icmp eq i32 %58, 1, !dbg !984
+  br i1 %59, label %60, label %66, !dbg !985
 
-56:                                               ; preds = %50
-  %57 = load ptr, ptr %4, align 4, !dbg !1001
-  %58 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %57, i32 0, i32 1, !dbg !1004
-  %59 = load i32, ptr %58, align 4, !dbg !1004
-  %60 = icmp eq i32 %59, 1, !dbg !1005
-  br i1 %60, label %61, label %67, !dbg !1006
+60:                                               ; preds = %55
+  %61 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !986
+  %62 = and i32 %61, 131072, !dbg !989
+  %63 = icmp eq i32 %62, 0, !dbg !990
+  br i1 %63, label %64, label %65, !dbg !991
 
-61:                                               ; preds = %56
-  %62 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1007
-  %63 = and i32 %62, 131072, !dbg !1010
-  %64 = icmp eq i32 %63, 0, !dbg !1011
-  br i1 %64, label %65, label %66, !dbg !1012
+64:                                               ; preds = %60
+  store i8 1, ptr %3, align 1, !dbg !992
+  br label %159, !dbg !992
 
-65:                                               ; preds = %61
-  store i8 1, ptr %3, align 1, !dbg !1013
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1013
+65:                                               ; preds = %60
+  br label %96, !dbg !994
 
-66:                                               ; preds = %61
-  br label %97, !dbg !1015
+66:                                               ; preds = %55
+  %67 = load ptr, ptr %4, align 4, !dbg !995
+  %68 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %67, i32 0, i32 1, !dbg !997
+  %69 = load i32, ptr %68, align 4, !dbg !997
+  %70 = icmp eq i32 %69, 2, !dbg !998
+  br i1 %70, label %71, label %77, !dbg !999
 
-67:                                               ; preds = %56
-  %68 = load ptr, ptr %4, align 4, !dbg !1016
-  %69 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %68, i32 0, i32 1, !dbg !1018
-  %70 = load i32, ptr %69, align 4, !dbg !1018
-  %71 = icmp eq i32 %70, 2, !dbg !1019
-  br i1 %71, label %72, label %78, !dbg !1020
+71:                                               ; preds = %66
+  %72 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1000
+  %73 = and i32 %72, 33554432, !dbg !1003
+  %74 = icmp eq i32 %73, 0, !dbg !1004
+  br i1 %74, label %75, label %76, !dbg !1005
 
-72:                                               ; preds = %67
-  %73 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1021
-  %74 = and i32 %73, 33554432, !dbg !1024
-  %75 = icmp eq i32 %74, 0, !dbg !1025
-  br i1 %75, label %76, label %77, !dbg !1026
+75:                                               ; preds = %71
+  store i8 1, ptr %3, align 1, !dbg !1006
+  br label %159, !dbg !1006
 
-76:                                               ; preds = %72
-  store i8 1, ptr %3, align 1, !dbg !1027
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1027
+76:                                               ; preds = %71
+  br label %95, !dbg !1008
 
-77:                                               ; preds = %72
-  br label %96, !dbg !1029
+77:                                               ; preds = %66
+  %78 = load ptr, ptr %4, align 4, !dbg !1009
+  %79 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %78, i32 0, i32 1, !dbg !1011
+  %80 = load i32, ptr %79, align 4, !dbg !1011
+  %81 = icmp eq i32 %80, 3, !dbg !1012
+  br i1 %81, label %82, label %88, !dbg !1013
 
-78:                                               ; preds = %67
-  %79 = load ptr, ptr %4, align 4, !dbg !1030
-  %80 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %79, i32 0, i32 1, !dbg !1032
-  %81 = load i32, ptr %80, align 4, !dbg !1032
-  %82 = icmp eq i32 %81, 3, !dbg !1033
-  br i1 %82, label %83, label %89, !dbg !1034
+82:                                               ; preds = %77
+  %83 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1014
+  %84 = and i32 %83, 131072, !dbg !1017
+  %85 = icmp eq i32 %84, 0, !dbg !1018
+  br i1 %85, label %86, label %87, !dbg !1019
 
-83:                                               ; preds = %78
-  %84 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1035
-  %85 = and i32 %84, 131072, !dbg !1038
-  %86 = icmp eq i32 %85, 0, !dbg !1039
-  br i1 %86, label %87, label %88, !dbg !1040
+86:                                               ; preds = %82
+  store i8 1, ptr %3, align 1, !dbg !1020
+  br label %159, !dbg !1020
 
-87:                                               ; preds = %83
-  store i8 1, ptr %3, align 1, !dbg !1041
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1041
+87:                                               ; preds = %82
+  br label %94, !dbg !1022
 
-88:                                               ; preds = %83
-  br label %95, !dbg !1043
+88:                                               ; preds = %77
+  %89 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1023
+  %90 = and i32 %89, 2, !dbg !1026
+  %91 = icmp eq i32 %90, 0, !dbg !1027
+  br i1 %91, label %92, label %93, !dbg !1028
 
-89:                                               ; preds = %78
-  %90 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1044
-  %91 = and i32 %90, 2, !dbg !1047
-  %92 = icmp eq i32 %91, 0, !dbg !1048
-  br i1 %92, label %93, label %94, !dbg !1049
+92:                                               ; preds = %88
+  store i8 1, ptr %3, align 1, !dbg !1029
+  br label %159, !dbg !1029
 
-93:                                               ; preds = %89
-  store i8 1, ptr %3, align 1, !dbg !1050
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1050
+93:                                               ; preds = %88
+  br label %94
 
-94:                                               ; preds = %89
+94:                                               ; preds = %93, %87
   br label %95
 
-95:                                               ; preds = %94, %88
+95:                                               ; preds = %94, %76
   br label %96
 
-96:                                               ; preds = %95, %77
-  br label %97
+96:                                               ; preds = %95, %65
+  %97 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1031
+  %98 = and i32 %97, -4, !dbg !1032
+  %99 = load ptr, ptr %4, align 4, !dbg !1033
+  %100 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %99, i32 0, i32 1, !dbg !1034
+  %101 = load i32, ptr %100, align 4, !dbg !1034
+  %102 = or i32 %98, %101, !dbg !1035
+  store volatile i32 %102, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1036
+  %103 = call i32 @HAL_GetTick(), !dbg !1037
+  store i32 %103, ptr %6, align 4, !dbg !1038
+  br label %104, !dbg !1039
 
-97:                                               ; preds = %96, %66
-  %98 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1052
-  %99 = and i32 %98, -4, !dbg !1053
-  %100 = load ptr, ptr %4, align 4, !dbg !1054
-  %101 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %100, i32 0, i32 1, !dbg !1055
-  %102 = load i32, ptr %101, align 4, !dbg !1055
-  %103 = or i32 %99, %102, !dbg !1056
-  store volatile i32 %103, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1057
-  %104 = call i32 @HAL_GetTick() #5, !dbg !1058
-  store i32 %104, ptr %6, align 4, !dbg !1059
-  br label %105, !dbg !1060
+104:                                              ; preds = %118, %96
+  %105 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1040
+  %106 = and i32 %105, 12, !dbg !1041
+  %107 = load ptr, ptr %4, align 4, !dbg !1042
+  %108 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %107, i32 0, i32 1, !dbg !1043
+  %109 = load i32, ptr %108, align 4, !dbg !1043
+  %110 = shl i32 %109, 2, !dbg !1044
+  %111 = icmp ne i32 %106, %110, !dbg !1045
+  br i1 %111, label %112, label %119, !dbg !1039
 
-105:                                              ; preds = %119, %97
-  %106 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1061
-  %107 = and i32 %106, 12, !dbg !1062
-  %108 = load ptr, ptr %4, align 4, !dbg !1063
-  %109 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %108, i32 0, i32 1, !dbg !1064
-  %110 = load i32, ptr %109, align 4, !dbg !1064
-  %111 = shl i32 %110, 2, !dbg !1065
-  %112 = icmp ne i32 %107, %111, !dbg !1066
-  br i1 %112, label %113, label %120, !dbg !1060
+112:                                              ; preds = %104
+  %113 = call i32 @HAL_GetTick(), !dbg !1046
+  %114 = load i32, ptr %6, align 4, !dbg !1049
+  %115 = sub i32 %113, %114, !dbg !1050
+  %116 = icmp ugt i32 %115, 5000, !dbg !1051
+  br i1 %116, label %117, label %118, !dbg !1052
 
-113:                                              ; preds = %105
-  %114 = call i32 @HAL_GetTick() #5, !dbg !1067
-  %115 = load i32, ptr %6, align 4, !dbg !1070
-  %116 = sub i32 %114, %115, !dbg !1071
-  %117 = icmp ugt i32 %116, 5000, !dbg !1072
-  br i1 %117, label %118, label %119, !dbg !1073
+117:                                              ; preds = %112
+  store i8 3, ptr %3, align 1, !dbg !1053
+  br label %159, !dbg !1053
 
-118:                                              ; preds = %113
-  store i8 3, ptr %3, align 1, !dbg !1074
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1074
+118:                                              ; preds = %112
+  br label %104, !dbg !1039, !llvm.loop !1055
 
-119:                                              ; preds = %113
-  br label %105, !dbg !1060, !llvm.loop !1076
+119:                                              ; preds = %104
+  br label %120, !dbg !1057
 
-120:                                              ; preds = %105
-  br label %121, !dbg !1078
+120:                                              ; preds = %119, %49
+  %121 = load i32, ptr %5, align 4, !dbg !1058
+  %122 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1060
+  %123 = and i32 %122, 1, !dbg !1061
+  %124 = icmp ult i32 %121, %123, !dbg !1062
+  br i1 %124, label %125, label %136, !dbg !1063
 
-121:                                              ; preds = %120, %50
-  %122 = load i32, ptr %5, align 4, !dbg !1079
-  %123 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1081
-  %124 = and i32 %123, 1, !dbg !1082
-  %125 = icmp ult i32 %122, %124, !dbg !1083
-  br i1 %125, label %126, label %137, !dbg !1084
+125:                                              ; preds = %120
+  %126 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1064
+  %127 = and i32 %126, -2, !dbg !1066
+  %128 = load i32, ptr %5, align 4, !dbg !1067
+  %129 = or i32 %127, %128, !dbg !1068
+  store volatile i32 %129, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1069
+  %130 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1070
+  %131 = and i32 %130, 1, !dbg !1072
+  %132 = load i32, ptr %5, align 4, !dbg !1073
+  %133 = icmp ne i32 %131, %132, !dbg !1074
+  br i1 %133, label %134, label %135, !dbg !1075
 
-126:                                              ; preds = %121
-  %127 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1085
-  %128 = and i32 %127, -2, !dbg !1087
-  %129 = load i32, ptr %5, align 4, !dbg !1088
-  %130 = or i32 %128, %129, !dbg !1089
-  store volatile i32 %130, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1090
-  %131 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1091
-  %132 = and i32 %131, 1, !dbg !1093
-  %133 = load i32, ptr %5, align 4, !dbg !1094
-  %134 = icmp ne i32 %132, %133, !dbg !1095
-  br i1 %134, label %135, label %136, !dbg !1096
+134:                                              ; preds = %125
+  store i8 1, ptr %3, align 1, !dbg !1076
+  br label %159, !dbg !1076
 
-135:                                              ; preds = %126
-  store i8 1, ptr %3, align 1, !dbg !1097
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1097
+135:                                              ; preds = %125
+  br label %136, !dbg !1078
 
-136:                                              ; preds = %126
-  br label %137, !dbg !1099
+136:                                              ; preds = %135, %120
+  %137 = load ptr, ptr %4, align 4, !dbg !1079
+  %138 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %137, i32 0, i32 0, !dbg !1081
+  %139 = load i32, ptr %138, align 4, !dbg !1081
+  %140 = and i32 %139, 4, !dbg !1082
+  %141 = icmp eq i32 %140, 4, !dbg !1083
+  br i1 %141, label %142, label %149, !dbg !1084
 
-137:                                              ; preds = %136, %121
-  %138 = load ptr, ptr %4, align 4, !dbg !1100
-  %139 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %138, i32 0, i32 0, !dbg !1102
-  %140 = load i32, ptr %139, align 4, !dbg !1102
-  %141 = and i32 %140, 4, !dbg !1103
-  %142 = icmp eq i32 %141, 4, !dbg !1104
-  br i1 %142, label %143, label %150, !dbg !1105
+142:                                              ; preds = %136
+  %143 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1085
+  %144 = and i32 %143, -1793, !dbg !1087
+  %145 = load ptr, ptr %4, align 4, !dbg !1088
+  %146 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %145, i32 0, i32 3, !dbg !1089
+  %147 = load i32, ptr %146, align 4, !dbg !1089
+  %148 = or i32 %144, %147, !dbg !1090
+  store volatile i32 %148, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1091
+  br label %149, !dbg !1092
 
-143:                                              ; preds = %137
-  %144 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1106
-  %145 = and i32 %144, -1793, !dbg !1108
-  %146 = load ptr, ptr %4, align 4, !dbg !1109
-  %147 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %146, i32 0, i32 3, !dbg !1110
-  %148 = load i32, ptr %147, align 4, !dbg !1110
-  %149 = or i32 %145, %148, !dbg !1111
-  store volatile i32 %149, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1112
-  br label %150, !dbg !1113
+149:                                              ; preds = %142, %136
+  %150 = call i32 @HAL_RCC_GetSysClockFreq(), !dbg !1093
+  %151 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1094
+  %152 = and i32 %151, 240, !dbg !1095
+  %153 = lshr i32 %152, 4, !dbg !1096
+  %154 = getelementptr inbounds [16 x i8], ptr @AHBPrescTable, i32 0, i32 %153, !dbg !1097
+  %155 = load i8, ptr %154, align 1, !dbg !1097
+  %156 = zext i8 %155 to i32, !dbg !1097
+  %157 = lshr i32 %150, %156, !dbg !1098
+  store i32 %157, ptr @SystemCoreClock, align 4, !dbg !1099
+  %158 = call zeroext i8 @HAL_InitTick(i32 noundef 3), !dbg !1100
+  store i8 0, ptr %3, align 1, !dbg !1101
+  br label %159, !dbg !1101
 
-150:                                              ; preds = %143, %137
-  %151 = call i32 @HAL_RCC_GetSysClockFreq() #5, !dbg !1114
-  %152 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1115
-  %153 = and i32 %152, 240, !dbg !1116
-  %154 = lshr i32 %153, 4, !dbg !1117
-  %155 = getelementptr inbounds [16 x i8], ptr @AHBPrescTable, i32 0, i32 %154, !dbg !1118
-  %156 = load i8, ptr %155, align 1, !dbg !1118
-  %157 = zext i8 %156 to i32, !dbg !1118
-  %158 = lshr i32 %151, %157, !dbg !1119
-  store i32 %158, ptr @SystemCoreClock, align 4, !dbg !1120
-  %159 = call zeroext i8 @HAL_InitTick(i32 noundef 3) #5, !dbg !1121
-  store i8 0, ptr %3, align 1, !dbg !1122
-  store i32 1, ptr %7, align 4
-  br label %160, !dbg !1122
-
-160:                                              ; preds = %150, %135, %118, %93, %87, %76, %65, %25, %10
-  call void @llvm.lifetime.end.p0(i64 4, ptr %6) #4, !dbg !1123
-  %161 = load i8, ptr %3, align 1, !dbg !1123
-  ret i8 %161, !dbg !1123
+159:                                              ; preds = %149, %134, %117, %92, %86, %75, %64, %24, %9
+  %160 = load i8, ptr %3, align 1, !dbg !1102
+  ret i8 %160, !dbg !1102
 }
 
-; Function Attrs: nounwind optsize
+; Function Attrs: noinline nounwind optnone
 define hidden i32 @HAL_RCC_GetSysClockFreq() #0 !dbg !2 {
   %1 = alloca i32, align 4
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   %5 = alloca i32, align 4
-  call void @llvm.lifetime.start.p0(i64 4, ptr %1) #4, !dbg !1124
-  call void @llvm.dbg.declare(metadata ptr %1, metadata !98, metadata !DIExpression()), !dbg !1125
-  store i32 0, ptr %1, align 4, !dbg !1125
-  call void @llvm.lifetime.start.p0(i64 4, ptr %2) #4, !dbg !1124
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !99, metadata !DIExpression()), !dbg !1126
-  store i32 0, ptr %2, align 4, !dbg !1126
-  call void @llvm.lifetime.start.p0(i64 4, ptr %3) #4, !dbg !1124
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !100, metadata !DIExpression()), !dbg !1127
-  store i32 0, ptr %3, align 4, !dbg !1127
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #4, !dbg !1124
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !101, metadata !DIExpression()), !dbg !1128
-  store i32 0, ptr %4, align 4, !dbg !1128
-  call void @llvm.lifetime.start.p0(i64 4, ptr %5) #4, !dbg !1129
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !102, metadata !DIExpression()), !dbg !1130
-  store i32 0, ptr %5, align 4, !dbg !1130
-  %6 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1131
-  store i32 %6, ptr %1, align 4, !dbg !1132
-  %7 = load i32, ptr %1, align 4, !dbg !1133
-  %8 = and i32 %7, 12, !dbg !1134
+  call void @llvm.dbg.declare(metadata ptr %1, metadata !1103, metadata !DIExpression()), !dbg !1104
+  store i32 0, ptr %1, align 4, !dbg !1104
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !1105, metadata !DIExpression()), !dbg !1106
+  store i32 0, ptr %2, align 4, !dbg !1106
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !1107, metadata !DIExpression()), !dbg !1108
+  store i32 0, ptr %3, align 4, !dbg !1108
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !1109, metadata !DIExpression()), !dbg !1110
+  store i32 0, ptr %4, align 4, !dbg !1110
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !1111, metadata !DIExpression()), !dbg !1112
+  store i32 0, ptr %5, align 4, !dbg !1112
+  %6 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1113
+  store i32 %6, ptr %1, align 4, !dbg !1114
+  %7 = load i32, ptr %1, align 4, !dbg !1115
+  %8 = and i32 %7, 12, !dbg !1116
   switch i32 %8, label %65 [
     i32 4, label %9
     i32 8, label %10
     i32 12, label %63
     i32 0, label %64
-  ], !dbg !1135
+  ], !dbg !1117
 
 9:                                                ; preds = %0
-  store i32 8000000, ptr %5, align 4, !dbg !1136
-  br label %66, !dbg !1139
+  store i32 8000000, ptr %5, align 4, !dbg !1118
+  br label %66, !dbg !1121
 
 10:                                               ; preds = %0
-  %11 = load i32, ptr %1, align 4, !dbg !1140
-  %12 = and i32 %11, 3932160, !dbg !1142
-  %13 = lshr i32 %12, 18, !dbg !1143
-  %14 = getelementptr inbounds [16 x i8], ptr @HAL_RCC_GetSysClockFreq.aPLLMULFactorTable, i32 0, i32 %13, !dbg !1144
-  %15 = load i8, ptr %14, align 1, !dbg !1144
-  %16 = zext i8 %15 to i32, !dbg !1144
-  store i32 %16, ptr %4, align 4, !dbg !1145
-  %17 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !1146
-  %18 = and i32 %17, 15, !dbg !1147
-  %19 = lshr i32 %18, 0, !dbg !1148
-  %20 = getelementptr inbounds [16 x i8], ptr @HAL_RCC_GetSysClockFreq.aPredivFactorTable, i32 0, i32 %19, !dbg !1149
-  %21 = load i8, ptr %20, align 1, !dbg !1149
-  %22 = zext i8 %21 to i32, !dbg !1149
-  store i32 %22, ptr %2, align 4, !dbg !1150
-  %23 = load i32, ptr %1, align 4, !dbg !1151
-  %24 = and i32 %23, 98304, !dbg !1153
-  %25 = icmp eq i32 %24, 65536, !dbg !1154
-  br i1 %25, label %26, label %36, !dbg !1155
+  %11 = load i32, ptr %1, align 4, !dbg !1122
+  %12 = and i32 %11, 3932160, !dbg !1124
+  %13 = lshr i32 %12, 18, !dbg !1125
+  %14 = getelementptr inbounds [16 x i8], ptr @HAL_RCC_GetSysClockFreq.aPLLMULFactorTable, i32 0, i32 %13, !dbg !1126
+  %15 = load i8, ptr %14, align 1, !dbg !1126
+  %16 = zext i8 %15 to i32, !dbg !1126
+  store i32 %16, ptr %4, align 4, !dbg !1127
+  %17 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !1128
+  %18 = and i32 %17, 15, !dbg !1129
+  %19 = lshr i32 %18, 0, !dbg !1130
+  %20 = getelementptr inbounds [16 x i8], ptr @HAL_RCC_GetSysClockFreq.aPredivFactorTable, i32 0, i32 %19, !dbg !1131
+  %21 = load i8, ptr %20, align 1, !dbg !1131
+  %22 = zext i8 %21 to i32, !dbg !1131
+  store i32 %22, ptr %2, align 4, !dbg !1132
+  %23 = load i32, ptr %1, align 4, !dbg !1133
+  %24 = and i32 %23, 98304, !dbg !1135
+  %25 = icmp eq i32 %24, 65536, !dbg !1136
+  br i1 %25, label %26, label %36, !dbg !1137
 
 26:                                               ; preds = %10
-  %27 = load i32, ptr %2, align 4, !dbg !1156
-  %28 = zext i32 %27 to i64, !dbg !1158
-  %29 = udiv i64 8000000, %28, !dbg !1159
-  %30 = trunc i64 %29 to i32, !dbg !1160
-  %31 = zext i32 %30 to i64, !dbg !1160
-  %32 = load i32, ptr %4, align 4, !dbg !1161
-  %33 = zext i32 %32 to i64, !dbg !1162
-  %34 = mul i64 %31, %33, !dbg !1163
-  %35 = trunc i64 %34 to i32, !dbg !1160
-  store i32 %35, ptr %3, align 4, !dbg !1164
-  br label %61, !dbg !1165
+  %27 = load i32, ptr %2, align 4, !dbg !1138
+  %28 = zext i32 %27 to i64, !dbg !1140
+  %29 = udiv i64 8000000, %28, !dbg !1141
+  %30 = trunc i64 %29 to i32, !dbg !1142
+  %31 = zext i32 %30 to i64, !dbg !1142
+  %32 = load i32, ptr %4, align 4, !dbg !1143
+  %33 = zext i32 %32 to i64, !dbg !1144
+  %34 = mul i64 %31, %33, !dbg !1145
+  %35 = trunc i64 %34 to i32, !dbg !1142
+  store i32 %35, ptr %3, align 4, !dbg !1146
+  br label %61, !dbg !1147
 
 36:                                               ; preds = %10
-  %37 = load i32, ptr %1, align 4, !dbg !1166
-  %38 = and i32 %37, 98304, !dbg !1168
-  %39 = icmp eq i32 %38, 98304, !dbg !1169
-  br i1 %39, label %40, label %50, !dbg !1170
+  %37 = load i32, ptr %1, align 4, !dbg !1148
+  %38 = and i32 %37, 98304, !dbg !1150
+  %39 = icmp eq i32 %38, 98304, !dbg !1151
+  br i1 %39, label %40, label %50, !dbg !1152
 
 40:                                               ; preds = %36
-  %41 = load i32, ptr %2, align 4, !dbg !1171
-  %42 = zext i32 %41 to i64, !dbg !1173
-  %43 = udiv i64 48000000, %42, !dbg !1174
-  %44 = trunc i64 %43 to i32, !dbg !1175
-  %45 = zext i32 %44 to i64, !dbg !1175
-  %46 = load i32, ptr %4, align 4, !dbg !1176
-  %47 = zext i32 %46 to i64, !dbg !1177
-  %48 = mul i64 %45, %47, !dbg !1178
-  %49 = trunc i64 %48 to i32, !dbg !1175
-  store i32 %49, ptr %3, align 4, !dbg !1179
-  br label %60, !dbg !1180
+  %41 = load i32, ptr %2, align 4, !dbg !1153
+  %42 = zext i32 %41 to i64, !dbg !1155
+  %43 = udiv i64 48000000, %42, !dbg !1156
+  %44 = trunc i64 %43 to i32, !dbg !1157
+  %45 = zext i32 %44 to i64, !dbg !1157
+  %46 = load i32, ptr %4, align 4, !dbg !1158
+  %47 = zext i32 %46 to i64, !dbg !1159
+  %48 = mul i64 %45, %47, !dbg !1160
+  %49 = trunc i64 %48 to i32, !dbg !1157
+  store i32 %49, ptr %3, align 4, !dbg !1161
+  br label %60, !dbg !1162
 
 50:                                               ; preds = %36
-  %51 = load i32, ptr %2, align 4, !dbg !1181
-  %52 = zext i32 %51 to i64, !dbg !1183
-  %53 = udiv i64 8000000, %52, !dbg !1184
-  %54 = trunc i64 %53 to i32, !dbg !1185
-  %55 = zext i32 %54 to i64, !dbg !1185
-  %56 = load i32, ptr %4, align 4, !dbg !1186
-  %57 = zext i32 %56 to i64, !dbg !1187
-  %58 = mul i64 %55, %57, !dbg !1188
-  %59 = trunc i64 %58 to i32, !dbg !1185
-  store i32 %59, ptr %3, align 4, !dbg !1189
+  %51 = load i32, ptr %2, align 4, !dbg !1163
+  %52 = zext i32 %51 to i64, !dbg !1165
+  %53 = udiv i64 8000000, %52, !dbg !1166
+  %54 = trunc i64 %53 to i32, !dbg !1167
+  %55 = zext i32 %54 to i64, !dbg !1167
+  %56 = load i32, ptr %4, align 4, !dbg !1168
+  %57 = zext i32 %56 to i64, !dbg !1169
+  %58 = mul i64 %55, %57, !dbg !1170
+  %59 = trunc i64 %58 to i32, !dbg !1167
+  store i32 %59, ptr %3, align 4, !dbg !1171
   br label %60
 
 60:                                               ; preds = %50, %40
   br label %61
 
 61:                                               ; preds = %60, %26
-  %62 = load i32, ptr %3, align 4, !dbg !1190
-  store i32 %62, ptr %5, align 4, !dbg !1191
-  br label %66, !dbg !1192
+  %62 = load i32, ptr %3, align 4, !dbg !1172
+  store i32 %62, ptr %5, align 4, !dbg !1173
+  br label %66, !dbg !1174
 
 63:                                               ; preds = %0
-  store i32 48000000, ptr %5, align 4, !dbg !1193
-  br label %66, !dbg !1195
+  store i32 48000000, ptr %5, align 4, !dbg !1175
+  br label %66, !dbg !1177
 
 64:                                               ; preds = %0
-  br label %65, !dbg !1196
+  br label %65, !dbg !1178
 
 65:                                               ; preds = %0, %64
-  store i32 8000000, ptr %5, align 4, !dbg !1197
-  br label %66, !dbg !1199
+  store i32 8000000, ptr %5, align 4, !dbg !1179
+  br label %66, !dbg !1181
 
 66:                                               ; preds = %65, %63, %61, %9
-  %67 = load i32, ptr %5, align 4, !dbg !1200
-  call void @llvm.lifetime.end.p0(i64 4, ptr %5) #4, !dbg !1201
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #4, !dbg !1201
-  call void @llvm.lifetime.end.p0(i64 4, ptr %3) #4, !dbg !1201
-  call void @llvm.lifetime.end.p0(i64 4, ptr %2) #4, !dbg !1201
-  call void @llvm.lifetime.end.p0(i64 4, ptr %1) #4, !dbg !1201
-  ret i32 %67, !dbg !1202
+  %67 = load i32, ptr %5, align 4, !dbg !1182
+  ret i32 %67, !dbg !1183
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_RCC_MCOConfig(i32 noundef %0, i32 noundef %1, i32 noundef %2) #0 !dbg !1203 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_RCC_MCOConfig(i32 noundef %0, i32 noundef %1, i32 noundef %2) #0 !dbg !1184 {
   %4 = alloca i32, align 4
   %5 = alloca i32, align 4
   %6 = alloca i32, align 4
   %7 = alloca %struct.GPIO_InitTypeDef, align 4
   %8 = alloca i32, align 4
   store i32 %0, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !1207, metadata !DIExpression()), !dbg !1222
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !1187, metadata !DIExpression()), !dbg !1188
   store i32 %1, ptr %5, align 4
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !1208, metadata !DIExpression()), !dbg !1223
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !1189, metadata !DIExpression()), !dbg !1190
   store i32 %2, ptr %6, align 4
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !1209, metadata !DIExpression()), !dbg !1224
-  call void @llvm.lifetime.start.p0(i64 20, ptr %7) #4, !dbg !1225
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !1210, metadata !DIExpression()), !dbg !1226
-  %9 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 1, !dbg !1227
-  store i32 2, ptr %9, align 4, !dbg !1228
-  %10 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 3, !dbg !1229
-  store i32 3, ptr %10, align 4, !dbg !1230
-  %11 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 2, !dbg !1231
-  store i32 0, ptr %11, align 4, !dbg !1232
-  %12 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 0, !dbg !1233
-  store i32 256, ptr %12, align 4, !dbg !1234
-  %13 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 4, !dbg !1235
-  store i32 0, ptr %13, align 4, !dbg !1236
-  br label %14, !dbg !1237
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !1191, metadata !DIExpression()), !dbg !1192
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !1193, metadata !DIExpression()), !dbg !1203
+  %9 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 1, !dbg !1204
+  store i32 2, ptr %9, align 4, !dbg !1205
+  %10 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 3, !dbg !1206
+  store i32 3, ptr %10, align 4, !dbg !1207
+  %11 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 2, !dbg !1208
+  store i32 0, ptr %11, align 4, !dbg !1209
+  %12 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 0, !dbg !1210
+  store i32 256, ptr %12, align 4, !dbg !1211
+  %13 = getelementptr inbounds %struct.GPIO_InitTypeDef, ptr %7, i32 0, i32 4, !dbg !1212
+  store i32 0, ptr %13, align 4, !dbg !1213
+  br label %14, !dbg !1214
 
 14:                                               ; preds = %3
-  call void @llvm.lifetime.start.p0(i64 4, ptr %8) #4, !dbg !1238
-  call void @llvm.dbg.declare(metadata ptr %8, metadata !1220, metadata !DIExpression()), !dbg !1239
-  %15 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 5), align 4, !dbg !1240
-  %16 = or i32 %15, 131072, !dbg !1240
-  store volatile i32 %16, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 5), align 4, !dbg !1240
-  %17 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 5), align 4, !dbg !1241
-  %18 = and i32 %17, 131072, !dbg !1242
-  store volatile i32 %18, ptr %8, align 4, !dbg !1243
-  %19 = load volatile i32, ptr %8, align 4, !dbg !1244
-  call void @llvm.lifetime.end.p0(i64 4, ptr %8) #4, !dbg !1245
-  br label %20, !dbg !1246
+  call void @llvm.dbg.declare(metadata ptr %8, metadata !1215, metadata !DIExpression()), !dbg !1217
+  %15 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 5), align 4, !dbg !1218
+  %16 = or i32 %15, 131072, !dbg !1218
+  store volatile i32 %16, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 5), align 4, !dbg !1218
+  %17 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 5), align 4, !dbg !1219
+  %18 = and i32 %17, 131072, !dbg !1220
+  store volatile i32 %18, ptr %8, align 4, !dbg !1221
+  %19 = load volatile i32, ptr %8, align 4, !dbg !1222
+  br label %20, !dbg !1223
 
 20:                                               ; preds = %14
-  br label %21, !dbg !1246
-
-21:                                               ; preds = %20
-  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1207959552 to ptr), ptr noundef %7) #5, !dbg !1247
-  %22 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1248
-  %23 = and i32 %22, -2130706433, !dbg !1249
-  %24 = load i32, ptr %5, align 4, !dbg !1250
-  %25 = load i32, ptr %6, align 4, !dbg !1251
-  %26 = or i32 %24, %25, !dbg !1252
-  %27 = or i32 %23, %26, !dbg !1253
-  store volatile i32 %27, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1254
-  call void @llvm.lifetime.end.p0(i64 20, ptr %7) #4, !dbg !1255
-  ret void, !dbg !1255
+  call void @HAL_GPIO_Init(ptr noundef inttoptr (i32 1207959552 to ptr), ptr noundef %7), !dbg !1224
+  %21 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1225
+  %22 = and i32 %21, -2130706433, !dbg !1226
+  %23 = load i32, ptr %5, align 4, !dbg !1227
+  %24 = load i32, ptr %6, align 4, !dbg !1228
+  %25 = or i32 %23, %24, !dbg !1229
+  %26 = or i32 %22, %25, !dbg !1230
+  store volatile i32 %26, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1231
+  ret void, !dbg !1232
 }
 
-; Function Attrs: optsize
-declare !dbg !1256 dso_local void @HAL_GPIO_Init(ptr noundef, ptr noundef) #3
+declare void @HAL_GPIO_Init(ptr noundef, ptr noundef) #2
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_RCC_EnableCSS() #0 !dbg !1260 {
-  %1 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1263
-  %2 = or i32 %1, 524288, !dbg !1263
-  store volatile i32 %2, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1263
-  ret void, !dbg !1264
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_RCC_EnableCSS() #0 !dbg !1233 {
+  %1 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1236
+  %2 = or i32 %1, 524288, !dbg !1236
+  store volatile i32 %2, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1236
+  ret void, !dbg !1237
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_RCC_DisableCSS() #0 !dbg !1265 {
-  %1 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1266
-  %2 = and i32 %1, -524289, !dbg !1266
-  store volatile i32 %2, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1266
-  ret void, !dbg !1267
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_RCC_DisableCSS() #0 !dbg !1238 {
+  %1 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1239
+  %2 = and i32 %1, -524289, !dbg !1239
+  store volatile i32 %2, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1239
+  ret void, !dbg !1240
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_RCC_GetHCLKFreq() #0 !dbg !1268 {
-  %1 = load i32, ptr @SystemCoreClock, align 4, !dbg !1269
-  ret i32 %1, !dbg !1270
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_RCC_GetHCLKFreq() #0 !dbg !1241 {
+  %1 = load i32, ptr @SystemCoreClock, align 4, !dbg !1242
+  ret i32 %1, !dbg !1243
 }
 
-; Function Attrs: nounwind optsize
-define hidden i32 @HAL_RCC_GetPCLK1Freq() #0 !dbg !1271 {
-  %1 = call i32 @HAL_RCC_GetHCLKFreq() #5, !dbg !1272
-  %2 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1273
-  %3 = and i32 %2, 1792, !dbg !1274
-  %4 = lshr i32 %3, 8, !dbg !1275
-  %5 = getelementptr inbounds [8 x i8], ptr @APBPrescTable, i32 0, i32 %4, !dbg !1276
-  %6 = load i8, ptr %5, align 1, !dbg !1276
-  %7 = zext i8 %6 to i32, !dbg !1276
-  %8 = lshr i32 %1, %7, !dbg !1277
-  ret i32 %8, !dbg !1278
+; Function Attrs: noinline nounwind optnone
+define hidden i32 @HAL_RCC_GetPCLK1Freq() #0 !dbg !1244 {
+  %1 = call i32 @HAL_RCC_GetHCLKFreq(), !dbg !1245
+  %2 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1246
+  %3 = and i32 %2, 1792, !dbg !1247
+  %4 = lshr i32 %3, 8, !dbg !1248
+  %5 = getelementptr inbounds [8 x i8], ptr @APBPrescTable, i32 0, i32 %4, !dbg !1249
+  %6 = load i8, ptr %5, align 1, !dbg !1249
+  %7 = zext i8 %6 to i32, !dbg !1249
+  %8 = lshr i32 %1, %7, !dbg !1250
+  ret i32 %8, !dbg !1251
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_RCC_GetOscConfig(ptr noundef %0) #0 !dbg !1279 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_RCC_GetOscConfig(ptr noundef %0) #0 !dbg !1252 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !1283, metadata !DIExpression()), !dbg !1284
-  %3 = load ptr, ptr %2, align 4, !dbg !1285
-  %4 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %3, i32 0, i32 0, !dbg !1286
-  store i32 31, ptr %4, align 4, !dbg !1287
-  %5 = load ptr, ptr %2, align 4, !dbg !1288
-  %6 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %5, i32 0, i32 0, !dbg !1289
-  %7 = load i32, ptr %6, align 4, !dbg !1290
-  %8 = or i32 %7, 32, !dbg !1290
-  store i32 %8, ptr %6, align 4, !dbg !1290
-  %9 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1291
-  %10 = and i32 %9, 262144, !dbg !1293
-  %11 = icmp eq i32 %10, 262144, !dbg !1294
-  br i1 %11, label %12, label %15, !dbg !1295
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !1255, metadata !DIExpression()), !dbg !1256
+  %3 = load ptr, ptr %2, align 4, !dbg !1257
+  %4 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %3, i32 0, i32 0, !dbg !1258
+  store i32 31, ptr %4, align 4, !dbg !1259
+  %5 = load ptr, ptr %2, align 4, !dbg !1260
+  %6 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %5, i32 0, i32 0, !dbg !1261
+  %7 = load i32, ptr %6, align 4, !dbg !1262
+  %8 = or i32 %7, 32, !dbg !1262
+  store i32 %8, ptr %6, align 4, !dbg !1262
+  %9 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1263
+  %10 = and i32 %9, 262144, !dbg !1265
+  %11 = icmp eq i32 %10, 262144, !dbg !1266
+  br i1 %11, label %12, label %15, !dbg !1267
 
 12:                                               ; preds = %1
-  %13 = load ptr, ptr %2, align 4, !dbg !1296
-  %14 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %13, i32 0, i32 1, !dbg !1298
-  store i32 5, ptr %14, align 4, !dbg !1299
-  br label %26, !dbg !1300
+  %13 = load ptr, ptr %2, align 4, !dbg !1268
+  %14 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %13, i32 0, i32 1, !dbg !1270
+  store i32 5, ptr %14, align 4, !dbg !1271
+  br label %26, !dbg !1272
 
 15:                                               ; preds = %1
-  %16 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1301
-  %17 = and i32 %16, 65536, !dbg !1303
-  %18 = icmp eq i32 %17, 65536, !dbg !1304
-  br i1 %18, label %19, label %22, !dbg !1305
+  %16 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1273
+  %17 = and i32 %16, 65536, !dbg !1275
+  %18 = icmp eq i32 %17, 65536, !dbg !1276
+  br i1 %18, label %19, label %22, !dbg !1277
 
 19:                                               ; preds = %15
-  %20 = load ptr, ptr %2, align 4, !dbg !1306
-  %21 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %20, i32 0, i32 1, !dbg !1308
-  store i32 1, ptr %21, align 4, !dbg !1309
-  br label %25, !dbg !1310
+  %20 = load ptr, ptr %2, align 4, !dbg !1278
+  %21 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %20, i32 0, i32 1, !dbg !1280
+  store i32 1, ptr %21, align 4, !dbg !1281
+  br label %25, !dbg !1282
 
 22:                                               ; preds = %15
-  %23 = load ptr, ptr %2, align 4, !dbg !1311
-  %24 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %23, i32 0, i32 1, !dbg !1313
-  store i32 0, ptr %24, align 4, !dbg !1314
+  %23 = load ptr, ptr %2, align 4, !dbg !1283
+  %24 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %23, i32 0, i32 1, !dbg !1285
+  store i32 0, ptr %24, align 4, !dbg !1286
   br label %25
 
 25:                                               ; preds = %22, %19
   br label %26
 
 26:                                               ; preds = %25, %12
-  %27 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1315
-  %28 = and i32 %27, 1, !dbg !1317
-  %29 = icmp eq i32 %28, 1, !dbg !1318
-  br i1 %29, label %30, label %33, !dbg !1319
+  %27 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1287
+  %28 = and i32 %27, 1, !dbg !1289
+  %29 = icmp eq i32 %28, 1, !dbg !1290
+  br i1 %29, label %30, label %33, !dbg !1291
 
 30:                                               ; preds = %26
-  %31 = load ptr, ptr %2, align 4, !dbg !1320
-  %32 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %31, i32 0, i32 3, !dbg !1322
-  store i32 1, ptr %32, align 4, !dbg !1323
-  br label %36, !dbg !1324
+  %31 = load ptr, ptr %2, align 4, !dbg !1292
+  %32 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %31, i32 0, i32 3, !dbg !1294
+  store i32 1, ptr %32, align 4, !dbg !1295
+  br label %36, !dbg !1296
 
 33:                                               ; preds = %26
-  %34 = load ptr, ptr %2, align 4, !dbg !1325
-  %35 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %34, i32 0, i32 3, !dbg !1327
-  store i32 0, ptr %35, align 4, !dbg !1328
+  %34 = load ptr, ptr %2, align 4, !dbg !1297
+  %35 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %34, i32 0, i32 3, !dbg !1299
+  store i32 0, ptr %35, align 4, !dbg !1300
   br label %36
 
 36:                                               ; preds = %33, %30
-  %37 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1329
-  %38 = and i32 %37, 248, !dbg !1330
-  %39 = lshr i32 %38, 3, !dbg !1331
-  %40 = load ptr, ptr %2, align 4, !dbg !1332
-  %41 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %40, i32 0, i32 4, !dbg !1333
-  store i32 %39, ptr %41, align 4, !dbg !1334
-  %42 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !1335
-  %43 = and i32 %42, 4, !dbg !1337
-  %44 = icmp eq i32 %43, 4, !dbg !1338
-  br i1 %44, label %45, label %48, !dbg !1339
+  %37 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1301
+  %38 = and i32 %37, 248, !dbg !1302
+  %39 = lshr i32 %38, 3, !dbg !1303
+  %40 = load ptr, ptr %2, align 4, !dbg !1304
+  %41 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %40, i32 0, i32 4, !dbg !1305
+  store i32 %39, ptr %41, align 4, !dbg !1306
+  %42 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !1307
+  %43 = and i32 %42, 4, !dbg !1309
+  %44 = icmp eq i32 %43, 4, !dbg !1310
+  br i1 %44, label %45, label %48, !dbg !1311
 
 45:                                               ; preds = %36
-  %46 = load ptr, ptr %2, align 4, !dbg !1340
-  %47 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %46, i32 0, i32 2, !dbg !1342
-  store i32 5, ptr %47, align 4, !dbg !1343
-  br label %59, !dbg !1344
+  %46 = load ptr, ptr %2, align 4, !dbg !1312
+  %47 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %46, i32 0, i32 2, !dbg !1314
+  store i32 5, ptr %47, align 4, !dbg !1315
+  br label %59, !dbg !1316
 
 48:                                               ; preds = %36
-  %49 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !1345
-  %50 = and i32 %49, 1, !dbg !1347
-  %51 = icmp eq i32 %50, 1, !dbg !1348
-  br i1 %51, label %52, label %55, !dbg !1349
+  %49 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 8), align 4, !dbg !1317
+  %50 = and i32 %49, 1, !dbg !1319
+  %51 = icmp eq i32 %50, 1, !dbg !1320
+  br i1 %51, label %52, label %55, !dbg !1321
 
 52:                                               ; preds = %48
-  %53 = load ptr, ptr %2, align 4, !dbg !1350
-  %54 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %53, i32 0, i32 2, !dbg !1352
-  store i32 1, ptr %54, align 4, !dbg !1353
-  br label %58, !dbg !1354
+  %53 = load ptr, ptr %2, align 4, !dbg !1322
+  %54 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %53, i32 0, i32 2, !dbg !1324
+  store i32 1, ptr %54, align 4, !dbg !1325
+  br label %58, !dbg !1326
 
 55:                                               ; preds = %48
-  %56 = load ptr, ptr %2, align 4, !dbg !1355
-  %57 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %56, i32 0, i32 2, !dbg !1357
-  store i32 0, ptr %57, align 4, !dbg !1358
+  %56 = load ptr, ptr %2, align 4, !dbg !1327
+  %57 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %56, i32 0, i32 2, !dbg !1329
+  store i32 0, ptr %57, align 4, !dbg !1330
   br label %58
 
 58:                                               ; preds = %55, %52
   br label %59
 
 59:                                               ; preds = %58, %45
-  %60 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !1359
-  %61 = and i32 %60, 1, !dbg !1361
-  %62 = icmp eq i32 %61, 1, !dbg !1362
-  br i1 %62, label %63, label %66, !dbg !1363
+  %60 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 9), align 4, !dbg !1331
+  %61 = and i32 %60, 1, !dbg !1333
+  %62 = icmp eq i32 %61, 1, !dbg !1334
+  br i1 %62, label %63, label %66, !dbg !1335
 
 63:                                               ; preds = %59
-  %64 = load ptr, ptr %2, align 4, !dbg !1364
-  %65 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %64, i32 0, i32 7, !dbg !1366
-  store i32 1, ptr %65, align 4, !dbg !1367
-  br label %69, !dbg !1368
+  %64 = load ptr, ptr %2, align 4, !dbg !1336
+  %65 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %64, i32 0, i32 7, !dbg !1338
+  store i32 1, ptr %65, align 4, !dbg !1339
+  br label %69, !dbg !1340
 
 66:                                               ; preds = %59
-  %67 = load ptr, ptr %2, align 4, !dbg !1369
-  %68 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %67, i32 0, i32 7, !dbg !1371
-  store i32 0, ptr %68, align 4, !dbg !1372
+  %67 = load ptr, ptr %2, align 4, !dbg !1341
+  %68 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %67, i32 0, i32 7, !dbg !1343
+  store i32 0, ptr %68, align 4, !dbg !1344
   br label %69
 
 69:                                               ; preds = %66, %63
-  %70 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1373
-  %71 = and i32 %70, 1, !dbg !1375
-  %72 = icmp eq i32 %71, 1, !dbg !1376
-  br i1 %72, label %73, label %76, !dbg !1377
+  %70 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1345
+  %71 = and i32 %70, 1, !dbg !1347
+  %72 = icmp eq i32 %71, 1, !dbg !1348
+  br i1 %72, label %73, label %76, !dbg !1349
 
 73:                                               ; preds = %69
-  %74 = load ptr, ptr %2, align 4, !dbg !1378
-  %75 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %74, i32 0, i32 5, !dbg !1380
-  store i32 1, ptr %75, align 4, !dbg !1381
-  br label %79, !dbg !1382
+  %74 = load ptr, ptr %2, align 4, !dbg !1350
+  %75 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %74, i32 0, i32 5, !dbg !1352
+  store i32 1, ptr %75, align 4, !dbg !1353
+  br label %79, !dbg !1354
 
 76:                                               ; preds = %69
-  %77 = load ptr, ptr %2, align 4, !dbg !1383
-  %78 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %77, i32 0, i32 5, !dbg !1385
-  store i32 0, ptr %78, align 4, !dbg !1386
+  %77 = load ptr, ptr %2, align 4, !dbg !1355
+  %78 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %77, i32 0, i32 5, !dbg !1357
+  store i32 0, ptr %78, align 4, !dbg !1358
   br label %79
 
 79:                                               ; preds = %76, %73
-  %80 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1387
-  %81 = and i32 %80, 248, !dbg !1388
-  %82 = lshr i32 %81, 3, !dbg !1389
-  %83 = load ptr, ptr %2, align 4, !dbg !1390
-  %84 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %83, i32 0, i32 6, !dbg !1391
-  store i32 %82, ptr %84, align 4, !dbg !1392
-  %85 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1393
-  %86 = and i32 %85, 65536, !dbg !1394
-  %87 = icmp ne i32 %86, 0, !dbg !1395
-  %88 = zext i1 %87 to i64, !dbg !1396
-  %89 = select i1 %87, i32 1, i32 0, !dbg !1396
-  %90 = load ptr, ptr %2, align 4, !dbg !1397
-  %91 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %90, i32 0, i32 8, !dbg !1398
-  store i32 %89, ptr %91, align 4, !dbg !1399
-  %92 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1400
-  %93 = and i32 %92, 16777216, !dbg !1402
-  %94 = icmp eq i32 %93, 16777216, !dbg !1403
-  br i1 %94, label %95, label %99, !dbg !1404
+  %80 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1359
+  %81 = and i32 %80, 248, !dbg !1360
+  %82 = lshr i32 %81, 3, !dbg !1361
+  %83 = load ptr, ptr %2, align 4, !dbg !1362
+  %84 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %83, i32 0, i32 6, !dbg !1363
+  store i32 %82, ptr %84, align 4, !dbg !1364
+  %85 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 13), align 4, !dbg !1365
+  %86 = and i32 %85, 65536, !dbg !1366
+  %87 = icmp ne i32 %86, 0, !dbg !1367
+  %88 = zext i1 %87 to i64, !dbg !1368
+  %89 = select i1 %87, i32 1, i32 0, !dbg !1368
+  %90 = load ptr, ptr %2, align 4, !dbg !1369
+  %91 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %90, i32 0, i32 8, !dbg !1370
+  store i32 %89, ptr %91, align 4, !dbg !1371
+  %92 = load volatile i32, ptr inttoptr (i32 1073876992 to ptr), align 4, !dbg !1372
+  %93 = and i32 %92, 16777216, !dbg !1374
+  %94 = icmp eq i32 %93, 16777216, !dbg !1375
+  br i1 %94, label %95, label %99, !dbg !1376
 
 95:                                               ; preds = %79
-  %96 = load ptr, ptr %2, align 4, !dbg !1405
-  %97 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %96, i32 0, i32 9, !dbg !1407
-  %98 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %97, i32 0, i32 0, !dbg !1408
-  store i32 2, ptr %98, align 4, !dbg !1409
-  br label %103, !dbg !1410
+  %96 = load ptr, ptr %2, align 4, !dbg !1377
+  %97 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %96, i32 0, i32 9, !dbg !1379
+  %98 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %97, i32 0, i32 0, !dbg !1380
+  store i32 2, ptr %98, align 4, !dbg !1381
+  br label %103, !dbg !1382
 
 99:                                               ; preds = %79
-  %100 = load ptr, ptr %2, align 4, !dbg !1411
-  %101 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %100, i32 0, i32 9, !dbg !1413
-  %102 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %101, i32 0, i32 0, !dbg !1414
-  store i32 1, ptr %102, align 4, !dbg !1415
+  %100 = load ptr, ptr %2, align 4, !dbg !1383
+  %101 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %100, i32 0, i32 9, !dbg !1385
+  %102 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %101, i32 0, i32 0, !dbg !1386
+  store i32 1, ptr %102, align 4, !dbg !1387
   br label %103
 
 103:                                              ; preds = %99, %95
-  %104 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1416
-  %105 = and i32 %104, 98304, !dbg !1417
-  %106 = load ptr, ptr %2, align 4, !dbg !1418
-  %107 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %106, i32 0, i32 9, !dbg !1419
-  %108 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %107, i32 0, i32 1, !dbg !1420
-  store i32 %105, ptr %108, align 4, !dbg !1421
-  %109 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1422
-  %110 = and i32 %109, 3932160, !dbg !1423
-  %111 = load ptr, ptr %2, align 4, !dbg !1424
-  %112 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %111, i32 0, i32 9, !dbg !1425
-  %113 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %112, i32 0, i32 2, !dbg !1426
-  store i32 %110, ptr %113, align 4, !dbg !1427
-  %114 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !1428
-  %115 = and i32 %114, 15, !dbg !1429
-  %116 = load ptr, ptr %2, align 4, !dbg !1430
-  %117 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %116, i32 0, i32 9, !dbg !1431
-  %118 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %117, i32 0, i32 3, !dbg !1432
-  store i32 %115, ptr %118, align 4, !dbg !1433
-  ret void, !dbg !1434
+  %104 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1388
+  %105 = and i32 %104, 98304, !dbg !1389
+  %106 = load ptr, ptr %2, align 4, !dbg !1390
+  %107 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %106, i32 0, i32 9, !dbg !1391
+  %108 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %107, i32 0, i32 1, !dbg !1392
+  store i32 %105, ptr %108, align 4, !dbg !1393
+  %109 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1394
+  %110 = and i32 %109, 3932160, !dbg !1395
+  %111 = load ptr, ptr %2, align 4, !dbg !1396
+  %112 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %111, i32 0, i32 9, !dbg !1397
+  %113 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %112, i32 0, i32 2, !dbg !1398
+  store i32 %110, ptr %113, align 4, !dbg !1399
+  %114 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 11), align 4, !dbg !1400
+  %115 = and i32 %114, 15, !dbg !1401
+  %116 = load ptr, ptr %2, align 4, !dbg !1402
+  %117 = getelementptr inbounds %struct.RCC_OscInitTypeDef, ptr %116, i32 0, i32 9, !dbg !1403
+  %118 = getelementptr inbounds %struct.RCC_PLLInitTypeDef, ptr %117, i32 0, i32 3, !dbg !1404
+  store i32 %115, ptr %118, align 4, !dbg !1405
+  ret void, !dbg !1406
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_RCC_GetClockConfig(ptr noundef %0, ptr noundef %1) #0 !dbg !1435 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_RCC_GetClockConfig(ptr noundef %0, ptr noundef %1) #0 !dbg !1407 {
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
   store ptr %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !1440, metadata !DIExpression()), !dbg !1442
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !1411, metadata !DIExpression()), !dbg !1412
   store ptr %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !1441, metadata !DIExpression()), !dbg !1443
-  %5 = load ptr, ptr %3, align 4, !dbg !1444
-  %6 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %5, i32 0, i32 0, !dbg !1445
-  store i32 7, ptr %6, align 4, !dbg !1446
-  %7 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1447
-  %8 = and i32 %7, 3, !dbg !1448
-  %9 = load ptr, ptr %3, align 4, !dbg !1449
-  %10 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %9, i32 0, i32 1, !dbg !1450
-  store i32 %8, ptr %10, align 4, !dbg !1451
-  %11 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1452
-  %12 = and i32 %11, 240, !dbg !1453
-  %13 = load ptr, ptr %3, align 4, !dbg !1454
-  %14 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %13, i32 0, i32 2, !dbg !1455
-  store i32 %12, ptr %14, align 4, !dbg !1456
-  %15 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1457
-  %16 = and i32 %15, 1792, !dbg !1458
-  %17 = load ptr, ptr %3, align 4, !dbg !1459
-  %18 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %17, i32 0, i32 3, !dbg !1460
-  store i32 %16, ptr %18, align 4, !dbg !1461
-  %19 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1462
-  %20 = and i32 %19, 1, !dbg !1463
-  %21 = load ptr, ptr %4, align 4, !dbg !1464
-  store i32 %20, ptr %21, align 4, !dbg !1465
-  ret void, !dbg !1466
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !1413, metadata !DIExpression()), !dbg !1414
+  %5 = load ptr, ptr %3, align 4, !dbg !1415
+  %6 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %5, i32 0, i32 0, !dbg !1416
+  store i32 7, ptr %6, align 4, !dbg !1417
+  %7 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1418
+  %8 = and i32 %7, 3, !dbg !1419
+  %9 = load ptr, ptr %3, align 4, !dbg !1420
+  %10 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %9, i32 0, i32 1, !dbg !1421
+  store i32 %8, ptr %10, align 4, !dbg !1422
+  %11 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1423
+  %12 = and i32 %11, 240, !dbg !1424
+  %13 = load ptr, ptr %3, align 4, !dbg !1425
+  %14 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %13, i32 0, i32 2, !dbg !1426
+  store i32 %12, ptr %14, align 4, !dbg !1427
+  %15 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 1), align 4, !dbg !1428
+  %16 = and i32 %15, 1792, !dbg !1429
+  %17 = load ptr, ptr %3, align 4, !dbg !1430
+  %18 = getelementptr inbounds %struct.RCC_ClkInitTypeDef, ptr %17, i32 0, i32 3, !dbg !1431
+  store i32 %16, ptr %18, align 4, !dbg !1432
+  %19 = load volatile i32, ptr inttoptr (i32 1073881088 to ptr), align 4, !dbg !1433
+  %20 = and i32 %19, 1, !dbg !1434
+  %21 = load ptr, ptr %4, align 4, !dbg !1435
+  store i32 %20, ptr %21, align 4, !dbg !1436
+  ret void, !dbg !1437
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @HAL_RCC_NMI_IRQHandler() #0 !dbg !1467 {
-  %1 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 2), align 4, !dbg !1468
-  %2 = and i32 %1, 128, !dbg !1470
-  %3 = icmp eq i32 %2, 128, !dbg !1471
-  br i1 %3, label %4, label %5, !dbg !1472
+; Function Attrs: noinline nounwind optnone
+define hidden void @HAL_RCC_NMI_IRQHandler() #0 !dbg !1438 {
+  %1 = load volatile i32, ptr getelementptr inbounds (%struct.RCC_TypeDef, ptr inttoptr (i32 1073876992 to ptr), i32 0, i32 2), align 4, !dbg !1439
+  %2 = and i32 %1, 128, !dbg !1441
+  %3 = icmp eq i32 %2, 128, !dbg !1442
+  br i1 %3, label %4, label %5, !dbg !1443
 
 4:                                                ; preds = %0
-  call void @HAL_RCC_CSSCallback() #5, !dbg !1473
-  store volatile i8 -128, ptr inttoptr (i32 1073877002 to ptr), align 1, !dbg !1475
-  br label %5, !dbg !1476
+  call void @HAL_RCC_CSSCallback(), !dbg !1444
+  store volatile i8 -128, ptr inttoptr (i32 1073877002 to ptr), align 1, !dbg !1446
+  br label %5, !dbg !1447
 
 5:                                                ; preds = %4, %0
-  ret void, !dbg !1477
+  ret void, !dbg !1448
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @HAL_RCC_CSSCallback() #0 !dbg !1478 {
-  ret void, !dbg !1479
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @HAL_RCC_CSSCallback() #0 !dbg !1449 {
+  ret void, !dbg !1450
 }
 
-attributes #0 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #1 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
-attributes #2 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #3 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #4 = { nounwind }
-attributes #5 = { optsize }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #1 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
 
 !llvm.dbg.cu = !{!9}
-!llvm.module.flags = !{!103, !104, !105, !106, !107, !108}
-!llvm.ident = !{!109}
+!llvm.module.flags = !{!98, !99, !100, !101, !102, !103, !104, !105}
+!llvm.ident = !{!106}
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "aPLLMULFactorTable", scope: !2, file: !3, line: 1097, type: !93, isLocal: true, isDefinition: true)
-!2 = distinct !DISubprogram(name: "HAL_RCC_GetSysClockFreq", scope: !3, file: !3, line: 1095, type: !4, scopeLine: 1096, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !97)
+!2 = distinct !DISubprogram(name: "HAL_RCC_GetSysClockFreq", scope: !3, file: !3, line: 1095, type: !4, scopeLine: 1096, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
 !3 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/src/stm32f0xx_hal_rcc.c", directory: "/home/sri/zephyrproject")
 !4 = !DISubroutineType(types: !5)
 !5 = !{!6}
 !6 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint32_t", file: !7, line: 64, baseType: !8)
 !7 = !DIFile(filename: "/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/bin/../include/stdint.h", directory: "")
 !8 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
-!9 = distinct !DICompileUnit(language: DW_LANG_C99, file: !10, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !11, retainedTypes: !25, globals: !90, splitDebugInlining: false, nameTableKind: None)
+!9 = distinct !DICompileUnit(language: DW_LANG_C99, file: !10, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !11, retainedTypes: !25, globals: !90, splitDebugInlining: false, nameTableKind: None)
 !10 = !DIFile(filename: "stm32f0xx_hal_rcc.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !11 = !{!12, !20}
 !12 = !DICompositeType(tag: DW_TAG_enumeration_type, file: !13, line: 38, baseType: !14, size: 8, elements: !15)
@@ -2159,1386 +2054,1357 @@ attributes #5 = { optsize }
 !94 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !47)
 !95 = !{!96}
 !96 = !DISubrange(count: 16)
-!97 = !{!98, !99, !100, !101, !102}
-!98 = !DILocalVariable(name: "tmpreg", scope: !2, file: !3, line: 1102, type: !6)
-!99 = !DILocalVariable(name: "prediv", scope: !2, file: !3, line: 1102, type: !6)
-!100 = !DILocalVariable(name: "pllclk", scope: !2, file: !3, line: 1102, type: !6)
-!101 = !DILocalVariable(name: "pllmul", scope: !2, file: !3, line: 1102, type: !6)
-!102 = !DILocalVariable(name: "sysclockfreq", scope: !2, file: !3, line: 1103, type: !6)
-!103 = !{i32 7, !"Dwarf Version", i32 4}
-!104 = !{i32 2, !"Debug Info Version", i32 3}
-!105 = !{i32 1, !"wchar_size", i32 4}
-!106 = !{i32 1, !"static_rwdata", i32 1}
-!107 = !{i32 1, !"enumsize_buildattr", i32 1}
-!108 = !{i32 1, !"armlib_unavailable", i32 0}
-!109 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!110 = distinct !DISubprogram(name: "HAL_RCC_DeInit", scope: !3, file: !3, line: 208, type: !111, scopeLine: 209, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !114)
-!111 = !DISubroutineType(types: !112)
-!112 = !{!113}
-!113 = !DIDerivedType(tag: DW_TAG_typedef, name: "HAL_StatusTypeDef", file: !13, line: 44, baseType: !12)
-!114 = !{!115}
-!115 = !DILocalVariable(name: "tickstart", scope: !110, file: !3, line: 210, type: !6)
-!116 = !DILocation(line: 210, column: 3, scope: !110)
-!117 = !DILocation(line: 210, column: 12, scope: !110)
-!118 = !DILocation(line: 213, column: 15, scope: !110)
-!119 = !DILocation(line: 213, column: 13, scope: !110)
-!120 = !DILocation(line: 216, column: 75, scope: !110)
-!121 = !DILocation(line: 219, column: 3, scope: !110)
-!122 = !DILocation(line: 219, column: 78, scope: !110)
-!123 = !DILocation(line: 219, column: 82, scope: !110)
-!124 = !DILocation(line: 219, column: 103, scope: !110)
-!125 = !DILocation(line: 221, column: 10, scope: !126)
-!126 = distinct !DILexicalBlock(scope: !127, file: !3, line: 221, column: 9)
-!127 = distinct !DILexicalBlock(scope: !110, file: !3, line: 220, column: 3)
-!128 = !DILocation(line: 221, column: 26, scope: !126)
-!129 = !DILocation(line: 221, column: 24, scope: !126)
-!130 = !DILocation(line: 221, column: 37, scope: !126)
-!131 = !DILocation(line: 221, column: 9, scope: !127)
-!132 = !DILocation(line: 223, column: 7, scope: !133)
-!133 = distinct !DILexicalBlock(scope: !126, file: !3, line: 222, column: 5)
-!134 = distinct !{!134, !121, !135}
-!135 = !DILocation(line: 225, column: 3, scope: !110)
-!136 = !DILocation(line: 228, column: 77, scope: !110)
-!137 = !DILocation(line: 231, column: 3, scope: !110)
-!138 = !DILocation(line: 231, column: 78, scope: !110)
-!139 = !DILocation(line: 231, column: 84, scope: !110)
-!140 = !DILocation(line: 231, column: 105, scope: !110)
-!141 = !DILocation(line: 233, column: 10, scope: !142)
-!142 = distinct !DILexicalBlock(scope: !143, file: !3, line: 233, column: 9)
-!143 = distinct !DILexicalBlock(scope: !110, file: !3, line: 232, column: 3)
-!144 = !DILocation(line: 233, column: 26, scope: !142)
-!145 = !DILocation(line: 233, column: 24, scope: !142)
-!146 = !DILocation(line: 233, column: 37, scope: !142)
-!147 = !DILocation(line: 233, column: 9, scope: !143)
-!148 = !DILocation(line: 235, column: 7, scope: !149)
-!149 = distinct !DILexicalBlock(scope: !142, file: !3, line: 234, column: 5)
-!150 = distinct !{!150, !137, !151}
-!151 = !DILocation(line: 237, column: 3, scope: !110)
-!152 = !DILocation(line: 240, column: 19, scope: !110)
-!153 = !DILocation(line: 243, column: 20, scope: !154)
-!154 = distinct !DILexicalBlock(scope: !110, file: !3, line: 243, column: 7)
-!155 = !DILocation(line: 243, column: 7, scope: !154)
-!156 = !DILocation(line: 243, column: 32, scope: !154)
-!157 = !DILocation(line: 243, column: 7, scope: !110)
-!158 = !DILocation(line: 245, column: 5, scope: !159)
-!159 = distinct !DILexicalBlock(scope: !154, file: !3, line: 244, column: 3)
-!160 = !DILocation(line: 249, column: 75, scope: !110)
-!161 = !DILocation(line: 252, column: 75, scope: !110)
-!162 = !DILocation(line: 255, column: 15, scope: !110)
-!163 = !DILocation(line: 255, column: 13, scope: !110)
-!164 = !DILocation(line: 258, column: 3, scope: !110)
-!165 = !DILocation(line: 258, column: 77, scope: !110)
-!166 = !DILocation(line: 258, column: 81, scope: !110)
-!167 = !DILocation(line: 258, column: 103, scope: !110)
-!168 = !DILocation(line: 260, column: 9, scope: !169)
-!169 = distinct !DILexicalBlock(scope: !170, file: !3, line: 260, column: 8)
-!170 = distinct !DILexicalBlock(scope: !110, file: !3, line: 259, column: 3)
-!171 = !DILocation(line: 260, column: 25, scope: !169)
-!172 = !DILocation(line: 260, column: 23, scope: !169)
-!173 = !DILocation(line: 260, column: 36, scope: !169)
-!174 = !DILocation(line: 260, column: 8, scope: !170)
-!175 = !DILocation(line: 262, column: 7, scope: !176)
-!176 = distinct !DILexicalBlock(scope: !169, file: !3, line: 261, column: 5)
-!177 = distinct !{!177, !164, !178}
-!178 = !DILocation(line: 264, column: 3, scope: !110)
-!179 = !DILocation(line: 267, column: 77, scope: !110)
-!180 = !DILocation(line: 270, column: 78, scope: !110)
-!181 = !DILocation(line: 273, column: 78, scope: !110)
-!182 = !DILocation(line: 276, column: 76, scope: !110)
-!183 = !DILocation(line: 279, column: 74, scope: !110)
-!184 = !DILocation(line: 281, column: 3, scope: !110)
-!185 = !DILocation(line: 282, column: 1, scope: !110)
-!186 = !DISubprogram(name: "HAL_GetTick", scope: !187, file: !187, line: 546, type: !4, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !188)
-!187 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_hal.h", directory: "/home/sri/zephyrproject")
-!188 = !{}
-!189 = !DISubprogram(name: "HAL_InitTick", scope: !187, file: !187, line: 523, type: !190, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !188)
-!190 = !DISubroutineType(types: !191)
-!191 = !{!113, !6}
-!192 = distinct !DISubprogram(name: "HAL_RCC_OscConfig", scope: !3, file: !3, line: 298, type: !193, scopeLine: 299, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !217)
-!193 = !DISubroutineType(types: !194)
-!194 = !{!113, !195}
-!195 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !196, size: 32)
-!196 = !DIDerivedType(tag: DW_TAG_typedef, name: "RCC_OscInitTypeDef", file: !197, line: 245, baseType: !198)
-!197 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_hal_rcc.h", directory: "/home/sri/zephyrproject")
-!198 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !197, line: 212, size: 416, elements: !199)
-!199 = !{!200, !201, !202, !203, !204, !205, !206, !207, !208, !209}
-!200 = !DIDerivedType(tag: DW_TAG_member, name: "OscillatorType", scope: !198, file: !197, line: 214, baseType: !6, size: 32)
-!201 = !DIDerivedType(tag: DW_TAG_member, name: "HSEState", scope: !198, file: !197, line: 217, baseType: !6, size: 32, offset: 32)
-!202 = !DIDerivedType(tag: DW_TAG_member, name: "LSEState", scope: !198, file: !197, line: 220, baseType: !6, size: 32, offset: 64)
-!203 = !DIDerivedType(tag: DW_TAG_member, name: "HSIState", scope: !198, file: !197, line: 223, baseType: !6, size: 32, offset: 96)
-!204 = !DIDerivedType(tag: DW_TAG_member, name: "HSICalibrationValue", scope: !198, file: !197, line: 226, baseType: !6, size: 32, offset: 128)
-!205 = !DIDerivedType(tag: DW_TAG_member, name: "HSI14State", scope: !198, file: !197, line: 229, baseType: !6, size: 32, offset: 160)
-!206 = !DIDerivedType(tag: DW_TAG_member, name: "HSI14CalibrationValue", scope: !198, file: !197, line: 232, baseType: !6, size: 32, offset: 192)
-!207 = !DIDerivedType(tag: DW_TAG_member, name: "LSIState", scope: !198, file: !197, line: 235, baseType: !6, size: 32, offset: 224)
-!208 = !DIDerivedType(tag: DW_TAG_member, name: "HSI48State", scope: !198, file: !197, line: 239, baseType: !6, size: 32, offset: 256)
-!209 = !DIDerivedType(tag: DW_TAG_member, name: "PLL", scope: !198, file: !197, line: 243, baseType: !210, size: 128, offset: 288)
-!210 = !DIDerivedType(tag: DW_TAG_typedef, name: "RCC_PLLInitTypeDef", file: !197, line: 207, baseType: !211)
-!211 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !197, line: 193, size: 128, elements: !212)
-!212 = !{!213, !214, !215, !216}
-!213 = !DIDerivedType(tag: DW_TAG_member, name: "PLLState", scope: !211, file: !197, line: 195, baseType: !6, size: 32)
-!214 = !DIDerivedType(tag: DW_TAG_member, name: "PLLSource", scope: !211, file: !197, line: 198, baseType: !6, size: 32, offset: 32)
-!215 = !DIDerivedType(tag: DW_TAG_member, name: "PLLMUL", scope: !211, file: !197, line: 201, baseType: !6, size: 32, offset: 64)
-!216 = !DIDerivedType(tag: DW_TAG_member, name: "PREDIV", scope: !211, file: !197, line: 204, baseType: !6, size: 32, offset: 96)
-!217 = !{!218, !219, !220, !221, !222, !226}
-!218 = !DILocalVariable(name: "RCC_OscInitStruct", arg: 1, scope: !192, file: !3, line: 298, type: !195)
-!219 = !DILocalVariable(name: "tickstart", scope: !192, file: !3, line: 300, type: !6)
-!220 = !DILocalVariable(name: "pll_config", scope: !192, file: !3, line: 301, type: !6)
-!221 = !DILocalVariable(name: "pll_config2", scope: !192, file: !3, line: 302, type: !6)
-!222 = !DILocalVariable(name: "pwrclkchanged", scope: !223, file: !3, line: 475, type: !225)
-!223 = distinct !DILexicalBlock(scope: !224, file: !3, line: 474, column: 3)
-!224 = distinct !DILexicalBlock(scope: !192, file: !3, line: 473, column: 6)
-!225 = !DIDerivedType(tag: DW_TAG_typedef, name: "FlagStatus", file: !21, line: 171, baseType: !20)
-!226 = !DILocalVariable(name: "tmpreg", scope: !227, file: !3, line: 484, type: !32)
-!227 = distinct !DILexicalBlock(scope: !228, file: !3, line: 484, column: 10)
-!228 = distinct !DILexicalBlock(scope: !229, file: !3, line: 483, column: 5)
-!229 = distinct !DILexicalBlock(scope: !223, file: !3, line: 482, column: 8)
-!230 = !DILocation(line: 298, column: 57, scope: !192)
-!231 = !DILocation(line: 300, column: 3, scope: !192)
-!232 = !DILocation(line: 300, column: 12, scope: !192)
-!233 = !DILocation(line: 301, column: 3, scope: !192)
-!234 = !DILocation(line: 301, column: 12, scope: !192)
-!235 = !DILocation(line: 302, column: 3, scope: !192)
-!236 = !DILocation(line: 302, column: 12, scope: !192)
-!237 = !DILocation(line: 305, column: 6, scope: !238)
-!238 = distinct !DILexicalBlock(scope: !192, file: !3, line: 305, column: 6)
-!239 = !DILocation(line: 305, column: 24, scope: !238)
-!240 = !DILocation(line: 305, column: 6, scope: !192)
-!241 = !DILocation(line: 307, column: 5, scope: !242)
-!242 = distinct !DILexicalBlock(scope: !238, file: !3, line: 306, column: 3)
-!243 = !DILocation(line: 314, column: 8, scope: !244)
-!244 = distinct !DILexicalBlock(scope: !192, file: !3, line: 314, column: 6)
-!245 = !DILocation(line: 314, column: 27, scope: !244)
-!246 = !DILocation(line: 314, column: 43, scope: !244)
-!247 = !DILocation(line: 314, column: 60, scope: !244)
-!248 = !DILocation(line: 314, column: 6, scope: !192)
-!249 = !DILocation(line: 320, column: 87, scope: !250)
-!250 = distinct !DILexicalBlock(scope: !251, file: !3, line: 320, column: 8)
-!251 = distinct !DILexicalBlock(scope: !244, file: !3, line: 315, column: 3)
-!252 = !DILocation(line: 320, column: 92, scope: !250)
-!253 = !DILocation(line: 320, column: 112, scope: !250)
-!254 = !DILocation(line: 321, column: 8, scope: !250)
-!255 = !DILocation(line: 321, column: 91, scope: !250)
-!256 = !DILocation(line: 321, column: 96, scope: !250)
-!257 = !DILocation(line: 321, column: 116, scope: !250)
-!258 = !DILocation(line: 321, column: 134, scope: !250)
-!259 = !DILocation(line: 321, column: 218, scope: !250)
-!260 = !DILocation(line: 321, column: 224, scope: !250)
-!261 = !DILocation(line: 321, column: 248, scope: !250)
-!262 = !DILocation(line: 320, column: 8, scope: !251)
-!263 = !DILocation(line: 323, column: 149, scope: !264)
-!264 = distinct !DILexicalBlock(scope: !265, file: !3, line: 323, column: 10)
-!265 = distinct !DILexicalBlock(scope: !250, file: !3, line: 322, column: 5)
-!266 = !DILocation(line: 323, column: 511, scope: !264)
-!267 = !DILocation(line: 323, column: 585, scope: !264)
-!268 = !DILocation(line: 323, column: 595, scope: !264)
-!269 = !DILocation(line: 323, column: 599, scope: !264)
-!270 = !DILocation(line: 323, column: 618, scope: !264)
-!271 = !DILocation(line: 323, column: 627, scope: !264)
-!272 = !DILocation(line: 323, column: 10, scope: !265)
-!273 = !DILocation(line: 325, column: 9, scope: !274)
-!274 = distinct !DILexicalBlock(scope: !264, file: !3, line: 324, column: 7)
-!275 = !DILocation(line: 327, column: 5, scope: !265)
-!276 = !DILocation(line: 331, column: 7, scope: !277)
-!277 = distinct !DILexicalBlock(scope: !250, file: !3, line: 329, column: 5)
-!278 = !DILocation(line: 331, column: 16, scope: !279)
-!279 = distinct !DILexicalBlock(scope: !280, file: !3, line: 331, column: 15)
-!280 = distinct !DILexicalBlock(scope: !277, file: !3, line: 331, column: 9)
-!281 = !DILocation(line: 331, column: 35, scope: !279)
-!282 = !DILocation(line: 331, column: 45, scope: !279)
-!283 = !DILocation(line: 331, column: 15, scope: !280)
-!284 = !DILocation(line: 331, column: 137, scope: !285)
-!285 = distinct !DILexicalBlock(scope: !279, file: !3, line: 331, column: 63)
-!286 = !DILocation(line: 331, column: 161, scope: !285)
-!287 = !DILocation(line: 331, column: 173, scope: !288)
-!288 = distinct !DILexicalBlock(scope: !279, file: !3, line: 331, column: 172)
-!289 = !DILocation(line: 331, column: 192, scope: !288)
-!290 = !DILocation(line: 331, column: 202, scope: !288)
-!291 = !DILocation(line: 331, column: 172, scope: !279)
-!292 = !DILocation(line: 331, column: 294, scope: !293)
-!293 = distinct !DILexicalBlock(scope: !288, file: !3, line: 331, column: 220)
-!294 = !DILocation(line: 331, column: 391, scope: !293)
-!295 = !DILocation(line: 331, column: 416, scope: !293)
-!296 = !DILocation(line: 331, column: 428, scope: !297)
-!297 = distinct !DILexicalBlock(scope: !288, file: !3, line: 331, column: 427)
-!298 = !DILocation(line: 331, column: 447, scope: !297)
-!299 = !DILocation(line: 331, column: 457, scope: !297)
-!300 = !DILocation(line: 331, column: 427, scope: !288)
-!301 = !DILocation(line: 331, column: 549, scope: !302)
-!302 = distinct !DILexicalBlock(scope: !297, file: !3, line: 331, column: 475)
-!303 = !DILocation(line: 331, column: 645, scope: !302)
-!304 = !DILocation(line: 331, column: 669, scope: !302)
-!305 = !DILocation(line: 331, column: 750, scope: !306)
-!306 = distinct !DILexicalBlock(scope: !297, file: !3, line: 331, column: 676)
-!307 = !DILocation(line: 331, column: 847, scope: !306)
-!308 = !DILocation(line: 331, column: 874, scope: !280)
-!309 = !DILocation(line: 335, column: 10, scope: !310)
-!310 = distinct !DILexicalBlock(scope: !277, file: !3, line: 335, column: 10)
-!311 = !DILocation(line: 335, column: 29, scope: !310)
-!312 = !DILocation(line: 335, column: 38, scope: !310)
-!313 = !DILocation(line: 335, column: 10, scope: !277)
-!314 = !DILocation(line: 338, column: 21, scope: !315)
-!315 = distinct !DILexicalBlock(scope: !310, file: !3, line: 336, column: 7)
-!316 = !DILocation(line: 338, column: 19, scope: !315)
-!317 = !DILocation(line: 341, column: 9, scope: !315)
-!318 = !DILocation(line: 341, column: 153, scope: !315)
-!319 = !DILocation(line: 341, column: 515, scope: !315)
-!320 = !DILocation(line: 341, column: 589, scope: !315)
-!321 = !DILocation(line: 343, column: 15, scope: !322)
-!322 = distinct !DILexicalBlock(scope: !323, file: !3, line: 343, column: 14)
-!323 = distinct !DILexicalBlock(scope: !315, file: !3, line: 342, column: 9)
-!324 = !DILocation(line: 343, column: 31, scope: !322)
-!325 = !DILocation(line: 343, column: 29, scope: !322)
-!326 = !DILocation(line: 343, column: 43, scope: !322)
-!327 = !DILocation(line: 343, column: 14, scope: !323)
-!328 = !DILocation(line: 345, column: 13, scope: !329)
-!329 = distinct !DILexicalBlock(scope: !322, file: !3, line: 344, column: 11)
-!330 = distinct !{!330, !317, !331}
-!331 = !DILocation(line: 347, column: 9, scope: !315)
-!332 = !DILocation(line: 348, column: 7, scope: !315)
-!333 = !DILocation(line: 352, column: 21, scope: !334)
-!334 = distinct !DILexicalBlock(scope: !310, file: !3, line: 350, column: 7)
-!335 = !DILocation(line: 352, column: 19, scope: !334)
-!336 = !DILocation(line: 355, column: 9, scope: !334)
-!337 = !DILocation(line: 355, column: 153, scope: !334)
-!338 = !DILocation(line: 355, column: 515, scope: !334)
-!339 = !DILocation(line: 355, column: 589, scope: !334)
-!340 = !DILocation(line: 357, column: 16, scope: !341)
-!341 = distinct !DILexicalBlock(scope: !342, file: !3, line: 357, column: 15)
-!342 = distinct !DILexicalBlock(scope: !334, file: !3, line: 356, column: 9)
-!343 = !DILocation(line: 357, column: 32, scope: !341)
-!344 = !DILocation(line: 357, column: 30, scope: !341)
-!345 = !DILocation(line: 357, column: 44, scope: !341)
-!346 = !DILocation(line: 357, column: 15, scope: !342)
-!347 = !DILocation(line: 359, column: 13, scope: !348)
-!348 = distinct !DILexicalBlock(scope: !341, file: !3, line: 358, column: 11)
-!349 = distinct !{!349, !336, !350}
-!350 = !DILocation(line: 361, column: 9, scope: !334)
-!351 = !DILocation(line: 364, column: 3, scope: !251)
-!352 = !DILocation(line: 366, column: 8, scope: !353)
-!353 = distinct !DILexicalBlock(scope: !192, file: !3, line: 366, column: 6)
-!354 = !DILocation(line: 366, column: 27, scope: !353)
-!355 = !DILocation(line: 366, column: 43, scope: !353)
-!356 = !DILocation(line: 366, column: 60, scope: !353)
-!357 = !DILocation(line: 366, column: 6, scope: !192)
-!358 = !DILocation(line: 373, column: 87, scope: !359)
-!359 = distinct !DILexicalBlock(scope: !360, file: !3, line: 373, column: 8)
-!360 = distinct !DILexicalBlock(scope: !353, file: !3, line: 367, column: 3)
-!361 = !DILocation(line: 373, column: 92, scope: !359)
-!362 = !DILocation(line: 373, column: 112, scope: !359)
-!363 = !DILocation(line: 374, column: 8, scope: !359)
-!364 = !DILocation(line: 374, column: 91, scope: !359)
-!365 = !DILocation(line: 374, column: 96, scope: !359)
-!366 = !DILocation(line: 374, column: 116, scope: !359)
-!367 = !DILocation(line: 374, column: 134, scope: !359)
-!368 = !DILocation(line: 374, column: 218, scope: !359)
-!369 = !DILocation(line: 374, column: 224, scope: !359)
-!370 = !DILocation(line: 374, column: 248, scope: !359)
-!371 = !DILocation(line: 373, column: 8, scope: !360)
-!372 = !DILocation(line: 377, column: 148, scope: !373)
-!373 = distinct !DILexicalBlock(scope: !374, file: !3, line: 377, column: 10)
-!374 = distinct !DILexicalBlock(scope: !359, file: !3, line: 375, column: 5)
-!375 = !DILocation(line: 377, column: 508, scope: !373)
-!376 = !DILocation(line: 377, column: 581, scope: !373)
-!377 = !DILocation(line: 377, column: 591, scope: !373)
-!378 = !DILocation(line: 377, column: 595, scope: !373)
-!379 = !DILocation(line: 377, column: 614, scope: !373)
-!380 = !DILocation(line: 377, column: 623, scope: !373)
-!381 = !DILocation(line: 377, column: 10, scope: !374)
-!382 = !DILocation(line: 379, column: 9, scope: !383)
-!383 = distinct !DILexicalBlock(scope: !373, file: !3, line: 378, column: 7)
-!384 = !DILocation(line: 385, column: 157, scope: !385)
-!385 = distinct !DILexicalBlock(scope: !373, file: !3, line: 383, column: 7)
-!386 = !DILocation(line: 385, column: 163, scope: !385)
-!387 = !DILocation(line: 385, column: 202, scope: !385)
-!388 = !DILocation(line: 385, column: 221, scope: !385)
-!389 = !DILocation(line: 385, column: 242, scope: !385)
-!390 = !DILocation(line: 385, column: 188, scope: !385)
-!391 = !DILocation(line: 385, column: 83, scope: !385)
-!392 = !DILocation(line: 387, column: 5, scope: !374)
-!393 = !DILocation(line: 391, column: 10, scope: !394)
-!394 = distinct !DILexicalBlock(scope: !395, file: !3, line: 391, column: 10)
-!395 = distinct !DILexicalBlock(scope: !359, file: !3, line: 389, column: 5)
-!396 = !DILocation(line: 391, column: 29, scope: !394)
-!397 = !DILocation(line: 391, column: 38, scope: !394)
-!398 = !DILocation(line: 391, column: 10, scope: !395)
-!399 = !DILocation(line: 394, column: 81, scope: !400)
-!400 = distinct !DILexicalBlock(scope: !394, file: !3, line: 392, column: 7)
-!401 = !DILocation(line: 397, column: 21, scope: !400)
-!402 = !DILocation(line: 397, column: 19, scope: !400)
-!403 = !DILocation(line: 400, column: 9, scope: !400)
-!404 = !DILocation(line: 400, column: 152, scope: !400)
-!405 = !DILocation(line: 400, column: 512, scope: !400)
-!406 = !DILocation(line: 400, column: 585, scope: !400)
-!407 = !DILocation(line: 402, column: 15, scope: !408)
-!408 = distinct !DILexicalBlock(scope: !409, file: !3, line: 402, column: 14)
-!409 = distinct !DILexicalBlock(scope: !400, file: !3, line: 401, column: 9)
-!410 = !DILocation(line: 402, column: 31, scope: !408)
-!411 = !DILocation(line: 402, column: 29, scope: !408)
-!412 = !DILocation(line: 402, column: 43, scope: !408)
-!413 = !DILocation(line: 402, column: 14, scope: !409)
-!414 = !DILocation(line: 404, column: 13, scope: !415)
-!415 = distinct !DILexicalBlock(scope: !408, file: !3, line: 403, column: 11)
-!416 = distinct !{!416, !403, !417}
-!417 = !DILocation(line: 406, column: 9, scope: !400)
-!418 = !DILocation(line: 409, column: 157, scope: !400)
-!419 = !DILocation(line: 409, column: 163, scope: !400)
-!420 = !DILocation(line: 409, column: 202, scope: !400)
-!421 = !DILocation(line: 409, column: 221, scope: !400)
-!422 = !DILocation(line: 409, column: 242, scope: !400)
-!423 = !DILocation(line: 409, column: 188, scope: !400)
-!424 = !DILocation(line: 409, column: 83, scope: !400)
-!425 = !DILocation(line: 410, column: 7, scope: !400)
-!426 = !DILocation(line: 414, column: 81, scope: !427)
-!427 = distinct !DILexicalBlock(scope: !394, file: !3, line: 412, column: 7)
-!428 = !DILocation(line: 417, column: 21, scope: !427)
-!429 = !DILocation(line: 417, column: 19, scope: !427)
-!430 = !DILocation(line: 420, column: 9, scope: !427)
-!431 = !DILocation(line: 420, column: 152, scope: !427)
-!432 = !DILocation(line: 420, column: 512, scope: !427)
-!433 = !DILocation(line: 420, column: 585, scope: !427)
-!434 = !DILocation(line: 422, column: 15, scope: !435)
-!435 = distinct !DILexicalBlock(scope: !436, file: !3, line: 422, column: 14)
-!436 = distinct !DILexicalBlock(scope: !427, file: !3, line: 421, column: 9)
-!437 = !DILocation(line: 422, column: 31, scope: !435)
-!438 = !DILocation(line: 422, column: 29, scope: !435)
-!439 = !DILocation(line: 422, column: 43, scope: !435)
-!440 = !DILocation(line: 422, column: 14, scope: !436)
-!441 = !DILocation(line: 424, column: 13, scope: !442)
-!442 = distinct !DILexicalBlock(scope: !435, file: !3, line: 423, column: 11)
-!443 = distinct !{!443, !430, !444}
-!444 = !DILocation(line: 426, column: 9, scope: !427)
-!445 = !DILocation(line: 429, column: 3, scope: !360)
-!446 = !DILocation(line: 431, column: 8, scope: !447)
-!447 = distinct !DILexicalBlock(scope: !192, file: !3, line: 431, column: 6)
-!448 = !DILocation(line: 431, column: 27, scope: !447)
-!449 = !DILocation(line: 431, column: 43, scope: !447)
-!450 = !DILocation(line: 431, column: 60, scope: !447)
-!451 = !DILocation(line: 431, column: 6, scope: !192)
-!452 = !DILocation(line: 437, column: 8, scope: !453)
-!453 = distinct !DILexicalBlock(scope: !454, file: !3, line: 437, column: 8)
-!454 = distinct !DILexicalBlock(scope: !447, file: !3, line: 432, column: 3)
-!455 = !DILocation(line: 437, column: 27, scope: !453)
-!456 = !DILocation(line: 437, column: 36, scope: !453)
-!457 = !DILocation(line: 437, column: 8, scope: !454)
-!458 = !DILocation(line: 440, column: 80, scope: !459)
-!459 = distinct !DILexicalBlock(scope: !453, file: !3, line: 438, column: 5)
-!460 = !DILocation(line: 443, column: 19, scope: !459)
-!461 = !DILocation(line: 443, column: 17, scope: !459)
-!462 = !DILocation(line: 446, column: 7, scope: !459)
-!463 = !DILocation(line: 446, column: 505, scope: !459)
-!464 = !DILocation(line: 446, column: 510, scope: !459)
-!465 = !DILocation(line: 446, column: 583, scope: !459)
-!466 = !DILocation(line: 448, column: 13, scope: !467)
-!467 = distinct !DILexicalBlock(scope: !468, file: !3, line: 448, column: 12)
-!468 = distinct !DILexicalBlock(scope: !459, file: !3, line: 447, column: 7)
-!469 = !DILocation(line: 448, column: 29, scope: !467)
-!470 = !DILocation(line: 448, column: 27, scope: !467)
-!471 = !DILocation(line: 448, column: 41, scope: !467)
-!472 = !DILocation(line: 448, column: 12, scope: !468)
-!473 = !DILocation(line: 450, column: 11, scope: !474)
-!474 = distinct !DILexicalBlock(scope: !467, file: !3, line: 449, column: 9)
-!475 = distinct !{!475, !462, !476}
-!476 = !DILocation(line: 452, column: 7, scope: !459)
-!477 = !DILocation(line: 453, column: 5, scope: !459)
-!478 = !DILocation(line: 457, column: 80, scope: !479)
-!479 = distinct !DILexicalBlock(scope: !453, file: !3, line: 455, column: 5)
-!480 = !DILocation(line: 460, column: 19, scope: !479)
-!481 = !DILocation(line: 460, column: 17, scope: !479)
-!482 = !DILocation(line: 463, column: 7, scope: !479)
-!483 = !DILocation(line: 463, column: 505, scope: !479)
-!484 = !DILocation(line: 463, column: 510, scope: !479)
-!485 = !DILocation(line: 463, column: 583, scope: !479)
-!486 = !DILocation(line: 465, column: 13, scope: !487)
-!487 = distinct !DILexicalBlock(scope: !488, file: !3, line: 465, column: 12)
-!488 = distinct !DILexicalBlock(scope: !479, file: !3, line: 464, column: 7)
-!489 = !DILocation(line: 465, column: 29, scope: !487)
-!490 = !DILocation(line: 465, column: 27, scope: !487)
-!491 = !DILocation(line: 465, column: 41, scope: !487)
-!492 = !DILocation(line: 465, column: 12, scope: !488)
-!493 = !DILocation(line: 467, column: 11, scope: !494)
-!494 = distinct !DILexicalBlock(scope: !487, file: !3, line: 466, column: 9)
-!495 = distinct !{!495, !482, !496}
-!496 = !DILocation(line: 469, column: 7, scope: !479)
-!497 = !DILocation(line: 471, column: 3, scope: !454)
-!498 = !DILocation(line: 473, column: 8, scope: !224)
-!499 = !DILocation(line: 473, column: 27, scope: !224)
-!500 = !DILocation(line: 473, column: 43, scope: !224)
-!501 = !DILocation(line: 473, column: 60, scope: !224)
-!502 = !DILocation(line: 473, column: 6, scope: !192)
-!503 = !DILocation(line: 475, column: 5, scope: !223)
-!504 = !DILocation(line: 475, column: 16, scope: !223)
-!505 = !DILocation(line: 482, column: 76, scope: !229)
-!506 = !DILocation(line: 482, column: 84, scope: !229)
-!507 = !DILocation(line: 482, column: 106, scope: !229)
-!508 = !DILocation(line: 482, column: 8, scope: !223)
-!509 = !DILocation(line: 484, column: 7, scope: !228)
-!510 = !DILocation(line: 484, column: 12, scope: !227)
-!511 = !DILocation(line: 484, column: 30, scope: !227)
-!512 = !DILocation(line: 484, column: 115, scope: !227)
-!513 = !DILocation(line: 484, column: 216, scope: !227)
-!514 = !DILocation(line: 484, column: 225, scope: !227)
-!515 = !DILocation(line: 484, column: 146, scope: !227)
-!516 = !DILocation(line: 484, column: 254, scope: !227)
-!517 = !DILocation(line: 484, column: 262, scope: !228)
-!518 = !DILocation(line: 484, column: 262, scope: !227)
-!519 = !DILocation(line: 485, column: 21, scope: !228)
-!520 = !DILocation(line: 486, column: 5, scope: !228)
-!521 = !DILocation(line: 488, column: 60, scope: !522)
-!522 = distinct !DILexicalBlock(scope: !223, file: !3, line: 488, column: 8)
-!523 = !DILocation(line: 488, column: 64, scope: !522)
-!524 = !DILocation(line: 488, column: 85, scope: !522)
-!525 = !DILocation(line: 488, column: 8, scope: !223)
-!526 = !DILocation(line: 491, column: 62, scope: !527)
-!527 = distinct !DILexicalBlock(scope: !522, file: !3, line: 489, column: 5)
-!528 = !DILocation(line: 494, column: 19, scope: !527)
-!529 = !DILocation(line: 494, column: 17, scope: !527)
-!530 = !DILocation(line: 496, column: 7, scope: !527)
-!531 = !DILocation(line: 496, column: 65, scope: !527)
-!532 = !DILocation(line: 496, column: 69, scope: !527)
-!533 = !DILocation(line: 496, column: 90, scope: !527)
-!534 = !DILocation(line: 498, column: 13, scope: !535)
-!535 = distinct !DILexicalBlock(scope: !536, file: !3, line: 498, column: 12)
-!536 = distinct !DILexicalBlock(scope: !527, file: !3, line: 497, column: 7)
-!537 = !DILocation(line: 498, column: 29, scope: !535)
-!538 = !DILocation(line: 498, column: 27, scope: !535)
-!539 = !DILocation(line: 498, column: 40, scope: !535)
-!540 = !DILocation(line: 498, column: 12, scope: !536)
-!541 = !DILocation(line: 500, column: 11, scope: !542)
-!542 = distinct !DILexicalBlock(scope: !535, file: !3, line: 499, column: 9)
-!543 = distinct !{!543, !530, !544}
-!544 = !DILocation(line: 502, column: 7, scope: !527)
-!545 = !DILocation(line: 503, column: 5, scope: !527)
-!546 = !DILocation(line: 506, column: 5, scope: !223)
-!547 = !DILocation(line: 506, column: 14, scope: !548)
-!548 = distinct !DILexicalBlock(scope: !549, file: !3, line: 506, column: 13)
-!549 = distinct !DILexicalBlock(scope: !223, file: !3, line: 506, column: 7)
-!550 = !DILocation(line: 506, column: 33, scope: !548)
-!551 = !DILocation(line: 506, column: 43, scope: !548)
-!552 = !DILocation(line: 506, column: 13, scope: !549)
-!553 = !DILocation(line: 506, column: 137, scope: !554)
-!554 = distinct !DILexicalBlock(scope: !548, file: !3, line: 506, column: 61)
-!555 = !DILocation(line: 506, column: 160, scope: !554)
-!556 = !DILocation(line: 506, column: 172, scope: !557)
-!557 = distinct !DILexicalBlock(scope: !548, file: !3, line: 506, column: 171)
-!558 = !DILocation(line: 506, column: 191, scope: !557)
-!559 = !DILocation(line: 506, column: 201, scope: !557)
-!560 = !DILocation(line: 506, column: 171, scope: !548)
-!561 = !DILocation(line: 506, column: 295, scope: !562)
-!562 = distinct !DILexicalBlock(scope: !557, file: !3, line: 506, column: 219)
-!563 = !DILocation(line: 506, column: 393, scope: !562)
-!564 = !DILocation(line: 506, column: 417, scope: !562)
-!565 = !DILocation(line: 506, column: 429, scope: !566)
-!566 = distinct !DILexicalBlock(scope: !557, file: !3, line: 506, column: 428)
-!567 = !DILocation(line: 506, column: 448, scope: !566)
-!568 = !DILocation(line: 506, column: 458, scope: !566)
-!569 = !DILocation(line: 506, column: 428, scope: !557)
-!570 = !DILocation(line: 506, column: 552, scope: !571)
-!571 = distinct !DILexicalBlock(scope: !566, file: !3, line: 506, column: 476)
-!572 = !DILocation(line: 506, column: 649, scope: !571)
-!573 = !DILocation(line: 506, column: 672, scope: !571)
-!574 = !DILocation(line: 506, column: 755, scope: !575)
-!575 = distinct !DILexicalBlock(scope: !566, file: !3, line: 506, column: 679)
-!576 = !DILocation(line: 506, column: 853, scope: !575)
-!577 = !DILocation(line: 506, column: 879, scope: !549)
-!578 = !DILocation(line: 508, column: 8, scope: !579)
-!579 = distinct !DILexicalBlock(scope: !223, file: !3, line: 508, column: 8)
-!580 = !DILocation(line: 508, column: 27, scope: !579)
-!581 = !DILocation(line: 508, column: 36, scope: !579)
-!582 = !DILocation(line: 508, column: 8, scope: !223)
-!583 = !DILocation(line: 511, column: 19, scope: !584)
-!584 = distinct !DILexicalBlock(scope: !579, file: !3, line: 509, column: 5)
-!585 = !DILocation(line: 511, column: 17, scope: !584)
-!586 = !DILocation(line: 514, column: 7, scope: !584)
-!587 = !DILocation(line: 514, column: 432, scope: !584)
-!588 = !DILocation(line: 514, column: 510, scope: !584)
-!589 = !DILocation(line: 514, column: 583, scope: !584)
-!590 = !DILocation(line: 516, column: 13, scope: !591)
-!591 = distinct !DILexicalBlock(scope: !592, file: !3, line: 516, column: 12)
-!592 = distinct !DILexicalBlock(scope: !584, file: !3, line: 515, column: 7)
-!593 = !DILocation(line: 516, column: 29, scope: !591)
-!594 = !DILocation(line: 516, column: 27, scope: !591)
-!595 = !DILocation(line: 516, column: 41, scope: !591)
-!596 = !DILocation(line: 516, column: 12, scope: !592)
-!597 = !DILocation(line: 518, column: 11, scope: !598)
-!598 = distinct !DILexicalBlock(scope: !591, file: !3, line: 517, column: 9)
-!599 = distinct !{!599, !586, !600}
-!600 = !DILocation(line: 520, column: 7, scope: !584)
-!601 = !DILocation(line: 521, column: 5, scope: !584)
-!602 = !DILocation(line: 525, column: 19, scope: !603)
-!603 = distinct !DILexicalBlock(scope: !579, file: !3, line: 523, column: 5)
-!604 = !DILocation(line: 525, column: 17, scope: !603)
-!605 = !DILocation(line: 528, column: 7, scope: !603)
-!606 = !DILocation(line: 528, column: 432, scope: !603)
-!607 = !DILocation(line: 528, column: 510, scope: !603)
-!608 = !DILocation(line: 528, column: 583, scope: !603)
-!609 = !DILocation(line: 530, column: 13, scope: !610)
-!610 = distinct !DILexicalBlock(scope: !611, file: !3, line: 530, column: 12)
-!611 = distinct !DILexicalBlock(scope: !603, file: !3, line: 529, column: 7)
-!612 = !DILocation(line: 530, column: 29, scope: !610)
-!613 = !DILocation(line: 530, column: 27, scope: !610)
-!614 = !DILocation(line: 530, column: 41, scope: !610)
-!615 = !DILocation(line: 530, column: 12, scope: !611)
-!616 = !DILocation(line: 532, column: 11, scope: !617)
-!617 = distinct !DILexicalBlock(scope: !610, file: !3, line: 531, column: 9)
-!618 = distinct !{!618, !605, !619}
-!619 = !DILocation(line: 534, column: 7, scope: !603)
-!620 = !DILocation(line: 538, column: 8, scope: !621)
-!621 = distinct !DILexicalBlock(scope: !223, file: !3, line: 538, column: 8)
-!622 = !DILocation(line: 538, column: 22, scope: !621)
-!623 = !DILocation(line: 538, column: 8, scope: !223)
-!624 = !DILocation(line: 540, column: 82, scope: !625)
-!625 = distinct !DILexicalBlock(scope: !621, file: !3, line: 539, column: 5)
-!626 = !DILocation(line: 541, column: 5, scope: !625)
-!627 = !DILocation(line: 542, column: 3, scope: !224)
-!628 = !DILocation(line: 542, column: 3, scope: !223)
-!629 = !DILocation(line: 545, column: 8, scope: !630)
-!630 = distinct !DILexicalBlock(scope: !192, file: !3, line: 545, column: 6)
-!631 = !DILocation(line: 545, column: 27, scope: !630)
-!632 = !DILocation(line: 545, column: 43, scope: !630)
-!633 = !DILocation(line: 545, column: 60, scope: !630)
-!634 = !DILocation(line: 545, column: 6, scope: !192)
-!635 = !DILocation(line: 552, column: 8, scope: !636)
-!636 = distinct !DILexicalBlock(scope: !637, file: !3, line: 552, column: 8)
-!637 = distinct !DILexicalBlock(scope: !630, file: !3, line: 546, column: 3)
-!638 = !DILocation(line: 552, column: 27, scope: !636)
-!639 = !DILocation(line: 552, column: 38, scope: !636)
-!640 = !DILocation(line: 552, column: 8, scope: !637)
-!641 = !DILocation(line: 555, column: 80, scope: !642)
-!642 = distinct !DILexicalBlock(scope: !636, file: !3, line: 553, column: 5)
-!643 = !DILocation(line: 558, column: 80, scope: !642)
-!644 = !DILocation(line: 561, column: 19, scope: !642)
-!645 = !DILocation(line: 561, column: 17, scope: !642)
-!646 = !DILocation(line: 564, column: 7, scope: !642)
-!647 = !DILocation(line: 564, column: 290, scope: !642)
-!648 = !DILocation(line: 564, column: 510, scope: !642)
-!649 = !DILocation(line: 564, column: 583, scope: !642)
-!650 = !DILocation(line: 566, column: 13, scope: !651)
-!651 = distinct !DILexicalBlock(scope: !652, file: !3, line: 566, column: 12)
-!652 = distinct !DILexicalBlock(scope: !642, file: !3, line: 565, column: 7)
-!653 = !DILocation(line: 566, column: 29, scope: !651)
-!654 = !DILocation(line: 566, column: 27, scope: !651)
-!655 = !DILocation(line: 566, column: 40, scope: !651)
-!656 = !DILocation(line: 566, column: 12, scope: !652)
-!657 = !DILocation(line: 568, column: 11, scope: !658)
-!658 = distinct !DILexicalBlock(scope: !651, file: !3, line: 567, column: 9)
-!659 = distinct !{!659, !646, !660}
-!660 = !DILocation(line: 570, column: 7, scope: !642)
-!661 = !DILocation(line: 573, column: 156, scope: !642)
-!662 = !DILocation(line: 573, column: 163, scope: !642)
-!663 = !DILocation(line: 573, column: 202, scope: !642)
-!664 = !DILocation(line: 573, column: 221, scope: !642)
-!665 = !DILocation(line: 573, column: 244, scope: !642)
-!666 = !DILocation(line: 573, column: 188, scope: !642)
-!667 = !DILocation(line: 573, column: 82, scope: !642)
-!668 = !DILocation(line: 574, column: 5, scope: !642)
-!669 = !DILocation(line: 575, column: 13, scope: !670)
-!670 = distinct !DILexicalBlock(scope: !636, file: !3, line: 575, column: 13)
-!671 = !DILocation(line: 575, column: 32, scope: !670)
-!672 = !DILocation(line: 575, column: 43, scope: !670)
-!673 = !DILocation(line: 575, column: 13, scope: !636)
-!674 = !DILocation(line: 578, column: 80, scope: !675)
-!675 = distinct !DILexicalBlock(scope: !670, file: !3, line: 576, column: 5)
-!676 = !DILocation(line: 581, column: 156, scope: !675)
-!677 = !DILocation(line: 581, column: 163, scope: !675)
-!678 = !DILocation(line: 581, column: 202, scope: !675)
-!679 = !DILocation(line: 581, column: 221, scope: !675)
-!680 = !DILocation(line: 581, column: 244, scope: !675)
-!681 = !DILocation(line: 581, column: 188, scope: !675)
-!682 = !DILocation(line: 581, column: 82, scope: !675)
-!683 = !DILocation(line: 582, column: 5, scope: !675)
-!684 = !DILocation(line: 586, column: 80, scope: !685)
-!685 = distinct !DILexicalBlock(scope: !670, file: !3, line: 584, column: 5)
-!686 = !DILocation(line: 589, column: 80, scope: !685)
-!687 = !DILocation(line: 592, column: 19, scope: !685)
-!688 = !DILocation(line: 592, column: 17, scope: !685)
-!689 = !DILocation(line: 595, column: 7, scope: !685)
-!690 = !DILocation(line: 595, column: 290, scope: !685)
-!691 = !DILocation(line: 595, column: 510, scope: !685)
-!692 = !DILocation(line: 595, column: 583, scope: !685)
-!693 = !DILocation(line: 597, column: 13, scope: !694)
-!694 = distinct !DILexicalBlock(scope: !695, file: !3, line: 597, column: 12)
-!695 = distinct !DILexicalBlock(scope: !685, file: !3, line: 596, column: 7)
-!696 = !DILocation(line: 597, column: 29, scope: !694)
-!697 = !DILocation(line: 597, column: 27, scope: !694)
-!698 = !DILocation(line: 597, column: 40, scope: !694)
-!699 = !DILocation(line: 597, column: 12, scope: !695)
-!700 = !DILocation(line: 599, column: 11, scope: !701)
-!701 = distinct !DILexicalBlock(scope: !694, file: !3, line: 598, column: 9)
-!702 = distinct !{!702, !689, !703}
-!703 = !DILocation(line: 601, column: 7, scope: !685)
-!704 = !DILocation(line: 603, column: 3, scope: !637)
-!705 = !DILocation(line: 607, column: 8, scope: !706)
-!706 = distinct !DILexicalBlock(scope: !192, file: !3, line: 607, column: 6)
-!707 = !DILocation(line: 607, column: 27, scope: !706)
-!708 = !DILocation(line: 607, column: 43, scope: !706)
-!709 = !DILocation(line: 607, column: 60, scope: !706)
-!710 = !DILocation(line: 607, column: 6, scope: !192)
-!711 = !DILocation(line: 613, column: 87, scope: !712)
-!712 = distinct !DILexicalBlock(scope: !713, file: !3, line: 613, column: 8)
-!713 = distinct !DILexicalBlock(scope: !706, file: !3, line: 608, column: 3)
-!714 = !DILocation(line: 613, column: 92, scope: !712)
-!715 = !DILocation(line: 613, column: 112, scope: !712)
-!716 = !DILocation(line: 613, column: 130, scope: !712)
-!717 = !DILocation(line: 614, column: 88, scope: !712)
-!718 = !DILocation(line: 614, column: 93, scope: !712)
-!719 = !DILocation(line: 614, column: 113, scope: !712)
-!720 = !DILocation(line: 614, column: 131, scope: !712)
-!721 = !DILocation(line: 614, column: 215, scope: !712)
-!722 = !DILocation(line: 614, column: 221, scope: !712)
-!723 = !DILocation(line: 614, column: 245, scope: !712)
-!724 = !DILocation(line: 613, column: 8, scope: !713)
-!725 = !DILocation(line: 616, column: 290, scope: !726)
-!726 = distinct !DILexicalBlock(scope: !727, file: !3, line: 616, column: 10)
-!727 = distinct !DILexicalBlock(scope: !712, file: !3, line: 615, column: 5)
-!728 = !DILocation(line: 616, column: 511, scope: !726)
-!729 = !DILocation(line: 616, column: 585, scope: !726)
-!730 = !DILocation(line: 616, column: 595, scope: !726)
-!731 = !DILocation(line: 616, column: 599, scope: !726)
-!732 = !DILocation(line: 616, column: 618, scope: !726)
-!733 = !DILocation(line: 616, column: 629, scope: !726)
-!734 = !DILocation(line: 616, column: 10, scope: !727)
-!735 = !DILocation(line: 618, column: 9, scope: !736)
-!736 = distinct !DILexicalBlock(scope: !726, file: !3, line: 617, column: 7)
-!737 = !DILocation(line: 620, column: 5, scope: !727)
-!738 = !DILocation(line: 624, column: 10, scope: !739)
-!739 = distinct !DILexicalBlock(scope: !740, file: !3, line: 624, column: 10)
-!740 = distinct !DILexicalBlock(scope: !712, file: !3, line: 622, column: 5)
-!741 = !DILocation(line: 624, column: 29, scope: !739)
-!742 = !DILocation(line: 624, column: 40, scope: !739)
-!743 = !DILocation(line: 624, column: 10, scope: !740)
-!744 = !DILocation(line: 627, column: 82, scope: !745)
-!745 = distinct !DILexicalBlock(scope: !739, file: !3, line: 625, column: 7)
-!746 = !DILocation(line: 630, column: 21, scope: !745)
-!747 = !DILocation(line: 630, column: 19, scope: !745)
-!748 = !DILocation(line: 633, column: 9, scope: !745)
-!749 = !DILocation(line: 633, column: 294, scope: !745)
-!750 = !DILocation(line: 633, column: 515, scope: !745)
-!751 = !DILocation(line: 633, column: 589, scope: !745)
-!752 = !DILocation(line: 635, column: 15, scope: !753)
-!753 = distinct !DILexicalBlock(scope: !754, file: !3, line: 635, column: 14)
-!754 = distinct !DILexicalBlock(scope: !745, file: !3, line: 634, column: 9)
-!755 = !DILocation(line: 635, column: 31, scope: !753)
-!756 = !DILocation(line: 635, column: 29, scope: !753)
-!757 = !DILocation(line: 635, column: 42, scope: !753)
-!758 = !DILocation(line: 635, column: 14, scope: !754)
-!759 = !DILocation(line: 637, column: 13, scope: !760)
-!760 = distinct !DILexicalBlock(scope: !753, file: !3, line: 636, column: 11)
-!761 = distinct !{!761, !748, !762}
-!762 = !DILocation(line: 639, column: 9, scope: !745)
-!763 = !DILocation(line: 640, column: 7, scope: !745)
-!764 = !DILocation(line: 644, column: 82, scope: !765)
-!765 = distinct !DILexicalBlock(scope: !739, file: !3, line: 642, column: 7)
-!766 = !DILocation(line: 647, column: 21, scope: !765)
-!767 = !DILocation(line: 647, column: 19, scope: !765)
-!768 = !DILocation(line: 650, column: 9, scope: !765)
-!769 = !DILocation(line: 650, column: 294, scope: !765)
-!770 = !DILocation(line: 650, column: 515, scope: !765)
-!771 = !DILocation(line: 650, column: 589, scope: !765)
-!772 = !DILocation(line: 652, column: 15, scope: !773)
-!773 = distinct !DILexicalBlock(scope: !774, file: !3, line: 652, column: 14)
-!774 = distinct !DILexicalBlock(scope: !765, file: !3, line: 651, column: 9)
-!775 = !DILocation(line: 652, column: 31, scope: !773)
-!776 = !DILocation(line: 652, column: 29, scope: !773)
-!777 = !DILocation(line: 652, column: 42, scope: !773)
-!778 = !DILocation(line: 652, column: 14, scope: !774)
-!779 = !DILocation(line: 654, column: 13, scope: !780)
-!780 = distinct !DILexicalBlock(scope: !773, file: !3, line: 653, column: 11)
-!781 = distinct !{!781, !768, !782}
-!782 = !DILocation(line: 656, column: 9, scope: !765)
-!783 = !DILocation(line: 659, column: 3, scope: !713)
-!784 = !DILocation(line: 665, column: 8, scope: !785)
-!785 = distinct !DILexicalBlock(scope: !192, file: !3, line: 665, column: 7)
-!786 = !DILocation(line: 665, column: 27, scope: !785)
-!787 = !DILocation(line: 665, column: 31, scope: !785)
-!788 = !DILocation(line: 665, column: 41, scope: !785)
-!789 = !DILocation(line: 665, column: 7, scope: !192)
-!790 = !DILocation(line: 668, column: 86, scope: !791)
-!791 = distinct !DILexicalBlock(scope: !792, file: !3, line: 668, column: 8)
-!792 = distinct !DILexicalBlock(scope: !785, file: !3, line: 666, column: 3)
-!793 = !DILocation(line: 668, column: 91, scope: !791)
-!794 = !DILocation(line: 668, column: 111, scope: !791)
-!795 = !DILocation(line: 668, column: 8, scope: !792)
-!796 = !DILocation(line: 670, column: 11, scope: !797)
-!797 = distinct !DILexicalBlock(scope: !798, file: !3, line: 670, column: 10)
-!798 = distinct !DILexicalBlock(scope: !791, file: !3, line: 669, column: 5)
-!799 = !DILocation(line: 670, column: 30, scope: !797)
-!800 = !DILocation(line: 670, column: 34, scope: !797)
-!801 = !DILocation(line: 670, column: 44, scope: !797)
-!802 = !DILocation(line: 670, column: 10, scope: !798)
-!803 = !DILocation(line: 678, column: 81, scope: !804)
-!804 = distinct !DILexicalBlock(scope: !797, file: !3, line: 671, column: 7)
-!805 = !DILocation(line: 681, column: 21, scope: !804)
-!806 = !DILocation(line: 681, column: 19, scope: !804)
-!807 = !DILocation(line: 684, column: 9, scope: !804)
-!808 = !DILocation(line: 684, column: 153, scope: !804)
-!809 = !DILocation(line: 684, column: 515, scope: !804)
-!810 = !DILocation(line: 684, column: 589, scope: !804)
-!811 = !DILocation(line: 686, column: 15, scope: !812)
-!812 = distinct !DILexicalBlock(scope: !813, file: !3, line: 686, column: 14)
-!813 = distinct !DILexicalBlock(scope: !804, file: !3, line: 685, column: 9)
-!814 = !DILocation(line: 686, column: 31, scope: !812)
-!815 = !DILocation(line: 686, column: 29, scope: !812)
-!816 = !DILocation(line: 686, column: 43, scope: !812)
-!817 = !DILocation(line: 686, column: 14, scope: !813)
-!818 = !DILocation(line: 688, column: 13, scope: !819)
-!819 = distinct !DILexicalBlock(scope: !812, file: !3, line: 687, column: 11)
-!820 = distinct !{!820, !807, !821}
-!821 = !DILocation(line: 690, column: 9, scope: !804)
-!822 = !DILocation(line: 693, column: 9, scope: !804)
-!823 = !DILocation(line: 693, column: 165, scope: !824)
-!824 = distinct !DILexicalBlock(scope: !804, file: !3, line: 693, column: 12)
-!825 = !DILocation(line: 693, column: 174, scope: !824)
-!826 = !DILocation(line: 693, column: 202, scope: !824)
-!827 = !DILocation(line: 693, column: 221, scope: !824)
-!828 = !DILocation(line: 693, column: 225, scope: !824)
-!829 = !DILocation(line: 693, column: 198, scope: !824)
-!830 = !DILocation(line: 693, column: 91, scope: !824)
-!831 = !DILocation(line: 693, column: 388, scope: !824)
-!832 = !DILocation(line: 693, column: 396, scope: !824)
-!833 = !DILocation(line: 693, column: 455, scope: !824)
-!834 = !DILocation(line: 693, column: 474, scope: !824)
-!835 = !DILocation(line: 693, column: 478, scope: !824)
-!836 = !DILocation(line: 693, column: 487, scope: !824)
-!837 = !DILocation(line: 693, column: 506, scope: !824)
-!838 = !DILocation(line: 693, column: 510, scope: !824)
-!839 = !DILocation(line: 693, column: 485, scope: !824)
-!840 = !DILocation(line: 693, column: 440, scope: !824)
-!841 = !DILocation(line: 693, column: 314, scope: !824)
-!842 = !DILocation(line: 693, column: 527, scope: !824)
-!843 = !DILocation(line: 697, column: 81, scope: !804)
-!844 = !DILocation(line: 700, column: 21, scope: !804)
-!845 = !DILocation(line: 700, column: 19, scope: !804)
-!846 = !DILocation(line: 703, column: 9, scope: !804)
-!847 = !DILocation(line: 703, column: 153, scope: !804)
-!848 = !DILocation(line: 703, column: 515, scope: !804)
-!849 = !DILocation(line: 703, column: 589, scope: !804)
-!850 = !DILocation(line: 705, column: 15, scope: !851)
-!851 = distinct !DILexicalBlock(scope: !852, file: !3, line: 705, column: 14)
-!852 = distinct !DILexicalBlock(scope: !804, file: !3, line: 704, column: 9)
-!853 = !DILocation(line: 705, column: 31, scope: !851)
-!854 = !DILocation(line: 705, column: 29, scope: !851)
-!855 = !DILocation(line: 705, column: 43, scope: !851)
-!856 = !DILocation(line: 705, column: 14, scope: !852)
-!857 = !DILocation(line: 707, column: 13, scope: !858)
-!858 = distinct !DILexicalBlock(scope: !851, file: !3, line: 706, column: 11)
-!859 = distinct !{!859, !846, !860}
-!860 = !DILocation(line: 709, column: 9, scope: !804)
-!861 = !DILocation(line: 710, column: 7, scope: !804)
-!862 = !DILocation(line: 714, column: 81, scope: !863)
-!863 = distinct !DILexicalBlock(scope: !797, file: !3, line: 712, column: 7)
-!864 = !DILocation(line: 717, column: 21, scope: !863)
-!865 = !DILocation(line: 717, column: 19, scope: !863)
-!866 = !DILocation(line: 720, column: 9, scope: !863)
-!867 = !DILocation(line: 720, column: 153, scope: !863)
-!868 = !DILocation(line: 720, column: 515, scope: !863)
-!869 = !DILocation(line: 720, column: 589, scope: !863)
-!870 = !DILocation(line: 722, column: 15, scope: !871)
-!871 = distinct !DILexicalBlock(scope: !872, file: !3, line: 722, column: 14)
-!872 = distinct !DILexicalBlock(scope: !863, file: !3, line: 721, column: 9)
-!873 = !DILocation(line: 722, column: 31, scope: !871)
-!874 = !DILocation(line: 722, column: 29, scope: !871)
-!875 = !DILocation(line: 722, column: 43, scope: !871)
-!876 = !DILocation(line: 722, column: 14, scope: !872)
-!877 = !DILocation(line: 724, column: 13, scope: !878)
-!878 = distinct !DILexicalBlock(scope: !871, file: !3, line: 723, column: 11)
-!879 = distinct !{!879, !866, !880}
-!880 = !DILocation(line: 726, column: 9, scope: !863)
-!881 = !DILocation(line: 728, column: 5, scope: !798)
-!882 = !DILocation(line: 732, column: 11, scope: !883)
-!883 = distinct !DILexicalBlock(scope: !884, file: !3, line: 732, column: 10)
-!884 = distinct !DILexicalBlock(scope: !791, file: !3, line: 730, column: 5)
-!885 = !DILocation(line: 732, column: 30, scope: !883)
-!886 = !DILocation(line: 732, column: 34, scope: !883)
-!887 = !DILocation(line: 732, column: 44, scope: !883)
-!888 = !DILocation(line: 732, column: 10, scope: !884)
-!889 = !DILocation(line: 734, column: 9, scope: !890)
-!890 = distinct !DILexicalBlock(scope: !883, file: !3, line: 733, column: 7)
-!891 = !DILocation(line: 739, column: 88, scope: !892)
-!892 = distinct !DILexicalBlock(scope: !883, file: !3, line: 737, column: 7)
-!893 = !DILocation(line: 739, column: 20, scope: !892)
-!894 = !DILocation(line: 740, column: 89, scope: !892)
-!895 = !DILocation(line: 740, column: 21, scope: !892)
-!896 = !DILocation(line: 741, column: 15, scope: !897)
-!897 = distinct !DILexicalBlock(scope: !892, file: !3, line: 741, column: 12)
-!898 = !DILocation(line: 741, column: 27, scope: !897)
-!899 = !DILocation(line: 741, column: 52, scope: !897)
-!900 = !DILocation(line: 741, column: 71, scope: !897)
-!901 = !DILocation(line: 741, column: 75, scope: !897)
-!902 = !DILocation(line: 741, column: 49, scope: !897)
-!903 = !DILocation(line: 741, column: 86, scope: !897)
-!904 = !DILocation(line: 742, column: 15, scope: !897)
-!905 = !DILocation(line: 742, column: 28, scope: !897)
-!906 = !DILocation(line: 742, column: 52, scope: !897)
-!907 = !DILocation(line: 742, column: 71, scope: !897)
-!908 = !DILocation(line: 742, column: 75, scope: !897)
-!909 = !DILocation(line: 742, column: 49, scope: !897)
-!910 = !DILocation(line: 742, column: 83, scope: !897)
-!911 = !DILocation(line: 743, column: 15, scope: !897)
-!912 = !DILocation(line: 743, column: 27, scope: !897)
-!913 = !DILocation(line: 743, column: 52, scope: !897)
-!914 = !DILocation(line: 743, column: 71, scope: !897)
-!915 = !DILocation(line: 743, column: 75, scope: !897)
-!916 = !DILocation(line: 743, column: 49, scope: !897)
-!917 = !DILocation(line: 741, column: 12, scope: !892)
-!918 = !DILocation(line: 745, column: 11, scope: !919)
-!919 = distinct !DILexicalBlock(scope: !897, file: !3, line: 744, column: 9)
-!920 = !DILocation(line: 749, column: 3, scope: !792)
-!921 = !DILocation(line: 751, column: 3, scope: !192)
-!922 = !DILocation(line: 752, column: 1, scope: !192)
-!923 = distinct !DISubprogram(name: "HAL_RCC_ClockConfig", scope: !3, file: !3, line: 777, type: !924, scopeLine: 778, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !934)
-!924 = !DISubroutineType(types: !925)
-!925 = !{!113, !926, !6}
-!926 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !927, size: 32)
-!927 = !DIDerivedType(tag: DW_TAG_typedef, name: "RCC_ClkInitTypeDef", file: !197, line: 264, baseType: !928)
-!928 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !197, line: 250, size: 128, elements: !929)
-!929 = !{!930, !931, !932, !933}
-!930 = !DIDerivedType(tag: DW_TAG_member, name: "ClockType", scope: !928, file: !197, line: 252, baseType: !6, size: 32)
-!931 = !DIDerivedType(tag: DW_TAG_member, name: "SYSCLKSource", scope: !928, file: !197, line: 255, baseType: !6, size: 32, offset: 32)
-!932 = !DIDerivedType(tag: DW_TAG_member, name: "AHBCLKDivider", scope: !928, file: !197, line: 258, baseType: !6, size: 32, offset: 64)
-!933 = !DIDerivedType(tag: DW_TAG_member, name: "APB1CLKDivider", scope: !928, file: !197, line: 261, baseType: !6, size: 32, offset: 96)
-!934 = !{!935, !936, !937}
-!935 = !DILocalVariable(name: "RCC_ClkInitStruct", arg: 1, scope: !923, file: !3, line: 777, type: !926)
-!936 = !DILocalVariable(name: "FLatency", arg: 2, scope: !923, file: !3, line: 777, type: !6)
-!937 = !DILocalVariable(name: "tickstart", scope: !923, file: !3, line: 779, type: !6)
-!938 = !DILocation(line: 777, column: 59, scope: !923)
-!939 = !DILocation(line: 777, column: 87, scope: !923)
-!940 = !DILocation(line: 779, column: 3, scope: !923)
-!941 = !DILocation(line: 779, column: 12, scope: !923)
-!942 = !DILocation(line: 782, column: 6, scope: !943)
-!943 = distinct !DILexicalBlock(scope: !923, file: !3, line: 782, column: 6)
-!944 = !DILocation(line: 782, column: 24, scope: !943)
-!945 = !DILocation(line: 782, column: 6, scope: !923)
-!946 = !DILocation(line: 784, column: 5, scope: !947)
-!947 = distinct !DILexicalBlock(scope: !943, file: !3, line: 783, column: 3)
-!948 = !DILocation(line: 796, column: 6, scope: !949)
-!949 = distinct !DILexicalBlock(scope: !923, file: !3, line: 796, column: 6)
-!950 = !DILocation(line: 796, column: 89, scope: !949)
-!951 = !DILocation(line: 796, column: 95, scope: !949)
-!952 = !DILocation(line: 796, column: 15, scope: !949)
-!953 = !DILocation(line: 796, column: 6, scope: !923)
-!954 = !DILocation(line: 799, column: 149, scope: !955)
-!955 = distinct !DILexicalBlock(scope: !949, file: !3, line: 797, column: 3)
-!956 = !DILocation(line: 799, column: 152, scope: !955)
-!957 = !DILocation(line: 799, column: 176, scope: !955)
-!958 = !DILocation(line: 799, column: 173, scope: !955)
-!959 = !DILocation(line: 799, column: 78, scope: !955)
-!960 = !DILocation(line: 803, column: 80, scope: !961)
-!961 = distinct !DILexicalBlock(scope: !955, file: !3, line: 803, column: 8)
-!962 = !DILocation(line: 803, column: 86, scope: !961)
-!963 = !DILocation(line: 803, column: 111, scope: !961)
-!964 = !DILocation(line: 803, column: 108, scope: !961)
-!965 = !DILocation(line: 803, column: 8, scope: !955)
-!966 = !DILocation(line: 805, column: 7, scope: !967)
-!967 = distinct !DILexicalBlock(scope: !961, file: !3, line: 804, column: 5)
-!968 = !DILocation(line: 807, column: 3, scope: !955)
-!969 = !DILocation(line: 810, column: 8, scope: !970)
-!970 = distinct !DILexicalBlock(scope: !923, file: !3, line: 810, column: 6)
-!971 = !DILocation(line: 810, column: 27, scope: !970)
-!972 = !DILocation(line: 810, column: 38, scope: !970)
-!973 = !DILocation(line: 810, column: 55, scope: !970)
-!974 = !DILocation(line: 810, column: 6, scope: !923)
-!975 = !DILocation(line: 814, column: 10, scope: !976)
-!976 = distinct !DILexicalBlock(scope: !977, file: !3, line: 814, column: 8)
-!977 = distinct !DILexicalBlock(scope: !970, file: !3, line: 811, column: 3)
-!978 = !DILocation(line: 814, column: 29, scope: !976)
-!979 = !DILocation(line: 814, column: 40, scope: !976)
-!980 = !DILocation(line: 814, column: 57, scope: !976)
-!981 = !DILocation(line: 814, column: 8, scope: !977)
-!982 = !DILocation(line: 816, column: 157, scope: !983)
-!983 = distinct !DILexicalBlock(scope: !976, file: !3, line: 815, column: 5)
-!984 = !DILocation(line: 816, column: 165, scope: !983)
-!985 = !DILocation(line: 816, column: 189, scope: !983)
-!986 = !DILocation(line: 816, column: 83, scope: !983)
-!987 = !DILocation(line: 817, column: 5, scope: !983)
-!988 = !DILocation(line: 821, column: 155, scope: !977)
-!989 = !DILocation(line: 821, column: 163, scope: !977)
-!990 = !DILocation(line: 821, column: 190, scope: !977)
-!991 = !DILocation(line: 821, column: 209, scope: !977)
-!992 = !DILocation(line: 821, column: 187, scope: !977)
-!993 = !DILocation(line: 821, column: 81, scope: !977)
-!994 = !DILocation(line: 822, column: 3, scope: !977)
-!995 = !DILocation(line: 825, column: 8, scope: !996)
-!996 = distinct !DILexicalBlock(scope: !923, file: !3, line: 825, column: 6)
-!997 = !DILocation(line: 825, column: 27, scope: !996)
-!998 = !DILocation(line: 825, column: 38, scope: !996)
-!999 = !DILocation(line: 825, column: 55, scope: !996)
-!1000 = !DILocation(line: 825, column: 6, scope: !923)
-!1001 = !DILocation(line: 830, column: 8, scope: !1002)
-!1002 = distinct !DILexicalBlock(scope: !1003, file: !3, line: 830, column: 8)
-!1003 = distinct !DILexicalBlock(scope: !996, file: !3, line: 826, column: 3)
-!1004 = !DILocation(line: 830, column: 27, scope: !1002)
-!1005 = !DILocation(line: 830, column: 40, scope: !1002)
-!1006 = !DILocation(line: 830, column: 8, scope: !1003)
-!1007 = !DILocation(line: 833, column: 148, scope: !1008)
-!1008 = distinct !DILexicalBlock(scope: !1009, file: !3, line: 833, column: 10)
-!1009 = distinct !DILexicalBlock(scope: !1002, file: !3, line: 831, column: 5)
-!1010 = !DILocation(line: 833, column: 510, scope: !1008)
-!1011 = !DILocation(line: 833, column: 584, scope: !1008)
-!1012 = !DILocation(line: 833, column: 10, scope: !1009)
-!1013 = !DILocation(line: 835, column: 9, scope: !1014)
-!1014 = distinct !DILexicalBlock(scope: !1008, file: !3, line: 834, column: 7)
-!1015 = !DILocation(line: 837, column: 5, scope: !1009)
-!1016 = !DILocation(line: 839, column: 13, scope: !1017)
-!1017 = distinct !DILexicalBlock(scope: !1002, file: !3, line: 839, column: 13)
-!1018 = !DILocation(line: 839, column: 32, scope: !1017)
-!1019 = !DILocation(line: 839, column: 45, scope: !1017)
-!1020 = !DILocation(line: 839, column: 13, scope: !1002)
-!1021 = !DILocation(line: 842, column: 148, scope: !1022)
-!1022 = distinct !DILexicalBlock(scope: !1023, file: !3, line: 842, column: 10)
-!1023 = distinct !DILexicalBlock(scope: !1017, file: !3, line: 840, column: 5)
-!1024 = !DILocation(line: 842, column: 510, scope: !1022)
-!1025 = !DILocation(line: 842, column: 584, scope: !1022)
-!1026 = !DILocation(line: 842, column: 10, scope: !1023)
-!1027 = !DILocation(line: 844, column: 9, scope: !1028)
-!1028 = distinct !DILexicalBlock(scope: !1022, file: !3, line: 843, column: 7)
-!1029 = !DILocation(line: 846, column: 5, scope: !1023)
-!1030 = !DILocation(line: 849, column: 13, scope: !1031)
-!1031 = distinct !DILexicalBlock(scope: !1017, file: !3, line: 849, column: 13)
-!1032 = !DILocation(line: 849, column: 32, scope: !1031)
-!1033 = !DILocation(line: 849, column: 45, scope: !1031)
-!1034 = !DILocation(line: 849, column: 13, scope: !1017)
-!1035 = !DILocation(line: 852, column: 289, scope: !1036)
-!1036 = distinct !DILexicalBlock(scope: !1037, file: !3, line: 852, column: 10)
-!1037 = distinct !DILexicalBlock(scope: !1031, file: !3, line: 850, column: 5)
-!1038 = !DILocation(line: 852, column: 510, scope: !1036)
-!1039 = !DILocation(line: 852, column: 584, scope: !1036)
-!1040 = !DILocation(line: 852, column: 10, scope: !1037)
-!1041 = !DILocation(line: 854, column: 9, scope: !1042)
-!1042 = distinct !DILexicalBlock(scope: !1036, file: !3, line: 853, column: 7)
-!1043 = !DILocation(line: 856, column: 5, scope: !1037)
-!1044 = !DILocation(line: 862, column: 147, scope: !1045)
-!1045 = distinct !DILexicalBlock(scope: !1046, file: !3, line: 862, column: 10)
-!1046 = distinct !DILexicalBlock(scope: !1031, file: !3, line: 860, column: 5)
-!1047 = !DILocation(line: 862, column: 507, scope: !1045)
-!1048 = !DILocation(line: 862, column: 580, scope: !1045)
-!1049 = !DILocation(line: 862, column: 10, scope: !1046)
-!1050 = !DILocation(line: 864, column: 9, scope: !1051)
-!1051 = distinct !DILexicalBlock(scope: !1045, file: !3, line: 863, column: 7)
-!1052 = !DILocation(line: 867, column: 155, scope: !1003)
-!1053 = !DILocation(line: 867, column: 163, scope: !1003)
-!1054 = !DILocation(line: 867, column: 191, scope: !1003)
-!1055 = !DILocation(line: 867, column: 210, scope: !1003)
-!1056 = !DILocation(line: 867, column: 187, scope: !1003)
-!1057 = !DILocation(line: 867, column: 81, scope: !1003)
-!1058 = !DILocation(line: 870, column: 17, scope: !1003)
-!1059 = !DILocation(line: 870, column: 15, scope: !1003)
-!1060 = !DILocation(line: 872, column: 5, scope: !1003)
-!1061 = !DILocation(line: 872, column: 90, scope: !1003)
-!1062 = !DILocation(line: 872, column: 95, scope: !1003)
-!1063 = !DILocation(line: 872, column: 119, scope: !1003)
-!1064 = !DILocation(line: 872, column: 138, scope: !1003)
-!1065 = !DILocation(line: 872, column: 151, scope: !1003)
-!1066 = !DILocation(line: 872, column: 115, scope: !1003)
-!1067 = !DILocation(line: 874, column: 11, scope: !1068)
-!1068 = distinct !DILexicalBlock(scope: !1069, file: !3, line: 874, column: 10)
-!1069 = distinct !DILexicalBlock(scope: !1003, file: !3, line: 873, column: 5)
-!1070 = !DILocation(line: 874, column: 27, scope: !1068)
-!1071 = !DILocation(line: 874, column: 25, scope: !1068)
-!1072 = !DILocation(line: 874, column: 39, scope: !1068)
-!1073 = !DILocation(line: 874, column: 10, scope: !1069)
-!1074 = !DILocation(line: 876, column: 9, scope: !1075)
-!1075 = distinct !DILexicalBlock(scope: !1068, file: !3, line: 875, column: 7)
-!1076 = distinct !{!1076, !1060, !1077}
-!1077 = !DILocation(line: 878, column: 5, scope: !1003)
-!1078 = !DILocation(line: 879, column: 3, scope: !1003)
-!1079 = !DILocation(line: 882, column: 6, scope: !1080)
-!1080 = distinct !DILexicalBlock(scope: !923, file: !3, line: 882, column: 6)
-!1081 = !DILocation(line: 882, column: 89, scope: !1080)
-!1082 = !DILocation(line: 882, column: 95, scope: !1080)
-!1083 = !DILocation(line: 882, column: 15, scope: !1080)
-!1084 = !DILocation(line: 882, column: 6, scope: !923)
-!1085 = !DILocation(line: 885, column: 149, scope: !1086)
-!1086 = distinct !DILexicalBlock(scope: !1080, file: !3, line: 883, column: 3)
-!1087 = !DILocation(line: 885, column: 152, scope: !1086)
-!1088 = !DILocation(line: 885, column: 176, scope: !1086)
-!1089 = !DILocation(line: 885, column: 173, scope: !1086)
-!1090 = !DILocation(line: 885, column: 78, scope: !1086)
-!1091 = !DILocation(line: 889, column: 80, scope: !1092)
-!1092 = distinct !DILexicalBlock(scope: !1086, file: !3, line: 889, column: 8)
-!1093 = !DILocation(line: 889, column: 86, scope: !1092)
-!1094 = !DILocation(line: 889, column: 111, scope: !1092)
-!1095 = !DILocation(line: 889, column: 108, scope: !1092)
-!1096 = !DILocation(line: 889, column: 8, scope: !1086)
-!1097 = !DILocation(line: 891, column: 7, scope: !1098)
-!1098 = distinct !DILexicalBlock(scope: !1092, file: !3, line: 890, column: 5)
-!1099 = !DILocation(line: 893, column: 3, scope: !1086)
-!1100 = !DILocation(line: 896, column: 8, scope: !1101)
-!1101 = distinct !DILexicalBlock(scope: !923, file: !3, line: 896, column: 6)
-!1102 = !DILocation(line: 896, column: 27, scope: !1101)
-!1103 = !DILocation(line: 896, column: 38, scope: !1101)
-!1104 = !DILocation(line: 896, column: 55, scope: !1101)
-!1105 = !DILocation(line: 896, column: 6, scope: !923)
-!1106 = !DILocation(line: 899, column: 155, scope: !1107)
-!1107 = distinct !DILexicalBlock(scope: !1101, file: !3, line: 897, column: 3)
-!1108 = !DILocation(line: 899, column: 163, scope: !1107)
-!1109 = !DILocation(line: 899, column: 190, scope: !1107)
-!1110 = !DILocation(line: 899, column: 209, scope: !1107)
-!1111 = !DILocation(line: 899, column: 187, scope: !1107)
-!1112 = !DILocation(line: 899, column: 81, scope: !1107)
-!1113 = !DILocation(line: 900, column: 3, scope: !1107)
-!1114 = !DILocation(line: 903, column: 21, scope: !923)
-!1115 = !DILocation(line: 903, column: 131, scope: !923)
-!1116 = !DILocation(line: 903, column: 136, scope: !923)
-!1117 = !DILocation(line: 903, column: 154, scope: !923)
-!1118 = !DILocation(line: 903, column: 50, scope: !923)
-!1119 = !DILocation(line: 903, column: 47, scope: !923)
-!1120 = !DILocation(line: 903, column: 19, scope: !923)
-!1121 = !DILocation(line: 906, column: 3, scope: !923)
-!1122 = !DILocation(line: 908, column: 3, scope: !923)
-!1123 = !DILocation(line: 909, column: 1, scope: !923)
-!1124 = !DILocation(line: 1102, column: 3, scope: !2)
-!1125 = !DILocation(line: 1102, column: 12, scope: !2)
-!1126 = !DILocation(line: 1102, column: 25, scope: !2)
-!1127 = !DILocation(line: 1102, column: 38, scope: !2)
-!1128 = !DILocation(line: 1102, column: 51, scope: !2)
-!1129 = !DILocation(line: 1103, column: 3, scope: !2)
-!1130 = !DILocation(line: 1103, column: 12, scope: !2)
-!1131 = !DILocation(line: 1105, column: 78, scope: !2)
-!1132 = !DILocation(line: 1105, column: 10, scope: !2)
-!1133 = !DILocation(line: 1108, column: 11, scope: !2)
-!1134 = !DILocation(line: 1108, column: 18, scope: !2)
-!1135 = !DILocation(line: 1108, column: 3, scope: !2)
-!1136 = !DILocation(line: 1112, column: 20, scope: !1137)
-!1137 = distinct !DILexicalBlock(scope: !1138, file: !3, line: 1111, column: 5)
-!1138 = distinct !DILexicalBlock(scope: !2, file: !3, line: 1109, column: 3)
-!1139 = !DILocation(line: 1113, column: 7, scope: !1137)
-!1140 = !DILocation(line: 1117, column: 46, scope: !1141)
-!1141 = distinct !DILexicalBlock(scope: !1138, file: !3, line: 1116, column: 5)
-!1142 = !DILocation(line: 1117, column: 53, scope: !1141)
-!1143 = !DILocation(line: 1117, column: 73, scope: !1141)
-!1144 = !DILocation(line: 1117, column: 16, scope: !1141)
-!1145 = !DILocation(line: 1117, column: 14, scope: !1141)
-!1146 = !DILocation(line: 1118, column: 112, scope: !1141)
-!1147 = !DILocation(line: 1118, column: 118, scope: !1141)
-!1148 = !DILocation(line: 1118, column: 137, scope: !1141)
-!1149 = !DILocation(line: 1118, column: 16, scope: !1141)
-!1150 = !DILocation(line: 1118, column: 14, scope: !1141)
-!1151 = !DILocation(line: 1119, column: 12, scope: !1152)
-!1152 = distinct !DILexicalBlock(scope: !1141, file: !3, line: 1119, column: 11)
-!1153 = !DILocation(line: 1119, column: 19, scope: !1152)
-!1154 = !DILocation(line: 1119, column: 39, scope: !1152)
-!1155 = !DILocation(line: 1119, column: 11, scope: !1141)
-!1156 = !DILocation(line: 1122, column: 62, scope: !1157)
-!1157 = distinct !DILexicalBlock(scope: !1152, file: !3, line: 1120, column: 7)
-!1158 = !DILocation(line: 1122, column: 50, scope: !1157)
-!1159 = !DILocation(line: 1122, column: 48, scope: !1157)
-!1160 = !DILocation(line: 1122, column: 18, scope: !1157)
-!1161 = !DILocation(line: 1122, column: 85, scope: !1157)
-!1162 = !DILocation(line: 1122, column: 74, scope: !1157)
-!1163 = !DILocation(line: 1122, column: 71, scope: !1157)
-!1164 = !DILocation(line: 1122, column: 16, scope: !1157)
-!1165 = !DILocation(line: 1123, column: 7, scope: !1157)
-!1166 = !DILocation(line: 1125, column: 17, scope: !1167)
-!1167 = distinct !DILexicalBlock(scope: !1152, file: !3, line: 1125, column: 16)
-!1168 = !DILocation(line: 1125, column: 24, scope: !1167)
-!1169 = !DILocation(line: 1125, column: 44, scope: !1167)
-!1170 = !DILocation(line: 1125, column: 16, scope: !1152)
-!1171 = !DILocation(line: 1128, column: 64, scope: !1172)
-!1172 = distinct !DILexicalBlock(scope: !1167, file: !3, line: 1126, column: 7)
-!1173 = !DILocation(line: 1128, column: 52, scope: !1172)
-!1174 = !DILocation(line: 1128, column: 50, scope: !1172)
-!1175 = !DILocation(line: 1128, column: 18, scope: !1172)
-!1176 = !DILocation(line: 1128, column: 87, scope: !1172)
-!1177 = !DILocation(line: 1128, column: 76, scope: !1172)
-!1178 = !DILocation(line: 1128, column: 73, scope: !1172)
-!1179 = !DILocation(line: 1128, column: 16, scope: !1172)
-!1180 = !DILocation(line: 1129, column: 7, scope: !1172)
-!1181 = !DILocation(line: 1135, column: 63, scope: !1182)
-!1182 = distinct !DILexicalBlock(scope: !1167, file: !3, line: 1132, column: 7)
-!1183 = !DILocation(line: 1135, column: 51, scope: !1182)
-!1184 = !DILocation(line: 1135, column: 49, scope: !1182)
-!1185 = !DILocation(line: 1135, column: 18, scope: !1182)
-!1186 = !DILocation(line: 1135, column: 86, scope: !1182)
-!1187 = !DILocation(line: 1135, column: 75, scope: !1182)
-!1188 = !DILocation(line: 1135, column: 72, scope: !1182)
-!1189 = !DILocation(line: 1135, column: 16, scope: !1182)
-!1190 = !DILocation(line: 1141, column: 22, scope: !1141)
-!1191 = !DILocation(line: 1141, column: 20, scope: !1141)
-!1192 = !DILocation(line: 1142, column: 7, scope: !1141)
-!1193 = !DILocation(line: 1147, column: 20, scope: !1194)
-!1194 = distinct !DILexicalBlock(scope: !1138, file: !3, line: 1146, column: 5)
-!1195 = !DILocation(line: 1148, column: 7, scope: !1194)
-!1196 = !DILocation(line: 1151, column: 5, scope: !1138)
-!1197 = !DILocation(line: 1154, column: 20, scope: !1198)
-!1198 = distinct !DILexicalBlock(scope: !1138, file: !3, line: 1153, column: 5)
-!1199 = !DILocation(line: 1155, column: 7, scope: !1198)
-!1200 = !DILocation(line: 1158, column: 10, scope: !2)
-!1201 = !DILocation(line: 1159, column: 1, scope: !2)
-!1202 = !DILocation(line: 1158, column: 3, scope: !2)
-!1203 = distinct !DISubprogram(name: "HAL_RCC_MCOConfig", scope: !3, file: !3, line: 1016, type: !1204, scopeLine: 1017, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !1206)
-!1204 = !DISubroutineType(types: !1205)
-!1205 = !{null, !6, !6, !6}
-!1206 = !{!1207, !1208, !1209, !1210, !1220}
-!1207 = !DILocalVariable(name: "RCC_MCOx", arg: 1, scope: !1203, file: !3, line: 1016, type: !6)
-!1208 = !DILocalVariable(name: "RCC_MCOSource", arg: 2, scope: !1203, file: !3, line: 1016, type: !6)
-!1209 = !DILocalVariable(name: "RCC_MCODiv", arg: 3, scope: !1203, file: !3, line: 1016, type: !6)
-!1210 = !DILocalVariable(name: "gpio", scope: !1203, file: !3, line: 1018, type: !1211)
-!1211 = !DIDerivedType(tag: DW_TAG_typedef, name: "GPIO_InitTypeDef", file: !1212, line: 62, baseType: !1213)
-!1212 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_hal_gpio.h", directory: "/home/sri/zephyrproject")
-!1213 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !1212, line: 46, size: 160, elements: !1214)
-!1214 = !{!1215, !1216, !1217, !1218, !1219}
-!1215 = !DIDerivedType(tag: DW_TAG_member, name: "Pin", scope: !1213, file: !1212, line: 48, baseType: !6, size: 32)
-!1216 = !DIDerivedType(tag: DW_TAG_member, name: "Mode", scope: !1213, file: !1212, line: 51, baseType: !6, size: 32, offset: 32)
-!1217 = !DIDerivedType(tag: DW_TAG_member, name: "Pull", scope: !1213, file: !1212, line: 54, baseType: !6, size: 32, offset: 64)
-!1218 = !DIDerivedType(tag: DW_TAG_member, name: "Speed", scope: !1213, file: !1212, line: 57, baseType: !6, size: 32, offset: 96)
-!1219 = !DIDerivedType(tag: DW_TAG_member, name: "Alternate", scope: !1213, file: !1212, line: 60, baseType: !6, size: 32, offset: 128)
-!1220 = !DILocalVariable(name: "tmpreg", scope: !1221, file: !3, line: 1033, type: !32)
-!1221 = distinct !DILexicalBlock(scope: !1203, file: !3, line: 1033, column: 6)
-!1222 = !DILocation(line: 1016, column: 33, scope: !1203)
-!1223 = !DILocation(line: 1016, column: 52, scope: !1203)
-!1224 = !DILocation(line: 1016, column: 76, scope: !1203)
-!1225 = !DILocation(line: 1018, column: 3, scope: !1203)
-!1226 = !DILocation(line: 1018, column: 20, scope: !1203)
-!1227 = !DILocation(line: 1026, column: 8, scope: !1203)
-!1228 = !DILocation(line: 1026, column: 13, scope: !1203)
-!1229 = !DILocation(line: 1027, column: 8, scope: !1203)
-!1230 = !DILocation(line: 1027, column: 14, scope: !1203)
-!1231 = !DILocation(line: 1028, column: 8, scope: !1203)
-!1232 = !DILocation(line: 1028, column: 13, scope: !1203)
-!1233 = !DILocation(line: 1029, column: 8, scope: !1203)
-!1234 = !DILocation(line: 1029, column: 12, scope: !1203)
-!1235 = !DILocation(line: 1030, column: 8, scope: !1203)
-!1236 = !DILocation(line: 1030, column: 18, scope: !1203)
-!1237 = !DILocation(line: 1033, column: 3, scope: !1203)
-!1238 = !DILocation(line: 1033, column: 8, scope: !1221)
-!1239 = !DILocation(line: 1033, column: 26, scope: !1221)
-!1240 = !DILocation(line: 1033, column: 110, scope: !1221)
-!1241 = !DILocation(line: 1033, column: 211, scope: !1221)
-!1242 = !DILocation(line: 1033, column: 219, scope: !1221)
-!1243 = !DILocation(line: 1033, column: 141, scope: !1221)
-!1244 = !DILocation(line: 1033, column: 248, scope: !1221)
-!1245 = !DILocation(line: 1033, column: 256, scope: !1203)
-!1246 = !DILocation(line: 1033, column: 256, scope: !1221)
-!1247 = !DILocation(line: 1035, column: 3, scope: !1203)
-!1248 = !DILocation(line: 1038, column: 153, scope: !1203)
-!1249 = !DILocation(line: 1038, column: 161, scope: !1203)
-!1250 = !DILocation(line: 1038, column: 212, scope: !1203)
-!1251 = !DILocation(line: 1038, column: 230, scope: !1203)
-!1252 = !DILocation(line: 1038, column: 227, scope: !1203)
-!1253 = !DILocation(line: 1038, column: 207, scope: !1203)
-!1254 = !DILocation(line: 1038, column: 79, scope: !1203)
-!1255 = !DILocation(line: 1039, column: 1, scope: !1203)
-!1256 = !DISubprogram(name: "HAL_GPIO_Init", scope: !1212, file: !1212, line: 280, type: !1257, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !188)
-!1257 = !DISubroutineType(types: !1258)
-!1258 = !{null, !69, !1259}
-!1259 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !1211, size: 32)
-!1260 = distinct !DISubprogram(name: "HAL_RCC_EnableCSS", scope: !3, file: !3, line: 1050, type: !1261, scopeLine: 1051, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !188)
-!1261 = !DISubroutineType(types: !1262)
-!1262 = !{null}
-!1263 = !DILocation(line: 1052, column: 75, scope: !1260)
-!1264 = !DILocation(line: 1053, column: 1, scope: !1260)
-!1265 = distinct !DISubprogram(name: "HAL_RCC_DisableCSS", scope: !3, file: !3, line: 1059, type: !1261, scopeLine: 1060, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !188)
-!1266 = !DILocation(line: 1061, column: 75, scope: !1265)
-!1267 = !DILocation(line: 1062, column: 1, scope: !1265)
-!1268 = distinct !DISubprogram(name: "HAL_RCC_GetHCLKFreq", scope: !3, file: !3, line: 1170, type: !4, scopeLine: 1171, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !188)
-!1269 = !DILocation(line: 1172, column: 10, scope: !1268)
-!1270 = !DILocation(line: 1172, column: 3, scope: !1268)
-!1271 = distinct !DISubprogram(name: "HAL_RCC_GetPCLK1Freq", scope: !3, file: !3, line: 1181, type: !4, scopeLine: 1182, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !188)
-!1272 = !DILocation(line: 1184, column: 11, scope: !1271)
-!1273 = !DILocation(line: 1184, column: 117, scope: !1271)
-!1274 = !DILocation(line: 1184, column: 122, scope: !1271)
-!1275 = !DILocation(line: 1184, column: 141, scope: !1271)
-!1276 = !DILocation(line: 1184, column: 36, scope: !1271)
-!1277 = !DILocation(line: 1184, column: 33, scope: !1271)
-!1278 = !DILocation(line: 1184, column: 3, scope: !1271)
-!1279 = distinct !DISubprogram(name: "HAL_RCC_GetOscConfig", scope: !3, file: !3, line: 1194, type: !1280, scopeLine: 1195, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !1282)
-!1280 = !DISubroutineType(types: !1281)
-!1281 = !{null, !195}
-!1282 = !{!1283}
-!1283 = !DILocalVariable(name: "RCC_OscInitStruct", arg: 1, scope: !1279, file: !3, line: 1194, type: !195)
-!1284 = !DILocation(line: 1194, column: 47, scope: !1279)
-!1285 = !DILocation(line: 1200, column: 3, scope: !1279)
-!1286 = !DILocation(line: 1200, column: 22, scope: !1279)
-!1287 = !DILocation(line: 1200, column: 37, scope: !1279)
-!1288 = !DILocation(line: 1203, column: 3, scope: !1279)
-!1289 = !DILocation(line: 1203, column: 22, scope: !1279)
-!1290 = !DILocation(line: 1203, column: 37, scope: !1279)
-!1291 = !DILocation(line: 1208, column: 73, scope: !1292)
-!1292 = distinct !DILexicalBlock(scope: !1279, file: !3, line: 1208, column: 6)
-!1293 = !DILocation(line: 1208, column: 76, scope: !1292)
-!1294 = !DILocation(line: 1208, column: 95, scope: !1292)
-!1295 = !DILocation(line: 1208, column: 6, scope: !1279)
-!1296 = !DILocation(line: 1210, column: 5, scope: !1297)
-!1297 = distinct !DILexicalBlock(scope: !1292, file: !3, line: 1209, column: 3)
-!1298 = !DILocation(line: 1210, column: 24, scope: !1297)
-!1299 = !DILocation(line: 1210, column: 33, scope: !1297)
-!1300 = !DILocation(line: 1211, column: 3, scope: !1297)
-!1301 = !DILocation(line: 1212, column: 78, scope: !1302)
-!1302 = distinct !DILexicalBlock(scope: !1292, file: !3, line: 1212, column: 11)
-!1303 = !DILocation(line: 1212, column: 81, scope: !1302)
-!1304 = !DILocation(line: 1212, column: 100, scope: !1302)
-!1305 = !DILocation(line: 1212, column: 11, scope: !1292)
-!1306 = !DILocation(line: 1214, column: 5, scope: !1307)
-!1307 = distinct !DILexicalBlock(scope: !1302, file: !3, line: 1213, column: 3)
-!1308 = !DILocation(line: 1214, column: 24, scope: !1307)
-!1309 = !DILocation(line: 1214, column: 33, scope: !1307)
-!1310 = !DILocation(line: 1215, column: 3, scope: !1307)
-!1311 = !DILocation(line: 1218, column: 5, scope: !1312)
-!1312 = distinct !DILexicalBlock(scope: !1302, file: !3, line: 1217, column: 3)
-!1313 = !DILocation(line: 1218, column: 24, scope: !1312)
-!1314 = !DILocation(line: 1218, column: 33, scope: !1312)
-!1315 = !DILocation(line: 1222, column: 73, scope: !1316)
-!1316 = distinct !DILexicalBlock(scope: !1279, file: !3, line: 1222, column: 6)
-!1317 = !DILocation(line: 1222, column: 76, scope: !1316)
-!1318 = !DILocation(line: 1222, column: 94, scope: !1316)
-!1319 = !DILocation(line: 1222, column: 6, scope: !1279)
-!1320 = !DILocation(line: 1224, column: 5, scope: !1321)
-!1321 = distinct !DILexicalBlock(scope: !1316, file: !3, line: 1223, column: 3)
-!1322 = !DILocation(line: 1224, column: 24, scope: !1321)
-!1323 = !DILocation(line: 1224, column: 33, scope: !1321)
-!1324 = !DILocation(line: 1225, column: 3, scope: !1321)
-!1325 = !DILocation(line: 1228, column: 5, scope: !1326)
-!1326 = distinct !DILexicalBlock(scope: !1316, file: !3, line: 1227, column: 3)
-!1327 = !DILocation(line: 1228, column: 24, scope: !1326)
-!1328 = !DILocation(line: 1228, column: 33, scope: !1326)
-!1329 = !DILocation(line: 1231, column: 122, scope: !1279)
-!1330 = !DILocation(line: 1231, column: 125, scope: !1279)
-!1331 = !DILocation(line: 1231, column: 144, scope: !1279)
-!1332 = !DILocation(line: 1231, column: 3, scope: !1279)
-!1333 = !DILocation(line: 1231, column: 22, scope: !1279)
-!1334 = !DILocation(line: 1231, column: 42, scope: !1279)
-!1335 = !DILocation(line: 1234, column: 73, scope: !1336)
-!1336 = distinct !DILexicalBlock(scope: !1279, file: !3, line: 1234, column: 6)
-!1337 = !DILocation(line: 1234, column: 78, scope: !1336)
-!1338 = !DILocation(line: 1234, column: 96, scope: !1336)
-!1339 = !DILocation(line: 1234, column: 6, scope: !1279)
-!1340 = !DILocation(line: 1236, column: 5, scope: !1341)
-!1341 = distinct !DILexicalBlock(scope: !1336, file: !3, line: 1235, column: 3)
-!1342 = !DILocation(line: 1236, column: 24, scope: !1341)
-!1343 = !DILocation(line: 1236, column: 33, scope: !1341)
-!1344 = !DILocation(line: 1237, column: 3, scope: !1341)
-!1345 = !DILocation(line: 1238, column: 78, scope: !1346)
-!1346 = distinct !DILexicalBlock(scope: !1336, file: !3, line: 1238, column: 11)
-!1347 = !DILocation(line: 1238, column: 83, scope: !1346)
-!1348 = !DILocation(line: 1238, column: 101, scope: !1346)
-!1349 = !DILocation(line: 1238, column: 11, scope: !1336)
-!1350 = !DILocation(line: 1240, column: 5, scope: !1351)
-!1351 = distinct !DILexicalBlock(scope: !1346, file: !3, line: 1239, column: 3)
-!1352 = !DILocation(line: 1240, column: 24, scope: !1351)
-!1353 = !DILocation(line: 1240, column: 33, scope: !1351)
-!1354 = !DILocation(line: 1241, column: 3, scope: !1351)
-!1355 = !DILocation(line: 1244, column: 5, scope: !1356)
-!1356 = distinct !DILexicalBlock(scope: !1346, file: !3, line: 1243, column: 3)
-!1357 = !DILocation(line: 1244, column: 24, scope: !1356)
-!1358 = !DILocation(line: 1244, column: 33, scope: !1356)
-!1359 = !DILocation(line: 1248, column: 73, scope: !1360)
-!1360 = distinct !DILexicalBlock(scope: !1279, file: !3, line: 1248, column: 6)
-!1361 = !DILocation(line: 1248, column: 77, scope: !1360)
-!1362 = !DILocation(line: 1248, column: 95, scope: !1360)
-!1363 = !DILocation(line: 1248, column: 6, scope: !1279)
-!1364 = !DILocation(line: 1250, column: 5, scope: !1365)
-!1365 = distinct !DILexicalBlock(scope: !1360, file: !3, line: 1249, column: 3)
-!1366 = !DILocation(line: 1250, column: 24, scope: !1365)
-!1367 = !DILocation(line: 1250, column: 33, scope: !1365)
-!1368 = !DILocation(line: 1251, column: 3, scope: !1365)
-!1369 = !DILocation(line: 1254, column: 5, scope: !1370)
-!1370 = distinct !DILexicalBlock(scope: !1360, file: !3, line: 1253, column: 3)
-!1371 = !DILocation(line: 1254, column: 24, scope: !1370)
-!1372 = !DILocation(line: 1254, column: 33, scope: !1370)
-!1373 = !DILocation(line: 1258, column: 73, scope: !1374)
-!1374 = distinct !DILexicalBlock(scope: !1279, file: !3, line: 1258, column: 6)
-!1375 = !DILocation(line: 1258, column: 77, scope: !1374)
-!1376 = !DILocation(line: 1258, column: 96, scope: !1374)
-!1377 = !DILocation(line: 1258, column: 6, scope: !1279)
-!1378 = !DILocation(line: 1260, column: 5, scope: !1379)
-!1379 = distinct !DILexicalBlock(scope: !1374, file: !3, line: 1259, column: 3)
-!1380 = !DILocation(line: 1260, column: 24, scope: !1379)
-!1381 = !DILocation(line: 1260, column: 35, scope: !1379)
-!1382 = !DILocation(line: 1261, column: 3, scope: !1379)
-!1383 = !DILocation(line: 1264, column: 5, scope: !1384)
-!1384 = distinct !DILexicalBlock(scope: !1374, file: !3, line: 1263, column: 3)
-!1385 = !DILocation(line: 1264, column: 24, scope: !1384)
-!1386 = !DILocation(line: 1264, column: 35, scope: !1384)
-!1387 = !DILocation(line: 1267, column: 124, scope: !1279)
-!1388 = !DILocation(line: 1267, column: 128, scope: !1279)
-!1389 = !DILocation(line: 1267, column: 148, scope: !1279)
-!1390 = !DILocation(line: 1267, column: 3, scope: !1279)
-!1391 = !DILocation(line: 1267, column: 22, scope: !1279)
-!1392 = !DILocation(line: 1267, column: 44, scope: !1279)
-!1393 = !DILocation(line: 1271, column: 116, scope: !1279)
-!1394 = !DILocation(line: 1271, column: 121, scope: !1279)
-!1395 = !DILocation(line: 1271, column: 144, scope: !1279)
-!1396 = !DILocation(line: 1271, column: 36, scope: !1279)
-!1397 = !DILocation(line: 1271, column: 3, scope: !1279)
-!1398 = !DILocation(line: 1271, column: 22, scope: !1279)
-!1399 = !DILocation(line: 1271, column: 33, scope: !1279)
-!1400 = !DILocation(line: 1275, column: 73, scope: !1401)
-!1401 = distinct !DILexicalBlock(scope: !1279, file: !3, line: 1275, column: 6)
-!1402 = !DILocation(line: 1275, column: 76, scope: !1401)
-!1403 = !DILocation(line: 1275, column: 95, scope: !1401)
-!1404 = !DILocation(line: 1275, column: 6, scope: !1279)
-!1405 = !DILocation(line: 1277, column: 5, scope: !1406)
-!1406 = distinct !DILexicalBlock(scope: !1401, file: !3, line: 1276, column: 3)
-!1407 = !DILocation(line: 1277, column: 24, scope: !1406)
-!1408 = !DILocation(line: 1277, column: 28, scope: !1406)
-!1409 = !DILocation(line: 1277, column: 37, scope: !1406)
-!1410 = !DILocation(line: 1278, column: 3, scope: !1406)
-!1411 = !DILocation(line: 1281, column: 5, scope: !1412)
-!1412 = distinct !DILexicalBlock(scope: !1401, file: !3, line: 1280, column: 3)
-!1413 = !DILocation(line: 1281, column: 24, scope: !1412)
-!1414 = !DILocation(line: 1281, column: 28, scope: !1412)
-!1415 = !DILocation(line: 1281, column: 37, scope: !1412)
-!1416 = !DILocation(line: 1283, column: 115, scope: !1279)
-!1417 = !DILocation(line: 1283, column: 120, scope: !1279)
-!1418 = !DILocation(line: 1283, column: 3, scope: !1279)
-!1419 = !DILocation(line: 1283, column: 22, scope: !1279)
-!1420 = !DILocation(line: 1283, column: 26, scope: !1279)
-!1421 = !DILocation(line: 1283, column: 36, scope: !1279)
-!1422 = !DILocation(line: 1284, column: 112, scope: !1279)
-!1423 = !DILocation(line: 1284, column: 117, scope: !1279)
-!1424 = !DILocation(line: 1284, column: 3, scope: !1279)
-!1425 = !DILocation(line: 1284, column: 22, scope: !1279)
-!1426 = !DILocation(line: 1284, column: 26, scope: !1279)
-!1427 = !DILocation(line: 1284, column: 33, scope: !1279)
-!1428 = !DILocation(line: 1285, column: 112, scope: !1279)
-!1429 = !DILocation(line: 1285, column: 118, scope: !1279)
-!1430 = !DILocation(line: 1285, column: 3, scope: !1279)
-!1431 = !DILocation(line: 1285, column: 22, scope: !1279)
-!1432 = !DILocation(line: 1285, column: 26, scope: !1279)
-!1433 = !DILocation(line: 1285, column: 33, scope: !1279)
-!1434 = !DILocation(line: 1286, column: 1, scope: !1279)
-!1435 = distinct !DISubprogram(name: "HAL_RCC_GetClockConfig", scope: !3, file: !3, line: 1296, type: !1436, scopeLine: 1297, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !1439)
-!1436 = !DISubroutineType(types: !1437)
-!1437 = !{null, !926, !1438}
-!1438 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !6, size: 32)
-!1439 = !{!1440, !1441}
-!1440 = !DILocalVariable(name: "RCC_ClkInitStruct", arg: 1, scope: !1435, file: !3, line: 1296, type: !926)
-!1441 = !DILocalVariable(name: "pFLatency", arg: 2, scope: !1435, file: !3, line: 1296, type: !1438)
-!1442 = !DILocation(line: 1296, column: 49, scope: !1435)
-!1443 = !DILocation(line: 1296, column: 78, scope: !1435)
-!1444 = !DILocation(line: 1303, column: 3, scope: !1435)
-!1445 = !DILocation(line: 1303, column: 22, scope: !1435)
-!1446 = !DILocation(line: 1303, column: 32, scope: !1435)
-!1447 = !DILocation(line: 1306, column: 114, scope: !1435)
-!1448 = !DILocation(line: 1306, column: 119, scope: !1435)
-!1449 = !DILocation(line: 1306, column: 3, scope: !1435)
-!1450 = !DILocation(line: 1306, column: 22, scope: !1435)
-!1451 = !DILocation(line: 1306, column: 35, scope: !1435)
-!1452 = !DILocation(line: 1309, column: 115, scope: !1435)
-!1453 = !DILocation(line: 1309, column: 120, scope: !1435)
-!1454 = !DILocation(line: 1309, column: 3, scope: !1435)
-!1455 = !DILocation(line: 1309, column: 22, scope: !1435)
-!1456 = !DILocation(line: 1309, column: 36, scope: !1435)
-!1457 = !DILocation(line: 1312, column: 116, scope: !1435)
-!1458 = !DILocation(line: 1312, column: 121, scope: !1435)
-!1459 = !DILocation(line: 1312, column: 3, scope: !1435)
-!1460 = !DILocation(line: 1312, column: 22, scope: !1435)
-!1461 = !DILocation(line: 1312, column: 37, scope: !1435)
-!1462 = !DILocation(line: 1314, column: 88, scope: !1435)
-!1463 = !DILocation(line: 1314, column: 94, scope: !1435)
-!1464 = !DILocation(line: 1314, column: 4, scope: !1435)
-!1465 = !DILocation(line: 1314, column: 14, scope: !1435)
-!1466 = !DILocation(line: 1315, column: 1, scope: !1435)
-!1467 = distinct !DISubprogram(name: "HAL_RCC_NMI_IRQHandler", scope: !3, file: !3, line: 1322, type: !1261, scopeLine: 1323, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !188)
-!1468 = !DILocation(line: 1325, column: 74, scope: !1469)
-!1469 = distinct !DILexicalBlock(scope: !1467, file: !3, line: 1325, column: 6)
-!1470 = !DILocation(line: 1325, column: 78, scope: !1469)
-!1471 = !DILocation(line: 1325, column: 110, scope: !1469)
-!1472 = !DILocation(line: 1325, column: 6, scope: !1467)
-!1473 = !DILocation(line: 1328, column: 5, scope: !1474)
-!1474 = distinct !DILexicalBlock(scope: !1469, file: !3, line: 1326, column: 3)
-!1475 = !DILocation(line: 1331, column: 104, scope: !1474)
-!1476 = !DILocation(line: 1332, column: 3, scope: !1474)
-!1477 = !DILocation(line: 1333, column: 1, scope: !1467)
-!1478 = distinct !DISubprogram(name: "HAL_RCC_CSSCallback", scope: !3, file: !3, line: 1339, type: !1261, scopeLine: 1340, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !9, retainedNodes: !188)
-!1479 = !DILocation(line: 1344, column: 1, scope: !1478)
+!97 = !{}
+!98 = !{i32 7, !"Dwarf Version", i32 4}
+!99 = !{i32 2, !"Debug Info Version", i32 3}
+!100 = !{i32 1, !"wchar_size", i32 4}
+!101 = !{i32 1, !"static_rwdata", i32 1}
+!102 = !{i32 1, !"enumsize_buildattr", i32 1}
+!103 = !{i32 1, !"armlib_unavailable", i32 0}
+!104 = !{i32 8, !"PIC Level", i32 2}
+!105 = !{i32 7, !"PIE Level", i32 2}
+!106 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!107 = distinct !DISubprogram(name: "HAL_RCC_DeInit", scope: !3, file: !3, line: 208, type: !108, scopeLine: 209, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!108 = !DISubroutineType(types: !109)
+!109 = !{!110}
+!110 = !DIDerivedType(tag: DW_TAG_typedef, name: "HAL_StatusTypeDef", file: !13, line: 44, baseType: !12)
+!111 = !DILocalVariable(name: "tickstart", scope: !107, file: !3, line: 210, type: !6)
+!112 = !DILocation(line: 210, column: 12, scope: !107)
+!113 = !DILocation(line: 213, column: 15, scope: !107)
+!114 = !DILocation(line: 213, column: 13, scope: !107)
+!115 = !DILocation(line: 216, column: 75, scope: !107)
+!116 = !DILocation(line: 219, column: 3, scope: !107)
+!117 = !DILocation(line: 219, column: 78, scope: !107)
+!118 = !DILocation(line: 219, column: 82, scope: !107)
+!119 = !DILocation(line: 219, column: 103, scope: !107)
+!120 = !DILocation(line: 221, column: 10, scope: !121)
+!121 = distinct !DILexicalBlock(scope: !122, file: !3, line: 221, column: 9)
+!122 = distinct !DILexicalBlock(scope: !107, file: !3, line: 220, column: 3)
+!123 = !DILocation(line: 221, column: 26, scope: !121)
+!124 = !DILocation(line: 221, column: 24, scope: !121)
+!125 = !DILocation(line: 221, column: 37, scope: !121)
+!126 = !DILocation(line: 221, column: 9, scope: !122)
+!127 = !DILocation(line: 223, column: 7, scope: !128)
+!128 = distinct !DILexicalBlock(scope: !121, file: !3, line: 222, column: 5)
+!129 = distinct !{!129, !116, !130}
+!130 = !DILocation(line: 225, column: 3, scope: !107)
+!131 = !DILocation(line: 228, column: 77, scope: !107)
+!132 = !DILocation(line: 231, column: 3, scope: !107)
+!133 = !DILocation(line: 231, column: 78, scope: !107)
+!134 = !DILocation(line: 231, column: 84, scope: !107)
+!135 = !DILocation(line: 231, column: 105, scope: !107)
+!136 = !DILocation(line: 233, column: 10, scope: !137)
+!137 = distinct !DILexicalBlock(scope: !138, file: !3, line: 233, column: 9)
+!138 = distinct !DILexicalBlock(scope: !107, file: !3, line: 232, column: 3)
+!139 = !DILocation(line: 233, column: 26, scope: !137)
+!140 = !DILocation(line: 233, column: 24, scope: !137)
+!141 = !DILocation(line: 233, column: 37, scope: !137)
+!142 = !DILocation(line: 233, column: 9, scope: !138)
+!143 = !DILocation(line: 235, column: 7, scope: !144)
+!144 = distinct !DILexicalBlock(scope: !137, file: !3, line: 234, column: 5)
+!145 = distinct !{!145, !132, !146}
+!146 = !DILocation(line: 237, column: 3, scope: !107)
+!147 = !DILocation(line: 240, column: 19, scope: !107)
+!148 = !DILocation(line: 243, column: 20, scope: !149)
+!149 = distinct !DILexicalBlock(scope: !107, file: !3, line: 243, column: 7)
+!150 = !DILocation(line: 243, column: 7, scope: !149)
+!151 = !DILocation(line: 243, column: 32, scope: !149)
+!152 = !DILocation(line: 243, column: 7, scope: !107)
+!153 = !DILocation(line: 245, column: 5, scope: !154)
+!154 = distinct !DILexicalBlock(scope: !149, file: !3, line: 244, column: 3)
+!155 = !DILocation(line: 249, column: 75, scope: !107)
+!156 = !DILocation(line: 252, column: 75, scope: !107)
+!157 = !DILocation(line: 255, column: 15, scope: !107)
+!158 = !DILocation(line: 255, column: 13, scope: !107)
+!159 = !DILocation(line: 258, column: 3, scope: !107)
+!160 = !DILocation(line: 258, column: 77, scope: !107)
+!161 = !DILocation(line: 258, column: 81, scope: !107)
+!162 = !DILocation(line: 258, column: 103, scope: !107)
+!163 = !DILocation(line: 260, column: 9, scope: !164)
+!164 = distinct !DILexicalBlock(scope: !165, file: !3, line: 260, column: 8)
+!165 = distinct !DILexicalBlock(scope: !107, file: !3, line: 259, column: 3)
+!166 = !DILocation(line: 260, column: 25, scope: !164)
+!167 = !DILocation(line: 260, column: 23, scope: !164)
+!168 = !DILocation(line: 260, column: 36, scope: !164)
+!169 = !DILocation(line: 260, column: 8, scope: !165)
+!170 = !DILocation(line: 262, column: 7, scope: !171)
+!171 = distinct !DILexicalBlock(scope: !164, file: !3, line: 261, column: 5)
+!172 = distinct !{!172, !159, !173}
+!173 = !DILocation(line: 264, column: 3, scope: !107)
+!174 = !DILocation(line: 267, column: 77, scope: !107)
+!175 = !DILocation(line: 270, column: 78, scope: !107)
+!176 = !DILocation(line: 273, column: 78, scope: !107)
+!177 = !DILocation(line: 276, column: 76, scope: !107)
+!178 = !DILocation(line: 279, column: 74, scope: !107)
+!179 = !DILocation(line: 281, column: 3, scope: !107)
+!180 = !DILocation(line: 282, column: 1, scope: !107)
+!181 = distinct !DISubprogram(name: "HAL_RCC_OscConfig", scope: !3, file: !3, line: 298, type: !182, scopeLine: 299, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!182 = !DISubroutineType(types: !183)
+!183 = !{!110, !184}
+!184 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !185, size: 32)
+!185 = !DIDerivedType(tag: DW_TAG_typedef, name: "RCC_OscInitTypeDef", file: !186, line: 245, baseType: !187)
+!186 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_hal_rcc.h", directory: "/home/sri/zephyrproject")
+!187 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !186, line: 212, size: 416, elements: !188)
+!188 = !{!189, !190, !191, !192, !193, !194, !195, !196, !197, !198}
+!189 = !DIDerivedType(tag: DW_TAG_member, name: "OscillatorType", scope: !187, file: !186, line: 214, baseType: !6, size: 32)
+!190 = !DIDerivedType(tag: DW_TAG_member, name: "HSEState", scope: !187, file: !186, line: 217, baseType: !6, size: 32, offset: 32)
+!191 = !DIDerivedType(tag: DW_TAG_member, name: "LSEState", scope: !187, file: !186, line: 220, baseType: !6, size: 32, offset: 64)
+!192 = !DIDerivedType(tag: DW_TAG_member, name: "HSIState", scope: !187, file: !186, line: 223, baseType: !6, size: 32, offset: 96)
+!193 = !DIDerivedType(tag: DW_TAG_member, name: "HSICalibrationValue", scope: !187, file: !186, line: 226, baseType: !6, size: 32, offset: 128)
+!194 = !DIDerivedType(tag: DW_TAG_member, name: "HSI14State", scope: !187, file: !186, line: 229, baseType: !6, size: 32, offset: 160)
+!195 = !DIDerivedType(tag: DW_TAG_member, name: "HSI14CalibrationValue", scope: !187, file: !186, line: 232, baseType: !6, size: 32, offset: 192)
+!196 = !DIDerivedType(tag: DW_TAG_member, name: "LSIState", scope: !187, file: !186, line: 235, baseType: !6, size: 32, offset: 224)
+!197 = !DIDerivedType(tag: DW_TAG_member, name: "HSI48State", scope: !187, file: !186, line: 239, baseType: !6, size: 32, offset: 256)
+!198 = !DIDerivedType(tag: DW_TAG_member, name: "PLL", scope: !187, file: !186, line: 243, baseType: !199, size: 128, offset: 288)
+!199 = !DIDerivedType(tag: DW_TAG_typedef, name: "RCC_PLLInitTypeDef", file: !186, line: 207, baseType: !200)
+!200 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !186, line: 193, size: 128, elements: !201)
+!201 = !{!202, !203, !204, !205}
+!202 = !DIDerivedType(tag: DW_TAG_member, name: "PLLState", scope: !200, file: !186, line: 195, baseType: !6, size: 32)
+!203 = !DIDerivedType(tag: DW_TAG_member, name: "PLLSource", scope: !200, file: !186, line: 198, baseType: !6, size: 32, offset: 32)
+!204 = !DIDerivedType(tag: DW_TAG_member, name: "PLLMUL", scope: !200, file: !186, line: 201, baseType: !6, size: 32, offset: 64)
+!205 = !DIDerivedType(tag: DW_TAG_member, name: "PREDIV", scope: !200, file: !186, line: 204, baseType: !6, size: 32, offset: 96)
+!206 = !DILocalVariable(name: "RCC_OscInitStruct", arg: 1, scope: !181, file: !3, line: 298, type: !184)
+!207 = !DILocation(line: 298, column: 57, scope: !181)
+!208 = !DILocalVariable(name: "tickstart", scope: !181, file: !3, line: 300, type: !6)
+!209 = !DILocation(line: 300, column: 12, scope: !181)
+!210 = !DILocalVariable(name: "pll_config", scope: !181, file: !3, line: 301, type: !6)
+!211 = !DILocation(line: 301, column: 12, scope: !181)
+!212 = !DILocalVariable(name: "pll_config2", scope: !181, file: !3, line: 302, type: !6)
+!213 = !DILocation(line: 302, column: 12, scope: !181)
+!214 = !DILocation(line: 305, column: 6, scope: !215)
+!215 = distinct !DILexicalBlock(scope: !181, file: !3, line: 305, column: 6)
+!216 = !DILocation(line: 305, column: 24, scope: !215)
+!217 = !DILocation(line: 305, column: 6, scope: !181)
+!218 = !DILocation(line: 307, column: 5, scope: !219)
+!219 = distinct !DILexicalBlock(scope: !215, file: !3, line: 306, column: 3)
+!220 = !DILocation(line: 314, column: 8, scope: !221)
+!221 = distinct !DILexicalBlock(scope: !181, file: !3, line: 314, column: 6)
+!222 = !DILocation(line: 314, column: 27, scope: !221)
+!223 = !DILocation(line: 314, column: 43, scope: !221)
+!224 = !DILocation(line: 314, column: 60, scope: !221)
+!225 = !DILocation(line: 314, column: 6, scope: !181)
+!226 = !DILocation(line: 320, column: 87, scope: !227)
+!227 = distinct !DILexicalBlock(scope: !228, file: !3, line: 320, column: 8)
+!228 = distinct !DILexicalBlock(scope: !221, file: !3, line: 315, column: 3)
+!229 = !DILocation(line: 320, column: 92, scope: !227)
+!230 = !DILocation(line: 320, column: 112, scope: !227)
+!231 = !DILocation(line: 321, column: 8, scope: !227)
+!232 = !DILocation(line: 321, column: 91, scope: !227)
+!233 = !DILocation(line: 321, column: 96, scope: !227)
+!234 = !DILocation(line: 321, column: 116, scope: !227)
+!235 = !DILocation(line: 321, column: 134, scope: !227)
+!236 = !DILocation(line: 321, column: 218, scope: !227)
+!237 = !DILocation(line: 321, column: 224, scope: !227)
+!238 = !DILocation(line: 321, column: 248, scope: !227)
+!239 = !DILocation(line: 320, column: 8, scope: !228)
+!240 = !DILocation(line: 323, column: 149, scope: !241)
+!241 = distinct !DILexicalBlock(scope: !242, file: !3, line: 323, column: 10)
+!242 = distinct !DILexicalBlock(scope: !227, file: !3, line: 322, column: 5)
+!243 = !DILocation(line: 323, column: 511, scope: !241)
+!244 = !DILocation(line: 323, column: 585, scope: !241)
+!245 = !DILocation(line: 323, column: 595, scope: !241)
+!246 = !DILocation(line: 323, column: 599, scope: !241)
+!247 = !DILocation(line: 323, column: 618, scope: !241)
+!248 = !DILocation(line: 323, column: 627, scope: !241)
+!249 = !DILocation(line: 323, column: 10, scope: !242)
+!250 = !DILocation(line: 325, column: 9, scope: !251)
+!251 = distinct !DILexicalBlock(scope: !241, file: !3, line: 324, column: 7)
+!252 = !DILocation(line: 327, column: 5, scope: !242)
+!253 = !DILocation(line: 331, column: 7, scope: !254)
+!254 = distinct !DILexicalBlock(scope: !227, file: !3, line: 329, column: 5)
+!255 = !DILocation(line: 331, column: 16, scope: !256)
+!256 = distinct !DILexicalBlock(scope: !257, file: !3, line: 331, column: 15)
+!257 = distinct !DILexicalBlock(scope: !254, file: !3, line: 331, column: 9)
+!258 = !DILocation(line: 331, column: 35, scope: !256)
+!259 = !DILocation(line: 331, column: 45, scope: !256)
+!260 = !DILocation(line: 331, column: 15, scope: !257)
+!261 = !DILocation(line: 331, column: 137, scope: !262)
+!262 = distinct !DILexicalBlock(scope: !256, file: !3, line: 331, column: 63)
+!263 = !DILocation(line: 331, column: 161, scope: !262)
+!264 = !DILocation(line: 331, column: 173, scope: !265)
+!265 = distinct !DILexicalBlock(scope: !256, file: !3, line: 331, column: 172)
+!266 = !DILocation(line: 331, column: 192, scope: !265)
+!267 = !DILocation(line: 331, column: 202, scope: !265)
+!268 = !DILocation(line: 331, column: 172, scope: !256)
+!269 = !DILocation(line: 331, column: 294, scope: !270)
+!270 = distinct !DILexicalBlock(scope: !265, file: !3, line: 331, column: 220)
+!271 = !DILocation(line: 331, column: 391, scope: !270)
+!272 = !DILocation(line: 331, column: 416, scope: !270)
+!273 = !DILocation(line: 331, column: 428, scope: !274)
+!274 = distinct !DILexicalBlock(scope: !265, file: !3, line: 331, column: 427)
+!275 = !DILocation(line: 331, column: 447, scope: !274)
+!276 = !DILocation(line: 331, column: 457, scope: !274)
+!277 = !DILocation(line: 331, column: 427, scope: !265)
+!278 = !DILocation(line: 331, column: 549, scope: !279)
+!279 = distinct !DILexicalBlock(scope: !274, file: !3, line: 331, column: 475)
+!280 = !DILocation(line: 331, column: 645, scope: !279)
+!281 = !DILocation(line: 331, column: 669, scope: !279)
+!282 = !DILocation(line: 331, column: 750, scope: !283)
+!283 = distinct !DILexicalBlock(scope: !274, file: !3, line: 331, column: 676)
+!284 = !DILocation(line: 331, column: 847, scope: !283)
+!285 = !DILocation(line: 331, column: 874, scope: !257)
+!286 = !DILocation(line: 335, column: 10, scope: !287)
+!287 = distinct !DILexicalBlock(scope: !254, file: !3, line: 335, column: 10)
+!288 = !DILocation(line: 335, column: 29, scope: !287)
+!289 = !DILocation(line: 335, column: 38, scope: !287)
+!290 = !DILocation(line: 335, column: 10, scope: !254)
+!291 = !DILocation(line: 338, column: 21, scope: !292)
+!292 = distinct !DILexicalBlock(scope: !287, file: !3, line: 336, column: 7)
+!293 = !DILocation(line: 338, column: 19, scope: !292)
+!294 = !DILocation(line: 341, column: 9, scope: !292)
+!295 = !DILocation(line: 341, column: 153, scope: !292)
+!296 = !DILocation(line: 341, column: 515, scope: !292)
+!297 = !DILocation(line: 341, column: 589, scope: !292)
+!298 = !DILocation(line: 343, column: 15, scope: !299)
+!299 = distinct !DILexicalBlock(scope: !300, file: !3, line: 343, column: 14)
+!300 = distinct !DILexicalBlock(scope: !292, file: !3, line: 342, column: 9)
+!301 = !DILocation(line: 343, column: 31, scope: !299)
+!302 = !DILocation(line: 343, column: 29, scope: !299)
+!303 = !DILocation(line: 343, column: 43, scope: !299)
+!304 = !DILocation(line: 343, column: 14, scope: !300)
+!305 = !DILocation(line: 345, column: 13, scope: !306)
+!306 = distinct !DILexicalBlock(scope: !299, file: !3, line: 344, column: 11)
+!307 = distinct !{!307, !294, !308}
+!308 = !DILocation(line: 347, column: 9, scope: !292)
+!309 = !DILocation(line: 348, column: 7, scope: !292)
+!310 = !DILocation(line: 352, column: 21, scope: !311)
+!311 = distinct !DILexicalBlock(scope: !287, file: !3, line: 350, column: 7)
+!312 = !DILocation(line: 352, column: 19, scope: !311)
+!313 = !DILocation(line: 355, column: 9, scope: !311)
+!314 = !DILocation(line: 355, column: 153, scope: !311)
+!315 = !DILocation(line: 355, column: 515, scope: !311)
+!316 = !DILocation(line: 355, column: 589, scope: !311)
+!317 = !DILocation(line: 357, column: 16, scope: !318)
+!318 = distinct !DILexicalBlock(scope: !319, file: !3, line: 357, column: 15)
+!319 = distinct !DILexicalBlock(scope: !311, file: !3, line: 356, column: 9)
+!320 = !DILocation(line: 357, column: 32, scope: !318)
+!321 = !DILocation(line: 357, column: 30, scope: !318)
+!322 = !DILocation(line: 357, column: 44, scope: !318)
+!323 = !DILocation(line: 357, column: 15, scope: !319)
+!324 = !DILocation(line: 359, column: 13, scope: !325)
+!325 = distinct !DILexicalBlock(scope: !318, file: !3, line: 358, column: 11)
+!326 = distinct !{!326, !313, !327}
+!327 = !DILocation(line: 361, column: 9, scope: !311)
+!328 = !DILocation(line: 364, column: 3, scope: !228)
+!329 = !DILocation(line: 366, column: 8, scope: !330)
+!330 = distinct !DILexicalBlock(scope: !181, file: !3, line: 366, column: 6)
+!331 = !DILocation(line: 366, column: 27, scope: !330)
+!332 = !DILocation(line: 366, column: 43, scope: !330)
+!333 = !DILocation(line: 366, column: 60, scope: !330)
+!334 = !DILocation(line: 366, column: 6, scope: !181)
+!335 = !DILocation(line: 373, column: 87, scope: !336)
+!336 = distinct !DILexicalBlock(scope: !337, file: !3, line: 373, column: 8)
+!337 = distinct !DILexicalBlock(scope: !330, file: !3, line: 367, column: 3)
+!338 = !DILocation(line: 373, column: 92, scope: !336)
+!339 = !DILocation(line: 373, column: 112, scope: !336)
+!340 = !DILocation(line: 374, column: 8, scope: !336)
+!341 = !DILocation(line: 374, column: 91, scope: !336)
+!342 = !DILocation(line: 374, column: 96, scope: !336)
+!343 = !DILocation(line: 374, column: 116, scope: !336)
+!344 = !DILocation(line: 374, column: 134, scope: !336)
+!345 = !DILocation(line: 374, column: 218, scope: !336)
+!346 = !DILocation(line: 374, column: 224, scope: !336)
+!347 = !DILocation(line: 374, column: 248, scope: !336)
+!348 = !DILocation(line: 373, column: 8, scope: !337)
+!349 = !DILocation(line: 377, column: 148, scope: !350)
+!350 = distinct !DILexicalBlock(scope: !351, file: !3, line: 377, column: 10)
+!351 = distinct !DILexicalBlock(scope: !336, file: !3, line: 375, column: 5)
+!352 = !DILocation(line: 377, column: 508, scope: !350)
+!353 = !DILocation(line: 377, column: 581, scope: !350)
+!354 = !DILocation(line: 377, column: 591, scope: !350)
+!355 = !DILocation(line: 377, column: 595, scope: !350)
+!356 = !DILocation(line: 377, column: 614, scope: !350)
+!357 = !DILocation(line: 377, column: 623, scope: !350)
+!358 = !DILocation(line: 377, column: 10, scope: !351)
+!359 = !DILocation(line: 379, column: 9, scope: !360)
+!360 = distinct !DILexicalBlock(scope: !350, file: !3, line: 378, column: 7)
+!361 = !DILocation(line: 385, column: 157, scope: !362)
+!362 = distinct !DILexicalBlock(scope: !350, file: !3, line: 383, column: 7)
+!363 = !DILocation(line: 385, column: 163, scope: !362)
+!364 = !DILocation(line: 385, column: 202, scope: !362)
+!365 = !DILocation(line: 385, column: 221, scope: !362)
+!366 = !DILocation(line: 385, column: 242, scope: !362)
+!367 = !DILocation(line: 385, column: 188, scope: !362)
+!368 = !DILocation(line: 385, column: 83, scope: !362)
+!369 = !DILocation(line: 387, column: 5, scope: !351)
+!370 = !DILocation(line: 391, column: 10, scope: !371)
+!371 = distinct !DILexicalBlock(scope: !372, file: !3, line: 391, column: 10)
+!372 = distinct !DILexicalBlock(scope: !336, file: !3, line: 389, column: 5)
+!373 = !DILocation(line: 391, column: 29, scope: !371)
+!374 = !DILocation(line: 391, column: 38, scope: !371)
+!375 = !DILocation(line: 391, column: 10, scope: !372)
+!376 = !DILocation(line: 394, column: 81, scope: !377)
+!377 = distinct !DILexicalBlock(scope: !371, file: !3, line: 392, column: 7)
+!378 = !DILocation(line: 397, column: 21, scope: !377)
+!379 = !DILocation(line: 397, column: 19, scope: !377)
+!380 = !DILocation(line: 400, column: 9, scope: !377)
+!381 = !DILocation(line: 400, column: 152, scope: !377)
+!382 = !DILocation(line: 400, column: 512, scope: !377)
+!383 = !DILocation(line: 400, column: 585, scope: !377)
+!384 = !DILocation(line: 402, column: 15, scope: !385)
+!385 = distinct !DILexicalBlock(scope: !386, file: !3, line: 402, column: 14)
+!386 = distinct !DILexicalBlock(scope: !377, file: !3, line: 401, column: 9)
+!387 = !DILocation(line: 402, column: 31, scope: !385)
+!388 = !DILocation(line: 402, column: 29, scope: !385)
+!389 = !DILocation(line: 402, column: 43, scope: !385)
+!390 = !DILocation(line: 402, column: 14, scope: !386)
+!391 = !DILocation(line: 404, column: 13, scope: !392)
+!392 = distinct !DILexicalBlock(scope: !385, file: !3, line: 403, column: 11)
+!393 = distinct !{!393, !380, !394}
+!394 = !DILocation(line: 406, column: 9, scope: !377)
+!395 = !DILocation(line: 409, column: 157, scope: !377)
+!396 = !DILocation(line: 409, column: 163, scope: !377)
+!397 = !DILocation(line: 409, column: 202, scope: !377)
+!398 = !DILocation(line: 409, column: 221, scope: !377)
+!399 = !DILocation(line: 409, column: 242, scope: !377)
+!400 = !DILocation(line: 409, column: 188, scope: !377)
+!401 = !DILocation(line: 409, column: 83, scope: !377)
+!402 = !DILocation(line: 410, column: 7, scope: !377)
+!403 = !DILocation(line: 414, column: 81, scope: !404)
+!404 = distinct !DILexicalBlock(scope: !371, file: !3, line: 412, column: 7)
+!405 = !DILocation(line: 417, column: 21, scope: !404)
+!406 = !DILocation(line: 417, column: 19, scope: !404)
+!407 = !DILocation(line: 420, column: 9, scope: !404)
+!408 = !DILocation(line: 420, column: 152, scope: !404)
+!409 = !DILocation(line: 420, column: 512, scope: !404)
+!410 = !DILocation(line: 420, column: 585, scope: !404)
+!411 = !DILocation(line: 422, column: 15, scope: !412)
+!412 = distinct !DILexicalBlock(scope: !413, file: !3, line: 422, column: 14)
+!413 = distinct !DILexicalBlock(scope: !404, file: !3, line: 421, column: 9)
+!414 = !DILocation(line: 422, column: 31, scope: !412)
+!415 = !DILocation(line: 422, column: 29, scope: !412)
+!416 = !DILocation(line: 422, column: 43, scope: !412)
+!417 = !DILocation(line: 422, column: 14, scope: !413)
+!418 = !DILocation(line: 424, column: 13, scope: !419)
+!419 = distinct !DILexicalBlock(scope: !412, file: !3, line: 423, column: 11)
+!420 = distinct !{!420, !407, !421}
+!421 = !DILocation(line: 426, column: 9, scope: !404)
+!422 = !DILocation(line: 429, column: 3, scope: !337)
+!423 = !DILocation(line: 431, column: 8, scope: !424)
+!424 = distinct !DILexicalBlock(scope: !181, file: !3, line: 431, column: 6)
+!425 = !DILocation(line: 431, column: 27, scope: !424)
+!426 = !DILocation(line: 431, column: 43, scope: !424)
+!427 = !DILocation(line: 431, column: 60, scope: !424)
+!428 = !DILocation(line: 431, column: 6, scope: !181)
+!429 = !DILocation(line: 437, column: 8, scope: !430)
+!430 = distinct !DILexicalBlock(scope: !431, file: !3, line: 437, column: 8)
+!431 = distinct !DILexicalBlock(scope: !424, file: !3, line: 432, column: 3)
+!432 = !DILocation(line: 437, column: 27, scope: !430)
+!433 = !DILocation(line: 437, column: 36, scope: !430)
+!434 = !DILocation(line: 437, column: 8, scope: !431)
+!435 = !DILocation(line: 440, column: 80, scope: !436)
+!436 = distinct !DILexicalBlock(scope: !430, file: !3, line: 438, column: 5)
+!437 = !DILocation(line: 443, column: 19, scope: !436)
+!438 = !DILocation(line: 443, column: 17, scope: !436)
+!439 = !DILocation(line: 446, column: 7, scope: !436)
+!440 = !DILocation(line: 446, column: 505, scope: !436)
+!441 = !DILocation(line: 446, column: 510, scope: !436)
+!442 = !DILocation(line: 446, column: 583, scope: !436)
+!443 = !DILocation(line: 448, column: 13, scope: !444)
+!444 = distinct !DILexicalBlock(scope: !445, file: !3, line: 448, column: 12)
+!445 = distinct !DILexicalBlock(scope: !436, file: !3, line: 447, column: 7)
+!446 = !DILocation(line: 448, column: 29, scope: !444)
+!447 = !DILocation(line: 448, column: 27, scope: !444)
+!448 = !DILocation(line: 448, column: 41, scope: !444)
+!449 = !DILocation(line: 448, column: 12, scope: !445)
+!450 = !DILocation(line: 450, column: 11, scope: !451)
+!451 = distinct !DILexicalBlock(scope: !444, file: !3, line: 449, column: 9)
+!452 = distinct !{!452, !439, !453}
+!453 = !DILocation(line: 452, column: 7, scope: !436)
+!454 = !DILocation(line: 453, column: 5, scope: !436)
+!455 = !DILocation(line: 457, column: 80, scope: !456)
+!456 = distinct !DILexicalBlock(scope: !430, file: !3, line: 455, column: 5)
+!457 = !DILocation(line: 460, column: 19, scope: !456)
+!458 = !DILocation(line: 460, column: 17, scope: !456)
+!459 = !DILocation(line: 463, column: 7, scope: !456)
+!460 = !DILocation(line: 463, column: 505, scope: !456)
+!461 = !DILocation(line: 463, column: 510, scope: !456)
+!462 = !DILocation(line: 463, column: 583, scope: !456)
+!463 = !DILocation(line: 465, column: 13, scope: !464)
+!464 = distinct !DILexicalBlock(scope: !465, file: !3, line: 465, column: 12)
+!465 = distinct !DILexicalBlock(scope: !456, file: !3, line: 464, column: 7)
+!466 = !DILocation(line: 465, column: 29, scope: !464)
+!467 = !DILocation(line: 465, column: 27, scope: !464)
+!468 = !DILocation(line: 465, column: 41, scope: !464)
+!469 = !DILocation(line: 465, column: 12, scope: !465)
+!470 = !DILocation(line: 467, column: 11, scope: !471)
+!471 = distinct !DILexicalBlock(scope: !464, file: !3, line: 466, column: 9)
+!472 = distinct !{!472, !459, !473}
+!473 = !DILocation(line: 469, column: 7, scope: !456)
+!474 = !DILocation(line: 471, column: 3, scope: !431)
+!475 = !DILocation(line: 473, column: 8, scope: !476)
+!476 = distinct !DILexicalBlock(scope: !181, file: !3, line: 473, column: 6)
+!477 = !DILocation(line: 473, column: 27, scope: !476)
+!478 = !DILocation(line: 473, column: 43, scope: !476)
+!479 = !DILocation(line: 473, column: 60, scope: !476)
+!480 = !DILocation(line: 473, column: 6, scope: !181)
+!481 = !DILocalVariable(name: "pwrclkchanged", scope: !482, file: !3, line: 475, type: !483)
+!482 = distinct !DILexicalBlock(scope: !476, file: !3, line: 474, column: 3)
+!483 = !DIDerivedType(tag: DW_TAG_typedef, name: "FlagStatus", file: !21, line: 171, baseType: !20)
+!484 = !DILocation(line: 475, column: 16, scope: !482)
+!485 = !DILocation(line: 482, column: 76, scope: !486)
+!486 = distinct !DILexicalBlock(scope: !482, file: !3, line: 482, column: 8)
+!487 = !DILocation(line: 482, column: 84, scope: !486)
+!488 = !DILocation(line: 482, column: 106, scope: !486)
+!489 = !DILocation(line: 482, column: 8, scope: !482)
+!490 = !DILocation(line: 484, column: 7, scope: !491)
+!491 = distinct !DILexicalBlock(scope: !486, file: !3, line: 483, column: 5)
+!492 = !DILocalVariable(name: "tmpreg", scope: !493, file: !3, line: 484, type: !32)
+!493 = distinct !DILexicalBlock(scope: !491, file: !3, line: 484, column: 10)
+!494 = !DILocation(line: 484, column: 30, scope: !493)
+!495 = !DILocation(line: 484, column: 115, scope: !493)
+!496 = !DILocation(line: 484, column: 216, scope: !493)
+!497 = !DILocation(line: 484, column: 225, scope: !493)
+!498 = !DILocation(line: 484, column: 146, scope: !493)
+!499 = !DILocation(line: 484, column: 254, scope: !493)
+!500 = !DILocation(line: 484, column: 262, scope: !493)
+!501 = !DILocation(line: 485, column: 21, scope: !491)
+!502 = !DILocation(line: 486, column: 5, scope: !491)
+!503 = !DILocation(line: 488, column: 60, scope: !504)
+!504 = distinct !DILexicalBlock(scope: !482, file: !3, line: 488, column: 8)
+!505 = !DILocation(line: 488, column: 64, scope: !504)
+!506 = !DILocation(line: 488, column: 85, scope: !504)
+!507 = !DILocation(line: 488, column: 8, scope: !482)
+!508 = !DILocation(line: 491, column: 62, scope: !509)
+!509 = distinct !DILexicalBlock(scope: !504, file: !3, line: 489, column: 5)
+!510 = !DILocation(line: 494, column: 19, scope: !509)
+!511 = !DILocation(line: 494, column: 17, scope: !509)
+!512 = !DILocation(line: 496, column: 7, scope: !509)
+!513 = !DILocation(line: 496, column: 65, scope: !509)
+!514 = !DILocation(line: 496, column: 69, scope: !509)
+!515 = !DILocation(line: 496, column: 90, scope: !509)
+!516 = !DILocation(line: 498, column: 13, scope: !517)
+!517 = distinct !DILexicalBlock(scope: !518, file: !3, line: 498, column: 12)
+!518 = distinct !DILexicalBlock(scope: !509, file: !3, line: 497, column: 7)
+!519 = !DILocation(line: 498, column: 29, scope: !517)
+!520 = !DILocation(line: 498, column: 27, scope: !517)
+!521 = !DILocation(line: 498, column: 40, scope: !517)
+!522 = !DILocation(line: 498, column: 12, scope: !518)
+!523 = !DILocation(line: 500, column: 11, scope: !524)
+!524 = distinct !DILexicalBlock(scope: !517, file: !3, line: 499, column: 9)
+!525 = distinct !{!525, !512, !526}
+!526 = !DILocation(line: 502, column: 7, scope: !509)
+!527 = !DILocation(line: 503, column: 5, scope: !509)
+!528 = !DILocation(line: 506, column: 5, scope: !482)
+!529 = !DILocation(line: 506, column: 14, scope: !530)
+!530 = distinct !DILexicalBlock(scope: !531, file: !3, line: 506, column: 13)
+!531 = distinct !DILexicalBlock(scope: !482, file: !3, line: 506, column: 7)
+!532 = !DILocation(line: 506, column: 33, scope: !530)
+!533 = !DILocation(line: 506, column: 43, scope: !530)
+!534 = !DILocation(line: 506, column: 13, scope: !531)
+!535 = !DILocation(line: 506, column: 137, scope: !536)
+!536 = distinct !DILexicalBlock(scope: !530, file: !3, line: 506, column: 61)
+!537 = !DILocation(line: 506, column: 160, scope: !536)
+!538 = !DILocation(line: 506, column: 172, scope: !539)
+!539 = distinct !DILexicalBlock(scope: !530, file: !3, line: 506, column: 171)
+!540 = !DILocation(line: 506, column: 191, scope: !539)
+!541 = !DILocation(line: 506, column: 201, scope: !539)
+!542 = !DILocation(line: 506, column: 171, scope: !530)
+!543 = !DILocation(line: 506, column: 295, scope: !544)
+!544 = distinct !DILexicalBlock(scope: !539, file: !3, line: 506, column: 219)
+!545 = !DILocation(line: 506, column: 393, scope: !544)
+!546 = !DILocation(line: 506, column: 417, scope: !544)
+!547 = !DILocation(line: 506, column: 429, scope: !548)
+!548 = distinct !DILexicalBlock(scope: !539, file: !3, line: 506, column: 428)
+!549 = !DILocation(line: 506, column: 448, scope: !548)
+!550 = !DILocation(line: 506, column: 458, scope: !548)
+!551 = !DILocation(line: 506, column: 428, scope: !539)
+!552 = !DILocation(line: 506, column: 552, scope: !553)
+!553 = distinct !DILexicalBlock(scope: !548, file: !3, line: 506, column: 476)
+!554 = !DILocation(line: 506, column: 649, scope: !553)
+!555 = !DILocation(line: 506, column: 672, scope: !553)
+!556 = !DILocation(line: 506, column: 755, scope: !557)
+!557 = distinct !DILexicalBlock(scope: !548, file: !3, line: 506, column: 679)
+!558 = !DILocation(line: 506, column: 853, scope: !557)
+!559 = !DILocation(line: 506, column: 879, scope: !531)
+!560 = !DILocation(line: 508, column: 8, scope: !561)
+!561 = distinct !DILexicalBlock(scope: !482, file: !3, line: 508, column: 8)
+!562 = !DILocation(line: 508, column: 27, scope: !561)
+!563 = !DILocation(line: 508, column: 36, scope: !561)
+!564 = !DILocation(line: 508, column: 8, scope: !482)
+!565 = !DILocation(line: 511, column: 19, scope: !566)
+!566 = distinct !DILexicalBlock(scope: !561, file: !3, line: 509, column: 5)
+!567 = !DILocation(line: 511, column: 17, scope: !566)
+!568 = !DILocation(line: 514, column: 7, scope: !566)
+!569 = !DILocation(line: 514, column: 432, scope: !566)
+!570 = !DILocation(line: 514, column: 510, scope: !566)
+!571 = !DILocation(line: 514, column: 583, scope: !566)
+!572 = !DILocation(line: 516, column: 13, scope: !573)
+!573 = distinct !DILexicalBlock(scope: !574, file: !3, line: 516, column: 12)
+!574 = distinct !DILexicalBlock(scope: !566, file: !3, line: 515, column: 7)
+!575 = !DILocation(line: 516, column: 29, scope: !573)
+!576 = !DILocation(line: 516, column: 27, scope: !573)
+!577 = !DILocation(line: 516, column: 41, scope: !573)
+!578 = !DILocation(line: 516, column: 12, scope: !574)
+!579 = !DILocation(line: 518, column: 11, scope: !580)
+!580 = distinct !DILexicalBlock(scope: !573, file: !3, line: 517, column: 9)
+!581 = distinct !{!581, !568, !582}
+!582 = !DILocation(line: 520, column: 7, scope: !566)
+!583 = !DILocation(line: 521, column: 5, scope: !566)
+!584 = !DILocation(line: 525, column: 19, scope: !585)
+!585 = distinct !DILexicalBlock(scope: !561, file: !3, line: 523, column: 5)
+!586 = !DILocation(line: 525, column: 17, scope: !585)
+!587 = !DILocation(line: 528, column: 7, scope: !585)
+!588 = !DILocation(line: 528, column: 432, scope: !585)
+!589 = !DILocation(line: 528, column: 510, scope: !585)
+!590 = !DILocation(line: 528, column: 583, scope: !585)
+!591 = !DILocation(line: 530, column: 13, scope: !592)
+!592 = distinct !DILexicalBlock(scope: !593, file: !3, line: 530, column: 12)
+!593 = distinct !DILexicalBlock(scope: !585, file: !3, line: 529, column: 7)
+!594 = !DILocation(line: 530, column: 29, scope: !592)
+!595 = !DILocation(line: 530, column: 27, scope: !592)
+!596 = !DILocation(line: 530, column: 41, scope: !592)
+!597 = !DILocation(line: 530, column: 12, scope: !593)
+!598 = !DILocation(line: 532, column: 11, scope: !599)
+!599 = distinct !DILexicalBlock(scope: !592, file: !3, line: 531, column: 9)
+!600 = distinct !{!600, !587, !601}
+!601 = !DILocation(line: 534, column: 7, scope: !585)
+!602 = !DILocation(line: 538, column: 8, scope: !603)
+!603 = distinct !DILexicalBlock(scope: !482, file: !3, line: 538, column: 8)
+!604 = !DILocation(line: 538, column: 22, scope: !603)
+!605 = !DILocation(line: 538, column: 8, scope: !482)
+!606 = !DILocation(line: 540, column: 82, scope: !607)
+!607 = distinct !DILexicalBlock(scope: !603, file: !3, line: 539, column: 5)
+!608 = !DILocation(line: 541, column: 5, scope: !607)
+!609 = !DILocation(line: 542, column: 3, scope: !482)
+!610 = !DILocation(line: 545, column: 8, scope: !611)
+!611 = distinct !DILexicalBlock(scope: !181, file: !3, line: 545, column: 6)
+!612 = !DILocation(line: 545, column: 27, scope: !611)
+!613 = !DILocation(line: 545, column: 43, scope: !611)
+!614 = !DILocation(line: 545, column: 60, scope: !611)
+!615 = !DILocation(line: 545, column: 6, scope: !181)
+!616 = !DILocation(line: 552, column: 8, scope: !617)
+!617 = distinct !DILexicalBlock(scope: !618, file: !3, line: 552, column: 8)
+!618 = distinct !DILexicalBlock(scope: !611, file: !3, line: 546, column: 3)
+!619 = !DILocation(line: 552, column: 27, scope: !617)
+!620 = !DILocation(line: 552, column: 38, scope: !617)
+!621 = !DILocation(line: 552, column: 8, scope: !618)
+!622 = !DILocation(line: 555, column: 80, scope: !623)
+!623 = distinct !DILexicalBlock(scope: !617, file: !3, line: 553, column: 5)
+!624 = !DILocation(line: 558, column: 80, scope: !623)
+!625 = !DILocation(line: 561, column: 19, scope: !623)
+!626 = !DILocation(line: 561, column: 17, scope: !623)
+!627 = !DILocation(line: 564, column: 7, scope: !623)
+!628 = !DILocation(line: 564, column: 290, scope: !623)
+!629 = !DILocation(line: 564, column: 510, scope: !623)
+!630 = !DILocation(line: 564, column: 583, scope: !623)
+!631 = !DILocation(line: 566, column: 13, scope: !632)
+!632 = distinct !DILexicalBlock(scope: !633, file: !3, line: 566, column: 12)
+!633 = distinct !DILexicalBlock(scope: !623, file: !3, line: 565, column: 7)
+!634 = !DILocation(line: 566, column: 29, scope: !632)
+!635 = !DILocation(line: 566, column: 27, scope: !632)
+!636 = !DILocation(line: 566, column: 40, scope: !632)
+!637 = !DILocation(line: 566, column: 12, scope: !633)
+!638 = !DILocation(line: 568, column: 11, scope: !639)
+!639 = distinct !DILexicalBlock(scope: !632, file: !3, line: 567, column: 9)
+!640 = distinct !{!640, !627, !641}
+!641 = !DILocation(line: 570, column: 7, scope: !623)
+!642 = !DILocation(line: 573, column: 156, scope: !623)
+!643 = !DILocation(line: 573, column: 163, scope: !623)
+!644 = !DILocation(line: 573, column: 202, scope: !623)
+!645 = !DILocation(line: 573, column: 221, scope: !623)
+!646 = !DILocation(line: 573, column: 244, scope: !623)
+!647 = !DILocation(line: 573, column: 188, scope: !623)
+!648 = !DILocation(line: 573, column: 82, scope: !623)
+!649 = !DILocation(line: 574, column: 5, scope: !623)
+!650 = !DILocation(line: 575, column: 13, scope: !651)
+!651 = distinct !DILexicalBlock(scope: !617, file: !3, line: 575, column: 13)
+!652 = !DILocation(line: 575, column: 32, scope: !651)
+!653 = !DILocation(line: 575, column: 43, scope: !651)
+!654 = !DILocation(line: 575, column: 13, scope: !617)
+!655 = !DILocation(line: 578, column: 80, scope: !656)
+!656 = distinct !DILexicalBlock(scope: !651, file: !3, line: 576, column: 5)
+!657 = !DILocation(line: 581, column: 156, scope: !656)
+!658 = !DILocation(line: 581, column: 163, scope: !656)
+!659 = !DILocation(line: 581, column: 202, scope: !656)
+!660 = !DILocation(line: 581, column: 221, scope: !656)
+!661 = !DILocation(line: 581, column: 244, scope: !656)
+!662 = !DILocation(line: 581, column: 188, scope: !656)
+!663 = !DILocation(line: 581, column: 82, scope: !656)
+!664 = !DILocation(line: 582, column: 5, scope: !656)
+!665 = !DILocation(line: 586, column: 80, scope: !666)
+!666 = distinct !DILexicalBlock(scope: !651, file: !3, line: 584, column: 5)
+!667 = !DILocation(line: 589, column: 80, scope: !666)
+!668 = !DILocation(line: 592, column: 19, scope: !666)
+!669 = !DILocation(line: 592, column: 17, scope: !666)
+!670 = !DILocation(line: 595, column: 7, scope: !666)
+!671 = !DILocation(line: 595, column: 290, scope: !666)
+!672 = !DILocation(line: 595, column: 510, scope: !666)
+!673 = !DILocation(line: 595, column: 583, scope: !666)
+!674 = !DILocation(line: 597, column: 13, scope: !675)
+!675 = distinct !DILexicalBlock(scope: !676, file: !3, line: 597, column: 12)
+!676 = distinct !DILexicalBlock(scope: !666, file: !3, line: 596, column: 7)
+!677 = !DILocation(line: 597, column: 29, scope: !675)
+!678 = !DILocation(line: 597, column: 27, scope: !675)
+!679 = !DILocation(line: 597, column: 40, scope: !675)
+!680 = !DILocation(line: 597, column: 12, scope: !676)
+!681 = !DILocation(line: 599, column: 11, scope: !682)
+!682 = distinct !DILexicalBlock(scope: !675, file: !3, line: 598, column: 9)
+!683 = distinct !{!683, !670, !684}
+!684 = !DILocation(line: 601, column: 7, scope: !666)
+!685 = !DILocation(line: 603, column: 3, scope: !618)
+!686 = !DILocation(line: 607, column: 8, scope: !687)
+!687 = distinct !DILexicalBlock(scope: !181, file: !3, line: 607, column: 6)
+!688 = !DILocation(line: 607, column: 27, scope: !687)
+!689 = !DILocation(line: 607, column: 43, scope: !687)
+!690 = !DILocation(line: 607, column: 60, scope: !687)
+!691 = !DILocation(line: 607, column: 6, scope: !181)
+!692 = !DILocation(line: 613, column: 87, scope: !693)
+!693 = distinct !DILexicalBlock(scope: !694, file: !3, line: 613, column: 8)
+!694 = distinct !DILexicalBlock(scope: !687, file: !3, line: 608, column: 3)
+!695 = !DILocation(line: 613, column: 92, scope: !693)
+!696 = !DILocation(line: 613, column: 112, scope: !693)
+!697 = !DILocation(line: 613, column: 130, scope: !693)
+!698 = !DILocation(line: 614, column: 88, scope: !693)
+!699 = !DILocation(line: 614, column: 93, scope: !693)
+!700 = !DILocation(line: 614, column: 113, scope: !693)
+!701 = !DILocation(line: 614, column: 131, scope: !693)
+!702 = !DILocation(line: 614, column: 215, scope: !693)
+!703 = !DILocation(line: 614, column: 221, scope: !693)
+!704 = !DILocation(line: 614, column: 245, scope: !693)
+!705 = !DILocation(line: 613, column: 8, scope: !694)
+!706 = !DILocation(line: 616, column: 290, scope: !707)
+!707 = distinct !DILexicalBlock(scope: !708, file: !3, line: 616, column: 10)
+!708 = distinct !DILexicalBlock(scope: !693, file: !3, line: 615, column: 5)
+!709 = !DILocation(line: 616, column: 511, scope: !707)
+!710 = !DILocation(line: 616, column: 585, scope: !707)
+!711 = !DILocation(line: 616, column: 595, scope: !707)
+!712 = !DILocation(line: 616, column: 599, scope: !707)
+!713 = !DILocation(line: 616, column: 618, scope: !707)
+!714 = !DILocation(line: 616, column: 629, scope: !707)
+!715 = !DILocation(line: 616, column: 10, scope: !708)
+!716 = !DILocation(line: 618, column: 9, scope: !717)
+!717 = distinct !DILexicalBlock(scope: !707, file: !3, line: 617, column: 7)
+!718 = !DILocation(line: 620, column: 5, scope: !708)
+!719 = !DILocation(line: 624, column: 10, scope: !720)
+!720 = distinct !DILexicalBlock(scope: !721, file: !3, line: 624, column: 10)
+!721 = distinct !DILexicalBlock(scope: !693, file: !3, line: 622, column: 5)
+!722 = !DILocation(line: 624, column: 29, scope: !720)
+!723 = !DILocation(line: 624, column: 40, scope: !720)
+!724 = !DILocation(line: 624, column: 10, scope: !721)
+!725 = !DILocation(line: 627, column: 82, scope: !726)
+!726 = distinct !DILexicalBlock(scope: !720, file: !3, line: 625, column: 7)
+!727 = !DILocation(line: 630, column: 21, scope: !726)
+!728 = !DILocation(line: 630, column: 19, scope: !726)
+!729 = !DILocation(line: 633, column: 9, scope: !726)
+!730 = !DILocation(line: 633, column: 294, scope: !726)
+!731 = !DILocation(line: 633, column: 515, scope: !726)
+!732 = !DILocation(line: 633, column: 589, scope: !726)
+!733 = !DILocation(line: 635, column: 15, scope: !734)
+!734 = distinct !DILexicalBlock(scope: !735, file: !3, line: 635, column: 14)
+!735 = distinct !DILexicalBlock(scope: !726, file: !3, line: 634, column: 9)
+!736 = !DILocation(line: 635, column: 31, scope: !734)
+!737 = !DILocation(line: 635, column: 29, scope: !734)
+!738 = !DILocation(line: 635, column: 42, scope: !734)
+!739 = !DILocation(line: 635, column: 14, scope: !735)
+!740 = !DILocation(line: 637, column: 13, scope: !741)
+!741 = distinct !DILexicalBlock(scope: !734, file: !3, line: 636, column: 11)
+!742 = distinct !{!742, !729, !743}
+!743 = !DILocation(line: 639, column: 9, scope: !726)
+!744 = !DILocation(line: 640, column: 7, scope: !726)
+!745 = !DILocation(line: 644, column: 82, scope: !746)
+!746 = distinct !DILexicalBlock(scope: !720, file: !3, line: 642, column: 7)
+!747 = !DILocation(line: 647, column: 21, scope: !746)
+!748 = !DILocation(line: 647, column: 19, scope: !746)
+!749 = !DILocation(line: 650, column: 9, scope: !746)
+!750 = !DILocation(line: 650, column: 294, scope: !746)
+!751 = !DILocation(line: 650, column: 515, scope: !746)
+!752 = !DILocation(line: 650, column: 589, scope: !746)
+!753 = !DILocation(line: 652, column: 15, scope: !754)
+!754 = distinct !DILexicalBlock(scope: !755, file: !3, line: 652, column: 14)
+!755 = distinct !DILexicalBlock(scope: !746, file: !3, line: 651, column: 9)
+!756 = !DILocation(line: 652, column: 31, scope: !754)
+!757 = !DILocation(line: 652, column: 29, scope: !754)
+!758 = !DILocation(line: 652, column: 42, scope: !754)
+!759 = !DILocation(line: 652, column: 14, scope: !755)
+!760 = !DILocation(line: 654, column: 13, scope: !761)
+!761 = distinct !DILexicalBlock(scope: !754, file: !3, line: 653, column: 11)
+!762 = distinct !{!762, !749, !763}
+!763 = !DILocation(line: 656, column: 9, scope: !746)
+!764 = !DILocation(line: 659, column: 3, scope: !694)
+!765 = !DILocation(line: 665, column: 8, scope: !766)
+!766 = distinct !DILexicalBlock(scope: !181, file: !3, line: 665, column: 7)
+!767 = !DILocation(line: 665, column: 27, scope: !766)
+!768 = !DILocation(line: 665, column: 31, scope: !766)
+!769 = !DILocation(line: 665, column: 41, scope: !766)
+!770 = !DILocation(line: 665, column: 7, scope: !181)
+!771 = !DILocation(line: 668, column: 86, scope: !772)
+!772 = distinct !DILexicalBlock(scope: !773, file: !3, line: 668, column: 8)
+!773 = distinct !DILexicalBlock(scope: !766, file: !3, line: 666, column: 3)
+!774 = !DILocation(line: 668, column: 91, scope: !772)
+!775 = !DILocation(line: 668, column: 111, scope: !772)
+!776 = !DILocation(line: 668, column: 8, scope: !773)
+!777 = !DILocation(line: 670, column: 11, scope: !778)
+!778 = distinct !DILexicalBlock(scope: !779, file: !3, line: 670, column: 10)
+!779 = distinct !DILexicalBlock(scope: !772, file: !3, line: 669, column: 5)
+!780 = !DILocation(line: 670, column: 30, scope: !778)
+!781 = !DILocation(line: 670, column: 34, scope: !778)
+!782 = !DILocation(line: 670, column: 44, scope: !778)
+!783 = !DILocation(line: 670, column: 10, scope: !779)
+!784 = !DILocation(line: 678, column: 81, scope: !785)
+!785 = distinct !DILexicalBlock(scope: !778, file: !3, line: 671, column: 7)
+!786 = !DILocation(line: 681, column: 21, scope: !785)
+!787 = !DILocation(line: 681, column: 19, scope: !785)
+!788 = !DILocation(line: 684, column: 9, scope: !785)
+!789 = !DILocation(line: 684, column: 153, scope: !785)
+!790 = !DILocation(line: 684, column: 515, scope: !785)
+!791 = !DILocation(line: 684, column: 589, scope: !785)
+!792 = !DILocation(line: 686, column: 15, scope: !793)
+!793 = distinct !DILexicalBlock(scope: !794, file: !3, line: 686, column: 14)
+!794 = distinct !DILexicalBlock(scope: !785, file: !3, line: 685, column: 9)
+!795 = !DILocation(line: 686, column: 31, scope: !793)
+!796 = !DILocation(line: 686, column: 29, scope: !793)
+!797 = !DILocation(line: 686, column: 43, scope: !793)
+!798 = !DILocation(line: 686, column: 14, scope: !794)
+!799 = !DILocation(line: 688, column: 13, scope: !800)
+!800 = distinct !DILexicalBlock(scope: !793, file: !3, line: 687, column: 11)
+!801 = distinct !{!801, !788, !802}
+!802 = !DILocation(line: 690, column: 9, scope: !785)
+!803 = !DILocation(line: 693, column: 9, scope: !785)
+!804 = !DILocation(line: 693, column: 165, scope: !805)
+!805 = distinct !DILexicalBlock(scope: !785, file: !3, line: 693, column: 12)
+!806 = !DILocation(line: 693, column: 174, scope: !805)
+!807 = !DILocation(line: 693, column: 202, scope: !805)
+!808 = !DILocation(line: 693, column: 221, scope: !805)
+!809 = !DILocation(line: 693, column: 225, scope: !805)
+!810 = !DILocation(line: 693, column: 198, scope: !805)
+!811 = !DILocation(line: 693, column: 91, scope: !805)
+!812 = !DILocation(line: 693, column: 388, scope: !805)
+!813 = !DILocation(line: 693, column: 396, scope: !805)
+!814 = !DILocation(line: 693, column: 455, scope: !805)
+!815 = !DILocation(line: 693, column: 474, scope: !805)
+!816 = !DILocation(line: 693, column: 478, scope: !805)
+!817 = !DILocation(line: 693, column: 487, scope: !805)
+!818 = !DILocation(line: 693, column: 506, scope: !805)
+!819 = !DILocation(line: 693, column: 510, scope: !805)
+!820 = !DILocation(line: 693, column: 485, scope: !805)
+!821 = !DILocation(line: 693, column: 440, scope: !805)
+!822 = !DILocation(line: 693, column: 314, scope: !805)
+!823 = !DILocation(line: 693, column: 527, scope: !805)
+!824 = !DILocation(line: 697, column: 81, scope: !785)
+!825 = !DILocation(line: 700, column: 21, scope: !785)
+!826 = !DILocation(line: 700, column: 19, scope: !785)
+!827 = !DILocation(line: 703, column: 9, scope: !785)
+!828 = !DILocation(line: 703, column: 153, scope: !785)
+!829 = !DILocation(line: 703, column: 515, scope: !785)
+!830 = !DILocation(line: 703, column: 589, scope: !785)
+!831 = !DILocation(line: 705, column: 15, scope: !832)
+!832 = distinct !DILexicalBlock(scope: !833, file: !3, line: 705, column: 14)
+!833 = distinct !DILexicalBlock(scope: !785, file: !3, line: 704, column: 9)
+!834 = !DILocation(line: 705, column: 31, scope: !832)
+!835 = !DILocation(line: 705, column: 29, scope: !832)
+!836 = !DILocation(line: 705, column: 43, scope: !832)
+!837 = !DILocation(line: 705, column: 14, scope: !833)
+!838 = !DILocation(line: 707, column: 13, scope: !839)
+!839 = distinct !DILexicalBlock(scope: !832, file: !3, line: 706, column: 11)
+!840 = distinct !{!840, !827, !841}
+!841 = !DILocation(line: 709, column: 9, scope: !785)
+!842 = !DILocation(line: 710, column: 7, scope: !785)
+!843 = !DILocation(line: 714, column: 81, scope: !844)
+!844 = distinct !DILexicalBlock(scope: !778, file: !3, line: 712, column: 7)
+!845 = !DILocation(line: 717, column: 21, scope: !844)
+!846 = !DILocation(line: 717, column: 19, scope: !844)
+!847 = !DILocation(line: 720, column: 9, scope: !844)
+!848 = !DILocation(line: 720, column: 153, scope: !844)
+!849 = !DILocation(line: 720, column: 515, scope: !844)
+!850 = !DILocation(line: 720, column: 589, scope: !844)
+!851 = !DILocation(line: 722, column: 15, scope: !852)
+!852 = distinct !DILexicalBlock(scope: !853, file: !3, line: 722, column: 14)
+!853 = distinct !DILexicalBlock(scope: !844, file: !3, line: 721, column: 9)
+!854 = !DILocation(line: 722, column: 31, scope: !852)
+!855 = !DILocation(line: 722, column: 29, scope: !852)
+!856 = !DILocation(line: 722, column: 43, scope: !852)
+!857 = !DILocation(line: 722, column: 14, scope: !853)
+!858 = !DILocation(line: 724, column: 13, scope: !859)
+!859 = distinct !DILexicalBlock(scope: !852, file: !3, line: 723, column: 11)
+!860 = distinct !{!860, !847, !861}
+!861 = !DILocation(line: 726, column: 9, scope: !844)
+!862 = !DILocation(line: 728, column: 5, scope: !779)
+!863 = !DILocation(line: 732, column: 11, scope: !864)
+!864 = distinct !DILexicalBlock(scope: !865, file: !3, line: 732, column: 10)
+!865 = distinct !DILexicalBlock(scope: !772, file: !3, line: 730, column: 5)
+!866 = !DILocation(line: 732, column: 30, scope: !864)
+!867 = !DILocation(line: 732, column: 34, scope: !864)
+!868 = !DILocation(line: 732, column: 44, scope: !864)
+!869 = !DILocation(line: 732, column: 10, scope: !865)
+!870 = !DILocation(line: 734, column: 9, scope: !871)
+!871 = distinct !DILexicalBlock(scope: !864, file: !3, line: 733, column: 7)
+!872 = !DILocation(line: 739, column: 88, scope: !873)
+!873 = distinct !DILexicalBlock(scope: !864, file: !3, line: 737, column: 7)
+!874 = !DILocation(line: 739, column: 20, scope: !873)
+!875 = !DILocation(line: 740, column: 89, scope: !873)
+!876 = !DILocation(line: 740, column: 21, scope: !873)
+!877 = !DILocation(line: 741, column: 15, scope: !878)
+!878 = distinct !DILexicalBlock(scope: !873, file: !3, line: 741, column: 12)
+!879 = !DILocation(line: 741, column: 27, scope: !878)
+!880 = !DILocation(line: 741, column: 52, scope: !878)
+!881 = !DILocation(line: 741, column: 71, scope: !878)
+!882 = !DILocation(line: 741, column: 75, scope: !878)
+!883 = !DILocation(line: 741, column: 49, scope: !878)
+!884 = !DILocation(line: 741, column: 86, scope: !878)
+!885 = !DILocation(line: 742, column: 15, scope: !878)
+!886 = !DILocation(line: 742, column: 28, scope: !878)
+!887 = !DILocation(line: 742, column: 52, scope: !878)
+!888 = !DILocation(line: 742, column: 71, scope: !878)
+!889 = !DILocation(line: 742, column: 75, scope: !878)
+!890 = !DILocation(line: 742, column: 49, scope: !878)
+!891 = !DILocation(line: 742, column: 83, scope: !878)
+!892 = !DILocation(line: 743, column: 15, scope: !878)
+!893 = !DILocation(line: 743, column: 27, scope: !878)
+!894 = !DILocation(line: 743, column: 52, scope: !878)
+!895 = !DILocation(line: 743, column: 71, scope: !878)
+!896 = !DILocation(line: 743, column: 75, scope: !878)
+!897 = !DILocation(line: 743, column: 49, scope: !878)
+!898 = !DILocation(line: 741, column: 12, scope: !873)
+!899 = !DILocation(line: 745, column: 11, scope: !900)
+!900 = distinct !DILexicalBlock(scope: !878, file: !3, line: 744, column: 9)
+!901 = !DILocation(line: 749, column: 3, scope: !773)
+!902 = !DILocation(line: 751, column: 3, scope: !181)
+!903 = !DILocation(line: 752, column: 1, scope: !181)
+!904 = distinct !DISubprogram(name: "HAL_RCC_ClockConfig", scope: !3, file: !3, line: 777, type: !905, scopeLine: 778, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!905 = !DISubroutineType(types: !906)
+!906 = !{!110, !907, !6}
+!907 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !908, size: 32)
+!908 = !DIDerivedType(tag: DW_TAG_typedef, name: "RCC_ClkInitTypeDef", file: !186, line: 264, baseType: !909)
+!909 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !186, line: 250, size: 128, elements: !910)
+!910 = !{!911, !912, !913, !914}
+!911 = !DIDerivedType(tag: DW_TAG_member, name: "ClockType", scope: !909, file: !186, line: 252, baseType: !6, size: 32)
+!912 = !DIDerivedType(tag: DW_TAG_member, name: "SYSCLKSource", scope: !909, file: !186, line: 255, baseType: !6, size: 32, offset: 32)
+!913 = !DIDerivedType(tag: DW_TAG_member, name: "AHBCLKDivider", scope: !909, file: !186, line: 258, baseType: !6, size: 32, offset: 64)
+!914 = !DIDerivedType(tag: DW_TAG_member, name: "APB1CLKDivider", scope: !909, file: !186, line: 261, baseType: !6, size: 32, offset: 96)
+!915 = !DILocalVariable(name: "RCC_ClkInitStruct", arg: 1, scope: !904, file: !3, line: 777, type: !907)
+!916 = !DILocation(line: 777, column: 59, scope: !904)
+!917 = !DILocalVariable(name: "FLatency", arg: 2, scope: !904, file: !3, line: 777, type: !6)
+!918 = !DILocation(line: 777, column: 87, scope: !904)
+!919 = !DILocalVariable(name: "tickstart", scope: !904, file: !3, line: 779, type: !6)
+!920 = !DILocation(line: 779, column: 12, scope: !904)
+!921 = !DILocation(line: 782, column: 6, scope: !922)
+!922 = distinct !DILexicalBlock(scope: !904, file: !3, line: 782, column: 6)
+!923 = !DILocation(line: 782, column: 24, scope: !922)
+!924 = !DILocation(line: 782, column: 6, scope: !904)
+!925 = !DILocation(line: 784, column: 5, scope: !926)
+!926 = distinct !DILexicalBlock(scope: !922, file: !3, line: 783, column: 3)
+!927 = !DILocation(line: 796, column: 6, scope: !928)
+!928 = distinct !DILexicalBlock(scope: !904, file: !3, line: 796, column: 6)
+!929 = !DILocation(line: 796, column: 89, scope: !928)
+!930 = !DILocation(line: 796, column: 95, scope: !928)
+!931 = !DILocation(line: 796, column: 15, scope: !928)
+!932 = !DILocation(line: 796, column: 6, scope: !904)
+!933 = !DILocation(line: 799, column: 149, scope: !934)
+!934 = distinct !DILexicalBlock(scope: !928, file: !3, line: 797, column: 3)
+!935 = !DILocation(line: 799, column: 152, scope: !934)
+!936 = !DILocation(line: 799, column: 176, scope: !934)
+!937 = !DILocation(line: 799, column: 173, scope: !934)
+!938 = !DILocation(line: 799, column: 78, scope: !934)
+!939 = !DILocation(line: 803, column: 80, scope: !940)
+!940 = distinct !DILexicalBlock(scope: !934, file: !3, line: 803, column: 8)
+!941 = !DILocation(line: 803, column: 86, scope: !940)
+!942 = !DILocation(line: 803, column: 111, scope: !940)
+!943 = !DILocation(line: 803, column: 108, scope: !940)
+!944 = !DILocation(line: 803, column: 8, scope: !934)
+!945 = !DILocation(line: 805, column: 7, scope: !946)
+!946 = distinct !DILexicalBlock(scope: !940, file: !3, line: 804, column: 5)
+!947 = !DILocation(line: 807, column: 3, scope: !934)
+!948 = !DILocation(line: 810, column: 8, scope: !949)
+!949 = distinct !DILexicalBlock(scope: !904, file: !3, line: 810, column: 6)
+!950 = !DILocation(line: 810, column: 27, scope: !949)
+!951 = !DILocation(line: 810, column: 38, scope: !949)
+!952 = !DILocation(line: 810, column: 55, scope: !949)
+!953 = !DILocation(line: 810, column: 6, scope: !904)
+!954 = !DILocation(line: 814, column: 10, scope: !955)
+!955 = distinct !DILexicalBlock(scope: !956, file: !3, line: 814, column: 8)
+!956 = distinct !DILexicalBlock(scope: !949, file: !3, line: 811, column: 3)
+!957 = !DILocation(line: 814, column: 29, scope: !955)
+!958 = !DILocation(line: 814, column: 40, scope: !955)
+!959 = !DILocation(line: 814, column: 57, scope: !955)
+!960 = !DILocation(line: 814, column: 8, scope: !956)
+!961 = !DILocation(line: 816, column: 157, scope: !962)
+!962 = distinct !DILexicalBlock(scope: !955, file: !3, line: 815, column: 5)
+!963 = !DILocation(line: 816, column: 165, scope: !962)
+!964 = !DILocation(line: 816, column: 189, scope: !962)
+!965 = !DILocation(line: 816, column: 83, scope: !962)
+!966 = !DILocation(line: 817, column: 5, scope: !962)
+!967 = !DILocation(line: 821, column: 155, scope: !956)
+!968 = !DILocation(line: 821, column: 163, scope: !956)
+!969 = !DILocation(line: 821, column: 190, scope: !956)
+!970 = !DILocation(line: 821, column: 209, scope: !956)
+!971 = !DILocation(line: 821, column: 187, scope: !956)
+!972 = !DILocation(line: 821, column: 81, scope: !956)
+!973 = !DILocation(line: 822, column: 3, scope: !956)
+!974 = !DILocation(line: 825, column: 8, scope: !975)
+!975 = distinct !DILexicalBlock(scope: !904, file: !3, line: 825, column: 6)
+!976 = !DILocation(line: 825, column: 27, scope: !975)
+!977 = !DILocation(line: 825, column: 38, scope: !975)
+!978 = !DILocation(line: 825, column: 55, scope: !975)
+!979 = !DILocation(line: 825, column: 6, scope: !904)
+!980 = !DILocation(line: 830, column: 8, scope: !981)
+!981 = distinct !DILexicalBlock(scope: !982, file: !3, line: 830, column: 8)
+!982 = distinct !DILexicalBlock(scope: !975, file: !3, line: 826, column: 3)
+!983 = !DILocation(line: 830, column: 27, scope: !981)
+!984 = !DILocation(line: 830, column: 40, scope: !981)
+!985 = !DILocation(line: 830, column: 8, scope: !982)
+!986 = !DILocation(line: 833, column: 148, scope: !987)
+!987 = distinct !DILexicalBlock(scope: !988, file: !3, line: 833, column: 10)
+!988 = distinct !DILexicalBlock(scope: !981, file: !3, line: 831, column: 5)
+!989 = !DILocation(line: 833, column: 510, scope: !987)
+!990 = !DILocation(line: 833, column: 584, scope: !987)
+!991 = !DILocation(line: 833, column: 10, scope: !988)
+!992 = !DILocation(line: 835, column: 9, scope: !993)
+!993 = distinct !DILexicalBlock(scope: !987, file: !3, line: 834, column: 7)
+!994 = !DILocation(line: 837, column: 5, scope: !988)
+!995 = !DILocation(line: 839, column: 13, scope: !996)
+!996 = distinct !DILexicalBlock(scope: !981, file: !3, line: 839, column: 13)
+!997 = !DILocation(line: 839, column: 32, scope: !996)
+!998 = !DILocation(line: 839, column: 45, scope: !996)
+!999 = !DILocation(line: 839, column: 13, scope: !981)
+!1000 = !DILocation(line: 842, column: 148, scope: !1001)
+!1001 = distinct !DILexicalBlock(scope: !1002, file: !3, line: 842, column: 10)
+!1002 = distinct !DILexicalBlock(scope: !996, file: !3, line: 840, column: 5)
+!1003 = !DILocation(line: 842, column: 510, scope: !1001)
+!1004 = !DILocation(line: 842, column: 584, scope: !1001)
+!1005 = !DILocation(line: 842, column: 10, scope: !1002)
+!1006 = !DILocation(line: 844, column: 9, scope: !1007)
+!1007 = distinct !DILexicalBlock(scope: !1001, file: !3, line: 843, column: 7)
+!1008 = !DILocation(line: 846, column: 5, scope: !1002)
+!1009 = !DILocation(line: 849, column: 13, scope: !1010)
+!1010 = distinct !DILexicalBlock(scope: !996, file: !3, line: 849, column: 13)
+!1011 = !DILocation(line: 849, column: 32, scope: !1010)
+!1012 = !DILocation(line: 849, column: 45, scope: !1010)
+!1013 = !DILocation(line: 849, column: 13, scope: !996)
+!1014 = !DILocation(line: 852, column: 289, scope: !1015)
+!1015 = distinct !DILexicalBlock(scope: !1016, file: !3, line: 852, column: 10)
+!1016 = distinct !DILexicalBlock(scope: !1010, file: !3, line: 850, column: 5)
+!1017 = !DILocation(line: 852, column: 510, scope: !1015)
+!1018 = !DILocation(line: 852, column: 584, scope: !1015)
+!1019 = !DILocation(line: 852, column: 10, scope: !1016)
+!1020 = !DILocation(line: 854, column: 9, scope: !1021)
+!1021 = distinct !DILexicalBlock(scope: !1015, file: !3, line: 853, column: 7)
+!1022 = !DILocation(line: 856, column: 5, scope: !1016)
+!1023 = !DILocation(line: 862, column: 147, scope: !1024)
+!1024 = distinct !DILexicalBlock(scope: !1025, file: !3, line: 862, column: 10)
+!1025 = distinct !DILexicalBlock(scope: !1010, file: !3, line: 860, column: 5)
+!1026 = !DILocation(line: 862, column: 507, scope: !1024)
+!1027 = !DILocation(line: 862, column: 580, scope: !1024)
+!1028 = !DILocation(line: 862, column: 10, scope: !1025)
+!1029 = !DILocation(line: 864, column: 9, scope: !1030)
+!1030 = distinct !DILexicalBlock(scope: !1024, file: !3, line: 863, column: 7)
+!1031 = !DILocation(line: 867, column: 155, scope: !982)
+!1032 = !DILocation(line: 867, column: 163, scope: !982)
+!1033 = !DILocation(line: 867, column: 191, scope: !982)
+!1034 = !DILocation(line: 867, column: 210, scope: !982)
+!1035 = !DILocation(line: 867, column: 187, scope: !982)
+!1036 = !DILocation(line: 867, column: 81, scope: !982)
+!1037 = !DILocation(line: 870, column: 17, scope: !982)
+!1038 = !DILocation(line: 870, column: 15, scope: !982)
+!1039 = !DILocation(line: 872, column: 5, scope: !982)
+!1040 = !DILocation(line: 872, column: 90, scope: !982)
+!1041 = !DILocation(line: 872, column: 95, scope: !982)
+!1042 = !DILocation(line: 872, column: 119, scope: !982)
+!1043 = !DILocation(line: 872, column: 138, scope: !982)
+!1044 = !DILocation(line: 872, column: 151, scope: !982)
+!1045 = !DILocation(line: 872, column: 115, scope: !982)
+!1046 = !DILocation(line: 874, column: 11, scope: !1047)
+!1047 = distinct !DILexicalBlock(scope: !1048, file: !3, line: 874, column: 10)
+!1048 = distinct !DILexicalBlock(scope: !982, file: !3, line: 873, column: 5)
+!1049 = !DILocation(line: 874, column: 27, scope: !1047)
+!1050 = !DILocation(line: 874, column: 25, scope: !1047)
+!1051 = !DILocation(line: 874, column: 39, scope: !1047)
+!1052 = !DILocation(line: 874, column: 10, scope: !1048)
+!1053 = !DILocation(line: 876, column: 9, scope: !1054)
+!1054 = distinct !DILexicalBlock(scope: !1047, file: !3, line: 875, column: 7)
+!1055 = distinct !{!1055, !1039, !1056}
+!1056 = !DILocation(line: 878, column: 5, scope: !982)
+!1057 = !DILocation(line: 879, column: 3, scope: !982)
+!1058 = !DILocation(line: 882, column: 6, scope: !1059)
+!1059 = distinct !DILexicalBlock(scope: !904, file: !3, line: 882, column: 6)
+!1060 = !DILocation(line: 882, column: 89, scope: !1059)
+!1061 = !DILocation(line: 882, column: 95, scope: !1059)
+!1062 = !DILocation(line: 882, column: 15, scope: !1059)
+!1063 = !DILocation(line: 882, column: 6, scope: !904)
+!1064 = !DILocation(line: 885, column: 149, scope: !1065)
+!1065 = distinct !DILexicalBlock(scope: !1059, file: !3, line: 883, column: 3)
+!1066 = !DILocation(line: 885, column: 152, scope: !1065)
+!1067 = !DILocation(line: 885, column: 176, scope: !1065)
+!1068 = !DILocation(line: 885, column: 173, scope: !1065)
+!1069 = !DILocation(line: 885, column: 78, scope: !1065)
+!1070 = !DILocation(line: 889, column: 80, scope: !1071)
+!1071 = distinct !DILexicalBlock(scope: !1065, file: !3, line: 889, column: 8)
+!1072 = !DILocation(line: 889, column: 86, scope: !1071)
+!1073 = !DILocation(line: 889, column: 111, scope: !1071)
+!1074 = !DILocation(line: 889, column: 108, scope: !1071)
+!1075 = !DILocation(line: 889, column: 8, scope: !1065)
+!1076 = !DILocation(line: 891, column: 7, scope: !1077)
+!1077 = distinct !DILexicalBlock(scope: !1071, file: !3, line: 890, column: 5)
+!1078 = !DILocation(line: 893, column: 3, scope: !1065)
+!1079 = !DILocation(line: 896, column: 8, scope: !1080)
+!1080 = distinct !DILexicalBlock(scope: !904, file: !3, line: 896, column: 6)
+!1081 = !DILocation(line: 896, column: 27, scope: !1080)
+!1082 = !DILocation(line: 896, column: 38, scope: !1080)
+!1083 = !DILocation(line: 896, column: 55, scope: !1080)
+!1084 = !DILocation(line: 896, column: 6, scope: !904)
+!1085 = !DILocation(line: 899, column: 155, scope: !1086)
+!1086 = distinct !DILexicalBlock(scope: !1080, file: !3, line: 897, column: 3)
+!1087 = !DILocation(line: 899, column: 163, scope: !1086)
+!1088 = !DILocation(line: 899, column: 190, scope: !1086)
+!1089 = !DILocation(line: 899, column: 209, scope: !1086)
+!1090 = !DILocation(line: 899, column: 187, scope: !1086)
+!1091 = !DILocation(line: 899, column: 81, scope: !1086)
+!1092 = !DILocation(line: 900, column: 3, scope: !1086)
+!1093 = !DILocation(line: 903, column: 21, scope: !904)
+!1094 = !DILocation(line: 903, column: 131, scope: !904)
+!1095 = !DILocation(line: 903, column: 136, scope: !904)
+!1096 = !DILocation(line: 903, column: 154, scope: !904)
+!1097 = !DILocation(line: 903, column: 50, scope: !904)
+!1098 = !DILocation(line: 903, column: 47, scope: !904)
+!1099 = !DILocation(line: 903, column: 19, scope: !904)
+!1100 = !DILocation(line: 906, column: 3, scope: !904)
+!1101 = !DILocation(line: 908, column: 3, scope: !904)
+!1102 = !DILocation(line: 909, column: 1, scope: !904)
+!1103 = !DILocalVariable(name: "tmpreg", scope: !2, file: !3, line: 1102, type: !6)
+!1104 = !DILocation(line: 1102, column: 12, scope: !2)
+!1105 = !DILocalVariable(name: "prediv", scope: !2, file: !3, line: 1102, type: !6)
+!1106 = !DILocation(line: 1102, column: 25, scope: !2)
+!1107 = !DILocalVariable(name: "pllclk", scope: !2, file: !3, line: 1102, type: !6)
+!1108 = !DILocation(line: 1102, column: 38, scope: !2)
+!1109 = !DILocalVariable(name: "pllmul", scope: !2, file: !3, line: 1102, type: !6)
+!1110 = !DILocation(line: 1102, column: 51, scope: !2)
+!1111 = !DILocalVariable(name: "sysclockfreq", scope: !2, file: !3, line: 1103, type: !6)
+!1112 = !DILocation(line: 1103, column: 12, scope: !2)
+!1113 = !DILocation(line: 1105, column: 78, scope: !2)
+!1114 = !DILocation(line: 1105, column: 10, scope: !2)
+!1115 = !DILocation(line: 1108, column: 11, scope: !2)
+!1116 = !DILocation(line: 1108, column: 18, scope: !2)
+!1117 = !DILocation(line: 1108, column: 3, scope: !2)
+!1118 = !DILocation(line: 1112, column: 20, scope: !1119)
+!1119 = distinct !DILexicalBlock(scope: !1120, file: !3, line: 1111, column: 5)
+!1120 = distinct !DILexicalBlock(scope: !2, file: !3, line: 1109, column: 3)
+!1121 = !DILocation(line: 1113, column: 7, scope: !1119)
+!1122 = !DILocation(line: 1117, column: 46, scope: !1123)
+!1123 = distinct !DILexicalBlock(scope: !1120, file: !3, line: 1116, column: 5)
+!1124 = !DILocation(line: 1117, column: 53, scope: !1123)
+!1125 = !DILocation(line: 1117, column: 73, scope: !1123)
+!1126 = !DILocation(line: 1117, column: 16, scope: !1123)
+!1127 = !DILocation(line: 1117, column: 14, scope: !1123)
+!1128 = !DILocation(line: 1118, column: 112, scope: !1123)
+!1129 = !DILocation(line: 1118, column: 118, scope: !1123)
+!1130 = !DILocation(line: 1118, column: 137, scope: !1123)
+!1131 = !DILocation(line: 1118, column: 16, scope: !1123)
+!1132 = !DILocation(line: 1118, column: 14, scope: !1123)
+!1133 = !DILocation(line: 1119, column: 12, scope: !1134)
+!1134 = distinct !DILexicalBlock(scope: !1123, file: !3, line: 1119, column: 11)
+!1135 = !DILocation(line: 1119, column: 19, scope: !1134)
+!1136 = !DILocation(line: 1119, column: 39, scope: !1134)
+!1137 = !DILocation(line: 1119, column: 11, scope: !1123)
+!1138 = !DILocation(line: 1122, column: 62, scope: !1139)
+!1139 = distinct !DILexicalBlock(scope: !1134, file: !3, line: 1120, column: 7)
+!1140 = !DILocation(line: 1122, column: 50, scope: !1139)
+!1141 = !DILocation(line: 1122, column: 48, scope: !1139)
+!1142 = !DILocation(line: 1122, column: 18, scope: !1139)
+!1143 = !DILocation(line: 1122, column: 85, scope: !1139)
+!1144 = !DILocation(line: 1122, column: 74, scope: !1139)
+!1145 = !DILocation(line: 1122, column: 71, scope: !1139)
+!1146 = !DILocation(line: 1122, column: 16, scope: !1139)
+!1147 = !DILocation(line: 1123, column: 7, scope: !1139)
+!1148 = !DILocation(line: 1125, column: 17, scope: !1149)
+!1149 = distinct !DILexicalBlock(scope: !1134, file: !3, line: 1125, column: 16)
+!1150 = !DILocation(line: 1125, column: 24, scope: !1149)
+!1151 = !DILocation(line: 1125, column: 44, scope: !1149)
+!1152 = !DILocation(line: 1125, column: 16, scope: !1134)
+!1153 = !DILocation(line: 1128, column: 64, scope: !1154)
+!1154 = distinct !DILexicalBlock(scope: !1149, file: !3, line: 1126, column: 7)
+!1155 = !DILocation(line: 1128, column: 52, scope: !1154)
+!1156 = !DILocation(line: 1128, column: 50, scope: !1154)
+!1157 = !DILocation(line: 1128, column: 18, scope: !1154)
+!1158 = !DILocation(line: 1128, column: 87, scope: !1154)
+!1159 = !DILocation(line: 1128, column: 76, scope: !1154)
+!1160 = !DILocation(line: 1128, column: 73, scope: !1154)
+!1161 = !DILocation(line: 1128, column: 16, scope: !1154)
+!1162 = !DILocation(line: 1129, column: 7, scope: !1154)
+!1163 = !DILocation(line: 1135, column: 63, scope: !1164)
+!1164 = distinct !DILexicalBlock(scope: !1149, file: !3, line: 1132, column: 7)
+!1165 = !DILocation(line: 1135, column: 51, scope: !1164)
+!1166 = !DILocation(line: 1135, column: 49, scope: !1164)
+!1167 = !DILocation(line: 1135, column: 18, scope: !1164)
+!1168 = !DILocation(line: 1135, column: 86, scope: !1164)
+!1169 = !DILocation(line: 1135, column: 75, scope: !1164)
+!1170 = !DILocation(line: 1135, column: 72, scope: !1164)
+!1171 = !DILocation(line: 1135, column: 16, scope: !1164)
+!1172 = !DILocation(line: 1141, column: 22, scope: !1123)
+!1173 = !DILocation(line: 1141, column: 20, scope: !1123)
+!1174 = !DILocation(line: 1142, column: 7, scope: !1123)
+!1175 = !DILocation(line: 1147, column: 20, scope: !1176)
+!1176 = distinct !DILexicalBlock(scope: !1120, file: !3, line: 1146, column: 5)
+!1177 = !DILocation(line: 1148, column: 7, scope: !1176)
+!1178 = !DILocation(line: 1151, column: 5, scope: !1120)
+!1179 = !DILocation(line: 1154, column: 20, scope: !1180)
+!1180 = distinct !DILexicalBlock(scope: !1120, file: !3, line: 1153, column: 5)
+!1181 = !DILocation(line: 1155, column: 7, scope: !1180)
+!1182 = !DILocation(line: 1158, column: 10, scope: !2)
+!1183 = !DILocation(line: 1158, column: 3, scope: !2)
+!1184 = distinct !DISubprogram(name: "HAL_RCC_MCOConfig", scope: !3, file: !3, line: 1016, type: !1185, scopeLine: 1017, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1185 = !DISubroutineType(types: !1186)
+!1186 = !{null, !6, !6, !6}
+!1187 = !DILocalVariable(name: "RCC_MCOx", arg: 1, scope: !1184, file: !3, line: 1016, type: !6)
+!1188 = !DILocation(line: 1016, column: 33, scope: !1184)
+!1189 = !DILocalVariable(name: "RCC_MCOSource", arg: 2, scope: !1184, file: !3, line: 1016, type: !6)
+!1190 = !DILocation(line: 1016, column: 52, scope: !1184)
+!1191 = !DILocalVariable(name: "RCC_MCODiv", arg: 3, scope: !1184, file: !3, line: 1016, type: !6)
+!1192 = !DILocation(line: 1016, column: 76, scope: !1184)
+!1193 = !DILocalVariable(name: "gpio", scope: !1184, file: !3, line: 1018, type: !1194)
+!1194 = !DIDerivedType(tag: DW_TAG_typedef, name: "GPIO_InitTypeDef", file: !1195, line: 62, baseType: !1196)
+!1195 = !DIFile(filename: "modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/stm32f0xx_hal_gpio.h", directory: "/home/sri/zephyrproject")
+!1196 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !1195, line: 46, size: 160, elements: !1197)
+!1197 = !{!1198, !1199, !1200, !1201, !1202}
+!1198 = !DIDerivedType(tag: DW_TAG_member, name: "Pin", scope: !1196, file: !1195, line: 48, baseType: !6, size: 32)
+!1199 = !DIDerivedType(tag: DW_TAG_member, name: "Mode", scope: !1196, file: !1195, line: 51, baseType: !6, size: 32, offset: 32)
+!1200 = !DIDerivedType(tag: DW_TAG_member, name: "Pull", scope: !1196, file: !1195, line: 54, baseType: !6, size: 32, offset: 64)
+!1201 = !DIDerivedType(tag: DW_TAG_member, name: "Speed", scope: !1196, file: !1195, line: 57, baseType: !6, size: 32, offset: 96)
+!1202 = !DIDerivedType(tag: DW_TAG_member, name: "Alternate", scope: !1196, file: !1195, line: 60, baseType: !6, size: 32, offset: 128)
+!1203 = !DILocation(line: 1018, column: 20, scope: !1184)
+!1204 = !DILocation(line: 1026, column: 8, scope: !1184)
+!1205 = !DILocation(line: 1026, column: 13, scope: !1184)
+!1206 = !DILocation(line: 1027, column: 8, scope: !1184)
+!1207 = !DILocation(line: 1027, column: 14, scope: !1184)
+!1208 = !DILocation(line: 1028, column: 8, scope: !1184)
+!1209 = !DILocation(line: 1028, column: 13, scope: !1184)
+!1210 = !DILocation(line: 1029, column: 8, scope: !1184)
+!1211 = !DILocation(line: 1029, column: 12, scope: !1184)
+!1212 = !DILocation(line: 1030, column: 8, scope: !1184)
+!1213 = !DILocation(line: 1030, column: 18, scope: !1184)
+!1214 = !DILocation(line: 1033, column: 3, scope: !1184)
+!1215 = !DILocalVariable(name: "tmpreg", scope: !1216, file: !3, line: 1033, type: !32)
+!1216 = distinct !DILexicalBlock(scope: !1184, file: !3, line: 1033, column: 6)
+!1217 = !DILocation(line: 1033, column: 26, scope: !1216)
+!1218 = !DILocation(line: 1033, column: 110, scope: !1216)
+!1219 = !DILocation(line: 1033, column: 211, scope: !1216)
+!1220 = !DILocation(line: 1033, column: 219, scope: !1216)
+!1221 = !DILocation(line: 1033, column: 141, scope: !1216)
+!1222 = !DILocation(line: 1033, column: 248, scope: !1216)
+!1223 = !DILocation(line: 1033, column: 256, scope: !1216)
+!1224 = !DILocation(line: 1035, column: 3, scope: !1184)
+!1225 = !DILocation(line: 1038, column: 153, scope: !1184)
+!1226 = !DILocation(line: 1038, column: 161, scope: !1184)
+!1227 = !DILocation(line: 1038, column: 212, scope: !1184)
+!1228 = !DILocation(line: 1038, column: 230, scope: !1184)
+!1229 = !DILocation(line: 1038, column: 227, scope: !1184)
+!1230 = !DILocation(line: 1038, column: 207, scope: !1184)
+!1231 = !DILocation(line: 1038, column: 79, scope: !1184)
+!1232 = !DILocation(line: 1039, column: 1, scope: !1184)
+!1233 = distinct !DISubprogram(name: "HAL_RCC_EnableCSS", scope: !3, file: !3, line: 1050, type: !1234, scopeLine: 1051, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1234 = !DISubroutineType(types: !1235)
+!1235 = !{null}
+!1236 = !DILocation(line: 1052, column: 75, scope: !1233)
+!1237 = !DILocation(line: 1053, column: 1, scope: !1233)
+!1238 = distinct !DISubprogram(name: "HAL_RCC_DisableCSS", scope: !3, file: !3, line: 1059, type: !1234, scopeLine: 1060, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1239 = !DILocation(line: 1061, column: 75, scope: !1238)
+!1240 = !DILocation(line: 1062, column: 1, scope: !1238)
+!1241 = distinct !DISubprogram(name: "HAL_RCC_GetHCLKFreq", scope: !3, file: !3, line: 1170, type: !4, scopeLine: 1171, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1242 = !DILocation(line: 1172, column: 10, scope: !1241)
+!1243 = !DILocation(line: 1172, column: 3, scope: !1241)
+!1244 = distinct !DISubprogram(name: "HAL_RCC_GetPCLK1Freq", scope: !3, file: !3, line: 1181, type: !4, scopeLine: 1182, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1245 = !DILocation(line: 1184, column: 11, scope: !1244)
+!1246 = !DILocation(line: 1184, column: 117, scope: !1244)
+!1247 = !DILocation(line: 1184, column: 122, scope: !1244)
+!1248 = !DILocation(line: 1184, column: 141, scope: !1244)
+!1249 = !DILocation(line: 1184, column: 36, scope: !1244)
+!1250 = !DILocation(line: 1184, column: 33, scope: !1244)
+!1251 = !DILocation(line: 1184, column: 3, scope: !1244)
+!1252 = distinct !DISubprogram(name: "HAL_RCC_GetOscConfig", scope: !3, file: !3, line: 1194, type: !1253, scopeLine: 1195, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1253 = !DISubroutineType(types: !1254)
+!1254 = !{null, !184}
+!1255 = !DILocalVariable(name: "RCC_OscInitStruct", arg: 1, scope: !1252, file: !3, line: 1194, type: !184)
+!1256 = !DILocation(line: 1194, column: 47, scope: !1252)
+!1257 = !DILocation(line: 1200, column: 3, scope: !1252)
+!1258 = !DILocation(line: 1200, column: 22, scope: !1252)
+!1259 = !DILocation(line: 1200, column: 37, scope: !1252)
+!1260 = !DILocation(line: 1203, column: 3, scope: !1252)
+!1261 = !DILocation(line: 1203, column: 22, scope: !1252)
+!1262 = !DILocation(line: 1203, column: 37, scope: !1252)
+!1263 = !DILocation(line: 1208, column: 73, scope: !1264)
+!1264 = distinct !DILexicalBlock(scope: !1252, file: !3, line: 1208, column: 6)
+!1265 = !DILocation(line: 1208, column: 76, scope: !1264)
+!1266 = !DILocation(line: 1208, column: 95, scope: !1264)
+!1267 = !DILocation(line: 1208, column: 6, scope: !1252)
+!1268 = !DILocation(line: 1210, column: 5, scope: !1269)
+!1269 = distinct !DILexicalBlock(scope: !1264, file: !3, line: 1209, column: 3)
+!1270 = !DILocation(line: 1210, column: 24, scope: !1269)
+!1271 = !DILocation(line: 1210, column: 33, scope: !1269)
+!1272 = !DILocation(line: 1211, column: 3, scope: !1269)
+!1273 = !DILocation(line: 1212, column: 78, scope: !1274)
+!1274 = distinct !DILexicalBlock(scope: !1264, file: !3, line: 1212, column: 11)
+!1275 = !DILocation(line: 1212, column: 81, scope: !1274)
+!1276 = !DILocation(line: 1212, column: 100, scope: !1274)
+!1277 = !DILocation(line: 1212, column: 11, scope: !1264)
+!1278 = !DILocation(line: 1214, column: 5, scope: !1279)
+!1279 = distinct !DILexicalBlock(scope: !1274, file: !3, line: 1213, column: 3)
+!1280 = !DILocation(line: 1214, column: 24, scope: !1279)
+!1281 = !DILocation(line: 1214, column: 33, scope: !1279)
+!1282 = !DILocation(line: 1215, column: 3, scope: !1279)
+!1283 = !DILocation(line: 1218, column: 5, scope: !1284)
+!1284 = distinct !DILexicalBlock(scope: !1274, file: !3, line: 1217, column: 3)
+!1285 = !DILocation(line: 1218, column: 24, scope: !1284)
+!1286 = !DILocation(line: 1218, column: 33, scope: !1284)
+!1287 = !DILocation(line: 1222, column: 73, scope: !1288)
+!1288 = distinct !DILexicalBlock(scope: !1252, file: !3, line: 1222, column: 6)
+!1289 = !DILocation(line: 1222, column: 76, scope: !1288)
+!1290 = !DILocation(line: 1222, column: 94, scope: !1288)
+!1291 = !DILocation(line: 1222, column: 6, scope: !1252)
+!1292 = !DILocation(line: 1224, column: 5, scope: !1293)
+!1293 = distinct !DILexicalBlock(scope: !1288, file: !3, line: 1223, column: 3)
+!1294 = !DILocation(line: 1224, column: 24, scope: !1293)
+!1295 = !DILocation(line: 1224, column: 33, scope: !1293)
+!1296 = !DILocation(line: 1225, column: 3, scope: !1293)
+!1297 = !DILocation(line: 1228, column: 5, scope: !1298)
+!1298 = distinct !DILexicalBlock(scope: !1288, file: !3, line: 1227, column: 3)
+!1299 = !DILocation(line: 1228, column: 24, scope: !1298)
+!1300 = !DILocation(line: 1228, column: 33, scope: !1298)
+!1301 = !DILocation(line: 1231, column: 122, scope: !1252)
+!1302 = !DILocation(line: 1231, column: 125, scope: !1252)
+!1303 = !DILocation(line: 1231, column: 144, scope: !1252)
+!1304 = !DILocation(line: 1231, column: 3, scope: !1252)
+!1305 = !DILocation(line: 1231, column: 22, scope: !1252)
+!1306 = !DILocation(line: 1231, column: 42, scope: !1252)
+!1307 = !DILocation(line: 1234, column: 73, scope: !1308)
+!1308 = distinct !DILexicalBlock(scope: !1252, file: !3, line: 1234, column: 6)
+!1309 = !DILocation(line: 1234, column: 78, scope: !1308)
+!1310 = !DILocation(line: 1234, column: 96, scope: !1308)
+!1311 = !DILocation(line: 1234, column: 6, scope: !1252)
+!1312 = !DILocation(line: 1236, column: 5, scope: !1313)
+!1313 = distinct !DILexicalBlock(scope: !1308, file: !3, line: 1235, column: 3)
+!1314 = !DILocation(line: 1236, column: 24, scope: !1313)
+!1315 = !DILocation(line: 1236, column: 33, scope: !1313)
+!1316 = !DILocation(line: 1237, column: 3, scope: !1313)
+!1317 = !DILocation(line: 1238, column: 78, scope: !1318)
+!1318 = distinct !DILexicalBlock(scope: !1308, file: !3, line: 1238, column: 11)
+!1319 = !DILocation(line: 1238, column: 83, scope: !1318)
+!1320 = !DILocation(line: 1238, column: 101, scope: !1318)
+!1321 = !DILocation(line: 1238, column: 11, scope: !1308)
+!1322 = !DILocation(line: 1240, column: 5, scope: !1323)
+!1323 = distinct !DILexicalBlock(scope: !1318, file: !3, line: 1239, column: 3)
+!1324 = !DILocation(line: 1240, column: 24, scope: !1323)
+!1325 = !DILocation(line: 1240, column: 33, scope: !1323)
+!1326 = !DILocation(line: 1241, column: 3, scope: !1323)
+!1327 = !DILocation(line: 1244, column: 5, scope: !1328)
+!1328 = distinct !DILexicalBlock(scope: !1318, file: !3, line: 1243, column: 3)
+!1329 = !DILocation(line: 1244, column: 24, scope: !1328)
+!1330 = !DILocation(line: 1244, column: 33, scope: !1328)
+!1331 = !DILocation(line: 1248, column: 73, scope: !1332)
+!1332 = distinct !DILexicalBlock(scope: !1252, file: !3, line: 1248, column: 6)
+!1333 = !DILocation(line: 1248, column: 77, scope: !1332)
+!1334 = !DILocation(line: 1248, column: 95, scope: !1332)
+!1335 = !DILocation(line: 1248, column: 6, scope: !1252)
+!1336 = !DILocation(line: 1250, column: 5, scope: !1337)
+!1337 = distinct !DILexicalBlock(scope: !1332, file: !3, line: 1249, column: 3)
+!1338 = !DILocation(line: 1250, column: 24, scope: !1337)
+!1339 = !DILocation(line: 1250, column: 33, scope: !1337)
+!1340 = !DILocation(line: 1251, column: 3, scope: !1337)
+!1341 = !DILocation(line: 1254, column: 5, scope: !1342)
+!1342 = distinct !DILexicalBlock(scope: !1332, file: !3, line: 1253, column: 3)
+!1343 = !DILocation(line: 1254, column: 24, scope: !1342)
+!1344 = !DILocation(line: 1254, column: 33, scope: !1342)
+!1345 = !DILocation(line: 1258, column: 73, scope: !1346)
+!1346 = distinct !DILexicalBlock(scope: !1252, file: !3, line: 1258, column: 6)
+!1347 = !DILocation(line: 1258, column: 77, scope: !1346)
+!1348 = !DILocation(line: 1258, column: 96, scope: !1346)
+!1349 = !DILocation(line: 1258, column: 6, scope: !1252)
+!1350 = !DILocation(line: 1260, column: 5, scope: !1351)
+!1351 = distinct !DILexicalBlock(scope: !1346, file: !3, line: 1259, column: 3)
+!1352 = !DILocation(line: 1260, column: 24, scope: !1351)
+!1353 = !DILocation(line: 1260, column: 35, scope: !1351)
+!1354 = !DILocation(line: 1261, column: 3, scope: !1351)
+!1355 = !DILocation(line: 1264, column: 5, scope: !1356)
+!1356 = distinct !DILexicalBlock(scope: !1346, file: !3, line: 1263, column: 3)
+!1357 = !DILocation(line: 1264, column: 24, scope: !1356)
+!1358 = !DILocation(line: 1264, column: 35, scope: !1356)
+!1359 = !DILocation(line: 1267, column: 124, scope: !1252)
+!1360 = !DILocation(line: 1267, column: 128, scope: !1252)
+!1361 = !DILocation(line: 1267, column: 148, scope: !1252)
+!1362 = !DILocation(line: 1267, column: 3, scope: !1252)
+!1363 = !DILocation(line: 1267, column: 22, scope: !1252)
+!1364 = !DILocation(line: 1267, column: 44, scope: !1252)
+!1365 = !DILocation(line: 1271, column: 116, scope: !1252)
+!1366 = !DILocation(line: 1271, column: 121, scope: !1252)
+!1367 = !DILocation(line: 1271, column: 144, scope: !1252)
+!1368 = !DILocation(line: 1271, column: 36, scope: !1252)
+!1369 = !DILocation(line: 1271, column: 3, scope: !1252)
+!1370 = !DILocation(line: 1271, column: 22, scope: !1252)
+!1371 = !DILocation(line: 1271, column: 33, scope: !1252)
+!1372 = !DILocation(line: 1275, column: 73, scope: !1373)
+!1373 = distinct !DILexicalBlock(scope: !1252, file: !3, line: 1275, column: 6)
+!1374 = !DILocation(line: 1275, column: 76, scope: !1373)
+!1375 = !DILocation(line: 1275, column: 95, scope: !1373)
+!1376 = !DILocation(line: 1275, column: 6, scope: !1252)
+!1377 = !DILocation(line: 1277, column: 5, scope: !1378)
+!1378 = distinct !DILexicalBlock(scope: !1373, file: !3, line: 1276, column: 3)
+!1379 = !DILocation(line: 1277, column: 24, scope: !1378)
+!1380 = !DILocation(line: 1277, column: 28, scope: !1378)
+!1381 = !DILocation(line: 1277, column: 37, scope: !1378)
+!1382 = !DILocation(line: 1278, column: 3, scope: !1378)
+!1383 = !DILocation(line: 1281, column: 5, scope: !1384)
+!1384 = distinct !DILexicalBlock(scope: !1373, file: !3, line: 1280, column: 3)
+!1385 = !DILocation(line: 1281, column: 24, scope: !1384)
+!1386 = !DILocation(line: 1281, column: 28, scope: !1384)
+!1387 = !DILocation(line: 1281, column: 37, scope: !1384)
+!1388 = !DILocation(line: 1283, column: 115, scope: !1252)
+!1389 = !DILocation(line: 1283, column: 120, scope: !1252)
+!1390 = !DILocation(line: 1283, column: 3, scope: !1252)
+!1391 = !DILocation(line: 1283, column: 22, scope: !1252)
+!1392 = !DILocation(line: 1283, column: 26, scope: !1252)
+!1393 = !DILocation(line: 1283, column: 36, scope: !1252)
+!1394 = !DILocation(line: 1284, column: 112, scope: !1252)
+!1395 = !DILocation(line: 1284, column: 117, scope: !1252)
+!1396 = !DILocation(line: 1284, column: 3, scope: !1252)
+!1397 = !DILocation(line: 1284, column: 22, scope: !1252)
+!1398 = !DILocation(line: 1284, column: 26, scope: !1252)
+!1399 = !DILocation(line: 1284, column: 33, scope: !1252)
+!1400 = !DILocation(line: 1285, column: 112, scope: !1252)
+!1401 = !DILocation(line: 1285, column: 118, scope: !1252)
+!1402 = !DILocation(line: 1285, column: 3, scope: !1252)
+!1403 = !DILocation(line: 1285, column: 22, scope: !1252)
+!1404 = !DILocation(line: 1285, column: 26, scope: !1252)
+!1405 = !DILocation(line: 1285, column: 33, scope: !1252)
+!1406 = !DILocation(line: 1286, column: 1, scope: !1252)
+!1407 = distinct !DISubprogram(name: "HAL_RCC_GetClockConfig", scope: !3, file: !3, line: 1296, type: !1408, scopeLine: 1297, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1408 = !DISubroutineType(types: !1409)
+!1409 = !{null, !907, !1410}
+!1410 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !6, size: 32)
+!1411 = !DILocalVariable(name: "RCC_ClkInitStruct", arg: 1, scope: !1407, file: !3, line: 1296, type: !907)
+!1412 = !DILocation(line: 1296, column: 49, scope: !1407)
+!1413 = !DILocalVariable(name: "pFLatency", arg: 2, scope: !1407, file: !3, line: 1296, type: !1410)
+!1414 = !DILocation(line: 1296, column: 78, scope: !1407)
+!1415 = !DILocation(line: 1303, column: 3, scope: !1407)
+!1416 = !DILocation(line: 1303, column: 22, scope: !1407)
+!1417 = !DILocation(line: 1303, column: 32, scope: !1407)
+!1418 = !DILocation(line: 1306, column: 114, scope: !1407)
+!1419 = !DILocation(line: 1306, column: 119, scope: !1407)
+!1420 = !DILocation(line: 1306, column: 3, scope: !1407)
+!1421 = !DILocation(line: 1306, column: 22, scope: !1407)
+!1422 = !DILocation(line: 1306, column: 35, scope: !1407)
+!1423 = !DILocation(line: 1309, column: 115, scope: !1407)
+!1424 = !DILocation(line: 1309, column: 120, scope: !1407)
+!1425 = !DILocation(line: 1309, column: 3, scope: !1407)
+!1426 = !DILocation(line: 1309, column: 22, scope: !1407)
+!1427 = !DILocation(line: 1309, column: 36, scope: !1407)
+!1428 = !DILocation(line: 1312, column: 116, scope: !1407)
+!1429 = !DILocation(line: 1312, column: 121, scope: !1407)
+!1430 = !DILocation(line: 1312, column: 3, scope: !1407)
+!1431 = !DILocation(line: 1312, column: 22, scope: !1407)
+!1432 = !DILocation(line: 1312, column: 37, scope: !1407)
+!1433 = !DILocation(line: 1314, column: 88, scope: !1407)
+!1434 = !DILocation(line: 1314, column: 94, scope: !1407)
+!1435 = !DILocation(line: 1314, column: 4, scope: !1407)
+!1436 = !DILocation(line: 1314, column: 14, scope: !1407)
+!1437 = !DILocation(line: 1315, column: 1, scope: !1407)
+!1438 = distinct !DISubprogram(name: "HAL_RCC_NMI_IRQHandler", scope: !3, file: !3, line: 1322, type: !1234, scopeLine: 1323, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1439 = !DILocation(line: 1325, column: 74, scope: !1440)
+!1440 = distinct !DILexicalBlock(scope: !1438, file: !3, line: 1325, column: 6)
+!1441 = !DILocation(line: 1325, column: 78, scope: !1440)
+!1442 = !DILocation(line: 1325, column: 110, scope: !1440)
+!1443 = !DILocation(line: 1325, column: 6, scope: !1438)
+!1444 = !DILocation(line: 1328, column: 5, scope: !1445)
+!1445 = distinct !DILexicalBlock(scope: !1440, file: !3, line: 1326, column: 3)
+!1446 = !DILocation(line: 1331, column: 104, scope: !1445)
+!1447 = !DILocation(line: 1332, column: 3, scope: !1445)
+!1448 = !DILocation(line: 1333, column: 1, scope: !1438)
+!1449 = distinct !DISubprogram(name: "HAL_RCC_CSSCallback", scope: !3, file: !3, line: 1339, type: !1234, scopeLine: 1340, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !9, retainedNodes: !97)
+!1450 = !DILocation(line: 1344, column: 1, scope: !1449)

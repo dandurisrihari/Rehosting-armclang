@@ -32,9 +32,6 @@ namespace {
  
       // Remove inline asm
       LLVMContext &Ctx = M.getContext();
-      Type *Int32Ty = Type::getInt32Ty(Ctx);
-      FunctionType *ReadFromAsmTy = FunctionType::get(Int32Ty, {}, false);
-      FunctionCallee ReadFromAsmFn = M.getOrInsertFunction("read_from_asm", ReadFromAsmTy);
 
       for(auto &F : M){
         for (auto &BB : F) {
@@ -45,25 +42,52 @@ namespace {
               if (CI->isInlineAsm()) {
                 // Check if the inline asm has return type int.
                 if (CI->getType()->isIntegerTy(32)) {
-                  // Create a call to the read_from_asm function.
+                  // Create a function type for the readFromAsmRetInt function.
+                  Type *Int32Ty = Type::getInt32Ty(Ctx);
+                  FunctionType *ReadFromAsmTy = FunctionType::get(Int32Ty, {}, false);
+                  FunctionCallee ReadFromAsmFn = M.getOrInsertFunction("readFromAsmRetInt", ReadFromAsmTy);
+                  // Create a call to the readFromAsmRetInt function.
                   CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
-                  // Replace all uses of the inline asm with the return value of the read_from_asm function.
+                  // Replace all uses of the inline asm with the return value of the readFromAsmRetInt function.
                   CI->replaceAllUsesWith(readFromAsmCall);
                 }
-                // Erase the instruction from the basic block and increment the iterator.
+                // Check if the inline asm has return type struct.
+                else if (CI->getType()->isStructTy()) {
+                  // for all elements in the struct
+                  // Create a call to the readFromAsmRetStruct function.
+                  // That has identical retun type as the struct.
+                  // Replace all uses of the inline asm with the return value of the readFromAsmRetStruct function.
+                  StructType *ST = dyn_cast<StructType>(CI->getType());
+                  std::vector<Type *> StructElements;
+                  for (unsigned i = 0; i < ST->getNumElements(); i++) {
+                    StructElements.push_back(ST->getElementType(i));
+                  }
+                  FunctionType *ReadFromAsmStructTy = FunctionType::get(ST, {}, false);
+                  FunctionCallee ReadFromAsmStructFn = M.getOrInsertFunction("readFromAsmRetStruct", ReadFromAsmStructTy);
+                  CallInst *readFromAsmStructCall = CallInst::Create(ReadFromAsmStructFn, {}, "", CI);
+                  CI->replaceAllUsesWith(readFromAsmStructCall);
+                }
+                // Erase the instruction from the basic block in all cases and increment the iterator.
                 I = CI->eraseFromParent();
                 continue;
               }
               // Replace all calls that have armIntrinsicPrefix
-              // with a call to the read_from_asm function if return type is int.
+              // with a call to the readFromIntrinsic function if return type is int.
               // Remove if return type is void.
               std::string armIntrinsicPrefix = "llvm.arm.";
               if (auto CF = CI->getCalledFunction()) {
                 if(CF->getName().startswith(armIntrinsicPrefix)){
                   if (CI->getType()->isIntegerTy(32)) {
-                    CallInst *readFromAsmCall = CallInst::Create(ReadFromAsmFn, {}, "", CI);
-                    CI->replaceAllUsesWith(readFromAsmCall);
+                    // Create a function type for the readFromIntrinsicRetInt function.
+                    Type *Int32Ty = Type::getInt32Ty(Ctx);
+                    FunctionType *ReadFromIntrinsicTy = FunctionType::get(Int32Ty, {}, false);
+                    FunctionCallee ReadFromIntrinsicFn = M.getOrInsertFunction("readFromIntrinsicRetInt", ReadFromIntrinsicTy);
+                    // Create a call to the readFromIntrinsicRetInt function.
+                    CallInst *readFromIntrinsicCall = CallInst::Create(ReadFromIntrinsicFn, {}, "", CI);
+                    // Replace all uses of the intinsic with the return value of the readFromIntrinsicRetInt function.
+                    CI->replaceAllUsesWith(readFromIntrinsicCall);
                   }
+                  // Erase the instruction from the basic block in all cases and increment the iterator.
                   I = CI->eraseFromParent();
                   continue;                
                 }

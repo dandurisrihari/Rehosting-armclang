@@ -22,21 +22,21 @@ target triple = "aarch64-arm-none-eabi"
 %struct.k_sem = type { %struct._wait_q_t, i32, i32 }
 %struct.k_msgq = type { %struct._wait_q_t, %struct.k_spinlock, i32, i32, ptr, ptr, ptr, ptr, i32, i8 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_impl_k_object_access_grant(ptr noundef %0, ptr noundef %1) #0 !dbg !96 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_impl_k_object_access_grant(ptr noundef %0, ptr noundef %1) #0 !dbg !98 {
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
   store ptr %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !221, metadata !DIExpression()), !dbg !223
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !222, metadata !DIExpression()), !dbg !223
   store ptr %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !222, metadata !DIExpression()), !dbg !224
-  %5 = load ptr, ptr %3, align 4, !dbg !225
-  %6 = load ptr, ptr %4, align 4, !dbg !226
-  ret void, !dbg !227
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !224, metadata !DIExpression()), !dbg !225
+  %5 = load ptr, ptr %3, align 4, !dbg !226
+  %6 = load ptr, ptr %4, align 4, !dbg !227
+  ret void, !dbg !228
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_impl_k_object_release(ptr noundef %0) #0 !dbg !228 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_impl_k_object_release(ptr noundef %0) #0 !dbg !229 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
   call void @llvm.dbg.declare(metadata ptr %2, metadata !232, metadata !DIExpression()), !dbg !233
@@ -44,251 +44,236 @@ define internal void @z_impl_k_object_release(ptr noundef %0) #0 !dbg !228 {
   ret void, !dbg !235
 }
 
-; Function Attrs: inlinehint nounwind optsize
+; Function Attrs: noinline nounwind optnone
 define internal ptr @z_impl_k_object_alloc(i8 noundef zeroext %0) #0 !dbg !236 {
   %2 = alloca i8, align 1
   store i8 %0, ptr %2, align 1
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !240, metadata !DIExpression()), !dbg !241
-  %3 = load i8, ptr %2, align 1, !dbg !242
-  ret ptr null, !dbg !243
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !239, metadata !DIExpression()), !dbg !240
+  %3 = load i8, ptr %2, align 1, !dbg !241
+  ret ptr null, !dbg !242
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @z_impl_k_object_alloc_size(i8 noundef zeroext %0, i32 noundef %1) #0 !dbg !244 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @z_impl_k_object_alloc_size(i8 noundef zeroext %0, i32 noundef %1) #0 !dbg !243 {
   %3 = alloca i8, align 1
   %4 = alloca i32, align 4
   store i8 %0, ptr %3, align 1
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !248, metadata !DIExpression()), !dbg !250
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !246, metadata !DIExpression()), !dbg !247
   store i32 %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !249, metadata !DIExpression()), !dbg !251
-  %5 = load i8, ptr %3, align 1, !dbg !252
-  %6 = load i32, ptr %4, align 4, !dbg !253
-  ret ptr null, !dbg !254
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !248, metadata !DIExpression()), !dbg !249
+  %5 = load i8, ptr %3, align 1, !dbg !250
+  %6 = load i32, ptr %4, align 4, !dbg !251
+  ret ptr null, !dbg !252
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_thread_timeout_expires_ticks(ptr noundef %0) #0 !dbg !255 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_thread_timeout_expires_ticks(ptr noundef %0) #0 !dbg !253 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !263, metadata !DIExpression()), !dbg !264
-  %3 = load ptr, ptr %2, align 4, !dbg !265
-  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !266
-  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !267
-  %6 = call i64 @z_timeout_expires(ptr noundef %5) #5, !dbg !268
-  ret i64 %6, !dbg !269
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !260, metadata !DIExpression()), !dbg !261
+  %3 = load ptr, ptr %2, align 4, !dbg !262
+  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !263
+  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !264
+  %6 = call i64 @z_timeout_expires(ptr noundef %5), !dbg !265
+  ret i64 %6, !dbg !266
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_thread_timeout_remaining_ticks(ptr noundef %0) #0 !dbg !270 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_thread_timeout_remaining_ticks(ptr noundef %0) #0 !dbg !267 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !272, metadata !DIExpression()), !dbg !273
-  %3 = load ptr, ptr %2, align 4, !dbg !274
-  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !275
-  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !276
-  %6 = call i64 @z_timeout_remaining(ptr noundef %5) #5, !dbg !277
-  ret i64 %6, !dbg !278
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !268, metadata !DIExpression()), !dbg !269
+  %3 = load ptr, ptr %2, align 4, !dbg !270
+  %4 = getelementptr inbounds %struct.k_thread, ptr %3, i32 0, i32 0, !dbg !271
+  %5 = getelementptr inbounds %struct._thread_base, ptr %4, i32 0, i32 7, !dbg !272
+  %6 = call i64 @z_timeout_remaining(ptr noundef %5), !dbg !273
+  ret i64 %6, !dbg !274
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_timer_expires_ticks(ptr noundef %0) #0 !dbg !279 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_timer_expires_ticks(ptr noundef %0) #0 !dbg !275 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !302, metadata !DIExpression()), !dbg !303
-  %3 = load ptr, ptr %2, align 4, !dbg !304
-  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !305
-  %5 = call i64 @z_timeout_expires(ptr noundef %4) #5, !dbg !306
-  ret i64 %5, !dbg !307
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !297, metadata !DIExpression()), !dbg !298
+  %3 = load ptr, ptr %2, align 4, !dbg !299
+  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !300
+  %5 = call i64 @z_timeout_expires(ptr noundef %4), !dbg !301
+  ret i64 %5, !dbg !302
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i64 @z_impl_k_timer_remaining_ticks(ptr noundef %0) #0 !dbg !308 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @z_impl_k_timer_remaining_ticks(ptr noundef %0) #0 !dbg !303 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !310, metadata !DIExpression()), !dbg !311
-  %3 = load ptr, ptr %2, align 4, !dbg !312
-  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !313
-  %5 = call i64 @z_timeout_remaining(ptr noundef %4) #5, !dbg !314
-  ret i64 %5, !dbg !315
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !304, metadata !DIExpression()), !dbg !305
+  %3 = load ptr, ptr %2, align 4, !dbg !306
+  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 0, !dbg !307
+  %5 = call i64 @z_timeout_remaining(ptr noundef %4), !dbg !308
+  ret i64 %5, !dbg !309
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @z_impl_k_timer_user_data_set(ptr noundef %0, ptr noundef %1) #0 !dbg !316 {
+; Function Attrs: noinline nounwind optnone
+define internal void @z_impl_k_timer_user_data_set(ptr noundef %0, ptr noundef %1) #0 !dbg !310 {
   %3 = alloca ptr, align 4
   %4 = alloca ptr, align 4
   store ptr %0, ptr %3, align 4
-  call void @llvm.dbg.declare(metadata ptr %3, metadata !320, metadata !DIExpression()), !dbg !322
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !313, metadata !DIExpression()), !dbg !314
   store ptr %1, ptr %4, align 4
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !321, metadata !DIExpression()), !dbg !323
-  %5 = load ptr, ptr %4, align 4, !dbg !324
-  %6 = load ptr, ptr %3, align 4, !dbg !325
-  %7 = getelementptr inbounds %struct.k_timer, ptr %6, i32 0, i32 6, !dbg !326
-  store ptr %5, ptr %7, align 4, !dbg !327
-  ret void, !dbg !328
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !315, metadata !DIExpression()), !dbg !316
+  %5 = load ptr, ptr %4, align 4, !dbg !317
+  %6 = load ptr, ptr %3, align 4, !dbg !318
+  %7 = getelementptr inbounds %struct.k_timer, ptr %6, i32 0, i32 6, !dbg !319
+  store ptr %5, ptr %7, align 4, !dbg !320
+  ret void, !dbg !321
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @z_impl_k_timer_user_data_get(ptr noundef %0) #0 !dbg !329 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @z_impl_k_timer_user_data_get(ptr noundef %0) #0 !dbg !322 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !333, metadata !DIExpression()), !dbg !334
-  %3 = load ptr, ptr %2, align 4, !dbg !335
-  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 6, !dbg !336
-  %5 = load ptr, ptr %4, align 4, !dbg !336
-  ret ptr %5, !dbg !337
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !325, metadata !DIExpression()), !dbg !326
+  %3 = load ptr, ptr %2, align 4, !dbg !327
+  %4 = getelementptr inbounds %struct.k_timer, ptr %3, i32 0, i32 6, !dbg !328
+  %5 = load ptr, ptr %4, align 4, !dbg !328
+  ret ptr %5, !dbg !329
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_queue_is_empty(ptr noundef %0) #0 !dbg !338 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_queue_is_empty(ptr noundef %0) #0 !dbg !330 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !360, metadata !DIExpression()), !dbg !361
-  %3 = load ptr, ptr %2, align 4, !dbg !362
-  %4 = getelementptr inbounds %struct.k_queue, ptr %3, i32 0, i32 0, !dbg !363
-  %5 = call zeroext i1 @sys_sflist_is_empty(ptr noundef %4) #5, !dbg !364
-  %6 = zext i1 %5 to i32, !dbg !365
-  ret i32 %6, !dbg !366
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !351, metadata !DIExpression()), !dbg !352
+  %3 = load ptr, ptr %2, align 4, !dbg !353
+  %4 = getelementptr inbounds %struct.k_queue, ptr %3, i32 0, i32 0, !dbg !354
+  %5 = call zeroext i1 @sys_sflist_is_empty(ptr noundef %4), !dbg !355
+  %6 = zext i1 %5 to i32, !dbg !356
+  ret i32 %6, !dbg !357
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_sem_count_get(ptr noundef %0) #0 !dbg !367 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_sem_count_get(ptr noundef %0) #0 !dbg !358 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !377, metadata !DIExpression()), !dbg !378
-  %3 = load ptr, ptr %2, align 4, !dbg !379
-  %4 = getelementptr inbounds %struct.k_sem, ptr %3, i32 0, i32 1, !dbg !380
-  %5 = load i32, ptr %4, align 4, !dbg !380
-  ret i32 %5, !dbg !381
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !367, metadata !DIExpression()), !dbg !368
+  %3 = load ptr, ptr %2, align 4, !dbg !369
+  %4 = getelementptr inbounds %struct.k_sem, ptr %3, i32 0, i32 1, !dbg !370
+  %5 = load i32, ptr %4, align 4, !dbg !370
+  ret i32 %5, !dbg !371
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_msgq_num_free_get(ptr noundef %0) #0 !dbg !382 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_msgq_num_free_get(ptr noundef %0) #0 !dbg !372 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !401, metadata !DIExpression()), !dbg !402
-  %3 = load ptr, ptr %2, align 4, !dbg !403
-  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 3, !dbg !404
-  %5 = load i32, ptr %4, align 4, !dbg !404
-  %6 = load ptr, ptr %2, align 4, !dbg !405
-  %7 = getelementptr inbounds %struct.k_msgq, ptr %6, i32 0, i32 8, !dbg !406
-  %8 = load i32, ptr %7, align 4, !dbg !406
-  %9 = sub i32 %5, %8, !dbg !407
-  ret i32 %9, !dbg !408
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !390, metadata !DIExpression()), !dbg !391
+  %3 = load ptr, ptr %2, align 4, !dbg !392
+  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 3, !dbg !393
+  %5 = load i32, ptr %4, align 4, !dbg !393
+  %6 = load ptr, ptr %2, align 4, !dbg !394
+  %7 = getelementptr inbounds %struct.k_msgq, ptr %6, i32 0, i32 8, !dbg !395
+  %8 = load i32, ptr %7, align 4, !dbg !395
+  %9 = sub i32 %5, %8, !dbg !396
+  ret i32 %9, !dbg !397
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal i32 @z_impl_k_msgq_num_used_get(ptr noundef %0) #0 !dbg !409 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @z_impl_k_msgq_num_used_get(ptr noundef %0) #0 !dbg !398 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !411, metadata !DIExpression()), !dbg !412
-  %3 = load ptr, ptr %2, align 4, !dbg !413
-  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 8, !dbg !414
-  %5 = load i32, ptr %4, align 4, !dbg !414
-  ret i32 %5, !dbg !415
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !399, metadata !DIExpression()), !dbg !400
+  %3 = load ptr, ptr %2, align 4, !dbg !401
+  %4 = getelementptr inbounds %struct.k_msgq, ptr %3, i32 0, i32 8, !dbg !402
+  %5 = load i32, ptr %4, align 4, !dbg !402
+  ret i32 %5, !dbg !403
 }
 
-; Function Attrs: nounwind optsize
-define hidden void @z_pm_save_idle_exit() #1 !dbg !416 {
-  call void @sys_clock_idle_exit() #5, !dbg !420
-  ret void, !dbg !421
+; Function Attrs: noinline nounwind optnone
+define hidden void @z_pm_save_idle_exit() #0 !dbg !404 {
+  call void @sys_clock_idle_exit(), !dbg !408
+  ret void, !dbg !409
 }
 
-; Function Attrs: optsize
-declare !dbg !422 dso_local void @sys_clock_idle_exit() #2
+declare void @sys_clock_idle_exit() #1
 
-; Function Attrs: nounwind optsize
-define hidden void @idle(ptr noundef %0, ptr noundef %1, ptr noundef %2) #1 !dbg !424 {
+; Function Attrs: noinline nounwind optnone
+define hidden void @idle(ptr noundef %0, ptr noundef %1, ptr noundef %2) #0 !dbg !410 {
   %4 = alloca i32, align 4
   %5 = alloca ptr, align 4
   %6 = alloca ptr, align 4
   %7 = alloca ptr, align 4
   store ptr %0, ptr %5, align 4
-  call void @llvm.dbg.declare(metadata ptr %5, metadata !428, metadata !DIExpression()), !dbg !431
+  call void @llvm.dbg.declare(metadata ptr %5, metadata !413, metadata !DIExpression()), !dbg !414
   store ptr %1, ptr %6, align 4
-  call void @llvm.dbg.declare(metadata ptr %6, metadata !429, metadata !DIExpression()), !dbg !432
+  call void @llvm.dbg.declare(metadata ptr %6, metadata !415, metadata !DIExpression()), !dbg !416
   store ptr %2, ptr %7, align 4
-  call void @llvm.dbg.declare(metadata ptr %7, metadata !430, metadata !DIExpression()), !dbg !433
-  %8 = load ptr, ptr %5, align 4, !dbg !434
-  %9 = load ptr, ptr %6, align 4, !dbg !435
-  %10 = load ptr, ptr %7, align 4, !dbg !436
-  br label %11, !dbg !437
+  call void @llvm.dbg.declare(metadata ptr %7, metadata !417, metadata !DIExpression()), !dbg !418
+  %8 = load ptr, ptr %5, align 4, !dbg !419
+  %9 = load ptr, ptr %6, align 4, !dbg !420
+  %10 = load ptr, ptr %7, align 4, !dbg !421
+  br label %11, !dbg !422
 
 11:                                               ; preds = %3, %11
-  call void @llvm.lifetime.start.p0(i64 4, ptr %4) #6, !dbg !438
-  call void @llvm.dbg.declare(metadata ptr %4, metadata !444, metadata !DIExpression()), !dbg !447
-  %12 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #6, !dbg !448, !srcloc !449
-  store i32 %12, ptr %4, align 4, !dbg !448
-  %13 = load i32, ptr %4, align 4, !dbg !450
-  call void @llvm.lifetime.end.p0(i64 4, ptr %4) #6, !dbg !451
-  call void @k_cpu_idle() #5, !dbg !452
-  br label %11, !dbg !437, !llvm.loop !453
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !423, metadata !DIExpression()), !dbg !428
+  %12 = call i32 asm sideeffect "mrs $0, PRIMASK;cpsid i", "=r,~{memory}"() #3, !dbg !431, !srcloc !432
+  store i32 %12, ptr %4, align 4, !dbg !431
+  %13 = load i32, ptr %4, align 4, !dbg !433
+  call void @k_cpu_idle(), !dbg !434
+  br label %11, !dbg !422, !llvm.loop !435
 }
 
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #3
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #2
 
-; Function Attrs: inlinehint nounwind optsize
-define internal void @k_cpu_idle() #0 !dbg !455 {
-  call void @arch_cpu_idle() #5, !dbg !456
-  ret void, !dbg !457
+; Function Attrs: noinline nounwind optnone
+define internal void @k_cpu_idle() #0 !dbg !437 {
+  call void @arch_cpu_idle(), !dbg !438
+  ret void, !dbg !439
 }
 
-; Function Attrs: nounwind optsize
-define weak hidden void @arch_spin_relax() #1 !dbg !458 {
-  call void asm sideeffect "nop", ""() #6, !dbg !459, !srcloc !463
-  ret void, !dbg !464
+; Function Attrs: noinline nounwind optnone
+define weak hidden void @arch_spin_relax() #0 !dbg !440 {
+  call void asm sideeffect "nop", ""() #3, !dbg !441, !srcloc !445
+  ret void, !dbg !446
 }
 
-; Function Attrs: optsize
-declare !dbg !465 dso_local i64 @z_timeout_expires(ptr noundef) #2
+declare i64 @z_timeout_expires(ptr noundef) #1
 
-; Function Attrs: optsize
-declare !dbg !470 dso_local i64 @z_timeout_remaining(ptr noundef) #2
+declare i64 @z_timeout_remaining(ptr noundef) #1
 
-; Function Attrs: inlinehint nounwind optsize
-define internal zeroext i1 @sys_sflist_is_empty(ptr noundef %0) #0 !dbg !471 {
+; Function Attrs: noinline nounwind optnone
+define internal zeroext i1 @sys_sflist_is_empty(ptr noundef %0) #0 !dbg !447 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !477, metadata !DIExpression()), !dbg !478
-  %3 = load ptr, ptr %2, align 4, !dbg !479
-  %4 = call ptr @sys_sflist_peek_head(ptr noundef %3) #5, !dbg !480
-  %5 = icmp eq ptr %4, null, !dbg !481
-  ret i1 %5, !dbg !482
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !452, metadata !DIExpression()), !dbg !453
+  %3 = load ptr, ptr %2, align 4, !dbg !454
+  %4 = call ptr @sys_sflist_peek_head(ptr noundef %3), !dbg !455
+  %5 = icmp eq ptr %4, null, !dbg !456
+  ret i1 %5, !dbg !457
 }
 
-; Function Attrs: inlinehint nounwind optsize
-define internal ptr @sys_sflist_peek_head(ptr noundef %0) #0 !dbg !483 {
+; Function Attrs: noinline nounwind optnone
+define internal ptr @sys_sflist_peek_head(ptr noundef %0) #0 !dbg !458 {
   %2 = alloca ptr, align 4
   store ptr %0, ptr %2, align 4
-  call void @llvm.dbg.declare(metadata ptr %2, metadata !487, metadata !DIExpression()), !dbg !488
-  %3 = load ptr, ptr %2, align 4, !dbg !489
-  %4 = getelementptr inbounds %struct._sflist, ptr %3, i32 0, i32 0, !dbg !490
-  %5 = load ptr, ptr %4, align 4, !dbg !490
-  ret ptr %5, !dbg !491
+  call void @llvm.dbg.declare(metadata ptr %2, metadata !461, metadata !DIExpression()), !dbg !462
+  %3 = load ptr, ptr %2, align 4, !dbg !463
+  %4 = getelementptr inbounds %struct._sflist, ptr %3, i32 0, i32 0, !dbg !464
+  %5 = load ptr, ptr %4, align 4, !dbg !464
+  ret ptr %5, !dbg !465
 }
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #4
+declare void @arch_cpu_idle() #1
 
-; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
-declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #4
-
-; Function Attrs: optsize
-declare !dbg !492 dso_local void @arch_cpu_idle() #2
-
-attributes #0 = { inlinehint nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #1 = { nounwind optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #2 = { optsize "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
-attributes #3 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #4 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
-attributes #5 = { optsize }
-attributes #6 = { nounwind }
+attributes #0 = { noinline nounwind optnone "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #1 = { "denormal-fp-math"="preserve-sign,preserve-sign" "no-infs-fp-math"="true" "no-nans-fp-math"="true" "no-signed-zeros-fp-math"="true" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="cortex-m0" "target-features"="+armv6-m,+soft-float,+strict-align,+thumb-mode,-aes,-bf16,-cdecp0,-cdecp1,-cdecp2,-cdecp3,-cdecp4,-cdecp5,-cdecp6,-cdecp7,-crc,-crypto,-d32,-dotprod,-dsp,-fce,-fp-armv8,-fp-armv8d16,-fp-armv8d16sp,-fp-armv8sp,-fp16,-fp16fml,-fp64,-fpregs,-fullfp16,-hwdiv,-hwdiv-arm,-i8mm,-lob,-mve,-mve.fp,-neon,-pacbti,-ras,-sb,-sha2,-vfp2,-vfp2sp,-vfp3,-vfp3d16,-vfp3d16sp,-vfp3sp,-vfp4,-vfp4d16,-vfp4d16sp,-vfp4sp" "use-soft-float"="true" }
+attributes #2 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #3 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
-!llvm.module.flags = !{!89, !90, !91, !92, !93, !94}
-!llvm.ident = !{!95}
+!llvm.module.flags = !{!89, !90, !91, !92, !93, !94, !95, !96}
+!llvm.ident = !{!97}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !86, splitDebugInlining: false, nameTableKind: None)
+!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !2, retainedTypes: !86, splitDebugInlining: false, nameTableKind: None)
 !1 = !DIFile(filename: "idle.c", directory: "/home/sri/zephyrproject/zephyr/build")
 !2 = !{!3}
 !3 = !DICompositeType(tag: DW_TAG_enumeration_type, name: "k_objects", file: !4, line: 29, baseType: !5, size: 8, elements: !6)
@@ -313,43 +298,43 @@ attributes #6 = { nounwind }
 !22 = !DIEnumerator(name: "K_OBJ_FUTEX", value: 15)
 !23 = !DIEnumerator(name: "K_OBJ_CONDVAR", value: 16)
 !24 = !DIEnumerator(name: "K_OBJ_DRIVER_GPIO", value: 17)
-!25 = !DIEnumerator(name: "K_OBJ_DRIVER_RESET", value: 18)
-!26 = !DIEnumerator(name: "K_OBJ_DRIVER_UART", value: 19)
-!27 = !DIEnumerator(name: "K_OBJ_DRIVER_CRYPTO", value: 20)
-!28 = !DIEnumerator(name: "K_OBJ_DRIVER_ADC", value: 21)
-!29 = !DIEnumerator(name: "K_OBJ_DRIVER_AUXDISPLAY", value: 22)
-!30 = !DIEnumerator(name: "K_OBJ_DRIVER_BBRAM", value: 23)
-!31 = !DIEnumerator(name: "K_OBJ_DRIVER_CAN", value: 24)
-!32 = !DIEnumerator(name: "K_OBJ_DRIVER_CHARGER", value: 25)
-!33 = !DIEnumerator(name: "K_OBJ_DRIVER_COREDUMP", value: 26)
-!34 = !DIEnumerator(name: "K_OBJ_DRIVER_COUNTER", value: 27)
-!35 = !DIEnumerator(name: "K_OBJ_DRIVER_DAC", value: 28)
-!36 = !DIEnumerator(name: "K_OBJ_DRIVER_DAI", value: 29)
-!37 = !DIEnumerator(name: "K_OBJ_DRIVER_DMA", value: 30)
-!38 = !DIEnumerator(name: "K_OBJ_DRIVER_EDAC", value: 31)
-!39 = !DIEnumerator(name: "K_OBJ_DRIVER_EEPROM", value: 32)
-!40 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE_EMUL", value: 33)
-!41 = !DIEnumerator(name: "K_OBJ_DRIVER_EMUL_SENSOR_BACKEND_API", value: 34)
-!42 = !DIEnumerator(name: "K_OBJ_DRIVER_ENTROPY", value: 35)
-!43 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI", value: 36)
-!44 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI_SAF", value: 37)
-!45 = !DIEnumerator(name: "K_OBJ_DRIVER_FLASH", value: 38)
-!46 = !DIEnumerator(name: "K_OBJ_DRIVER_FPGA", value: 39)
-!47 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE", value: 40)
-!48 = !DIEnumerator(name: "K_OBJ_DRIVER_HWSPINLOCK", value: 41)
-!49 = !DIEnumerator(name: "K_OBJ_DRIVER_I2C", value: 42)
-!50 = !DIEnumerator(name: "K_OBJ_DRIVER_I2S", value: 43)
-!51 = !DIEnumerator(name: "K_OBJ_DRIVER_I3C", value: 44)
-!52 = !DIEnumerator(name: "K_OBJ_DRIVER_IPM", value: 45)
-!53 = !DIEnumerator(name: "K_OBJ_DRIVER_KSCAN", value: 46)
-!54 = !DIEnumerator(name: "K_OBJ_DRIVER_LED", value: 47)
-!55 = !DIEnumerator(name: "K_OBJ_DRIVER_MBOX", value: 48)
-!56 = !DIEnumerator(name: "K_OBJ_DRIVER_MDIO", value: 49)
-!57 = !DIEnumerator(name: "K_OBJ_DRIVER_MIPI_DSI", value: 50)
-!58 = !DIEnumerator(name: "K_OBJ_DRIVER_PECI", value: 51)
-!59 = !DIEnumerator(name: "K_OBJ_DRIVER_PS2", value: 52)
-!60 = !DIEnumerator(name: "K_OBJ_DRIVER_PTP_CLOCK", value: 53)
-!61 = !DIEnumerator(name: "K_OBJ_DRIVER_PWM", value: 54)
+!25 = !DIEnumerator(name: "K_OBJ_DRIVER_PWM", value: 18)
+!26 = !DIEnumerator(name: "K_OBJ_DRIVER_RESET", value: 19)
+!27 = !DIEnumerator(name: "K_OBJ_DRIVER_UART", value: 20)
+!28 = !DIEnumerator(name: "K_OBJ_DRIVER_CRYPTO", value: 21)
+!29 = !DIEnumerator(name: "K_OBJ_DRIVER_ADC", value: 22)
+!30 = !DIEnumerator(name: "K_OBJ_DRIVER_AUXDISPLAY", value: 23)
+!31 = !DIEnumerator(name: "K_OBJ_DRIVER_BBRAM", value: 24)
+!32 = !DIEnumerator(name: "K_OBJ_DRIVER_CAN", value: 25)
+!33 = !DIEnumerator(name: "K_OBJ_DRIVER_CHARGER", value: 26)
+!34 = !DIEnumerator(name: "K_OBJ_DRIVER_COREDUMP", value: 27)
+!35 = !DIEnumerator(name: "K_OBJ_DRIVER_COUNTER", value: 28)
+!36 = !DIEnumerator(name: "K_OBJ_DRIVER_DAC", value: 29)
+!37 = !DIEnumerator(name: "K_OBJ_DRIVER_DAI", value: 30)
+!38 = !DIEnumerator(name: "K_OBJ_DRIVER_DMA", value: 31)
+!39 = !DIEnumerator(name: "K_OBJ_DRIVER_EDAC", value: 32)
+!40 = !DIEnumerator(name: "K_OBJ_DRIVER_EEPROM", value: 33)
+!41 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE_EMUL", value: 34)
+!42 = !DIEnumerator(name: "K_OBJ_DRIVER_EMUL_SENSOR_BACKEND_API", value: 35)
+!43 = !DIEnumerator(name: "K_OBJ_DRIVER_ENTROPY", value: 36)
+!44 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI", value: 37)
+!45 = !DIEnumerator(name: "K_OBJ_DRIVER_ESPI_SAF", value: 38)
+!46 = !DIEnumerator(name: "K_OBJ_DRIVER_FLASH", value: 39)
+!47 = !DIEnumerator(name: "K_OBJ_DRIVER_FPGA", value: 40)
+!48 = !DIEnumerator(name: "K_OBJ_DRIVER_FUEL_GAUGE", value: 41)
+!49 = !DIEnumerator(name: "K_OBJ_DRIVER_HWSPINLOCK", value: 42)
+!50 = !DIEnumerator(name: "K_OBJ_DRIVER_I2C", value: 43)
+!51 = !DIEnumerator(name: "K_OBJ_DRIVER_I2S", value: 44)
+!52 = !DIEnumerator(name: "K_OBJ_DRIVER_I3C", value: 45)
+!53 = !DIEnumerator(name: "K_OBJ_DRIVER_IPM", value: 46)
+!54 = !DIEnumerator(name: "K_OBJ_DRIVER_KSCAN", value: 47)
+!55 = !DIEnumerator(name: "K_OBJ_DRIVER_LED", value: 48)
+!56 = !DIEnumerator(name: "K_OBJ_DRIVER_MBOX", value: 49)
+!57 = !DIEnumerator(name: "K_OBJ_DRIVER_MDIO", value: 50)
+!58 = !DIEnumerator(name: "K_OBJ_DRIVER_MIPI_DSI", value: 51)
+!59 = !DIEnumerator(name: "K_OBJ_DRIVER_PECI", value: 52)
+!60 = !DIEnumerator(name: "K_OBJ_DRIVER_PS2", value: 53)
+!61 = !DIEnumerator(name: "K_OBJ_DRIVER_PTP_CLOCK", value: 54)
 !62 = !DIEnumerator(name: "K_OBJ_DRIVER_REGULATOR_PARENT", value: 55)
 !63 = !DIEnumerator(name: "K_OBJ_DRIVER_REGULATOR", value: 56)
 !64 = !DIEnumerator(name: "K_OBJ_DRIVER_RETAINED_MEM", value: 57)
@@ -383,402 +368,374 @@ attributes #6 = { nounwind }
 !92 = !{i32 1, !"static_rwdata", i32 1}
 !93 = !{i32 1, !"enumsize_buildattr", i32 1}
 !94 = !{i32 1, !"armlib_unavailable", i32 0}
-!95 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
-!96 = distinct !DISubprogram(name: "z_impl_k_object_access_grant", scope: !4, file: !4, line: 223, type: !97, scopeLine: 225, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !220)
-!97 = !DISubroutineType(types: !98)
-!98 = !{null, !99, !101}
-!99 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !100, size: 32)
-!100 = !DIDerivedType(tag: DW_TAG_const_type, baseType: null)
+!95 = !{i32 8, !"PIC Level", i32 2}
+!96 = !{i32 7, !"PIE Level", i32 2}
+!97 = !{!"Component: Arm Compiler for Embedded 6.20 Tool: armclang [5e9ad700]"}
+!98 = distinct !DISubprogram(name: "z_impl_k_object_access_grant", scope: !4, file: !4, line: 223, type: !99, scopeLine: 225, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!99 = !DISubroutineType(types: !100)
+!100 = !{null, !101, !103}
 !101 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !102, size: 32)
-!102 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_thread", file: !103, line: 250, size: 896, elements: !104)
-!103 = !DIFile(filename: "include/zephyr/kernel/thread.h", directory: "/home/sri/zephyrproject/zephyr")
-!104 = !{!105, !178, !191, !192, !193, !194, !215}
-!105 = !DIDerivedType(tag: DW_TAG_member, name: "base", scope: !102, file: !103, line: 252, baseType: !106, size: 384)
-!106 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_base", file: !103, line: 58, size: 384, elements: !107)
-!107 = !{!108, !136, !144, !147, !148, !161, !164, !165}
-!108 = !DIDerivedType(tag: DW_TAG_member, scope: !106, file: !103, line: 61, baseType: !109, size: 64)
-!109 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !106, file: !103, line: 61, size: 64, elements: !110)
-!110 = !{!111, !127}
-!111 = !DIDerivedType(tag: DW_TAG_member, name: "qnode_dlist", scope: !109, file: !103, line: 62, baseType: !112, size: 64)
-!112 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_dnode_t", file: !113, line: 55, baseType: !114)
-!113 = !DIFile(filename: "include/zephyr/sys/dlist.h", directory: "/home/sri/zephyrproject/zephyr")
-!114 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_dnode", file: !113, line: 37, size: 64, elements: !115)
-!115 = !{!116, !122}
-!116 = !DIDerivedType(tag: DW_TAG_member, scope: !114, file: !113, line: 38, baseType: !117, size: 32)
-!117 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !114, file: !113, line: 38, size: 32, elements: !118)
-!118 = !{!119, !121}
-!119 = !DIDerivedType(tag: DW_TAG_member, name: "head", scope: !117, file: !113, line: 39, baseType: !120, size: 32)
-!120 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !114, size: 32)
-!121 = !DIDerivedType(tag: DW_TAG_member, name: "next", scope: !117, file: !113, line: 40, baseType: !120, size: 32)
-!122 = !DIDerivedType(tag: DW_TAG_member, scope: !114, file: !113, line: 42, baseType: !123, size: 32, offset: 32)
-!123 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !114, file: !113, line: 42, size: 32, elements: !124)
-!124 = !{!125, !126}
-!125 = !DIDerivedType(tag: DW_TAG_member, name: "tail", scope: !123, file: !113, line: 43, baseType: !120, size: 32)
-!126 = !DIDerivedType(tag: DW_TAG_member, name: "prev", scope: !123, file: !113, line: 44, baseType: !120, size: 32)
-!127 = !DIDerivedType(tag: DW_TAG_member, name: "qnode_rb", scope: !109, file: !103, line: 63, baseType: !128, size: 64)
-!128 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "rbnode", file: !129, line: 58, size: 64, elements: !130)
-!129 = !DIFile(filename: "include/zephyr/sys/rb.h", directory: "/home/sri/zephyrproject/zephyr")
-!130 = !{!131}
-!131 = !DIDerivedType(tag: DW_TAG_member, name: "children", scope: !128, file: !129, line: 60, baseType: !132, size: 64)
-!132 = !DICompositeType(tag: DW_TAG_array_type, baseType: !133, size: 64, elements: !134)
-!133 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !128, size: 32)
-!134 = !{!135}
-!135 = !DISubrange(count: 2)
-!136 = !DIDerivedType(tag: DW_TAG_member, name: "pended_on", scope: !106, file: !103, line: 69, baseType: !137, size: 32, offset: 64)
-!137 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !138, size: 32)
-!138 = !DIDerivedType(tag: DW_TAG_typedef, name: "_wait_q_t", file: !139, line: 243, baseType: !140)
-!139 = !DIFile(filename: "include/zephyr/kernel_structs.h", directory: "/home/sri/zephyrproject/zephyr")
-!140 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !139, line: 241, size: 64, elements: !141)
-!141 = !{!142}
-!142 = !DIDerivedType(tag: DW_TAG_member, name: "waitq", scope: !140, file: !139, line: 242, baseType: !143, size: 64)
-!143 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_dlist_t", file: !113, line: 51, baseType: !114)
-!144 = !DIDerivedType(tag: DW_TAG_member, name: "user_options", scope: !106, file: !103, line: 72, baseType: !145, size: 8, offset: 96)
-!145 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint8_t", file: !146, line: 62, baseType: !5)
-!146 = !DIFile(filename: "/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/bin/../include/stdint.h", directory: "")
-!147 = !DIDerivedType(tag: DW_TAG_member, name: "thread_state", scope: !106, file: !103, line: 75, baseType: !145, size: 8, offset: 104)
-!148 = !DIDerivedType(tag: DW_TAG_member, scope: !106, file: !103, line: 91, baseType: !149, size: 16, offset: 112)
-!149 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !106, file: !103, line: 91, size: 16, elements: !150)
-!150 = !{!151, !158}
-!151 = !DIDerivedType(tag: DW_TAG_member, scope: !149, file: !103, line: 92, baseType: !152, size: 16)
-!152 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !149, file: !103, line: 92, size: 16, elements: !153)
-!153 = !{!154, !157}
-!154 = !DIDerivedType(tag: DW_TAG_member, name: "prio", scope: !152, file: !103, line: 97, baseType: !155, size: 8)
-!155 = !DIDerivedType(tag: DW_TAG_typedef, name: "int8_t", file: !146, line: 56, baseType: !156)
-!156 = !DIBasicType(name: "signed char", size: 8, encoding: DW_ATE_signed_char)
-!157 = !DIDerivedType(tag: DW_TAG_member, name: "sched_locked", scope: !152, file: !103, line: 98, baseType: !145, size: 8, offset: 8)
-!158 = !DIDerivedType(tag: DW_TAG_member, name: "preempt", scope: !149, file: !103, line: 101, baseType: !159, size: 16)
-!159 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint16_t", file: !146, line: 63, baseType: !160)
-!160 = !DIBasicType(name: "unsigned short", size: 16, encoding: DW_ATE_unsigned)
-!161 = !DIDerivedType(tag: DW_TAG_member, name: "order_key", scope: !106, file: !103, line: 108, baseType: !162, size: 32, offset: 128)
-!162 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint32_t", file: !146, line: 64, baseType: !163)
-!163 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
-!164 = !DIDerivedType(tag: DW_TAG_member, name: "swap_data", scope: !106, file: !103, line: 132, baseType: !87, size: 32, offset: 160)
-!165 = !DIDerivedType(tag: DW_TAG_member, name: "timeout", scope: !106, file: !103, line: 136, baseType: !166, size: 192, offset: 192)
-!166 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_timeout", file: !139, line: 254, size: 192, elements: !167)
-!167 = !{!168, !169, !175}
-!168 = !DIDerivedType(tag: DW_TAG_member, name: "node", scope: !166, file: !139, line: 255, baseType: !112, size: 64)
-!169 = !DIDerivedType(tag: DW_TAG_member, name: "fn", scope: !166, file: !139, line: 256, baseType: !170, size: 32, offset: 64)
-!170 = !DIDerivedType(tag: DW_TAG_typedef, name: "_timeout_func_t", file: !139, line: 252, baseType: !171)
-!171 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !172, size: 32)
-!172 = !DISubroutineType(types: !173)
-!173 = !{null, !174}
-!174 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !166, size: 32)
-!175 = !DIDerivedType(tag: DW_TAG_member, name: "dticks", scope: !166, file: !139, line: 259, baseType: !176, size: 64, offset: 128)
-!176 = !DIDerivedType(tag: DW_TAG_typedef, name: "int64_t", file: !146, line: 59, baseType: !177)
-!177 = !DIBasicType(name: "long long", size: 64, encoding: DW_ATE_signed)
-!178 = !DIDerivedType(tag: DW_TAG_member, name: "callee_saved", scope: !102, file: !103, line: 255, baseType: !179, size: 288, offset: 384)
-!179 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_callee_saved", file: !180, line: 25, size: 288, elements: !181)
-!180 = !DIFile(filename: "include/zephyr/arch/arm/thread.h", directory: "/home/sri/zephyrproject/zephyr")
-!181 = !{!182, !183, !184, !185, !186, !187, !188, !189, !190}
-!182 = !DIDerivedType(tag: DW_TAG_member, name: "v1", scope: !179, file: !180, line: 26, baseType: !162, size: 32)
-!183 = !DIDerivedType(tag: DW_TAG_member, name: "v2", scope: !179, file: !180, line: 27, baseType: !162, size: 32, offset: 32)
-!184 = !DIDerivedType(tag: DW_TAG_member, name: "v3", scope: !179, file: !180, line: 28, baseType: !162, size: 32, offset: 64)
-!185 = !DIDerivedType(tag: DW_TAG_member, name: "v4", scope: !179, file: !180, line: 29, baseType: !162, size: 32, offset: 96)
-!186 = !DIDerivedType(tag: DW_TAG_member, name: "v5", scope: !179, file: !180, line: 30, baseType: !162, size: 32, offset: 128)
-!187 = !DIDerivedType(tag: DW_TAG_member, name: "v6", scope: !179, file: !180, line: 31, baseType: !162, size: 32, offset: 160)
-!188 = !DIDerivedType(tag: DW_TAG_member, name: "v7", scope: !179, file: !180, line: 32, baseType: !162, size: 32, offset: 192)
-!189 = !DIDerivedType(tag: DW_TAG_member, name: "v8", scope: !179, file: !180, line: 33, baseType: !162, size: 32, offset: 224)
-!190 = !DIDerivedType(tag: DW_TAG_member, name: "psp", scope: !179, file: !180, line: 34, baseType: !162, size: 32, offset: 256)
-!191 = !DIDerivedType(tag: DW_TAG_member, name: "init_data", scope: !102, file: !103, line: 258, baseType: !87, size: 32, offset: 672)
-!192 = !DIDerivedType(tag: DW_TAG_member, name: "join_queue", scope: !102, file: !103, line: 261, baseType: !138, size: 64, offset: 704)
-!193 = !DIDerivedType(tag: DW_TAG_member, name: "errno_var", scope: !102, file: !103, line: 302, baseType: !88, size: 32, offset: 768)
-!194 = !DIDerivedType(tag: DW_TAG_member, name: "resource_pool", scope: !102, file: !103, line: 333, baseType: !195, size: 32, offset: 800)
-!195 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !196, size: 32)
-!196 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_heap", file: !197, line: 5291, size: 160, elements: !198)
-!197 = !DIFile(filename: "include/zephyr/kernel.h", directory: "/home/sri/zephyrproject/zephyr")
-!198 = !{!199, !210, !211}
-!199 = !DIDerivedType(tag: DW_TAG_member, name: "heap", scope: !196, file: !197, line: 5292, baseType: !200, size: 96)
-!200 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "sys_heap", file: !201, line: 56, size: 96, elements: !202)
-!201 = !DIFile(filename: "include/zephyr/sys/sys_heap.h", directory: "/home/sri/zephyrproject/zephyr")
-!202 = !{!203, !206, !207}
-!203 = !DIDerivedType(tag: DW_TAG_member, name: "heap", scope: !200, file: !201, line: 57, baseType: !204, size: 32)
-!204 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !205, size: 32)
-!205 = !DICompositeType(tag: DW_TAG_structure_type, name: "z_heap", file: !201, line: 57, flags: DIFlagFwdDecl)
-!206 = !DIDerivedType(tag: DW_TAG_member, name: "init_mem", scope: !200, file: !201, line: 58, baseType: !87, size: 32, offset: 32)
-!207 = !DIDerivedType(tag: DW_TAG_member, name: "init_bytes", scope: !200, file: !201, line: 59, baseType: !208, size: 32, offset: 64)
-!208 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !209, line: 46, baseType: !163)
-!209 = !DIFile(filename: "/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/lib/clang/17/include/stddef.h", directory: "")
-!210 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !196, file: !197, line: 5293, baseType: !138, size: 64, offset: 96)
-!211 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !196, file: !197, line: 5294, baseType: !212, offset: 160)
-!212 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_spinlock", file: !213, line: 45, elements: !214)
-!213 = !DIFile(filename: "include/zephyr/spinlock.h", directory: "/home/sri/zephyrproject/zephyr")
-!214 = !{}
-!215 = !DIDerivedType(tag: DW_TAG_member, name: "arch", scope: !102, file: !103, line: 355, baseType: !216, size: 64, offset: 832)
-!216 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_arch", file: !180, line: 60, size: 64, elements: !217)
-!217 = !{!218, !219}
-!218 = !DIDerivedType(tag: DW_TAG_member, name: "basepri", scope: !216, file: !180, line: 63, baseType: !162, size: 32)
-!219 = !DIDerivedType(tag: DW_TAG_member, name: "swap_return_value", scope: !216, file: !180, line: 66, baseType: !162, size: 32, offset: 32)
-!220 = !{!221, !222}
-!221 = !DILocalVariable(name: "object", arg: 1, scope: !96, file: !4, line: 223, type: !99)
-!222 = !DILocalVariable(name: "thread", arg: 2, scope: !96, file: !4, line: 224, type: !101)
-!223 = !DILocation(line: 223, column: 61, scope: !96)
-!224 = !DILocation(line: 224, column: 24, scope: !96)
-!225 = !DILocation(line: 226, column: 9, scope: !96)
-!226 = !DILocation(line: 227, column: 9, scope: !96)
-!227 = !DILocation(line: 228, column: 1, scope: !96)
-!228 = distinct !DISubprogram(name: "z_impl_k_object_release", scope: !4, file: !4, line: 243, type: !229, scopeLine: 244, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !231)
-!229 = !DISubroutineType(types: !230)
-!230 = !{null, !99}
-!231 = !{!232}
-!232 = !DILocalVariable(name: "object", arg: 1, scope: !228, file: !4, line: 243, type: !99)
-!233 = !DILocation(line: 243, column: 56, scope: !228)
-!234 = !DILocation(line: 245, column: 9, scope: !228)
-!235 = !DILocation(line: 246, column: 1, scope: !228)
-!236 = distinct !DISubprogram(name: "z_impl_k_object_alloc", scope: !4, file: !4, line: 359, type: !237, scopeLine: 360, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !239)
+!102 = !DIDerivedType(tag: DW_TAG_const_type, baseType: null)
+!103 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !104, size: 32)
+!104 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_thread", file: !105, line: 250, size: 896, elements: !106)
+!105 = !DIFile(filename: "include/zephyr/kernel/thread.h", directory: "/home/sri/zephyrproject/zephyr")
+!106 = !{!107, !180, !193, !194, !195, !196, !217}
+!107 = !DIDerivedType(tag: DW_TAG_member, name: "base", scope: !104, file: !105, line: 252, baseType: !108, size: 384)
+!108 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_base", file: !105, line: 58, size: 384, elements: !109)
+!109 = !{!110, !138, !146, !149, !150, !163, !166, !167}
+!110 = !DIDerivedType(tag: DW_TAG_member, scope: !108, file: !105, line: 61, baseType: !111, size: 64)
+!111 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !108, file: !105, line: 61, size: 64, elements: !112)
+!112 = !{!113, !129}
+!113 = !DIDerivedType(tag: DW_TAG_member, name: "qnode_dlist", scope: !111, file: !105, line: 62, baseType: !114, size: 64)
+!114 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_dnode_t", file: !115, line: 55, baseType: !116)
+!115 = !DIFile(filename: "include/zephyr/sys/dlist.h", directory: "/home/sri/zephyrproject/zephyr")
+!116 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_dnode", file: !115, line: 37, size: 64, elements: !117)
+!117 = !{!118, !124}
+!118 = !DIDerivedType(tag: DW_TAG_member, scope: !116, file: !115, line: 38, baseType: !119, size: 32)
+!119 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !116, file: !115, line: 38, size: 32, elements: !120)
+!120 = !{!121, !123}
+!121 = !DIDerivedType(tag: DW_TAG_member, name: "head", scope: !119, file: !115, line: 39, baseType: !122, size: 32)
+!122 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !116, size: 32)
+!123 = !DIDerivedType(tag: DW_TAG_member, name: "next", scope: !119, file: !115, line: 40, baseType: !122, size: 32)
+!124 = !DIDerivedType(tag: DW_TAG_member, scope: !116, file: !115, line: 42, baseType: !125, size: 32, offset: 32)
+!125 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !116, file: !115, line: 42, size: 32, elements: !126)
+!126 = !{!127, !128}
+!127 = !DIDerivedType(tag: DW_TAG_member, name: "tail", scope: !125, file: !115, line: 43, baseType: !122, size: 32)
+!128 = !DIDerivedType(tag: DW_TAG_member, name: "prev", scope: !125, file: !115, line: 44, baseType: !122, size: 32)
+!129 = !DIDerivedType(tag: DW_TAG_member, name: "qnode_rb", scope: !111, file: !105, line: 63, baseType: !130, size: 64)
+!130 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "rbnode", file: !131, line: 58, size: 64, elements: !132)
+!131 = !DIFile(filename: "include/zephyr/sys/rb.h", directory: "/home/sri/zephyrproject/zephyr")
+!132 = !{!133}
+!133 = !DIDerivedType(tag: DW_TAG_member, name: "children", scope: !130, file: !131, line: 60, baseType: !134, size: 64)
+!134 = !DICompositeType(tag: DW_TAG_array_type, baseType: !135, size: 64, elements: !136)
+!135 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !130, size: 32)
+!136 = !{!137}
+!137 = !DISubrange(count: 2)
+!138 = !DIDerivedType(tag: DW_TAG_member, name: "pended_on", scope: !108, file: !105, line: 69, baseType: !139, size: 32, offset: 64)
+!139 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !140, size: 32)
+!140 = !DIDerivedType(tag: DW_TAG_typedef, name: "_wait_q_t", file: !141, line: 243, baseType: !142)
+!141 = !DIFile(filename: "include/zephyr/kernel_structs.h", directory: "/home/sri/zephyrproject/zephyr")
+!142 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !141, line: 241, size: 64, elements: !143)
+!143 = !{!144}
+!144 = !DIDerivedType(tag: DW_TAG_member, name: "waitq", scope: !142, file: !141, line: 242, baseType: !145, size: 64)
+!145 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_dlist_t", file: !115, line: 51, baseType: !116)
+!146 = !DIDerivedType(tag: DW_TAG_member, name: "user_options", scope: !108, file: !105, line: 72, baseType: !147, size: 8, offset: 96)
+!147 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint8_t", file: !148, line: 62, baseType: !5)
+!148 = !DIFile(filename: "/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/bin/../include/stdint.h", directory: "")
+!149 = !DIDerivedType(tag: DW_TAG_member, name: "thread_state", scope: !108, file: !105, line: 75, baseType: !147, size: 8, offset: 104)
+!150 = !DIDerivedType(tag: DW_TAG_member, scope: !108, file: !105, line: 91, baseType: !151, size: 16, offset: 112)
+!151 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !108, file: !105, line: 91, size: 16, elements: !152)
+!152 = !{!153, !160}
+!153 = !DIDerivedType(tag: DW_TAG_member, scope: !151, file: !105, line: 92, baseType: !154, size: 16)
+!154 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !151, file: !105, line: 92, size: 16, elements: !155)
+!155 = !{!156, !159}
+!156 = !DIDerivedType(tag: DW_TAG_member, name: "prio", scope: !154, file: !105, line: 97, baseType: !157, size: 8)
+!157 = !DIDerivedType(tag: DW_TAG_typedef, name: "int8_t", file: !148, line: 56, baseType: !158)
+!158 = !DIBasicType(name: "signed char", size: 8, encoding: DW_ATE_signed_char)
+!159 = !DIDerivedType(tag: DW_TAG_member, name: "sched_locked", scope: !154, file: !105, line: 98, baseType: !147, size: 8, offset: 8)
+!160 = !DIDerivedType(tag: DW_TAG_member, name: "preempt", scope: !151, file: !105, line: 101, baseType: !161, size: 16)
+!161 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint16_t", file: !148, line: 63, baseType: !162)
+!162 = !DIBasicType(name: "unsigned short", size: 16, encoding: DW_ATE_unsigned)
+!163 = !DIDerivedType(tag: DW_TAG_member, name: "order_key", scope: !108, file: !105, line: 108, baseType: !164, size: 32, offset: 128)
+!164 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint32_t", file: !148, line: 64, baseType: !165)
+!165 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
+!166 = !DIDerivedType(tag: DW_TAG_member, name: "swap_data", scope: !108, file: !105, line: 132, baseType: !87, size: 32, offset: 160)
+!167 = !DIDerivedType(tag: DW_TAG_member, name: "timeout", scope: !108, file: !105, line: 136, baseType: !168, size: 192, offset: 192)
+!168 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_timeout", file: !141, line: 254, size: 192, elements: !169)
+!169 = !{!170, !171, !177}
+!170 = !DIDerivedType(tag: DW_TAG_member, name: "node", scope: !168, file: !141, line: 255, baseType: !114, size: 64)
+!171 = !DIDerivedType(tag: DW_TAG_member, name: "fn", scope: !168, file: !141, line: 256, baseType: !172, size: 32, offset: 64)
+!172 = !DIDerivedType(tag: DW_TAG_typedef, name: "_timeout_func_t", file: !141, line: 252, baseType: !173)
+!173 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !174, size: 32)
+!174 = !DISubroutineType(types: !175)
+!175 = !{null, !176}
+!176 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !168, size: 32)
+!177 = !DIDerivedType(tag: DW_TAG_member, name: "dticks", scope: !168, file: !141, line: 259, baseType: !178, size: 64, offset: 128)
+!178 = !DIDerivedType(tag: DW_TAG_typedef, name: "int64_t", file: !148, line: 59, baseType: !179)
+!179 = !DIBasicType(name: "long long", size: 64, encoding: DW_ATE_signed)
+!180 = !DIDerivedType(tag: DW_TAG_member, name: "callee_saved", scope: !104, file: !105, line: 255, baseType: !181, size: 288, offset: 384)
+!181 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_callee_saved", file: !182, line: 25, size: 288, elements: !183)
+!182 = !DIFile(filename: "include/zephyr/arch/arm/thread.h", directory: "/home/sri/zephyrproject/zephyr")
+!183 = !{!184, !185, !186, !187, !188, !189, !190, !191, !192}
+!184 = !DIDerivedType(tag: DW_TAG_member, name: "v1", scope: !181, file: !182, line: 26, baseType: !164, size: 32)
+!185 = !DIDerivedType(tag: DW_TAG_member, name: "v2", scope: !181, file: !182, line: 27, baseType: !164, size: 32, offset: 32)
+!186 = !DIDerivedType(tag: DW_TAG_member, name: "v3", scope: !181, file: !182, line: 28, baseType: !164, size: 32, offset: 64)
+!187 = !DIDerivedType(tag: DW_TAG_member, name: "v4", scope: !181, file: !182, line: 29, baseType: !164, size: 32, offset: 96)
+!188 = !DIDerivedType(tag: DW_TAG_member, name: "v5", scope: !181, file: !182, line: 30, baseType: !164, size: 32, offset: 128)
+!189 = !DIDerivedType(tag: DW_TAG_member, name: "v6", scope: !181, file: !182, line: 31, baseType: !164, size: 32, offset: 160)
+!190 = !DIDerivedType(tag: DW_TAG_member, name: "v7", scope: !181, file: !182, line: 32, baseType: !164, size: 32, offset: 192)
+!191 = !DIDerivedType(tag: DW_TAG_member, name: "v8", scope: !181, file: !182, line: 33, baseType: !164, size: 32, offset: 224)
+!192 = !DIDerivedType(tag: DW_TAG_member, name: "psp", scope: !181, file: !182, line: 34, baseType: !164, size: 32, offset: 256)
+!193 = !DIDerivedType(tag: DW_TAG_member, name: "init_data", scope: !104, file: !105, line: 258, baseType: !87, size: 32, offset: 672)
+!194 = !DIDerivedType(tag: DW_TAG_member, name: "join_queue", scope: !104, file: !105, line: 261, baseType: !140, size: 64, offset: 704)
+!195 = !DIDerivedType(tag: DW_TAG_member, name: "errno_var", scope: !104, file: !105, line: 302, baseType: !88, size: 32, offset: 768)
+!196 = !DIDerivedType(tag: DW_TAG_member, name: "resource_pool", scope: !104, file: !105, line: 333, baseType: !197, size: 32, offset: 800)
+!197 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !198, size: 32)
+!198 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_heap", file: !199, line: 5291, size: 160, elements: !200)
+!199 = !DIFile(filename: "include/zephyr/kernel.h", directory: "/home/sri/zephyrproject/zephyr")
+!200 = !{!201, !212, !213}
+!201 = !DIDerivedType(tag: DW_TAG_member, name: "heap", scope: !198, file: !199, line: 5292, baseType: !202, size: 96)
+!202 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "sys_heap", file: !203, line: 56, size: 96, elements: !204)
+!203 = !DIFile(filename: "include/zephyr/sys/sys_heap.h", directory: "/home/sri/zephyrproject/zephyr")
+!204 = !{!205, !208, !209}
+!205 = !DIDerivedType(tag: DW_TAG_member, name: "heap", scope: !202, file: !203, line: 57, baseType: !206, size: 32)
+!206 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !207, size: 32)
+!207 = !DICompositeType(tag: DW_TAG_structure_type, name: "z_heap", file: !203, line: 57, flags: DIFlagFwdDecl)
+!208 = !DIDerivedType(tag: DW_TAG_member, name: "init_mem", scope: !202, file: !203, line: 58, baseType: !87, size: 32, offset: 32)
+!209 = !DIDerivedType(tag: DW_TAG_member, name: "init_bytes", scope: !202, file: !203, line: 59, baseType: !210, size: 32, offset: 64)
+!210 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !211, line: 46, baseType: !165)
+!211 = !DIFile(filename: "/opt/arm/developmentstudio-2023.0/sw/ARMCompiler6.20/lib/clang/17/include/stddef.h", directory: "")
+!212 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !198, file: !199, line: 5293, baseType: !140, size: 64, offset: 96)
+!213 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !198, file: !199, line: 5294, baseType: !214, offset: 160)
+!214 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_spinlock", file: !215, line: 45, elements: !216)
+!215 = !DIFile(filename: "include/zephyr/spinlock.h", directory: "/home/sri/zephyrproject/zephyr")
+!216 = !{}
+!217 = !DIDerivedType(tag: DW_TAG_member, name: "arch", scope: !104, file: !105, line: 355, baseType: !218, size: 64, offset: 832)
+!218 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_thread_arch", file: !182, line: 60, size: 64, elements: !219)
+!219 = !{!220, !221}
+!220 = !DIDerivedType(tag: DW_TAG_member, name: "basepri", scope: !218, file: !182, line: 63, baseType: !164, size: 32)
+!221 = !DIDerivedType(tag: DW_TAG_member, name: "swap_return_value", scope: !218, file: !182, line: 66, baseType: !164, size: 32, offset: 32)
+!222 = !DILocalVariable(name: "object", arg: 1, scope: !98, file: !4, line: 223, type: !101)
+!223 = !DILocation(line: 223, column: 61, scope: !98)
+!224 = !DILocalVariable(name: "thread", arg: 2, scope: !98, file: !4, line: 224, type: !103)
+!225 = !DILocation(line: 224, column: 24, scope: !98)
+!226 = !DILocation(line: 226, column: 9, scope: !98)
+!227 = !DILocation(line: 227, column: 9, scope: !98)
+!228 = !DILocation(line: 228, column: 1, scope: !98)
+!229 = distinct !DISubprogram(name: "z_impl_k_object_release", scope: !4, file: !4, line: 243, type: !230, scopeLine: 244, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!230 = !DISubroutineType(types: !231)
+!231 = !{null, !101}
+!232 = !DILocalVariable(name: "object", arg: 1, scope: !229, file: !4, line: 243, type: !101)
+!233 = !DILocation(line: 243, column: 56, scope: !229)
+!234 = !DILocation(line: 245, column: 9, scope: !229)
+!235 = !DILocation(line: 246, column: 1, scope: !229)
+!236 = distinct !DISubprogram(name: "z_impl_k_object_alloc", scope: !4, file: !4, line: 359, type: !237, scopeLine: 360, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
 !237 = !DISubroutineType(types: !238)
 !238 = !{!87, !3}
-!239 = !{!240}
-!240 = !DILocalVariable(name: "otype", arg: 1, scope: !236, file: !4, line: 359, type: !3)
-!241 = !DILocation(line: 359, column: 58, scope: !236)
-!242 = !DILocation(line: 361, column: 9, scope: !236)
-!243 = !DILocation(line: 363, column: 2, scope: !236)
-!244 = distinct !DISubprogram(name: "z_impl_k_object_alloc_size", scope: !4, file: !4, line: 366, type: !245, scopeLine: 368, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !247)
-!245 = !DISubroutineType(types: !246)
-!246 = !{!87, !3, !208}
-!247 = !{!248, !249}
-!248 = !DILocalVariable(name: "otype", arg: 1, scope: !244, file: !4, line: 366, type: !3)
-!249 = !DILocalVariable(name: "size", arg: 2, scope: !244, file: !4, line: 367, type: !208)
-!250 = !DILocation(line: 366, column: 63, scope: !244)
-!251 = !DILocation(line: 367, column: 13, scope: !244)
-!252 = !DILocation(line: 369, column: 9, scope: !244)
-!253 = !DILocation(line: 370, column: 9, scope: !244)
-!254 = !DILocation(line: 372, column: 2, scope: !244)
-!255 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_expires_ticks", scope: !197, file: !197, line: 656, type: !256, scopeLine: 658, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !262)
-!256 = !DISubroutineType(types: !257)
-!257 = !{!258, !260}
-!258 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_ticks_t", file: !259, line: 46, baseType: !176)
-!259 = !DIFile(filename: "include/zephyr/sys_clock.h", directory: "/home/sri/zephyrproject/zephyr")
-!260 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !261, size: 32)
-!261 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !102)
-!262 = !{!263}
-!263 = !DILocalVariable(name: "t", arg: 1, scope: !255, file: !197, line: 657, type: !260)
-!264 = !DILocation(line: 657, column: 30, scope: !255)
-!265 = !DILocation(line: 659, column: 28, scope: !255)
-!266 = !DILocation(line: 659, column: 31, scope: !255)
-!267 = !DILocation(line: 659, column: 36, scope: !255)
-!268 = !DILocation(line: 659, column: 9, scope: !255)
-!269 = !DILocation(line: 659, column: 2, scope: !255)
-!270 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_remaining_ticks", scope: !197, file: !197, line: 671, type: !256, scopeLine: 673, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !271)
-!271 = !{!272}
-!272 = !DILocalVariable(name: "t", arg: 1, scope: !270, file: !197, line: 672, type: !260)
-!273 = !DILocation(line: 672, column: 30, scope: !270)
-!274 = !DILocation(line: 674, column: 30, scope: !270)
-!275 = !DILocation(line: 674, column: 33, scope: !270)
-!276 = !DILocation(line: 674, column: 38, scope: !270)
-!277 = !DILocation(line: 674, column: 9, scope: !270)
-!278 = !DILocation(line: 674, column: 2, scope: !270)
-!279 = distinct !DISubprogram(name: "z_impl_k_timer_expires_ticks", scope: !197, file: !197, line: 1634, type: !280, scopeLine: 1636, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !301)
-!280 = !DISubroutineType(types: !281)
-!281 = !{!258, !282}
-!282 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !283, size: 32)
-!283 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !284)
-!284 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_timer", file: !197, line: 1439, size: 448, elements: !285)
-!285 = !{!286, !287, !288, !293, !294, !299, !300}
-!286 = !DIDerivedType(tag: DW_TAG_member, name: "timeout", scope: !284, file: !197, line: 1445, baseType: !166, size: 192)
-!287 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !284, file: !197, line: 1448, baseType: !138, size: 64, offset: 192)
-!288 = !DIDerivedType(tag: DW_TAG_member, name: "expiry_fn", scope: !284, file: !197, line: 1451, baseType: !289, size: 32, offset: 256)
-!289 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !290, size: 32)
-!290 = !DISubroutineType(types: !291)
-!291 = !{null, !292}
-!292 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !284, size: 32)
-!293 = !DIDerivedType(tag: DW_TAG_member, name: "stop_fn", scope: !284, file: !197, line: 1454, baseType: !289, size: 32, offset: 288)
-!294 = !DIDerivedType(tag: DW_TAG_member, name: "period", scope: !284, file: !197, line: 1457, baseType: !295, size: 64, offset: 320)
-!295 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_timeout_t", file: !259, line: 67, baseType: !296)
-!296 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !259, line: 65, size: 64, elements: !297)
-!297 = !{!298}
-!298 = !DIDerivedType(tag: DW_TAG_member, name: "ticks", scope: !296, file: !259, line: 66, baseType: !258, size: 64)
-!299 = !DIDerivedType(tag: DW_TAG_member, name: "status", scope: !284, file: !197, line: 1460, baseType: !162, size: 32, offset: 384)
-!300 = !DIDerivedType(tag: DW_TAG_member, name: "user_data", scope: !284, file: !197, line: 1463, baseType: !87, size: 32, offset: 416)
-!301 = !{!302}
-!302 = !DILocalVariable(name: "timer", arg: 1, scope: !279, file: !197, line: 1635, type: !282)
-!303 = !DILocation(line: 1635, column: 34, scope: !279)
-!304 = !DILocation(line: 1637, column: 28, scope: !279)
-!305 = !DILocation(line: 1637, column: 35, scope: !279)
-!306 = !DILocation(line: 1637, column: 9, scope: !279)
-!307 = !DILocation(line: 1637, column: 2, scope: !279)
-!308 = distinct !DISubprogram(name: "z_impl_k_timer_remaining_ticks", scope: !197, file: !197, line: 1649, type: !280, scopeLine: 1651, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !309)
-!309 = !{!310}
-!310 = !DILocalVariable(name: "timer", arg: 1, scope: !308, file: !197, line: 1650, type: !282)
-!311 = !DILocation(line: 1650, column: 34, scope: !308)
-!312 = !DILocation(line: 1652, column: 30, scope: !308)
-!313 = !DILocation(line: 1652, column: 37, scope: !308)
-!314 = !DILocation(line: 1652, column: 9, scope: !308)
-!315 = !DILocation(line: 1652, column: 2, scope: !308)
-!316 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_set", scope: !197, file: !197, line: 1689, type: !317, scopeLine: 1691, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !319)
-!317 = !DISubroutineType(types: !318)
-!318 = !{null, !292, !87}
-!319 = !{!320, !321}
-!320 = !DILocalVariable(name: "timer", arg: 1, scope: !316, file: !197, line: 1689, type: !292)
-!321 = !DILocalVariable(name: "user_data", arg: 2, scope: !316, file: !197, line: 1690, type: !87)
-!322 = !DILocation(line: 1689, column: 65, scope: !316)
-!323 = !DILocation(line: 1690, column: 19, scope: !316)
-!324 = !DILocation(line: 1692, column: 21, scope: !316)
-!325 = !DILocation(line: 1692, column: 2, scope: !316)
-!326 = !DILocation(line: 1692, column: 9, scope: !316)
-!327 = !DILocation(line: 1692, column: 19, scope: !316)
-!328 = !DILocation(line: 1693, column: 1, scope: !316)
-!329 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_get", scope: !197, file: !197, line: 1704, type: !330, scopeLine: 1705, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !332)
-!330 = !DISubroutineType(types: !331)
-!331 = !{!87, !282}
-!332 = !{!333}
-!333 = !DILocalVariable(name: "timer", arg: 1, scope: !329, file: !197, line: 1704, type: !282)
-!334 = !DILocation(line: 1704, column: 72, scope: !329)
-!335 = !DILocation(line: 1706, column: 9, scope: !329)
-!336 = !DILocation(line: 1706, column: 16, scope: !329)
-!337 = !DILocation(line: 1706, column: 2, scope: !329)
-!338 = distinct !DISubprogram(name: "z_impl_k_queue_is_empty", scope: !197, file: !197, line: 2071, type: !339, scopeLine: 2072, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !359)
-!339 = !DISubroutineType(types: !340)
-!340 = !{!88, !341}
-!341 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !342, size: 32)
-!342 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_queue", file: !197, line: 1830, size: 128, elements: !343)
-!343 = !{!344, !357, !358}
-!344 = !DIDerivedType(tag: DW_TAG_member, name: "data_q", scope: !342, file: !197, line: 1831, baseType: !345, size: 64)
-!345 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sflist_t", file: !346, line: 60, baseType: !347)
-!346 = !DIFile(filename: "include/zephyr/sys/sflist.h", directory: "/home/sri/zephyrproject/zephyr")
-!347 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sflist", file: !346, line: 53, size: 64, elements: !348)
-!348 = !{!349, !356}
-!349 = !DIDerivedType(tag: DW_TAG_member, name: "head", scope: !347, file: !346, line: 54, baseType: !350, size: 32)
-!350 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !351, size: 32)
-!351 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sfnode_t", file: !346, line: 50, baseType: !352)
-!352 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sfnode", file: !346, line: 44, size: 32, elements: !353)
-!353 = !{!354}
-!354 = !DIDerivedType(tag: DW_TAG_member, name: "next_and_flags", scope: !352, file: !346, line: 45, baseType: !355, size: 32)
-!355 = !DIDerivedType(tag: DW_TAG_typedef, name: "unative_t", file: !346, line: 40, baseType: !162)
-!356 = !DIDerivedType(tag: DW_TAG_member, name: "tail", scope: !347, file: !346, line: 55, baseType: !350, size: 32, offset: 32)
-!357 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !342, file: !197, line: 1832, baseType: !212, offset: 64)
-!358 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !342, file: !197, line: 1833, baseType: !138, size: 64, offset: 64)
-!359 = !{!360}
-!360 = !DILocalVariable(name: "queue", arg: 1, scope: !338, file: !197, line: 2071, type: !341)
-!361 = !DILocation(line: 2071, column: 59, scope: !338)
-!362 = !DILocation(line: 2073, column: 35, scope: !338)
-!363 = !DILocation(line: 2073, column: 42, scope: !338)
-!364 = !DILocation(line: 2073, column: 14, scope: !338)
-!365 = !DILocation(line: 2073, column: 9, scope: !338)
-!366 = !DILocation(line: 2073, column: 2, scope: !338)
-!367 = distinct !DISubprogram(name: "z_impl_k_sem_count_get", scope: !197, file: !197, line: 3209, type: !368, scopeLine: 3210, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !376)
-!368 = !DISubroutineType(types: !369)
-!369 = !{!163, !370}
-!370 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !371, size: 32)
-!371 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_sem", file: !197, line: 3092, size: 128, elements: !372)
-!372 = !{!373, !374, !375}
-!373 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !371, file: !197, line: 3093, baseType: !138, size: 64)
-!374 = !DIDerivedType(tag: DW_TAG_member, name: "count", scope: !371, file: !197, line: 3094, baseType: !163, size: 32, offset: 64)
-!375 = !DIDerivedType(tag: DW_TAG_member, name: "limit", scope: !371, file: !197, line: 3095, baseType: !163, size: 32, offset: 96)
-!376 = !{!377}
-!377 = !DILocalVariable(name: "sem", arg: 1, scope: !367, file: !197, line: 3209, type: !370)
-!378 = !DILocation(line: 3209, column: 65, scope: !367)
-!379 = !DILocation(line: 3211, column: 9, scope: !367)
-!380 = !DILocation(line: 3211, column: 14, scope: !367)
-!381 = !DILocation(line: 3211, column: 2, scope: !367)
-!382 = distinct !DISubprogram(name: "z_impl_k_msgq_num_free_get", scope: !197, file: !197, line: 4649, type: !383, scopeLine: 4650, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !400)
-!383 = !DISubroutineType(types: !384)
-!384 = !{!162, !385}
-!385 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !386, size: 32)
-!386 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_msgq", file: !197, line: 4390, size: 320, elements: !387)
-!387 = !{!388, !389, !390, !391, !392, !395, !396, !397, !398, !399}
-!388 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !386, file: !197, line: 4392, baseType: !138, size: 64)
-!389 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !386, file: !197, line: 4394, baseType: !212, offset: 64)
-!390 = !DIDerivedType(tag: DW_TAG_member, name: "msg_size", scope: !386, file: !197, line: 4396, baseType: !208, size: 32, offset: 64)
-!391 = !DIDerivedType(tag: DW_TAG_member, name: "max_msgs", scope: !386, file: !197, line: 4398, baseType: !162, size: 32, offset: 96)
-!392 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_start", scope: !386, file: !197, line: 4400, baseType: !393, size: 32, offset: 128)
-!393 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !394, size: 32)
-!394 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_unsigned_char)
-!395 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_end", scope: !386, file: !197, line: 4402, baseType: !393, size: 32, offset: 160)
-!396 = !DIDerivedType(tag: DW_TAG_member, name: "read_ptr", scope: !386, file: !197, line: 4404, baseType: !393, size: 32, offset: 192)
-!397 = !DIDerivedType(tag: DW_TAG_member, name: "write_ptr", scope: !386, file: !197, line: 4406, baseType: !393, size: 32, offset: 224)
-!398 = !DIDerivedType(tag: DW_TAG_member, name: "used_msgs", scope: !386, file: !197, line: 4408, baseType: !162, size: 32, offset: 256)
-!399 = !DIDerivedType(tag: DW_TAG_member, name: "flags", scope: !386, file: !197, line: 4413, baseType: !145, size: 8, offset: 288)
-!400 = !{!401}
-!401 = !DILocalVariable(name: "msgq", arg: 1, scope: !382, file: !197, line: 4649, type: !385)
-!402 = !DILocation(line: 4649, column: 66, scope: !382)
-!403 = !DILocation(line: 4651, column: 9, scope: !382)
-!404 = !DILocation(line: 4651, column: 15, scope: !382)
-!405 = !DILocation(line: 4651, column: 26, scope: !382)
-!406 = !DILocation(line: 4651, column: 32, scope: !382)
-!407 = !DILocation(line: 4651, column: 24, scope: !382)
-!408 = !DILocation(line: 4651, column: 2, scope: !382)
-!409 = distinct !DISubprogram(name: "z_impl_k_msgq_num_used_get", scope: !197, file: !197, line: 4665, type: !383, scopeLine: 4666, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !410)
-!410 = !{!411}
-!411 = !DILocalVariable(name: "msgq", arg: 1, scope: !409, file: !197, line: 4665, type: !385)
-!412 = !DILocation(line: 4665, column: 66, scope: !409)
-!413 = !DILocation(line: 4667, column: 9, scope: !409)
-!414 = !DILocation(line: 4667, column: 15, scope: !409)
-!415 = !DILocation(line: 4667, column: 2, scope: !409)
-!416 = distinct !DISubprogram(name: "z_pm_save_idle_exit", scope: !417, file: !417, line: 21, type: !418, scopeLine: 22, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !214)
-!417 = !DIFile(filename: "kernel/idle.c", directory: "/home/sri/zephyrproject/zephyr")
-!418 = !DISubroutineType(types: !419)
-!419 = !{null}
-!420 = !DILocation(line: 32, column: 2, scope: !416)
-!421 = !DILocation(line: 34, column: 1, scope: !416)
-!422 = !DISubprogram(name: "sys_clock_idle_exit", scope: !423, file: !423, line: 87, type: !418, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !214)
-!423 = !DIFile(filename: "include/zephyr/drivers/timer/system_timer.h", directory: "/home/sri/zephyrproject/zephyr")
-!424 = distinct !DISubprogram(name: "idle", scope: !417, file: !417, line: 36, type: !425, scopeLine: 37, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !427)
-!425 = !DISubroutineType(types: !426)
-!426 = !{null, !87, !87, !87}
-!427 = !{!428, !429, !430}
-!428 = !DILocalVariable(name: "unused1", arg: 1, scope: !424, file: !417, line: 36, type: !87)
-!429 = !DILocalVariable(name: "unused2", arg: 2, scope: !424, file: !417, line: 36, type: !87)
-!430 = !DILocalVariable(name: "unused3", arg: 3, scope: !424, file: !417, line: 36, type: !87)
-!431 = !DILocation(line: 36, column: 17, scope: !424)
-!432 = !DILocation(line: 36, column: 32, scope: !424)
-!433 = !DILocation(line: 36, column: 47, scope: !424)
-!434 = !DILocation(line: 38, column: 9, scope: !424)
-!435 = !DILocation(line: 39, column: 9, scope: !424)
-!436 = !DILocation(line: 40, column: 9, scope: !424)
-!437 = !DILocation(line: 44, column: 2, scope: !424)
-!438 = !DILocation(line: 44, column: 2, scope: !439, inlinedAt: !445)
-!439 = distinct !DISubprogram(name: "arch_irq_lock", scope: !440, file: !440, line: 42, type: !441, scopeLine: 43, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !443)
-!440 = !DIFile(filename: "include/zephyr/arch/arm/asm_inline_gcc.h", directory: "/home/sri/zephyrproject/zephyr")
-!441 = !DISubroutineType(types: !442)
-!442 = !{!163}
-!443 = !{!444}
-!444 = !DILocalVariable(name: "key", scope: !439, file: !440, line: 44, type: !163)
-!445 = distinct !DILocation(line: 65, column: 10, scope: !446)
-!446 = distinct !DILexicalBlock(scope: !424, file: !417, line: 44, column: 12)
-!447 = !DILocation(line: 44, column: 15, scope: !439, inlinedAt: !445)
-!448 = !DILocation(line: 48, column: 2, scope: !439, inlinedAt: !445)
-!449 = !{i64 66896}
-!450 = !DILocation(line: 80, column: 9, scope: !439, inlinedAt: !445)
-!451 = !DILocation(line: 81, column: 1, scope: !439, inlinedAt: !445)
-!452 = !DILocation(line: 89, column: 3, scope: !446)
-!453 = distinct !{!453, !437, !454}
-!454 = !DILocation(line: 108, column: 2, scope: !424)
-!455 = distinct !DISubprogram(name: "k_cpu_idle", scope: !197, file: !197, line: 5840, type: !418, scopeLine: 5841, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !214)
-!456 = !DILocation(line: 5842, column: 2, scope: !455)
-!457 = !DILocation(line: 5843, column: 1, scope: !455)
-!458 = distinct !DISubprogram(name: "arch_spin_relax", scope: !417, file: !417, line: 111, type: !418, scopeLine: 112, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !214)
-!459 = !DILocation(line: 38, column: 2, scope: !460, inlinedAt: !462)
-!460 = distinct !DISubprogram(name: "arch_nop", scope: !461, file: !461, line: 36, type: !418, scopeLine: 37, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !214)
-!461 = !DIFile(filename: "include/zephyr/arch/arm/misc.h", directory: "/home/sri/zephyrproject/zephyr")
-!462 = distinct !DILocation(line: 116, column: 2, scope: !458)
-!463 = !{i64 65343}
-!464 = !DILocation(line: 117, column: 1, scope: !458)
-!465 = !DISubprogram(name: "z_timeout_expires", scope: !197, file: !197, line: 642, type: !466, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !214)
-!466 = !DISubroutineType(types: !467)
-!467 = !{!258, !468}
-!468 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !469, size: 32)
-!469 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !166)
-!470 = !DISubprogram(name: "z_timeout_remaining", scope: !197, file: !197, line: 643, type: !466, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !214)
-!471 = distinct !DISubprogram(name: "sys_sflist_is_empty", scope: !346, file: !346, line: 335, type: !472, scopeLine: 335, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !476)
-!472 = !DISubroutineType(types: !473)
-!473 = !{!474, !475}
-!474 = !DIBasicType(name: "_Bool", size: 8, encoding: DW_ATE_boolean)
-!475 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !345, size: 32)
-!476 = !{!477}
-!477 = !DILocalVariable(name: "list", arg: 1, scope: !471, file: !346, line: 335, type: !475)
-!478 = !DILocation(line: 335, column: 55, scope: !471)
-!479 = !DILocation(line: 335, column: 92, scope: !471)
-!480 = !DILocation(line: 335, column: 71, scope: !471)
-!481 = !DILocation(line: 335, column: 98, scope: !471)
-!482 = !DILocation(line: 335, column: 63, scope: !471)
-!483 = distinct !DISubprogram(name: "sys_sflist_peek_head", scope: !346, file: !346, line: 255, type: !484, scopeLine: 256, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !486)
-!484 = !DISubroutineType(types: !485)
-!485 = !{!350, !475}
-!486 = !{!487}
-!487 = !DILocalVariable(name: "list", arg: 1, scope: !483, file: !346, line: 255, type: !475)
-!488 = !DILocation(line: 255, column: 64, scope: !483)
-!489 = !DILocation(line: 257, column: 9, scope: !483)
-!490 = !DILocation(line: 257, column: 15, scope: !483)
-!491 = !DILocation(line: 257, column: 2, scope: !483)
-!492 = !DISubprogram(name: "arch_cpu_idle", scope: !493, file: !493, line: 183, type: !418, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !214)
-!493 = !DIFile(filename: "include/zephyr/sys/arch_interface.h", directory: "/home/sri/zephyrproject/zephyr")
+!239 = !DILocalVariable(name: "otype", arg: 1, scope: !236, file: !4, line: 359, type: !3)
+!240 = !DILocation(line: 359, column: 58, scope: !236)
+!241 = !DILocation(line: 361, column: 9, scope: !236)
+!242 = !DILocation(line: 363, column: 2, scope: !236)
+!243 = distinct !DISubprogram(name: "z_impl_k_object_alloc_size", scope: !4, file: !4, line: 366, type: !244, scopeLine: 368, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!244 = !DISubroutineType(types: !245)
+!245 = !{!87, !3, !210}
+!246 = !DILocalVariable(name: "otype", arg: 1, scope: !243, file: !4, line: 366, type: !3)
+!247 = !DILocation(line: 366, column: 63, scope: !243)
+!248 = !DILocalVariable(name: "size", arg: 2, scope: !243, file: !4, line: 367, type: !210)
+!249 = !DILocation(line: 367, column: 13, scope: !243)
+!250 = !DILocation(line: 369, column: 9, scope: !243)
+!251 = !DILocation(line: 370, column: 9, scope: !243)
+!252 = !DILocation(line: 372, column: 2, scope: !243)
+!253 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_expires_ticks", scope: !199, file: !199, line: 656, type: !254, scopeLine: 658, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!254 = !DISubroutineType(types: !255)
+!255 = !{!256, !258}
+!256 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_ticks_t", file: !257, line: 46, baseType: !178)
+!257 = !DIFile(filename: "include/zephyr/sys_clock.h", directory: "/home/sri/zephyrproject/zephyr")
+!258 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !259, size: 32)
+!259 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !104)
+!260 = !DILocalVariable(name: "t", arg: 1, scope: !253, file: !199, line: 657, type: !258)
+!261 = !DILocation(line: 657, column: 30, scope: !253)
+!262 = !DILocation(line: 659, column: 28, scope: !253)
+!263 = !DILocation(line: 659, column: 31, scope: !253)
+!264 = !DILocation(line: 659, column: 36, scope: !253)
+!265 = !DILocation(line: 659, column: 9, scope: !253)
+!266 = !DILocation(line: 659, column: 2, scope: !253)
+!267 = distinct !DISubprogram(name: "z_impl_k_thread_timeout_remaining_ticks", scope: !199, file: !199, line: 671, type: !254, scopeLine: 673, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!268 = !DILocalVariable(name: "t", arg: 1, scope: !267, file: !199, line: 672, type: !258)
+!269 = !DILocation(line: 672, column: 30, scope: !267)
+!270 = !DILocation(line: 674, column: 30, scope: !267)
+!271 = !DILocation(line: 674, column: 33, scope: !267)
+!272 = !DILocation(line: 674, column: 38, scope: !267)
+!273 = !DILocation(line: 674, column: 9, scope: !267)
+!274 = !DILocation(line: 674, column: 2, scope: !267)
+!275 = distinct !DISubprogram(name: "z_impl_k_timer_expires_ticks", scope: !199, file: !199, line: 1634, type: !276, scopeLine: 1636, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!276 = !DISubroutineType(types: !277)
+!277 = !{!256, !278}
+!278 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !279, size: 32)
+!279 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !280)
+!280 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_timer", file: !199, line: 1439, size: 448, elements: !281)
+!281 = !{!282, !283, !284, !289, !290, !295, !296}
+!282 = !DIDerivedType(tag: DW_TAG_member, name: "timeout", scope: !280, file: !199, line: 1445, baseType: !168, size: 192)
+!283 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !280, file: !199, line: 1448, baseType: !140, size: 64, offset: 192)
+!284 = !DIDerivedType(tag: DW_TAG_member, name: "expiry_fn", scope: !280, file: !199, line: 1451, baseType: !285, size: 32, offset: 256)
+!285 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !286, size: 32)
+!286 = !DISubroutineType(types: !287)
+!287 = !{null, !288}
+!288 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !280, size: 32)
+!289 = !DIDerivedType(tag: DW_TAG_member, name: "stop_fn", scope: !280, file: !199, line: 1454, baseType: !285, size: 32, offset: 288)
+!290 = !DIDerivedType(tag: DW_TAG_member, name: "period", scope: !280, file: !199, line: 1457, baseType: !291, size: 64, offset: 320)
+!291 = !DIDerivedType(tag: DW_TAG_typedef, name: "k_timeout_t", file: !257, line: 67, baseType: !292)
+!292 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !257, line: 65, size: 64, elements: !293)
+!293 = !{!294}
+!294 = !DIDerivedType(tag: DW_TAG_member, name: "ticks", scope: !292, file: !257, line: 66, baseType: !256, size: 64)
+!295 = !DIDerivedType(tag: DW_TAG_member, name: "status", scope: !280, file: !199, line: 1460, baseType: !164, size: 32, offset: 384)
+!296 = !DIDerivedType(tag: DW_TAG_member, name: "user_data", scope: !280, file: !199, line: 1463, baseType: !87, size: 32, offset: 416)
+!297 = !DILocalVariable(name: "timer", arg: 1, scope: !275, file: !199, line: 1635, type: !278)
+!298 = !DILocation(line: 1635, column: 34, scope: !275)
+!299 = !DILocation(line: 1637, column: 28, scope: !275)
+!300 = !DILocation(line: 1637, column: 35, scope: !275)
+!301 = !DILocation(line: 1637, column: 9, scope: !275)
+!302 = !DILocation(line: 1637, column: 2, scope: !275)
+!303 = distinct !DISubprogram(name: "z_impl_k_timer_remaining_ticks", scope: !199, file: !199, line: 1649, type: !276, scopeLine: 1651, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!304 = !DILocalVariable(name: "timer", arg: 1, scope: !303, file: !199, line: 1650, type: !278)
+!305 = !DILocation(line: 1650, column: 34, scope: !303)
+!306 = !DILocation(line: 1652, column: 30, scope: !303)
+!307 = !DILocation(line: 1652, column: 37, scope: !303)
+!308 = !DILocation(line: 1652, column: 9, scope: !303)
+!309 = !DILocation(line: 1652, column: 2, scope: !303)
+!310 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_set", scope: !199, file: !199, line: 1689, type: !311, scopeLine: 1691, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!311 = !DISubroutineType(types: !312)
+!312 = !{null, !288, !87}
+!313 = !DILocalVariable(name: "timer", arg: 1, scope: !310, file: !199, line: 1689, type: !288)
+!314 = !DILocation(line: 1689, column: 65, scope: !310)
+!315 = !DILocalVariable(name: "user_data", arg: 2, scope: !310, file: !199, line: 1690, type: !87)
+!316 = !DILocation(line: 1690, column: 19, scope: !310)
+!317 = !DILocation(line: 1692, column: 21, scope: !310)
+!318 = !DILocation(line: 1692, column: 2, scope: !310)
+!319 = !DILocation(line: 1692, column: 9, scope: !310)
+!320 = !DILocation(line: 1692, column: 19, scope: !310)
+!321 = !DILocation(line: 1693, column: 1, scope: !310)
+!322 = distinct !DISubprogram(name: "z_impl_k_timer_user_data_get", scope: !199, file: !199, line: 1704, type: !323, scopeLine: 1705, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!323 = !DISubroutineType(types: !324)
+!324 = !{!87, !278}
+!325 = !DILocalVariable(name: "timer", arg: 1, scope: !322, file: !199, line: 1704, type: !278)
+!326 = !DILocation(line: 1704, column: 72, scope: !322)
+!327 = !DILocation(line: 1706, column: 9, scope: !322)
+!328 = !DILocation(line: 1706, column: 16, scope: !322)
+!329 = !DILocation(line: 1706, column: 2, scope: !322)
+!330 = distinct !DISubprogram(name: "z_impl_k_queue_is_empty", scope: !199, file: !199, line: 2071, type: !331, scopeLine: 2072, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!331 = !DISubroutineType(types: !332)
+!332 = !{!88, !333}
+!333 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !334, size: 32)
+!334 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_queue", file: !199, line: 1830, size: 128, elements: !335)
+!335 = !{!336, !349, !350}
+!336 = !DIDerivedType(tag: DW_TAG_member, name: "data_q", scope: !334, file: !199, line: 1831, baseType: !337, size: 64)
+!337 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sflist_t", file: !338, line: 60, baseType: !339)
+!338 = !DIFile(filename: "include/zephyr/sys/sflist.h", directory: "/home/sri/zephyrproject/zephyr")
+!339 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sflist", file: !338, line: 53, size: 64, elements: !340)
+!340 = !{!341, !348}
+!341 = !DIDerivedType(tag: DW_TAG_member, name: "head", scope: !339, file: !338, line: 54, baseType: !342, size: 32)
+!342 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !343, size: 32)
+!343 = !DIDerivedType(tag: DW_TAG_typedef, name: "sys_sfnode_t", file: !338, line: 50, baseType: !344)
+!344 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_sfnode", file: !338, line: 44, size: 32, elements: !345)
+!345 = !{!346}
+!346 = !DIDerivedType(tag: DW_TAG_member, name: "next_and_flags", scope: !344, file: !338, line: 45, baseType: !347, size: 32)
+!347 = !DIDerivedType(tag: DW_TAG_typedef, name: "unative_t", file: !338, line: 40, baseType: !164)
+!348 = !DIDerivedType(tag: DW_TAG_member, name: "tail", scope: !339, file: !338, line: 55, baseType: !342, size: 32, offset: 32)
+!349 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !334, file: !199, line: 1832, baseType: !214, offset: 64)
+!350 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !334, file: !199, line: 1833, baseType: !140, size: 64, offset: 64)
+!351 = !DILocalVariable(name: "queue", arg: 1, scope: !330, file: !199, line: 2071, type: !333)
+!352 = !DILocation(line: 2071, column: 59, scope: !330)
+!353 = !DILocation(line: 2073, column: 35, scope: !330)
+!354 = !DILocation(line: 2073, column: 42, scope: !330)
+!355 = !DILocation(line: 2073, column: 14, scope: !330)
+!356 = !DILocation(line: 2073, column: 9, scope: !330)
+!357 = !DILocation(line: 2073, column: 2, scope: !330)
+!358 = distinct !DISubprogram(name: "z_impl_k_sem_count_get", scope: !199, file: !199, line: 3209, type: !359, scopeLine: 3210, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!359 = !DISubroutineType(types: !360)
+!360 = !{!165, !361}
+!361 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !362, size: 32)
+!362 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_sem", file: !199, line: 3092, size: 128, elements: !363)
+!363 = !{!364, !365, !366}
+!364 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !362, file: !199, line: 3093, baseType: !140, size: 64)
+!365 = !DIDerivedType(tag: DW_TAG_member, name: "count", scope: !362, file: !199, line: 3094, baseType: !165, size: 32, offset: 64)
+!366 = !DIDerivedType(tag: DW_TAG_member, name: "limit", scope: !362, file: !199, line: 3095, baseType: !165, size: 32, offset: 96)
+!367 = !DILocalVariable(name: "sem", arg: 1, scope: !358, file: !199, line: 3209, type: !361)
+!368 = !DILocation(line: 3209, column: 65, scope: !358)
+!369 = !DILocation(line: 3211, column: 9, scope: !358)
+!370 = !DILocation(line: 3211, column: 14, scope: !358)
+!371 = !DILocation(line: 3211, column: 2, scope: !358)
+!372 = distinct !DISubprogram(name: "z_impl_k_msgq_num_free_get", scope: !199, file: !199, line: 4649, type: !373, scopeLine: 4650, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!373 = !DISubroutineType(types: !374)
+!374 = !{!164, !375}
+!375 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !376, size: 32)
+!376 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "k_msgq", file: !199, line: 4390, size: 320, elements: !377)
+!377 = !{!378, !379, !380, !381, !382, !385, !386, !387, !388, !389}
+!378 = !DIDerivedType(tag: DW_TAG_member, name: "wait_q", scope: !376, file: !199, line: 4392, baseType: !140, size: 64)
+!379 = !DIDerivedType(tag: DW_TAG_member, name: "lock", scope: !376, file: !199, line: 4394, baseType: !214, offset: 64)
+!380 = !DIDerivedType(tag: DW_TAG_member, name: "msg_size", scope: !376, file: !199, line: 4396, baseType: !210, size: 32, offset: 64)
+!381 = !DIDerivedType(tag: DW_TAG_member, name: "max_msgs", scope: !376, file: !199, line: 4398, baseType: !164, size: 32, offset: 96)
+!382 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_start", scope: !376, file: !199, line: 4400, baseType: !383, size: 32, offset: 128)
+!383 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !384, size: 32)
+!384 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_unsigned_char)
+!385 = !DIDerivedType(tag: DW_TAG_member, name: "buffer_end", scope: !376, file: !199, line: 4402, baseType: !383, size: 32, offset: 160)
+!386 = !DIDerivedType(tag: DW_TAG_member, name: "read_ptr", scope: !376, file: !199, line: 4404, baseType: !383, size: 32, offset: 192)
+!387 = !DIDerivedType(tag: DW_TAG_member, name: "write_ptr", scope: !376, file: !199, line: 4406, baseType: !383, size: 32, offset: 224)
+!388 = !DIDerivedType(tag: DW_TAG_member, name: "used_msgs", scope: !376, file: !199, line: 4408, baseType: !164, size: 32, offset: 256)
+!389 = !DIDerivedType(tag: DW_TAG_member, name: "flags", scope: !376, file: !199, line: 4413, baseType: !147, size: 8, offset: 288)
+!390 = !DILocalVariable(name: "msgq", arg: 1, scope: !372, file: !199, line: 4649, type: !375)
+!391 = !DILocation(line: 4649, column: 66, scope: !372)
+!392 = !DILocation(line: 4651, column: 9, scope: !372)
+!393 = !DILocation(line: 4651, column: 15, scope: !372)
+!394 = !DILocation(line: 4651, column: 26, scope: !372)
+!395 = !DILocation(line: 4651, column: 32, scope: !372)
+!396 = !DILocation(line: 4651, column: 24, scope: !372)
+!397 = !DILocation(line: 4651, column: 2, scope: !372)
+!398 = distinct !DISubprogram(name: "z_impl_k_msgq_num_used_get", scope: !199, file: !199, line: 4665, type: !373, scopeLine: 4666, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!399 = !DILocalVariable(name: "msgq", arg: 1, scope: !398, file: !199, line: 4665, type: !375)
+!400 = !DILocation(line: 4665, column: 66, scope: !398)
+!401 = !DILocation(line: 4667, column: 9, scope: !398)
+!402 = !DILocation(line: 4667, column: 15, scope: !398)
+!403 = !DILocation(line: 4667, column: 2, scope: !398)
+!404 = distinct !DISubprogram(name: "z_pm_save_idle_exit", scope: !405, file: !405, line: 21, type: !406, scopeLine: 22, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!405 = !DIFile(filename: "kernel/idle.c", directory: "/home/sri/zephyrproject/zephyr")
+!406 = !DISubroutineType(types: !407)
+!407 = !{null}
+!408 = !DILocation(line: 32, column: 2, scope: !404)
+!409 = !DILocation(line: 34, column: 1, scope: !404)
+!410 = distinct !DISubprogram(name: "idle", scope: !405, file: !405, line: 36, type: !411, scopeLine: 37, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!411 = !DISubroutineType(types: !412)
+!412 = !{null, !87, !87, !87}
+!413 = !DILocalVariable(name: "unused1", arg: 1, scope: !410, file: !405, line: 36, type: !87)
+!414 = !DILocation(line: 36, column: 17, scope: !410)
+!415 = !DILocalVariable(name: "unused2", arg: 2, scope: !410, file: !405, line: 36, type: !87)
+!416 = !DILocation(line: 36, column: 32, scope: !410)
+!417 = !DILocalVariable(name: "unused3", arg: 3, scope: !410, file: !405, line: 36, type: !87)
+!418 = !DILocation(line: 36, column: 47, scope: !410)
+!419 = !DILocation(line: 38, column: 9, scope: !410)
+!420 = !DILocation(line: 39, column: 9, scope: !410)
+!421 = !DILocation(line: 40, column: 9, scope: !410)
+!422 = !DILocation(line: 44, column: 2, scope: !410)
+!423 = !DILocalVariable(name: "key", scope: !424, file: !425, line: 44, type: !165)
+!424 = distinct !DISubprogram(name: "arch_irq_lock", scope: !425, file: !425, line: 42, type: !426, scopeLine: 43, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!425 = !DIFile(filename: "include/zephyr/arch/arm/asm_inline_gcc.h", directory: "/home/sri/zephyrproject/zephyr")
+!426 = !DISubroutineType(types: !427)
+!427 = !{!165}
+!428 = !DILocation(line: 44, column: 15, scope: !424, inlinedAt: !429)
+!429 = distinct !DILocation(line: 65, column: 10, scope: !430)
+!430 = distinct !DILexicalBlock(scope: !410, file: !405, line: 44, column: 12)
+!431 = !DILocation(line: 48, column: 2, scope: !424, inlinedAt: !429)
+!432 = !{i64 66896}
+!433 = !DILocation(line: 80, column: 9, scope: !424, inlinedAt: !429)
+!434 = !DILocation(line: 89, column: 3, scope: !430)
+!435 = distinct !{!435, !422, !436}
+!436 = !DILocation(line: 108, column: 2, scope: !410)
+!437 = distinct !DISubprogram(name: "k_cpu_idle", scope: !199, file: !199, line: 5840, type: !406, scopeLine: 5841, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!438 = !DILocation(line: 5842, column: 2, scope: !437)
+!439 = !DILocation(line: 5843, column: 1, scope: !437)
+!440 = distinct !DISubprogram(name: "arch_spin_relax", scope: !405, file: !405, line: 111, type: !406, scopeLine: 112, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!441 = !DILocation(line: 38, column: 2, scope: !442, inlinedAt: !444)
+!442 = distinct !DISubprogram(name: "arch_nop", scope: !443, file: !443, line: 36, type: !406, scopeLine: 37, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!443 = !DIFile(filename: "include/zephyr/arch/arm/misc.h", directory: "/home/sri/zephyrproject/zephyr")
+!444 = distinct !DILocation(line: 116, column: 2, scope: !440)
+!445 = !{i64 65343}
+!446 = !DILocation(line: 117, column: 1, scope: !440)
+!447 = distinct !DISubprogram(name: "sys_sflist_is_empty", scope: !338, file: !338, line: 335, type: !448, scopeLine: 335, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!448 = !DISubroutineType(types: !449)
+!449 = !{!450, !451}
+!450 = !DIBasicType(name: "_Bool", size: 8, encoding: DW_ATE_boolean)
+!451 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !337, size: 32)
+!452 = !DILocalVariable(name: "list", arg: 1, scope: !447, file: !338, line: 335, type: !451)
+!453 = !DILocation(line: 335, column: 55, scope: !447)
+!454 = !DILocation(line: 335, column: 92, scope: !447)
+!455 = !DILocation(line: 335, column: 71, scope: !447)
+!456 = !DILocation(line: 335, column: 98, scope: !447)
+!457 = !DILocation(line: 335, column: 63, scope: !447)
+!458 = distinct !DISubprogram(name: "sys_sflist_peek_head", scope: !338, file: !338, line: 255, type: !459, scopeLine: 256, flags: DIFlagPrototyped, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition, unit: !0, retainedNodes: !216)
+!459 = !DISubroutineType(types: !460)
+!460 = !{!342, !451}
+!461 = !DILocalVariable(name: "list", arg: 1, scope: !458, file: !338, line: 255, type: !451)
+!462 = !DILocation(line: 255, column: 64, scope: !458)
+!463 = !DILocation(line: 257, column: 9, scope: !458)
+!464 = !DILocation(line: 257, column: 15, scope: !458)
+!465 = !DILocation(line: 257, column: 2, scope: !458)
