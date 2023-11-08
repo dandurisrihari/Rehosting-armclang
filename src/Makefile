@@ -33,7 +33,7 @@ $(PASS_OBJECT): $(PASS_NAME).cpp
 # Applies the pass using opt on all .ll files in the current directory
 run-opt: $(PASS_SHARED_OBJECT) $(OPTIMIZED_IR_FILES)
 # Generate IR files
-	$(shell cd ../ll_files/ && $(ARM_CLANG_CXX) --target=aarch64-arm-none-eabi -S -emit-llvm ../bc_files/*.bc  . && cd ../)
+	$(shell cd ../ll_files/ && $(ARM_CLANG_CXX) -Woverride-module --target=arm-arm-none-eabi -S -emit-llvm ../bc_files/*.bc  . && cd ../)
 
 # Optimized IR files
 ../output/optimized_ll_files/%_optimized.ll: ../ll_files/%.ll
@@ -48,21 +48,20 @@ obj:
 	# for all .ll files in optimized_cleaned_ll_files, run llc-17 and store objs in ../obj folder
 		for file in ../output/optimized_cleaned_ll_files/*.ll; do \
 			echo "obj: " $$file; \
-			llc-17 -filetype=obj $$file -o ../output/obj/$$(basename $$file .ll).o; \
+			llc-17 -relocation-model=pic -filetype=obj -march=x86 $$file -o ../output/obj/$$(basename $$file .ll).o; \
 		done
 
 	# compile externalLinking.c to externalLinking.o
-		clang-17 -c externalLinking.c -o ../output/obj/externalLinking.o
+		clang-17 -fPIC -m32 -c externalLinking.c -o ../output/obj/externalLinking.o
 
-bin.elf: ../output/obj/*.o ../posix/libarch__posix__core.a
-	rm -f ../output/obj/isr_tables_optimized_cleaned.o \
+bin.elf: obj
+	rm -f \
 	../output/obj/armlink_symbol_steering_optimized_cleaned.o \
 	../output/obj/main_weak_optimized_cleaned.o 
 	
-	clang-17 -fPIE -pie ../output/obj/*.o ../posix/libarch__posix__core.a -pthread -o ../output/elf/bin.elf
+	clang-17 -fPIE -m32 ../output/obj/*.o ../posix/libzephyr.a -pthread -o ../output/elf/bin.elf
 
 clean:
-	$(MAKE) -C ../llvm_pass clean
-	rm -f ../output/
+	rm -f ../ll_files/*.ll ../output/obj/*o ../output/elf/*.elf ../output/optimized_ll_files/*.ll ../output/optimized_cleaned_ll_files/*.ll
 
 .PHONY: all run-opt clean part1 part2

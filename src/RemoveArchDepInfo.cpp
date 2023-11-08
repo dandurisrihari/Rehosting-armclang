@@ -30,10 +30,14 @@ namespace {
         M.eraseNamedMetadata(Ident);
       }
  
+      for (GlobalVariable &G : M.globals()) {
+        G.setSection("");
+      }
       // Remove inline asm
       LLVMContext &Ctx = M.getContext();
 
       for(auto &F : M){
+        F.setSection("");
         for (auto &BB : F) {
           for (auto I = BB.begin(); I != BB.end(); /* no increment here */) {
             Instruction *currentInstruction = &*I;

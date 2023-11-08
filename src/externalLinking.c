@@ -1,9 +1,34 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <pthread.h>
 
-int read_from_asm(void){
+int readFromAsmRetInt(void){
     return 0;
+}
+
+int readFromIntrinsicRetInt(void){
+    return 0;
+}
+
+typedef struct {
+    int a;
+    int b;
+} retStruct;
+
+retStruct readFromAsmRetStruct(void){
+    retStruct ret;
+    ret.a = 0;
+    ret.b = 0;
+    return ret;
+}
+
+void z_arm_int_exit(void){
+    return;
+}
+
+void z_arm_fatal_error(unsigned int reason, const void *esf){
+    return;
 }
 
 char _vector_start;
@@ -15,7 +40,6 @@ char __rom_start_end;
 char __rom_start_size;
 char __text_start;
 char __text_load_start;
-
 char __text_end;
 char __text_size;
 char __init_EARLY_start;
@@ -27,6 +51,7 @@ char __init_SMP_start;
 char __init_start;
 char __init_load_start;
 
+char _isr_wrapper;
 char __init_end;
 char _device_list_start;
 char _device_list_end;
@@ -392,3 +417,38 @@ const int __aeabi_EDOM = 33;    /**< Argument too large */
 const int __aeabi_ERANGE = 34;  /**< Result too large */
 const int __aeabi_EILSEQ = 138; /**< Illegal byte sequence */
 unsigned char const __aeabi_ctype_table_[257];
+
+
+
+void arch_cpu_atomic_idle(unsigned int key) {
+    // Dummy implementation
+}
+
+void z_check_thread_stack_fail(uintptr_t addr) {
+    // Dummy implementation
+}
+
+void arch_cpu_idle(void) {
+    // Dummy implementation
+}
+
+void z_arm_cpu_idle_init(void) {
+    // Dummy implementation
+}
+
+void arch_switch_to_main_thread(void *main_thread, void *stack,
+                                size_t stack_size, int _main) {
+    // Dummy implementation
+}
+
+void z_SysNmiOnReset(unsigned int reason) {
+    // Dummy implementation
+}
+
+
+void arch_new_thread(void *new_thread, void *stack,
+                        size_t stack_size, int entry,
+                        void *p1, void *p2, void *p3,
+                        int prio, unsigned int options) {
+    // Dummy implementation
+}
