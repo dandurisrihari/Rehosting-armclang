@@ -59,7 +59,7 @@ bin.elf: obj
 	../output/obj/armlink_symbol_steering_optimized_cleaned.o \
 	../output/obj/main_weak_optimized_cleaned.o 
 	
-	clang-17 -fPIE -m32 ../output/obj/*.o ../posix/libzephyr.a -pthread -o ../output/elf/bin.elf
+	clang-17 -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
 
 clean:
 	rm -f ../ll_files/*.ll ../output/obj/*o ../output/elf/*.elf ../output/optimized_ll_files/*.ll ../output/optimized_cleaned_ll_files/*.ll
