@@ -3,25 +3,11 @@
 #include <string.h>
 #include <pthread.h>
 
-int readFromAsmRetInt(void){
-    return 0;
-}
 
 int readFromIntrinsicRetInt(void){
     return 0;
 }
 
-typedef struct {
-    int a;
-    int b;
-} retStruct;
-
-retStruct readFromAsmRetStruct(void){
-    retStruct ret;
-    ret.a = 0;
-    ret.b = 0;
-    return ret;
-}
 
 void z_arm_int_exit(void){
     return;
