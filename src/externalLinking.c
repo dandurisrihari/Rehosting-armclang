@@ -4,11 +4,6 @@
 #include <pthread.h>
 
 
-int readFromIntrinsicRetInt(void){
-    return 0;
-}
-
-
 void z_arm_int_exit(void){
     return;
 }

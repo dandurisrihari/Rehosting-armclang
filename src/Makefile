@@ -10,8 +10,8 @@ PASS_OBJECT = $(PASS_NAME).o
 PASS_SHARED_OBJECT = $(PASS_NAME).so
 ARM_CLANG_CXX = armclang
 
-# If no directories output, obj, optimized_cleaned_ll_files, optimized_ll_files create them
-$(shell mkdir -p ../output ../output/obj ../output/optimized_cleaned_ll_files ../output/optimized_ll_files)
+# If no directories output, elf, obj, optimized_cleaned_ll_files, optimized_ll_files create them
+$(shell mkdir -p ../output ../output/elf ../output/obj ../output/optimized_cleaned_ll_files ../output/optimized_ll_files)
 
 # IR files get from ../ll_files/
 IR_FILES = $(wildcard ../ll_files/*.ll)
@@ -62,6 +62,8 @@ bin.elf: obj
 	clang-17 -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
 
 clean:
-	rm -f ../ll_files/*.ll ../output/obj/*o ../output/elf/*.elf ../output/optimized_ll_files/*.ll ../output/optimized_cleaned_ll_files/*.ll
+	rm -f ../ll_files/*.ll \
+	-r ../output \
+	*.so *.o
 
 .PHONY: all run-opt clean part1 part2
