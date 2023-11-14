@@ -11,7 +11,7 @@ PASS_SHARED_OBJECT = $(PASS_NAME).so
 ARM_CLANG_CXX = armclang
 
 # If no directories output, elf, obj, optimized_cleaned_ll_files, optimized_ll_files create them
-$(shell mkdir -p ../output ../output/elf ../output/obj ../output/optimized_cleaned_ll_files ../output/optimized_ll_files)
+$(shell mkdir -p ../output ../output/elf ../output/obj ../output/optimized_ll_files)
 
 # IR files get from ../ll_files/
 IR_FILES = $(wildcard ../ll_files/*.ll)
@@ -37,29 +37,26 @@ run-opt: $(PASS_SHARED_OBJECT) $(OPTIMIZED_IR_FILES)
 
 # Optimized IR files
 ../output/optimized_ll_files/%_optimized.ll: ../ll_files/%.ll
-	opt-17 -strip-debug -S -load-pass-plugin=./$(PASS_SHARED_OBJECT) -passes=$(PASS_NAME) $< -o $@
+	opt-17 -S -load-pass-plugin=./$(PASS_SHARED_OBJECT) -passes=$(PASS_NAME) $< -o $@
 
-part2: ll_opt_clean obj bin.elf
+part2: obj bin.elf
 
-ll_opt_clean:
-	# run python3 script
-		python3 ./clean.py
 obj:
-	# for all .ll files in optimized_cleaned_ll_files, run llc-17 and store objs in ../obj folder
-		for file in ../output/optimized_cleaned_ll_files/*.ll; do \
+	# for all .ll files in optimized_ll_files, run llc-17 and store objs in ../obj folder
+		for file in ../output/optimized_ll_files/*.ll; do \
 			echo "obj: " $$file; \
 			llc-17 -relocation-model=pic -filetype=obj -march=x86 $$file -o ../output/obj/$$(basename $$file .ll).o; \
 		done
 
 	# compile externalLinking.c to externalLinking.o
-		clang-17 -fPIC -m32 -c externalLinking.c -o ../output/obj/externalLinking.o
+		clang-17 -g -fPIC -m32 -c externalLinking.c -o ../output/obj/externalLinking.o
 
 bin.elf: obj
 	rm -f \
-	../output/obj/armlink_symbol_steering_optimized_cleaned.o \
-	../output/obj/main_weak_optimized_cleaned.o 
+	../output/obj/armlink_symbol_steering_optimized.o \
+	../output/obj/main_weak_optimized.o 
 	
-	clang-17 -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
+	clang-17 -g -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
 
 clean:
 	rm -f ../ll_files/*.ll \
