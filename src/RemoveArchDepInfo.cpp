@@ -12,10 +12,13 @@
 using namespace llvm;
 using namespace removeArchDepInfo;
 
-
-void RemoveArchDepInfo::removeAllAttributes(Module &M) {
+/*
+  * Remove all attributes from the module.
+  * Remove all attributes from the functions.
+  * Remove all attributes from the call instructions.
+*/
+void RemoveArchDepInfo::RemoveDependentAttributes(Module &M) {
   for(auto &F : M){
-
     // Remove attributes from the function itself
     F.setAttributes(AttributeList());
 
@@ -30,23 +33,20 @@ void RemoveArchDepInfo::removeAllAttributes(Module &M) {
   }
 }
 
-void RemoveArchDepInfo::removeAllMetadata(Module &M) {
+/*
+  * Remove all metadata from the module.
+*/
+void RemoveArchDepInfo::RemoveDependentMetadata(Module &M) {
 
   // Remove the target triple and data layout.
-  M.setTargetTriple("");
+  M.setTargetTriple("i386-pc-linux-gnu");
   M.setDataLayout("");
   
-  // Set module flags to empty
-  NamedMDNode *ModuleFlags = M.getNamedMetadata("llvm.module.flags");
-  if (ModuleFlags) {
-    M.eraseNamedMetadata(ModuleFlags);
-  }
-
   // Set the string in llvm.ident to clang version 17.0.4 
   NamedMDNode *Ident = M.getNamedMetadata("llvm.ident");
   if (Ident) {
     for (unsigned i = 0; i < Ident->getNumOperands(); i++) {
-        // Create a new MDNode with the clang version 17 string
+        // Create a new MDNode with the clang version 17.0.4 string
         Metadata *IdentString = MDString::get(M.getContext(), "Ubuntu clang version 17.0.4 (++20231031083134+309d55140c46-1~exp1~20231031083240.62)");
         MDNode *NewIdentNode = MDNode::get(M.getContext(), IdentString);
 
@@ -54,88 +54,66 @@ void RemoveArchDepInfo::removeAllMetadata(Module &M) {
         Ident->setOperand(i, NewIdentNode);
     }
   }
-
-  // Set the string in producer of llvm.dbg.cu to clang version 17.0.4 
-  NamedMDNode *CU_Nodes = M.getNamedMetadata("llvm.dbg.cu");
-  if (CU_Nodes) {
-      for (unsigned j = 0; j < CU_Nodes->getNumOperands(); ++j) {
-          MDNode *CU_Node = dyn_cast<MDNode>(CU_Nodes->getOperand(j));
-          if (CU_Node) {
-            for (unsigned i = 0; i < CU_Node->getNumOperands(); ++i) {
-                Metadata *Op = CU_Node->getOperand(i);
-                if (Op && isa<MDString>(Op)) {
-                    MDString *MD = dyn_cast<MDString>(Op);
-                    if (MD->getString().startswith("Component:")) {
-                        // Create a new MDNode with the clang version 17 string
-                        Metadata *IdentString = MDString::get(M.getContext(), "Ubuntu clang version 17.0.4 (++20231031083134+309d55140c46-1~exp1~20231031083240.62)");
-                        SmallVector<Metadata *, 1> Ops;
-                        Ops.push_back(IdentString);
-                        MDNode *NewIdentNode = MDNode::get(M.getContext(), Ops);
-
-                        outs() << "MD->getString() = " << MD->getString() << "\n";
-
-                        // Replace the old MDNode with the new one
-                        //CU_Node->replaceOperandWith(i, NewIdentNode);
-                    }
-                }
-            }
-          }
-      }
-  }
-  // Change the producer in "llvm.dbg.cu"
-  // NamedMDNode *CU_Nodes = M.getNamedMetadata("llvm.dbg.cu");
-  // if (CU_Nodes) {
-  //   for (unsigned i = 0; i < CU_Nodes->getNumOperands(); i++) {
-  //     MDNode *CU_Node = CU_Nodes->getOperand(i);
-  //     // Delete the operands
-  //     for (unsigned j = 0; j < CU_Node->getNumOperands(); j++) {
-  //       CU_Node->removeOperand(j);
-  //     }
-  //   }
-  // }
 }
 
+/*
+  * Instrument inline asm
+  * Replace all inline asm with a call to the readFromStdInRetInt function if return type is int.
+  * Replace all inline asm with a call to the readFromAsmRetStruct function if return type is struct.
+  * Remove all inline asm instructions, if return type is void.
+*/
 void RemoveArchDepInfo::InstrumentInlineASM(Module &M) {
 
-  // Remove inline asm
+  // Get the context of the module.
   LLVMContext &Ctx = M.getContext();
 
-  // Create a function definition for the readFromStdInRetInt function and make it static to this module.
-  // In readFromStdInRetInt function, create a local variable of type int.
-  // Read the value from scanf and store it in the local variable.
-  // Return the local variable.
-  Type *Int32Ty = Type::getInt32Ty(Ctx);
-  FunctionType *ReadFromStdInTy = FunctionType::get(Int32Ty, {}, false);
-  Function *ReadFromStdInFn = Function::Create(ReadFromStdInTy, Function::InternalLinkage, "readFromStdInRetInt", M);
-  BasicBlock *ReadFromStdInBB = BasicBlock::Create(Ctx, "entry", ReadFromStdInFn);
-  IRBuilder<> Builder(ReadFromStdInBB);
-  AllocaInst *ReadFromStdInAlloca = Builder.CreateAlloca(Int32Ty);
-  Value *ReadFromStdInScanfArgs[] = {Builder.CreateBitCast(ReadFromStdInAlloca, Builder.getInt8PtrTy())};
-  Builder.CreateCall(M.getOrInsertFunction("scanf", FunctionType::get(Type::getInt32Ty(Ctx), {Builder.getInt8PtrTy()}, true)), ReadFromStdInScanfArgs);
-  Builder.CreateRet(Builder.CreateLoad(Int32Ty, ReadFromStdInAlloca));
-
   for(auto &F : M){
-    F.setSection("");
     for (auto &BB : F) {
       for (auto I = BB.begin(); I != BB.end(); /* no increment here */) {
+
         Instruction *currentInstruction = &*I;
         if (auto *CI = dyn_cast<CallInst>(currentInstruction)) {
+
           // Check if the instruction is an inline asm instruction.
           if (CI->isInlineAsm()) {
+
             // Check if the inline asm has return type int.
             if (CI->getType()->isIntegerTy(32)) {
-              // Create a function type for the readFromStdInRetInt function.
+              // Create a new function readFromStdInRetInt, if its not available.
+              // Create a call to the readFromStdInRetInt function.
+              // Replace all uses of the inline asm with the return value of the readFromStdInRetInt function.
+              // In this module create a function definition for the readFromStdInRetInt function and make it static to this module.
+              // In readFromStdInRetInt function, create a local variable of type int.
+              // Read the value from scanf and store it in the local variable.
+              // Return the local variable.
+              // Replace all uses of the inline asm with the return value of the readFromStdInRetInt function.
+
+              if(!M.getFunction("readFromStdInRetInt")){
+                // Create a function type for the readFromStdInRetInt function.
+                Type *Int32Ty = Type::getInt32Ty(Ctx);
+                FunctionType *ReadFromStdInTy = FunctionType::get(Int32Ty, {}, false);
+                Function *ReadFromStdInFn = Function::Create(ReadFromStdInTy, Function::InternalLinkage, "readFromStdInRetInt", M);
+                BasicBlock *ReadFromStdInBB = BasicBlock::Create(Ctx, "entry", ReadFromStdInFn);
+                IRBuilder<> Builder(ReadFromStdInBB);
+                AllocaInst *ReadFromStdInAlloca = Builder.CreateAlloca(Int32Ty);
+                Value *ReadFromStdInScanfArgs[] = {Builder.CreateBitCast(ReadFromStdInAlloca, Builder.getInt8PtrTy())};
+                Builder.CreateCall(M.getOrInsertFunction("scanf", FunctionType::get(Type::getInt32Ty(Ctx), {Builder.getInt8PtrTy()}, true)), ReadFromStdInScanfArgs);
+                Builder.CreateRet(Builder.CreateLoad(Int32Ty, ReadFromStdInAlloca));
+              }
+
+              // Create a call to the readFromStdInRetInt function.
               Type *Int32Ty = Type::getInt32Ty(Ctx);
               FunctionType *ReadFromStdInTy = FunctionType::get(Int32Ty, {}, false);
               FunctionCallee ReadFromStdInFn = M.getOrInsertFunction("readFromStdInRetInt", ReadFromStdInTy);
-              // Create a call to the readFromStdInRetInt function.
               CallInst *readFromStdInCall = CallInst::Create(ReadFromStdInFn, {}, "", CI);
+
               // Replace all uses of the inline asm with the return value of the readFromStdInRetInt function.
               CI->replaceAllUsesWith(readFromStdInCall);
             }
+
             // Check if the inline asm has return type struct.
             else if (CI->getType()->isStructTy()) {
-              // Create a call to the readFromAsmRetStruct function, if its not available.
+              // Create a new function readFromAsmRetStruct, if its not available.
               // That has identical retun type as the struct
               // Have a unique name for the function basing on number of elements in the struct, each time it is called.
               // Replace all uses of the inline asm with the return value of the unique function.
@@ -169,27 +147,6 @@ void RemoveArchDepInfo::InstrumentInlineASM(Module &M) {
             I = CI->eraseFromParent();
             continue;
           }
-          // Replace all calls that have armIntrinsicPrefix
-          // with a call to the readFromIntrinsic function if return type is int.
-          // Remove if return type is void.
-          std::string armIntrinsicPrefix = "llvm.arm.";
-          if (auto CF = CI->getCalledFunction()) {
-            if(CF->getName().startswith(armIntrinsicPrefix)){
-              if (CI->getType()->isIntegerTy(32)) {
-                // Create a function type for the readFromIntrinsicRetInt function.
-                Type *Int32Ty = Type::getInt32Ty(Ctx);
-                FunctionType *ReadFromIntrinsicTy = FunctionType::get(Int32Ty, {}, false);
-                FunctionCallee ReadFromIntrinsicFn = M.getOrInsertFunction("readFromIntrinsicRetInt", ReadFromIntrinsicTy);
-                // Create a call to the readFromIntrinsicRetInt function.
-                CallInst *readFromIntrinsicCall = CallInst::Create(ReadFromIntrinsicFn, {}, "", CI);
-                // Replace all uses of the intinsic with the return value of the readFromIntrinsicRetInt function.
-                CI->replaceAllUsesWith(readFromIntrinsicCall);
-              }
-              // Erase the instruction from the basic block in all cases and increment the iterator.
-              I = CI->eraseFromParent();
-              continue;                
-            }
-          }
         }
         // Move to the next instruction in the basic block.
         ++I;
@@ -199,21 +156,53 @@ void RemoveArchDepInfo::InstrumentInlineASM(Module &M) {
 }
 
 PreservedAnalyses RemoveArchDepInfo::run(Module &M, ModuleAnalysisManager &MAM) {
-      FunctionAnalysisManager &FAM =
-          MAM.getResult<FunctionAnalysisManagerModuleProxy>(M).getManager();
+  FunctionAnalysisManager &FAM =
+      MAM.getResult<FunctionAnalysisManagerModuleProxy>(M).getManager();
 
-      // Remove all metadata
-      removeAllMetadata(M);
+  // Remove all metadata
+  RemoveDependentMetadata(M);
+  
+  // Remove all attributes
+  RemoveDependentAttributes(M);
 
-      // Remove all attributes
-      removeAllAttributes(M);
-    
-      // Instrument inline asm
-      InstrumentInlineASM(M);
+  // Instrument inline asm
+  InstrumentInlineASM(M);
 
-      return PreservedAnalyses::none();
-    }
+  // Instrument arm intrinsics
+  InstrumentArmIntrinsics(M);
 
+  return PreservedAnalyses::none();
+}
+
+/*
+  * Remove all calls that have armIntrinsicPrefix
+  * To do: Handle cases for barriers and prefetches
+*/
+void RemoveArchDepInfo::InstrumentArmIntrinsics(Module &M){
+
+  std::string armIntrinsicPrefix = "llvm.arm.";
+
+  for(auto &F : M){
+    for (auto &BB : F) {
+      for (auto I = BB.begin(); I != BB.end(); /* no increment here */) {
+        Instruction *currentInstruction = &*I;
+        if (auto *CI = dyn_cast<CallInst>(currentInstruction)) {
+          // Remove all calls that have armIntrinsicPrefix
+          // To do: Handle cases for barriers and prefetches
+          if (auto CF = CI->getCalledFunction()) {
+            if(CF->getName().startswith(armIntrinsicPrefix)){
+              // Erase the instruction from the basic block in all cases and increment the iterator.
+              I = CI->eraseFromParent();
+              continue;                
+            }
+          }
+        }
+        // Move to the next instruction in the basic block.
+        ++I;
+      }
+    } 
+  }
+}
 
 // Register the pass with the pass manager builder.  This instructs the
 // builder to call the `run` function on your pass when it is constructing

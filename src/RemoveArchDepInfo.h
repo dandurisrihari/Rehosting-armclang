@@ -12,10 +12,15 @@ using namespace llvm;
 namespace removeArchDepInfo{
 
   class RemoveArchDepInfo : public PassInfoMixin<RemoveArchDepInfo> {
-  public:
-    PreservedAnalyses run(Module &M, ModuleAnalysisManager &MAM);
-    void removeAllAttributes(Module &M);
-    void removeAllMetadata(Module &M);
-    void InstrumentInlineASM(Module &M);
+  
+    private:
+      void RemoveDependentAttributes(Module &M);
+      void RemoveDependentMetadata(Module &M);
+      void InstrumentInlineASM(Module &M);
+      void InstrumentArmIntrinsics(Module &M);
+
+    public:
+      PreservedAnalyses run(Module &M, ModuleAnalysisManager &MAM);
+
   };
 }

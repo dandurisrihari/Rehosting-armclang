@@ -41,7 +41,7 @@ run-opt: $(PASS_SHARED_OBJECT) $(OPTIMIZED_IR_FILES)
 
 part2: obj bin.elf
 
-obj:
+obj: run-opt
 	# for all .ll files in optimized_ll_files, run llc-17 and store objs in ../obj folder
 		for file in ../output/optimized_ll_files/*.ll; do \
 			echo "obj: " $$file; \
@@ -56,7 +56,7 @@ bin.elf: obj
 	../output/obj/armlink_symbol_steering_optimized.o \
 	../output/obj/main_weak_optimized.o 
 	
-	clang-17 -g -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
+	clang-17 -fsanitize=address -g -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
 
 clean:
 	rm -f ../ll_files/*.ll \
