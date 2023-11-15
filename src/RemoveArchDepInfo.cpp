@@ -159,15 +159,19 @@ PreservedAnalyses RemoveArchDepInfo::run(Module &M, ModuleAnalysisManager &MAM) 
   FunctionAnalysisManager &FAM =
       MAM.getResult<FunctionAnalysisManagerModuleProxy>(M).getManager();
 
+  outs() << "RemoveDependentMetadata: \n";
   // Remove all metadata
   RemoveDependentMetadata(M);
   
+  outs() << "RemoveDependentAttributes: \n";
   // Remove all attributes
   RemoveDependentAttributes(M);
 
+  outs() << "InstrumentInlineASM: \n";
   // Instrument inline asm
   InstrumentInlineASM(M);
 
+  outs() << "InstrumentArmIntrinsics: \n";
   // Instrument arm intrinsics
   InstrumentArmIntrinsics(M);
 
@@ -191,6 +195,39 @@ void RemoveArchDepInfo::InstrumentArmIntrinsics(Module &M){
           // To do: Handle cases for barriers and prefetches
           if (auto CF = CI->getCalledFunction()) {
             if(CF->getName().startswith(armIntrinsicPrefix)){
+              if (CI->getType()->isIntegerTy(32)) {
+                // Create a new function readFromIntrinsicRetInt, if its not available.
+                // Create a call to the readFromIntrinsicRetInt function.
+                // Replace all uses of the inline asm with the return value of the readFromIntrinsicRetInt function.
+                // In this module create a function definition for the readFromIntrinsicRetInt function and make it static to this module.
+                // In readFromIntrinsicRetInt function, create a local variable of type int.
+                // Read the value from scanf and store it in the local variable.
+                // Return the local variable.
+                // Replace all uses of the inline asm with the return value of the readFromIntrinsicRetInt function.
+
+                if(!M.getFunction("readFromIntrinsicRetInt")){
+                  // Create a function type for the readFromIntrinsicRetInt function.
+                  Type *Int32Ty = Type::getInt32Ty(M.getContext());
+                  FunctionType *ReadFromIntrinsicTy = FunctionType::get(Int32Ty, {}, false);
+                  Function *ReadFromIntrinsicFn = Function::Create(ReadFromIntrinsicTy, Function::InternalLinkage, "readFromIntrinsicRetInt", M);
+                  BasicBlock *ReadFromIntrinsicBB = BasicBlock::Create(M.getContext(), "entry", ReadFromIntrinsicFn);
+                  IRBuilder<> Builder(ReadFromIntrinsicBB);
+                  AllocaInst *ReadFromIntrinsicAlloca = Builder.CreateAlloca(Int32Ty);
+                  Value *ReadFromIntrinsicScanfArgs[] = {Builder.CreateBitCast(ReadFromIntrinsicAlloca, Builder.getInt8PtrTy())};
+                  Builder.CreateCall(M.getOrInsertFunction("scanf", FunctionType::get(Type::getInt32Ty(M.getContext()), {Builder.getInt8PtrTy()}, true)), ReadFromIntrinsicScanfArgs);
+                  Builder.CreateRet(Builder.CreateLoad(Int32Ty, ReadFromIntrinsicAlloca));
+                }
+
+                // Create a call to the readFromIntrinsicRetInt function.
+                Type *Int32Ty = Type::getInt32Ty(M.getContext());
+                FunctionType *ReadFromIntrinsicTy = FunctionType::get(Int32Ty, {}, false);
+                FunctionCallee ReadFromIntrinsicFn = M.getOrInsertFunction("readFromIntrinsicRetInt", ReadFromIntrinsicTy);
+                CallInst *readFromIntrinsicCall = CallInst::Create(ReadFromIntrinsicFn, {}, "", CI);
+
+                // Replace all uses of the inline asm with the return value of the readFromIntrinsicRetInt function.
+                CI->replaceAllUsesWith(readFromIntrinsicCall);
+              }
+
               // Erase the instruction from the basic block in all cases and increment the iterator.
               I = CI->eraseFromParent();
               continue;                
