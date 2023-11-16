@@ -1,6 +1,5 @@
 output/
 posix/
 ll_files/
-bc_files/
 src/*.o
 src/*.so

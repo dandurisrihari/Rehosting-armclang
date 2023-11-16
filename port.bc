@@ -1,0 +1,1678 @@
+; ModuleID = '/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS/Source/portable/ThirdParty/GCC/Posix/port.c'
+source_filename = "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS/Source/portable/ThirdParty/GCC/Posix/port.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+%struct.__sigset_t = type { [16 x i64] }
+%union.pthread_attr_t = type { i64, [48 x i8] }
+%struct.sigaction = type { %union.anon, %struct.__sigset_t, i32, ptr }
+%union.anon = type { ptr }
+%struct.THREAD = type { i64, ptr, ptr, i64, ptr }
+%struct.timespec = type { i64, i64 }
+%struct.itimerval = type { %struct.timeval, %struct.timeval }
+%struct.timeval = type { i64, i64 }
+%struct.tms = type { i64, i64, i64, i64 }
+
+@hSigSetupThread = internal global i32 0, align 4, !dbg !0
+@stderr = external local_unnamed_addr global ptr, align 8
+@.str = private unnamed_addr constant [88 x i8] c"[WARN] pthread_attr_setstack failed with return value: %d. Default stack will be used.\0A\00", align 1, !dbg !50
+@.str.1 = private unnamed_addr constant [54 x i8] c"[WARN] Increase the stack size to PTHREAD_STACK_MIN.\0A\00", align 1, !dbg !56
+@.str.2 = private unnamed_addr constant [15 x i8] c"pthread_create\00", align 1, !dbg !61
+@hMainThread = internal unnamed_addr global i64 0, align 8, !dbg !88
+@xSchedulerEnd = internal unnamed_addr global i1 false, align 8, !dbg !113
+@xSchedulerOriginalSignalMask = internal global %struct.__sigset_t zeroinitializer, align 8, !dbg !78
+@uxCriticalNesting = internal global i64 0, align 8, !dbg !80
+@xAllSignals = internal global %struct.__sigset_t zeroinitializer, align 8, !dbg !66
+@.str.3 = private unnamed_addr constant [8 x i8] c"%s: %s\0A\00", align 1, !dbg !83
+@.str.4 = private unnamed_addr constant [10 x i8] c"getitimer\00", align 1, !dbg !92
+@.str.5 = private unnamed_addr constant [10 x i8] c"setitimer\00", align 1, !dbg !97
+@.str.6 = private unnamed_addr constant [109 x i8] c"/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS/Source/portable/ThirdParty/GCC/Posix/port.c\00", align 1, !dbg !105
+@.str.7 = private unnamed_addr constant [10 x i8] c"sigaction\00", align 1, !dbg !110
+
+; Function Attrs: nounwind uwtable
+define dso_local nonnull ptr @pxPortInitialiseStack(ptr noundef %0, ptr noundef %1, ptr noundef %2, ptr noundef %3) local_unnamed_addr #0 !dbg !122 {
+  %5 = alloca %union.pthread_attr_t, align 8, !DIAssignID !144
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !131, metadata !DIExpression(), metadata !144, metadata ptr %5, metadata !DIExpression()), !dbg !145
+  call void @llvm.dbg.value(metadata ptr %0, metadata !126, metadata !DIExpression()), !dbg !145
+  call void @llvm.dbg.value(metadata ptr %1, metadata !127, metadata !DIExpression()), !dbg !145
+  call void @llvm.dbg.value(metadata ptr %2, metadata !128, metadata !DIExpression()), !dbg !145
+  call void @llvm.dbg.value(metadata ptr %3, metadata !129, metadata !DIExpression()), !dbg !145
+  call void @llvm.lifetime.start.p0(i64 56, ptr nonnull %5) #16, !dbg !146
+  %6 = tail call i32 @pthread_once(ptr noundef nonnull @hSigSetupThread, ptr noundef nonnull @prvSetupSignalsAndSchedulerPolicy) #16, !dbg !147
+  %7 = getelementptr inbounds i64, ptr %0, i64 -4, !dbg !148
+  call void @llvm.dbg.value(metadata ptr %7, metadata !130, metadata !DIExpression()), !dbg !145
+  call void @llvm.dbg.value(metadata ptr %0, metadata !126, metadata !DIExpression(DW_OP_constu, 40, DW_OP_minus, DW_OP_stack_value)), !dbg !145
+  %8 = ptrtoint ptr %7 to i64, !dbg !149
+  %9 = ptrtoint ptr %1 to i64, !dbg !149
+  %10 = sub i64 %8, %9, !dbg !149
+  call void @llvm.dbg.value(metadata i64 %10, metadata !140, metadata !DIExpression()), !dbg !145
+  %11 = getelementptr inbounds i64, ptr %0, i64 -3, !dbg !150
+  store ptr %2, ptr %11, align 8, !dbg !151, !tbaa !152
+  %12 = getelementptr inbounds i64, ptr %0, i64 -2, !dbg !158
+  store ptr %3, ptr %12, align 8, !dbg !159, !tbaa !160
+  %13 = getelementptr inbounds i64, ptr %0, i64 -1, !dbg !161
+  store i64 0, ptr %13, align 8, !dbg !162, !tbaa !163
+  %14 = call i32 @pthread_attr_init(ptr noundef nonnull %5) #16, !dbg !164
+  %15 = call i32 @pthread_attr_setstack(ptr noundef nonnull %5, ptr noundef %1, i64 noundef %10) #16, !dbg !165
+  call void @llvm.dbg.value(metadata i32 %15, metadata !143, metadata !DIExpression()), !dbg !145
+  %16 = icmp eq i32 %15, 0, !dbg !166
+  br i1 %16, label %22, label %17, !dbg !168
+
+17:                                               ; preds = %4
+  %18 = load ptr, ptr @stderr, align 8, !dbg !169, !tbaa !171
+  %19 = call i32 (ptr, ptr, ...) @fprintf(ptr noundef %18, ptr noundef nonnull @.str, i32 noundef %15) #17, !dbg !172
+  %20 = load ptr, ptr @stderr, align 8, !dbg !173, !tbaa !171
+  %21 = call i64 @fwrite(ptr nonnull @.str.1, i64 53, i64 1, ptr %20) #17, !dbg !174
+  br label %22, !dbg !175
+
+22:                                               ; preds = %17, %4
+  %23 = call ptr @event_create() #16, !dbg !176
+  store ptr %23, ptr %0, align 8, !dbg !177, !tbaa !178
+  %24 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !179, !tbaa !185
+  %25 = icmp eq i64 %24, 0, !dbg !186
+  br i1 %25, label %26, label %28, !dbg !187
+
+26:                                               ; preds = %22
+  %27 = call i32 @pthread_sigmask(i32 noundef 0, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !188
+  br label %28, !dbg !192
+
+28:                                               ; preds = %22, %26
+  %29 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !193, !tbaa !185
+  %30 = add nsw i64 %29, 1, !dbg !193
+  store volatile i64 %30, ptr @uxCriticalNesting, align 8, !dbg !193, !tbaa !185
+  %31 = call i32 @pthread_create(ptr noundef nonnull %7, ptr noundef nonnull %5, ptr noundef nonnull @prvWaitForStart, ptr noundef nonnull %7) #16, !dbg !194
+  call void @llvm.dbg.value(metadata i32 %31, metadata !143, metadata !DIExpression()), !dbg !145
+  %32 = icmp eq i32 %31, 0, !dbg !195
+  br i1 %32, label %37, label %33, !dbg !197
+
+33:                                               ; preds = %28
+  call void @llvm.dbg.value(metadata ptr @.str.2, metadata !198, metadata !DIExpression()), !dbg !206
+  call void @llvm.dbg.value(metadata i32 %31, metadata !205, metadata !DIExpression()), !dbg !206
+  %34 = load ptr, ptr @stderr, align 8, !dbg !209, !tbaa !171
+  %35 = call ptr @strerror(i32 noundef %31) #16, !dbg !210
+  %36 = call i32 (ptr, ptr, ...) @fprintf(ptr noundef %34, ptr noundef nonnull @.str.3, ptr noundef nonnull @.str.2, ptr noundef %35) #17, !dbg !211
+  call void @abort() #18, !dbg !212
+  unreachable, !dbg !212
+
+37:                                               ; preds = %28
+  call void @llvm.dbg.value(metadata ptr %0, metadata !126, metadata !DIExpression(DW_OP_constu, 40, DW_OP_minus, DW_OP_stack_value)), !dbg !145
+  %38 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !213, !tbaa !185
+  %39 = add nsw i64 %38, -1, !dbg !213
+  store volatile i64 %39, ptr @uxCriticalNesting, align 8, !dbg !213, !tbaa !185
+  %40 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !216, !tbaa !185
+  %41 = icmp eq i64 %40, 0, !dbg !218
+  br i1 %41, label %42, label %44, !dbg !219
+
+42:                                               ; preds = %37
+  %43 = call i32 @pthread_sigmask(i32 noundef 1, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !220
+  br label %44, !dbg !224
+
+44:                                               ; preds = %37, %42
+  %45 = getelementptr inbounds i64, ptr %0, i64 -5, !dbg !225
+  call void @llvm.dbg.value(metadata ptr %45, metadata !126, metadata !DIExpression()), !dbg !145
+  call void @llvm.lifetime.end.p0(i64 56, ptr nonnull %5) #16, !dbg !226
+  ret ptr %45, !dbg !227
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.lifetime.start.p0(i64 immarg, ptr nocapture) #1
+
+declare !dbg !228 i32 @pthread_once(ptr noundef, ptr noundef) local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define internal void @prvSetupSignalsAndSchedulerPolicy() #0 !dbg !234 {
+  %1 = alloca %struct.sigaction, align 8, !DIAssignID !329
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !236, metadata !DIExpression(), metadata !329, metadata ptr %1, metadata !DIExpression()), !dbg !330
+  call void @llvm.lifetime.start.p0(i64 152, ptr nonnull %1) #16, !dbg !331
+  %2 = tail call i64 @pthread_self() #19, !dbg !332
+  store i64 %2, ptr @hMainThread, align 8, !dbg !333, !tbaa !185
+  %3 = tail call i32 @sigfillset(ptr noundef nonnull @xAllSignals) #16, !dbg !334
+  %4 = tail call i32 @sigdelset(ptr noundef nonnull @xAllSignals, i32 noundef 2) #16, !dbg !335
+  %5 = tail call i32 @pthread_sigmask(i32 noundef 2, ptr noundef nonnull @xAllSignals, ptr noundef nonnull @xSchedulerOriginalSignalMask) #16, !dbg !336
+  %6 = getelementptr inbounds %struct.sigaction, ptr %1, i64 0, i32 2, !dbg !337
+  store i32 0, ptr %6, align 8, !dbg !338, !tbaa !339, !DIAssignID !343
+  call void @llvm.dbg.assign(metadata i32 0, metadata !236, metadata !DIExpression(DW_OP_LLVM_fragment, 1088, 32), metadata !343, metadata ptr %6, metadata !DIExpression()), !dbg !330
+  store ptr @vPortSystemTickHandler, ptr %1, align 8, !dbg !344, !tbaa !345, !DIAssignID !346
+  call void @llvm.dbg.assign(metadata ptr @vPortSystemTickHandler, metadata !236, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 64), metadata !346, metadata ptr %1, metadata !DIExpression()), !dbg !330
+  %7 = getelementptr inbounds %struct.sigaction, ptr %1, i64 0, i32 1, !dbg !347
+  %8 = call i32 @sigfillset(ptr noundef nonnull %7) #16, !dbg !348
+  %9 = call i32 @sigaction(i32 noundef 14, ptr noundef nonnull %1, ptr noundef null) #16, !dbg !349
+  call void @llvm.dbg.value(metadata i32 %9, metadata !328, metadata !DIExpression()), !dbg !330
+  %10 = icmp eq i32 %9, -1, !dbg !350
+  br i1 %10, label %11, label %17, !dbg !352
+
+11:                                               ; preds = %0
+  %12 = tail call ptr @__errno_location() #19, !dbg !353
+  %13 = load i32, ptr %12, align 4, !dbg !353, !tbaa !355
+  call void @llvm.dbg.value(metadata ptr @.str.7, metadata !198, metadata !DIExpression()), !dbg !356
+  call void @llvm.dbg.value(metadata i32 %13, metadata !205, metadata !DIExpression()), !dbg !356
+  %14 = load ptr, ptr @stderr, align 8, !dbg !358, !tbaa !171
+  %15 = call ptr @strerror(i32 noundef %13) #16, !dbg !359
+  %16 = call i32 (ptr, ptr, ...) @fprintf(ptr noundef %14, ptr noundef nonnull @.str.3, ptr noundef nonnull @.str.7, ptr noundef %15) #17, !dbg !360
+  call void @abort() #18, !dbg !361
+  unreachable, !dbg !361
+
+17:                                               ; preds = %0
+  call void @llvm.lifetime.end.p0(i64 152, ptr nonnull %1) #16, !dbg !362
+  ret void, !dbg !362
+}
+
+; Function Attrs: nounwind
+declare !dbg !363 i32 @pthread_attr_init(ptr noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind
+declare !dbg !367 i32 @pthread_attr_setstack(ptr noundef, ptr noundef, i64 noundef) local_unnamed_addr #3
+
+; Function Attrs: nofree nounwind
+declare !dbg !370 noundef i32 @fprintf(ptr nocapture noundef, ptr nocapture noundef readonly, ...) local_unnamed_addr #4
+
+declare !dbg !431 ptr @event_create() local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortEnterCritical() local_unnamed_addr #0 !dbg !181 {
+  %1 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !434, !tbaa !185
+  %2 = icmp eq i64 %1, 0, !dbg !435
+  br i1 %2, label %3, label %5, !dbg !436
+
+3:                                                ; preds = %0
+  %4 = tail call i32 @pthread_sigmask(i32 noundef 0, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !437
+  br label %5, !dbg !439
+
+5:                                                ; preds = %3, %0
+  %6 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !440, !tbaa !185
+  %7 = add nsw i64 %6, 1, !dbg !440
+  store volatile i64 %7, ptr @uxCriticalNesting, align 8, !dbg !440, !tbaa !185
+  ret void, !dbg !441
+}
+
+; Function Attrs: nounwind
+declare !dbg !442 i32 @pthread_create(ptr noundef, ptr noundef, ptr noundef, ptr noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind uwtable
+define internal ptr @prvWaitForStart(ptr nocapture noundef readonly %0) #0 !dbg !454 {
+  call void @llvm.dbg.value(metadata ptr %0, metadata !456, metadata !DIExpression()), !dbg !458
+  call void @llvm.dbg.value(metadata ptr %0, metadata !457, metadata !DIExpression()), !dbg !458
+  %2 = getelementptr i8, ptr %0, i64 32, !dbg !459
+  %3 = load ptr, ptr %2, align 8, !dbg !459, !tbaa !178
+  call void @llvm.dbg.value(metadata ptr undef, metadata !460, metadata !DIExpression()), !dbg !465
+  %4 = tail call zeroext i1 @event_wait(ptr noundef %3) #16, !dbg !467
+  store volatile i64 0, ptr @uxCriticalNesting, align 8, !dbg !468, !tbaa !185
+  %5 = tail call i32 @pthread_sigmask(i32 noundef 1, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !469
+  %6 = getelementptr inbounds %struct.THREAD, ptr %0, i64 0, i32 1, !dbg !471
+  %7 = load ptr, ptr %6, align 8, !dbg !471, !tbaa !152
+  %8 = getelementptr inbounds %struct.THREAD, ptr %0, i64 0, i32 2, !dbg !472
+  %9 = load ptr, ptr %8, align 8, !dbg !472, !tbaa !160
+  tail call void %7(ptr noundef %9) #16, !dbg !473
+  tail call void @vAssertCalled(ptr noundef nonnull @.str.6, i64 noundef 472) #16, !dbg !474
+  ret ptr null, !dbg !476
+}
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortExitCritical() local_unnamed_addr #0 !dbg !214 {
+  %1 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !477, !tbaa !185
+  %2 = add nsw i64 %1, -1, !dbg !477
+  store volatile i64 %2, ptr @uxCriticalNesting, align 8, !dbg !477, !tbaa !185
+  %3 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !478, !tbaa !185
+  %4 = icmp eq i64 %3, 0, !dbg !479
+  br i1 %4, label %5, label %7, !dbg !480
+
+5:                                                ; preds = %0
+  %6 = tail call i32 @pthread_sigmask(i32 noundef 1, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !481
+  br label %7, !dbg !483
+
+7:                                                ; preds = %5, %0
+  ret void, !dbg !484
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.lifetime.end.p0(i64 immarg, ptr nocapture) #1
+
+; Function Attrs: nounwind uwtable
+define dso_local i64 @xPortStartScheduler() local_unnamed_addr #0 !dbg !485 {
+  %1 = alloca %struct.timespec, align 8, !DIAssignID !491
+  %2 = alloca %struct.itimerval, align 8, !DIAssignID !492
+  %3 = alloca i32, align 4, !DIAssignID !493
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !489, metadata !DIExpression(), metadata !493, metadata ptr %3, metadata !DIExpression()), !dbg !494
+  %4 = alloca %struct.__sigset_t, align 8, !DIAssignID !495
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !490, metadata !DIExpression(), metadata !495, metadata ptr %4, metadata !DIExpression()), !dbg !494
+  call void @llvm.lifetime.start.p0(i64 4, ptr nonnull %3) #16, !dbg !496
+  call void @llvm.lifetime.start.p0(i64 128, ptr nonnull %4) #16, !dbg !497
+  %5 = tail call i64 @pthread_self() #19, !dbg !498
+  store i64 %5, ptr @hMainThread, align 8, !dbg !499, !tbaa !185
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !500, metadata !DIExpression(), metadata !492, metadata ptr %2, metadata !DIExpression()), !dbg !515
+  call void @llvm.lifetime.start.p0(i64 32, ptr nonnull %2) #16, !dbg !517
+  %6 = call i32 @getitimer(i32 noundef 0, ptr noundef nonnull %2) #16, !dbg !518
+  call void @llvm.dbg.value(metadata i32 %6, metadata !503, metadata !DIExpression()), !dbg !515
+  %7 = icmp eq i32 %6, -1, !dbg !519
+  br i1 %7, label %8, label %14, !dbg !521
+
+8:                                                ; preds = %0
+  %9 = tail call ptr @__errno_location() #19, !dbg !522
+  %10 = load i32, ptr %9, align 4, !dbg !522, !tbaa !355
+  call void @llvm.dbg.value(metadata ptr @.str.4, metadata !198, metadata !DIExpression()), !dbg !524
+  call void @llvm.dbg.value(metadata i32 %10, metadata !205, metadata !DIExpression()), !dbg !524
+  %11 = load ptr, ptr @stderr, align 8, !dbg !526, !tbaa !171
+  %12 = tail call ptr @strerror(i32 noundef %10) #16, !dbg !527
+  %13 = tail call i32 (ptr, ptr, ...) @fprintf(ptr noundef %11, ptr noundef nonnull @.str.3, ptr noundef nonnull @.str.4, ptr noundef %12) #17, !dbg !528
+  tail call void @abort() #18, !dbg !529
+  unreachable, !dbg !529
+
+14:                                               ; preds = %0
+  store i64 0, ptr %2, align 8, !dbg !530, !tbaa !531, !DIAssignID !534
+  call void @llvm.dbg.assign(metadata i64 0, metadata !500, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 64), metadata !534, metadata ptr %2, metadata !DIExpression()), !dbg !515
+  %15 = getelementptr inbounds %struct.timeval, ptr %2, i64 0, i32 1, !dbg !535
+  store i64 1000, ptr %15, align 8, !dbg !536, !tbaa !537, !DIAssignID !538
+  call void @llvm.dbg.assign(metadata i64 1000, metadata !500, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 64), metadata !538, metadata ptr %15, metadata !DIExpression()), !dbg !515
+  %16 = getelementptr inbounds %struct.itimerval, ptr %2, i64 0, i32 1, !dbg !539
+  store i64 0, ptr %16, align 8, !dbg !540, !tbaa !541, !DIAssignID !542
+  call void @llvm.dbg.assign(metadata i64 0, metadata !500, metadata !DIExpression(DW_OP_LLVM_fragment, 128, 64), metadata !542, metadata ptr %16, metadata !DIExpression()), !dbg !515
+  %17 = getelementptr inbounds %struct.itimerval, ptr %2, i64 0, i32 1, i32 1, !dbg !543
+  store i64 1000, ptr %17, align 8, !dbg !544, !tbaa !545, !DIAssignID !546
+  call void @llvm.dbg.assign(metadata i64 1000, metadata !500, metadata !DIExpression(DW_OP_LLVM_fragment, 192, 64), metadata !546, metadata ptr %17, metadata !DIExpression()), !dbg !515
+  %18 = call i32 @setitimer(i32 noundef 0, ptr noundef nonnull %2, ptr noundef null) #16, !dbg !547
+  call void @llvm.dbg.value(metadata i32 %18, metadata !503, metadata !DIExpression()), !dbg !515
+  %19 = icmp eq i32 %18, -1, !dbg !548
+  br i1 %19, label %20, label %26, !dbg !550
+
+20:                                               ; preds = %14
+  %21 = tail call ptr @__errno_location() #19, !dbg !551
+  %22 = load i32, ptr %21, align 4, !dbg !551, !tbaa !355
+  call void @llvm.dbg.value(metadata ptr @.str.5, metadata !198, metadata !DIExpression()), !dbg !553
+  call void @llvm.dbg.value(metadata i32 %22, metadata !205, metadata !DIExpression()), !dbg !553
+  %23 = load ptr, ptr @stderr, align 8, !dbg !555, !tbaa !171
+  %24 = tail call ptr @strerror(i32 noundef %22) #16, !dbg !556
+  %25 = tail call i32 (ptr, ptr, ...) @fprintf(ptr noundef %23, ptr noundef nonnull @.str.3, ptr noundef nonnull @.str.5, ptr noundef %24) #17, !dbg !557
+  tail call void @abort() #18, !dbg !558
+  unreachable, !dbg !558
+
+26:                                               ; preds = %14
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !559, metadata !DIExpression(), metadata !491, metadata ptr %1, metadata !DIExpression()), !dbg !570
+  call void @llvm.lifetime.start.p0(i64 16, ptr nonnull %1) #16, !dbg !572
+  %27 = call i32 @clock_gettime(i32 noundef 1, ptr noundef nonnull %1) #16, !dbg !573
+  call void @llvm.lifetime.end.p0(i64 16, ptr nonnull %1) #16, !dbg !574
+  call void @llvm.lifetime.end.p0(i64 32, ptr nonnull %2) #16, !dbg !575
+  %28 = call i32 @sigemptyset(ptr noundef nonnull %4) #16, !dbg !576
+  %29 = call i32 @sigaddset(ptr noundef nonnull %4, i32 noundef 10) #16, !dbg !577
+  %30 = call i32 @pthread_sigmask(i32 noundef 0, ptr noundef nonnull %4, ptr noundef null) #16, !dbg !578
+  %31 = call ptr @xTaskGetCurrentTaskHandle() #16, !dbg !579
+  %32 = load ptr, ptr %31, align 8, !dbg !584, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !595
+  call void @llvm.dbg.value(metadata ptr %32, metadata !594, metadata !DIExpression()), !dbg !595
+  %33 = getelementptr inbounds i64, ptr %32, i64 1, !dbg !597
+  call void @llvm.dbg.value(metadata ptr %33, metadata !582, metadata !DIExpression()), !dbg !598
+  call void @llvm.dbg.value(metadata ptr %33, metadata !599, metadata !DIExpression()), !dbg !602
+  %34 = load i64, ptr %33, align 8, !dbg !604, !tbaa !606
+  %35 = icmp eq i64 %5, %34, !dbg !607
+  br i1 %35, label %39, label %36, !dbg !608
+
+36:                                               ; preds = %26
+  %37 = getelementptr inbounds i64, ptr %32, i64 5, !dbg !609
+  %38 = load ptr, ptr %37, align 8, !dbg !609, !tbaa !178
+  call void @event_signal(ptr noundef %38) #16, !dbg !611
+  br label %39, !dbg !612
+
+39:                                               ; preds = %26, %36
+  %40 = load i1, ptr @xSchedulerEnd, align 8, !dbg !613
+  br i1 %40, label %44, label %41, !dbg !614
+
+41:                                               ; preds = %39, %41
+  %42 = call i32 @sigwait(ptr noundef nonnull %4, ptr noundef nonnull %3) #16, !dbg !615
+  %43 = load i1, ptr @xSchedulerEnd, align 8, !dbg !613
+  br i1 %43, label %44, label %41, !dbg !614, !llvm.loop !617
+
+44:                                               ; preds = %41, %39
+  %45 = call ptr @xTaskGetIdleTaskHandle() #16, !dbg !620
+  call void @llvm.dbg.value(metadata ptr %45, metadata !621, metadata !DIExpression()), !dbg !625
+  %46 = load ptr, ptr %45, align 8, !dbg !627, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !628
+  call void @llvm.dbg.value(metadata ptr %46, metadata !594, metadata !DIExpression()), !dbg !628
+  %47 = getelementptr inbounds i64, ptr %46, i64 1, !dbg !630
+  call void @llvm.dbg.value(metadata ptr %47, metadata !624, metadata !DIExpression()), !dbg !625
+  %48 = load i64, ptr %47, align 8, !dbg !631, !tbaa !606
+  %49 = call i32 @pthread_cancel(i64 noundef %48) #16, !dbg !632
+  %50 = load i64, ptr %47, align 8, !dbg !633, !tbaa !606
+  %51 = call i32 @pthread_join(i64 noundef %50, ptr noundef null) #16, !dbg !634
+  %52 = getelementptr inbounds i64, ptr %46, i64 5, !dbg !635
+  %53 = load ptr, ptr %52, align 8, !dbg !635, !tbaa !178
+  call void @event_delete(ptr noundef %53) #16, !dbg !636
+  %54 = call ptr @xTimerGetTimerDaemonTaskHandle() #16, !dbg !637
+  call void @llvm.dbg.value(metadata ptr %54, metadata !621, metadata !DIExpression()), !dbg !638
+  %55 = load ptr, ptr %54, align 8, !dbg !640, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !641
+  call void @llvm.dbg.value(metadata ptr %55, metadata !594, metadata !DIExpression()), !dbg !641
+  %56 = getelementptr inbounds i64, ptr %55, i64 1, !dbg !643
+  call void @llvm.dbg.value(metadata ptr %56, metadata !624, metadata !DIExpression()), !dbg !638
+  %57 = load i64, ptr %56, align 8, !dbg !644, !tbaa !606
+  %58 = call i32 @pthread_cancel(i64 noundef %57) #16, !dbg !645
+  %59 = load i64, ptr %56, align 8, !dbg !646, !tbaa !606
+  %60 = call i32 @pthread_join(i64 noundef %59, ptr noundef null) #16, !dbg !647
+  %61 = getelementptr inbounds i64, ptr %55, i64 5, !dbg !648
+  %62 = load ptr, ptr %61, align 8, !dbg !648, !tbaa !178
+  call void @event_delete(ptr noundef %62) #16, !dbg !649
+  %63 = call i32 @pthread_sigmask(i32 noundef 2, ptr noundef nonnull @xSchedulerOriginalSignalMask, ptr noundef null) #16, !dbg !650
+  call void @llvm.lifetime.end.p0(i64 128, ptr nonnull %4) #16, !dbg !651
+  call void @llvm.lifetime.end.p0(i64 4, ptr nonnull %3) #16, !dbg !651
+  ret i64 0, !dbg !652
+}
+
+; Function Attrs: mustprogress nofree nosync nounwind willreturn memory(none)
+declare !dbg !653 i64 @pthread_self() local_unnamed_addr #5
+
+; Function Attrs: nounwind
+declare !dbg !656 i32 @sigemptyset(ptr noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind
+declare !dbg !660 i32 @sigaddset(ptr noundef, i32 noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind
+declare !dbg !663 i32 @pthread_sigmask(i32 noundef, ptr noundef, ptr noundef) local_unnamed_addr #3
+
+declare !dbg !672 i32 @sigwait(ptr noundef, ptr noundef) local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortCancelThread(ptr nocapture noundef readonly %0) local_unnamed_addr #0 !dbg !622 {
+  call void @llvm.dbg.value(metadata ptr %0, metadata !621, metadata !DIExpression()), !dbg !680
+  %2 = load ptr, ptr %0, align 8, !dbg !681, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !682
+  call void @llvm.dbg.value(metadata ptr %2, metadata !594, metadata !DIExpression()), !dbg !682
+  %3 = getelementptr inbounds i64, ptr %2, i64 1, !dbg !684
+  call void @llvm.dbg.value(metadata ptr %3, metadata !624, metadata !DIExpression()), !dbg !680
+  %4 = load i64, ptr %3, align 8, !dbg !685, !tbaa !606
+  %5 = tail call i32 @pthread_cancel(i64 noundef %4) #16, !dbg !686
+  %6 = load i64, ptr %3, align 8, !dbg !687, !tbaa !606
+  %7 = tail call i32 @pthread_join(i64 noundef %6, ptr noundef null) #16, !dbg !688
+  %8 = getelementptr inbounds i64, ptr %2, i64 5, !dbg !689
+  %9 = load ptr, ptr %8, align 8, !dbg !689, !tbaa !178
+  tail call void @event_delete(ptr noundef %9) #16, !dbg !690
+  ret void, !dbg !691
+}
+
+declare !dbg !692 ptr @xTaskGetIdleTaskHandle() local_unnamed_addr #2
+
+declare !dbg !695 ptr @xTimerGetTimerDaemonTaskHandle() local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortEndScheduler() local_unnamed_addr #0 !dbg !697 {
+  %1 = alloca %struct.itimerval, align 8, !DIAssignID !702
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !699, metadata !DIExpression(), metadata !702, metadata ptr %1, metadata !DIExpression()), !dbg !703
+  %2 = alloca %struct.sigaction, align 8, !DIAssignID !704
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !700, metadata !DIExpression(), metadata !704, metadata ptr %2, metadata !DIExpression()), !dbg !703
+  call void @llvm.lifetime.start.p0(i64 32, ptr nonnull %1) #16, !dbg !705
+  call void @llvm.lifetime.start.p0(i64 152, ptr nonnull %2) #16, !dbg !706
+  call void @llvm.dbg.assign(metadata i64 0, metadata !699, metadata !DIExpression(DW_OP_LLVM_fragment, 128, 64), metadata !707, metadata ptr %1, metadata !DIExpression(DW_OP_plus_uconst, 16)), !dbg !703
+  call void @llvm.dbg.assign(metadata i64 0, metadata !699, metadata !DIExpression(DW_OP_LLVM_fragment, 192, 64), metadata !707, metadata ptr %1, metadata !DIExpression(DW_OP_plus_uconst, 24)), !dbg !703
+  call void @llvm.dbg.assign(metadata i64 0, metadata !699, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 64), metadata !707, metadata ptr %1, metadata !DIExpression()), !dbg !703
+  call void @llvm.dbg.assign(metadata i64 0, metadata !699, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 64), metadata !707, metadata ptr %1, metadata !DIExpression(DW_OP_plus_uconst, 8)), !dbg !703
+  call void @llvm.memset.p0.i64(ptr noundef nonnull align 8 dereferenceable(32) %1, i8 0, i64 32, i1 false), !dbg !708, !DIAssignID !707
+  %3 = call i32 @setitimer(i32 noundef 0, ptr noundef nonnull %1, ptr noundef null) #16, !dbg !709
+  %4 = getelementptr inbounds %struct.sigaction, ptr %2, i64 0, i32 2, !dbg !710
+  store i32 0, ptr %4, align 8, !dbg !711, !tbaa !339, !DIAssignID !712
+  call void @llvm.dbg.assign(metadata i32 0, metadata !700, metadata !DIExpression(DW_OP_LLVM_fragment, 1088, 32), metadata !712, metadata ptr %4, metadata !DIExpression()), !dbg !703
+  store ptr inttoptr (i64 1 to ptr), ptr %2, align 8, !dbg !713, !tbaa !345, !DIAssignID !714
+  call void @llvm.dbg.assign(metadata ptr inttoptr (i64 1 to ptr), metadata !700, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 64), metadata !714, metadata ptr %2, metadata !DIExpression()), !dbg !703
+  %5 = getelementptr inbounds %struct.sigaction, ptr %2, i64 0, i32 1, !dbg !715
+  %6 = call i32 @sigemptyset(ptr noundef nonnull %5) #16, !dbg !716
+  %7 = call i32 @sigaction(i32 noundef 14, ptr noundef nonnull %2, ptr noundef null) #16, !dbg !717
+  store i1 true, ptr @xSchedulerEnd, align 8, !dbg !718
+  %8 = load i64, ptr @hMainThread, align 8, !dbg !719, !tbaa !185
+  %9 = call i32 @pthread_kill(i64 noundef %8, i32 noundef 10) #16, !dbg !720
+  %10 = call ptr @xTaskGetCurrentTaskHandle() #16, !dbg !721
+  %11 = load ptr, ptr %10, align 8, !dbg !722, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr %11, metadata !701, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !703
+  %12 = getelementptr i64, ptr %11, i64 5, !dbg !723
+  %13 = load ptr, ptr %12, align 8, !dbg !723, !tbaa !178
+  call void @llvm.dbg.value(metadata ptr undef, metadata !460, metadata !DIExpression()), !dbg !724
+  %14 = call zeroext i1 @event_wait(ptr noundef %13) #16, !dbg !726
+  call void @llvm.lifetime.end.p0(i64 152, ptr nonnull %2) #16, !dbg !727
+  call void @llvm.lifetime.end.p0(i64 32, ptr nonnull %1) #16, !dbg !727
+  ret void, !dbg !727
+}
+
+; Function Attrs: mustprogress nofree nounwind willreturn
+declare !dbg !728 noundef i32 @setitimer(i32 noundef, ptr nocapture noundef readonly, ptr nocapture noundef) local_unnamed_addr #6
+
+; Function Attrs: nounwind
+declare !dbg !737 i32 @sigaction(i32 noundef, ptr noundef, ptr noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind
+declare !dbg !745 i32 @pthread_kill(i64 noundef, i32 noundef) local_unnamed_addr #3
+
+declare !dbg !748 ptr @xTaskGetCurrentTaskHandle() local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortDisableInterrupts() local_unnamed_addr #0 !dbg !189 {
+  %1 = tail call i32 @pthread_sigmask(i32 noundef 0, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !749
+  ret void, !dbg !750
+}
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortEnableInterrupts() local_unnamed_addr #0 !dbg !221 {
+  %1 = tail call i32 @pthread_sigmask(i32 noundef 1, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !751
+  ret void, !dbg !752
+}
+
+; Function Attrs: nounwind uwtable
+define dso_local void @vPortYield() local_unnamed_addr #0 !dbg !753 {
+  %1 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !754, !tbaa !185
+  %2 = icmp eq i64 %1, 0, !dbg !756
+  br i1 %2, label %3, label %5, !dbg !757
+
+3:                                                ; preds = %0
+  %4 = tail call i32 @pthread_sigmask(i32 noundef 0, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !758
+  br label %5, !dbg !760
+
+5:                                                ; preds = %0, %3
+  %6 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !761, !tbaa !185
+  %7 = add nsw i64 %6, 1, !dbg !761
+  store volatile i64 %7, ptr @uxCriticalNesting, align 8, !dbg !761, !tbaa !185
+  %8 = tail call ptr @xTaskGetCurrentTaskHandle() #16, !dbg !762
+  %9 = load ptr, ptr %8, align 8, !dbg !768, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !769
+  call void @llvm.dbg.value(metadata ptr %9, metadata !594, metadata !DIExpression()), !dbg !769
+  call void @llvm.dbg.value(metadata ptr %9, metadata !765, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !771
+  tail call void @vTaskSwitchContext() #16, !dbg !772
+  %10 = tail call ptr @xTaskGetCurrentTaskHandle() #16, !dbg !773
+  %11 = load ptr, ptr %10, align 8, !dbg !774, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !775
+  call void @llvm.dbg.value(metadata ptr %11, metadata !594, metadata !DIExpression()), !dbg !775
+  call void @llvm.dbg.value(metadata ptr %11, metadata !766, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !771
+  call void @llvm.dbg.value(metadata ptr %11, metadata !777, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !784
+  call void @llvm.dbg.value(metadata ptr %9, metadata !782, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !784
+  %12 = icmp eq ptr %9, %11, !dbg !786
+  br i1 %12, label %31, label %13, !dbg !788
+
+13:                                               ; preds = %5
+  %14 = getelementptr inbounds i64, ptr %11, i64 1, !dbg !789
+  call void @llvm.dbg.value(metadata ptr %14, metadata !766, metadata !DIExpression()), !dbg !771
+  call void @llvm.dbg.value(metadata ptr %14, metadata !777, metadata !DIExpression()), !dbg !784
+  %15 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !790, !tbaa !185
+  call void @llvm.dbg.value(metadata i64 %15, metadata !783, metadata !DIExpression()), !dbg !784
+  call void @llvm.dbg.value(metadata ptr %11, metadata !599, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !792
+  %16 = tail call i64 @pthread_self() #19, !dbg !794
+  %17 = load i64, ptr %14, align 8, !dbg !795, !tbaa !606
+  %18 = icmp eq i64 %16, %17, !dbg !796
+  br i1 %18, label %22, label %19, !dbg !797
+
+19:                                               ; preds = %13
+  %20 = getelementptr inbounds i64, ptr %11, i64 5, !dbg !798
+  %21 = load ptr, ptr %20, align 8, !dbg !798, !tbaa !178
+  tail call void @event_signal(ptr noundef %21) #16, !dbg !799
+  br label %22, !dbg !800
+
+22:                                               ; preds = %19, %13
+  %23 = getelementptr inbounds i64, ptr %9, i64 4, !dbg !801
+  %24 = load i64, ptr %23, align 8, !dbg !801, !tbaa !163
+  %25 = icmp eq i64 %24, 1, !dbg !803
+  br i1 %25, label %26, label %27, !dbg !804
+
+26:                                               ; preds = %22
+  tail call void @pthread_exit(ptr noundef null) #18, !dbg !805
+  unreachable, !dbg !805
+
+27:                                               ; preds = %22
+  %28 = getelementptr i64, ptr %9, i64 5, !dbg !807
+  %29 = load ptr, ptr %28, align 8, !dbg !807, !tbaa !178
+  call void @llvm.dbg.value(metadata ptr undef, metadata !460, metadata !DIExpression()), !dbg !808
+  %30 = tail call zeroext i1 @event_wait(ptr noundef %29) #16, !dbg !810
+  store volatile i64 %15, ptr @uxCriticalNesting, align 8, !dbg !811, !tbaa !185
+  br label %31, !dbg !812
+
+31:                                               ; preds = %5, %27
+  %32 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !813, !tbaa !185
+  %33 = add nsw i64 %32, -1, !dbg !813
+  store volatile i64 %33, ptr @uxCriticalNesting, align 8, !dbg !813, !tbaa !185
+  %34 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !815, !tbaa !185
+  %35 = icmp eq i64 %34, 0, !dbg !816
+  br i1 %35, label %36, label %38, !dbg !817
+
+36:                                               ; preds = %31
+  %37 = tail call i32 @pthread_sigmask(i32 noundef 1, ptr noundef nonnull @xAllSignals, ptr noundef null) #16, !dbg !818
+  br label %38, !dbg !820
+
+38:                                               ; preds = %31, %36
+  ret void, !dbg !821
+}
+
+; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable
+define dso_local i64 @xPortSetInterruptMask() local_unnamed_addr #7 !dbg !822 {
+  ret i64 1, !dbg !825
+}
+
+; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable
+define dso_local void @vPortClearInterruptMask(i64 noundef %0) local_unnamed_addr #7 !dbg !826 {
+  call void @llvm.dbg.value(metadata i64 %0, metadata !830, metadata !DIExpression()), !dbg !831
+  ret void, !dbg !832
+}
+
+; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none) uwtable
+define dso_local void @vPortThreadDying(ptr nocapture noundef readonly %0, ptr nocapture noundef readnone %1) local_unnamed_addr #8 !dbg !833 {
+  call void @llvm.dbg.value(metadata ptr %0, metadata !839, metadata !DIExpression()), !dbg !842
+  call void @llvm.dbg.value(metadata ptr %1, metadata !840, metadata !DIExpression()), !dbg !842
+  %3 = load ptr, ptr %0, align 8, !dbg !843, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr %3, metadata !841, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !842
+  %4 = getelementptr inbounds i64, ptr %3, i64 4, !dbg !844
+  store i64 1, ptr %4, align 8, !dbg !845, !tbaa !163
+  ret void, !dbg !846
+}
+
+declare !dbg !847 i32 @pthread_cancel(i64 noundef) local_unnamed_addr #2
+
+declare !dbg !850 i32 @pthread_join(i64 noundef, ptr noundef) local_unnamed_addr #2
+
+declare !dbg !854 void @event_delete(ptr noundef) local_unnamed_addr #2
+
+; Function Attrs: nofree nounwind uwtable
+define dso_local i64 @ulPortGetRunTime() local_unnamed_addr #9 !dbg !857 {
+  %1 = alloca %struct.tms, align 8, !DIAssignID !871
+  call void @llvm.dbg.assign(metadata i1 undef, metadata !861, metadata !DIExpression(), metadata !871, metadata ptr %1, metadata !DIExpression()), !dbg !872
+  call void @llvm.lifetime.start.p0(i64 32, ptr nonnull %1) #16, !dbg !873
+  %2 = call i64 @times(ptr noundef nonnull %1) #16, !dbg !874
+  %3 = load i64, ptr %1, align 8, !dbg !875, !tbaa !876
+  call void @llvm.lifetime.end.p0(i64 32, ptr nonnull %1) #16, !dbg !878
+  ret i64 %3, !dbg !879
+}
+
+; Function Attrs: nofree nounwind
+declare !dbg !880 noundef i64 @times(ptr nocapture noundef) local_unnamed_addr #4
+
+; Function Attrs: nounwind
+declare !dbg !884 ptr @strerror(i32 noundef) local_unnamed_addr #3
+
+; Function Attrs: noreturn nounwind
+declare !dbg !888 void @abort() local_unnamed_addr #10
+
+declare !dbg !890 void @event_signal(ptr noundef) local_unnamed_addr #2
+
+declare !dbg !891 void @vTaskSwitchContext() local_unnamed_addr #2
+
+; Function Attrs: noreturn
+declare !dbg !892 void @pthread_exit(ptr noundef) local_unnamed_addr #11
+
+; Function Attrs: nofree nounwind
+declare !dbg !893 noundef i32 @getitimer(i32 noundef, ptr nocapture noundef) local_unnamed_addr #4
+
+; Function Attrs: mustprogress nofree nosync nounwind willreturn memory(none)
+declare !dbg !896 ptr @__errno_location() local_unnamed_addr #5
+
+; Function Attrs: nounwind
+declare !dbg !900 i32 @clock_gettime(i32 noundef, ptr noundef) local_unnamed_addr #3
+
+declare !dbg !908 void @vAssertCalled(ptr noundef, i64 noundef) local_unnamed_addr #2
+
+declare !dbg !913 zeroext i1 @event_wait(ptr noundef) local_unnamed_addr #2
+
+; Function Attrs: nounwind
+declare !dbg !917 i32 @sigfillset(ptr noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind
+declare !dbg !918 i32 @sigdelset(ptr noundef, i32 noundef) local_unnamed_addr #3
+
+; Function Attrs: nounwind uwtable
+define internal void @vPortSystemTickHandler(i32 %0) #0 !dbg !919 {
+  call void @llvm.dbg.value(metadata i32 poison, metadata !921, metadata !DIExpression()), !dbg !924
+  %2 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !925, !tbaa !185
+  %3 = add nsw i64 %2, 1, !dbg !925
+  store volatile i64 %3, ptr @uxCriticalNesting, align 8, !dbg !925, !tbaa !185
+  %4 = tail call ptr @xTaskGetCurrentTaskHandle() #16, !dbg !926
+  %5 = load ptr, ptr %4, align 8, !dbg !927, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !928
+  call void @llvm.dbg.value(metadata ptr %5, metadata !594, metadata !DIExpression()), !dbg !928
+  call void @llvm.dbg.value(metadata ptr %5, metadata !922, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !924
+  %6 = tail call i64 @xTaskIncrementTick() #16, !dbg !930
+  tail call void @vTaskSwitchContext() #16, !dbg !931
+  %7 = tail call ptr @xTaskGetCurrentTaskHandle() #16, !dbg !932
+  %8 = load ptr, ptr %7, align 8, !dbg !933, !tbaa !171
+  call void @llvm.dbg.value(metadata ptr undef, metadata !585, metadata !DIExpression()), !dbg !934
+  call void @llvm.dbg.value(metadata ptr %8, metadata !594, metadata !DIExpression()), !dbg !934
+  call void @llvm.dbg.value(metadata ptr %8, metadata !923, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !924
+  call void @llvm.dbg.value(metadata ptr %8, metadata !777, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !936
+  call void @llvm.dbg.value(metadata ptr %5, metadata !782, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !936
+  %9 = icmp eq ptr %5, %8, !dbg !938
+  br i1 %9, label %28, label %10, !dbg !939
+
+10:                                               ; preds = %1
+  %11 = getelementptr inbounds i64, ptr %8, i64 1, !dbg !940
+  call void @llvm.dbg.value(metadata ptr %11, metadata !923, metadata !DIExpression()), !dbg !924
+  call void @llvm.dbg.value(metadata ptr %11, metadata !777, metadata !DIExpression()), !dbg !936
+  %12 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !941, !tbaa !185
+  call void @llvm.dbg.value(metadata i64 %12, metadata !783, metadata !DIExpression()), !dbg !936
+  call void @llvm.dbg.value(metadata ptr %8, metadata !599, metadata !DIExpression(DW_OP_plus_uconst, 8, DW_OP_stack_value)), !dbg !942
+  %13 = tail call i64 @pthread_self() #19, !dbg !944
+  %14 = load i64, ptr %11, align 8, !dbg !945, !tbaa !606
+  %15 = icmp eq i64 %13, %14, !dbg !946
+  br i1 %15, label %19, label %16, !dbg !947
+
+16:                                               ; preds = %10
+  %17 = getelementptr inbounds i64, ptr %8, i64 5, !dbg !948
+  %18 = load ptr, ptr %17, align 8, !dbg !948, !tbaa !178
+  tail call void @event_signal(ptr noundef %18) #16, !dbg !949
+  br label %19, !dbg !950
+
+19:                                               ; preds = %16, %10
+  %20 = getelementptr inbounds i64, ptr %5, i64 4, !dbg !951
+  %21 = load i64, ptr %20, align 8, !dbg !951, !tbaa !163
+  %22 = icmp eq i64 %21, 1, !dbg !952
+  br i1 %22, label %23, label %24, !dbg !953
+
+23:                                               ; preds = %19
+  tail call void @pthread_exit(ptr noundef null) #18, !dbg !954
+  unreachable, !dbg !954
+
+24:                                               ; preds = %19
+  %25 = getelementptr i64, ptr %5, i64 5, !dbg !955
+  %26 = load ptr, ptr %25, align 8, !dbg !955, !tbaa !178
+  call void @llvm.dbg.value(metadata ptr undef, metadata !460, metadata !DIExpression()), !dbg !956
+  %27 = tail call zeroext i1 @event_wait(ptr noundef %26) #16, !dbg !958
+  store volatile i64 %12, ptr @uxCriticalNesting, align 8, !dbg !959, !tbaa !185
+  br label %28, !dbg !960
+
+28:                                               ; preds = %1, %24
+  %29 = load volatile i64, ptr @uxCriticalNesting, align 8, !dbg !961, !tbaa !185
+  %30 = add nsw i64 %29, -1, !dbg !961
+  store volatile i64 %30, ptr @uxCriticalNesting, align 8, !dbg !961, !tbaa !185
+  ret void, !dbg !962
+}
+
+declare !dbg !963 i64 @xTaskIncrementTick() local_unnamed_addr #2
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare void @llvm.dbg.assign(metadata, metadata, metadata, metadata, metadata, metadata) #12
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare void @llvm.dbg.value(metadata, metadata, metadata) #13
+
+; Function Attrs: nofree nounwind
+declare noundef i64 @fwrite(ptr nocapture noundef, i64 noundef, i64 noundef, ptr nocapture noundef) local_unnamed_addr #14
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
+declare void @llvm.memset.p0.i64(ptr nocapture writeonly, i8, i64, i1 immarg) #15
+
+attributes #0 = { nounwind uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { mustprogress nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
+attributes #2 = { "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #4 = { nofree nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #5 = { mustprogress nofree nosync nounwind willreturn memory(none) "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #6 = { mustprogress nofree nounwind willreturn "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #7 = { mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #8 = { mustprogress nofree norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none) uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #9 = { nofree nounwind uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #10 = { noreturn nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #11 = { noreturn "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #12 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #13 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #14 = { nofree nounwind }
+attributes #15 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #16 = { nounwind }
+attributes #17 = { cold }
+attributes #18 = { noreturn nounwind }
+attributes #19 = { nounwind willreturn memory(none) }
+
+!llvm.dbg.cu = !{!2}
+!llvm.module.flags = !{!114, !115, !116, !117, !118, !119, !120}
+!llvm.ident = !{!121}
+
+!0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
+!1 = distinct !DIGlobalVariable(name: "hSigSetupThread", scope: !2, file: !15, line: 95, type: !112, isLocal: true, isDefinition: true)
+!2 = distinct !DICompileUnit(language: DW_LANG_C11, file: !3, producer: "Ubuntu clang version 17.0.4 (++20231031083134+309d55140c46-1~exp1~20231031083240.62)", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !12, globals: !49, splitDebugInlining: false, nameTableKind: None)
+!3 = !DIFile(filename: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS/Source/portable/ThirdParty/GCC/Posix/port.c", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS/Demo/Posix_GCC", checksumkind: CSK_MD5, checksum: "6589948035a4210a8f2ad283ca69c8cd")
+!4 = !{!5}
+!5 = !DICompositeType(tag: DW_TAG_enumeration_type, name: "__itimer_which", file: !6, line: 114, baseType: !7, size: 32, elements: !8)
+!6 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/sys/time.h", directory: "", checksumkind: CSK_MD5, checksum: "b36e339815f62ba7208e5294180e353c")
+!7 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
+!8 = !{!9, !10, !11}
+!9 = !DIEnumerator(name: "ITIMER_REAL", value: 0)
+!10 = !DIEnumerator(name: "ITIMER_VIRTUAL", value: 1)
+!11 = !DIEnumerator(name: "ITIMER_PROF", value: 2)
+!12 = !{!13, !38, !31, !39, !21, !19, !45, !28, !48}
+!13 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !14, size: 64)
+!14 = !DIDerivedType(tag: DW_TAG_typedef, name: "Thread_t", file: !15, line: 80, baseType: !16)
+!15 = !DIFile(filename: "Source/portable/ThirdParty/GCC/Posix/port.c", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS", checksumkind: CSK_MD5, checksum: "6589948035a4210a8f2ad283ca69c8cd")
+!16 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "THREAD", file: !15, line: 73, size: 320, elements: !17)
+!17 = !{!18, !22, !29, !30, !34}
+!18 = !DIDerivedType(tag: DW_TAG_member, name: "pthread", scope: !16, file: !15, line: 75, baseType: !19, size: 64)
+!19 = !DIDerivedType(tag: DW_TAG_typedef, name: "pthread_t", file: !20, line: 27, baseType: !21)
+!20 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h", directory: "", checksumkind: CSK_MD5, checksum: "735e3bf264ff9d8f5d95898b1692fbdb")
+!21 = !DIBasicType(name: "unsigned long", size: 64, encoding: DW_ATE_unsigned)
+!22 = !DIDerivedType(tag: DW_TAG_member, name: "pxCode", scope: !16, file: !15, line: 76, baseType: !23, size: 64, offset: 64)
+!23 = !DIDerivedType(tag: DW_TAG_typedef, name: "TaskFunction_t", file: !24, line: 36, baseType: !25)
+!24 = !DIFile(filename: "Source/include/projdefs.h", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS", checksumkind: CSK_MD5, checksum: "81dfbfbb3ff6117c632b71ab1e91d000")
+!25 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !26, size: 64)
+!26 = !DISubroutineType(types: !27)
+!27 = !{null, !28}
+!28 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: null, size: 64)
+!29 = !DIDerivedType(tag: DW_TAG_member, name: "pvParams", scope: !16, file: !15, line: 77, baseType: !28, size: 64, offset: 128)
+!30 = !DIDerivedType(tag: DW_TAG_member, name: "xDying", scope: !16, file: !15, line: 78, baseType: !31, size: 64, offset: 192)
+!31 = !DIDerivedType(tag: DW_TAG_typedef, name: "BaseType_t", file: !32, line: 60, baseType: !33)
+!32 = !DIFile(filename: "Source/portable/ThirdParty/GCC/Posix/portmacro.h", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS", checksumkind: CSK_MD5, checksum: "860eefe50343427fb963612363cdbf08")
+!33 = !DIBasicType(name: "long", size: 64, encoding: DW_ATE_signed)
+!34 = !DIDerivedType(tag: DW_TAG_member, name: "ev", scope: !16, file: !15, line: 79, baseType: !35, size: 64, offset: 256)
+!35 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !36, size: 64)
+!36 = !DICompositeType(tag: DW_TAG_structure_type, name: "event", file: !37, line: 35, flags: DIFlagFwdDecl)
+!37 = !DIFile(filename: "Source/portable/ThirdParty/GCC/Posix/utils/wait_for_event.h", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS", checksumkind: CSK_MD5, checksum: "c36fb15a48f9c2b9c56f32d89cdeb401")
+!38 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !21, size: 64)
+!39 = !DIDerivedType(tag: DW_TAG_typedef, name: "__sighandler_t", file: !40, line: 72, baseType: !41)
+!40 = !DIFile(filename: "/usr/include/signal.h", directory: "", checksumkind: CSK_MD5, checksum: "331e107bf774bb600ec675d0db0b92ce")
+!41 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !42, size: 64)
+!42 = !DISubroutineType(types: !43)
+!43 = !{null, !44}
+!44 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!45 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !46, size: 64)
+!46 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !47, size: 64)
+!47 = !DIDerivedType(tag: DW_TAG_typedef, name: "StackType_t", file: !32, line: 59, baseType: !21)
+!48 = !DIDerivedType(tag: DW_TAG_typedef, name: "TickType_t", file: !32, line: 63, baseType: !21)
+!49 = !{!50, !56, !61, !66, !78, !80, !0, !83, !88, !90, !92, !97, !99, !105, !110}
+!50 = !DIGlobalVariableExpression(var: !51, expr: !DIExpression())
+!51 = distinct !DIGlobalVariable(scope: null, file: !15, line: 154, type: !52, isLocal: true, isDefinition: true)
+!52 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 704, elements: !54)
+!53 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!54 = !{!55}
+!55 = !DISubrange(count: 88)
+!56 = !DIGlobalVariableExpression(var: !57, expr: !DIExpression())
+!57 = distinct !DIGlobalVariable(scope: null, file: !15, line: 155, type: !58, isLocal: true, isDefinition: true)
+!58 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 432, elements: !59)
+!59 = !{!60}
+!60 = !DISubrange(count: 54)
+!61 = !DIGlobalVariableExpression(var: !62, expr: !DIExpression())
+!62 = distinct !DIGlobalVariable(scope: null, file: !15, line: 167, type: !63, isLocal: true, isDefinition: true)
+!63 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 120, elements: !64)
+!64 = !{!65}
+!65 = !DISubrange(count: 15)
+!66 = !DIGlobalVariableExpression(var: !67, expr: !DIExpression())
+!67 = distinct !DIGlobalVariable(name: "xAllSignals", scope: !2, file: !15, line: 96, type: !68, isLocal: true, isDefinition: true)
+!68 = !DIDerivedType(tag: DW_TAG_typedef, name: "sigset_t", file: !69, line: 7, baseType: !70)
+!69 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h", directory: "", checksumkind: CSK_MD5, checksum: "c2b978aaf49d5c0e2b1e9c2e1b7f7848")
+!70 = !DIDerivedType(tag: DW_TAG_typedef, name: "__sigset_t", file: !71, line: 8, baseType: !72)
+!71 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h", directory: "", checksumkind: CSK_MD5, checksum: "acc6b14c0967857fec362a8d433e1cf2")
+!72 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !71, line: 5, size: 1024, elements: !73)
+!73 = !{!74}
+!74 = !DIDerivedType(tag: DW_TAG_member, name: "__val", scope: !72, file: !71, line: 7, baseType: !75, size: 1024)
+!75 = !DICompositeType(tag: DW_TAG_array_type, baseType: !21, size: 1024, elements: !76)
+!76 = !{!77}
+!77 = !DISubrange(count: 16)
+!78 = !DIGlobalVariableExpression(var: !79, expr: !DIExpression())
+!79 = distinct !DIGlobalVariable(name: "xSchedulerOriginalSignalMask", scope: !2, file: !15, line: 97, type: !68, isLocal: true, isDefinition: true)
+!80 = !DIGlobalVariableExpression(var: !81, expr: !DIExpression())
+!81 = distinct !DIGlobalVariable(name: "uxCriticalNesting", scope: !2, file: !15, line: 99, type: !82, isLocal: true, isDefinition: true)
+!82 = !DIDerivedType(tag: DW_TAG_volatile_type, baseType: !33)
+!83 = !DIGlobalVariableExpression(var: !84, expr: !DIExpression())
+!84 = distinct !DIGlobalVariable(scope: null, file: !15, line: 120, type: !85, isLocal: true, isDefinition: true)
+!85 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 64, elements: !86)
+!86 = !{!87}
+!87 = !DISubrange(count: 8)
+!88 = !DIGlobalVariableExpression(var: !89, expr: !DIExpression())
+!89 = distinct !DIGlobalVariable(name: "hMainThread", scope: !2, file: !15, line: 98, type: !19, isLocal: true, isDefinition: true)
+!90 = !DIGlobalVariableExpression(var: !91, expr: !DIExpression())
+!91 = distinct !DIGlobalVariable(name: "xSchedulerEnd", scope: !2, file: !15, line: 102, type: !33, isLocal: true, isDefinition: true)
+!92 = !DIGlobalVariableExpression(var: !93, expr: !DIExpression())
+!93 = distinct !DIGlobalVariable(scope: null, file: !15, line: 366, type: !94, isLocal: true, isDefinition: true)
+!94 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 80, elements: !95)
+!95 = !{!96}
+!96 = !DISubrange(count: 10)
+!97 = !DIGlobalVariableExpression(var: !98, expr: !DIExpression())
+!98 = distinct !DIGlobalVariable(scope: null, file: !15, line: 382, type: !94, isLocal: true, isDefinition: true)
+!99 = !DIGlobalVariableExpression(var: !100, expr: !DIExpression())
+!100 = distinct !DIGlobalVariable(name: "prvStartTimeNs", scope: !2, file: !15, line: 346, type: !101, isLocal: true, isDefinition: true)
+!101 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint64_t", file: !102, line: 27, baseType: !103)
+!102 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h", directory: "", checksumkind: CSK_MD5, checksum: "2bf2ae53c58c01b1a1b9383b5195125c")
+!103 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uint64_t", file: !104, line: 45, baseType: !21)
+!104 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types.h", directory: "", checksumkind: CSK_MD5, checksum: "d108b5f93a74c50510d7d9bc0ab36df9")
+!105 = !DIGlobalVariableExpression(var: !106, expr: !DIExpression())
+!106 = distinct !DIGlobalVariable(scope: null, file: !15, line: 472, type: !107, isLocal: true, isDefinition: true)
+!107 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 872, elements: !108)
+!108 = !{!109}
+!109 = !DISubrange(count: 109)
+!110 = !DIGlobalVariableExpression(var: !111, expr: !DIExpression())
+!111 = distinct !DIGlobalVariable(scope: null, file: !15, line: 570, type: !94, isLocal: true, isDefinition: true)
+!112 = !DIDerivedType(tag: DW_TAG_typedef, name: "pthread_once_t", file: !20, line: 53, baseType: !44)
+!113 = !DIGlobalVariableExpression(var: !91, expr: !DIExpression(DW_OP_deref_size, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_constu, 0, DW_OP_plus, DW_OP_stack_value))
+!114 = !{i32 7, !"Dwarf Version", i32 5}
+!115 = !{i32 2, !"Debug Info Version", i32 3}
+!116 = !{i32 1, !"wchar_size", i32 4}
+!117 = !{i32 8, !"PIC Level", i32 2}
+!118 = !{i32 7, !"PIE Level", i32 2}
+!119 = !{i32 7, !"uwtable", i32 2}
+!120 = !{i32 7, !"debug-info-assignment-tracking", i1 true}
+!121 = !{!"Ubuntu clang version 17.0.4 (++20231031083134+309d55140c46-1~exp1~20231031083240.62)"}
+!122 = distinct !DISubprogram(name: "pxPortInitialiseStack", scope: !15, file: !15, line: 127, type: !123, scopeLine: 131, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !125)
+!123 = !DISubroutineType(types: !124)
+!124 = !{!46, !38, !38, !23, !28}
+!125 = !{!126, !127, !128, !129, !130, !131, !140, !143}
+!126 = !DILocalVariable(name: "pxTopOfStack", arg: 1, scope: !122, file: !15, line: 127, type: !38)
+!127 = !DILocalVariable(name: "pxEndOfStack", arg: 2, scope: !122, file: !15, line: 128, type: !38)
+!128 = !DILocalVariable(name: "pxCode", arg: 3, scope: !122, file: !15, line: 129, type: !23)
+!129 = !DILocalVariable(name: "pvParameters", arg: 4, scope: !122, file: !15, line: 130, type: !28)
+!130 = !DILocalVariable(name: "thread", scope: !122, file: !15, line: 132, type: !13)
+!131 = !DILocalVariable(name: "xThreadAttributes", scope: !122, file: !15, line: 133, type: !132)
+!132 = !DIDerivedType(tag: DW_TAG_typedef, name: "pthread_attr_t", file: !20, line: 62, baseType: !133)
+!133 = distinct !DICompositeType(tag: DW_TAG_union_type, name: "pthread_attr_t", file: !20, line: 56, size: 448, elements: !134)
+!134 = !{!135, !139}
+!135 = !DIDerivedType(tag: DW_TAG_member, name: "__size", scope: !133, file: !20, line: 58, baseType: !136, size: 448)
+!136 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 448, elements: !137)
+!137 = !{!138}
+!138 = !DISubrange(count: 56)
+!139 = !DIDerivedType(tag: DW_TAG_member, name: "__align", scope: !133, file: !20, line: 59, baseType: !33, size: 64)
+!140 = !DILocalVariable(name: "ulStackSize", scope: !122, file: !15, line: 134, type: !141)
+!141 = !DIDerivedType(tag: DW_TAG_typedef, name: "size_t", file: !142, line: 46, baseType: !21)
+!142 = !DIFile(filename: "/usr/lib/llvm-17/lib/clang/17/include/stddef.h", directory: "", checksumkind: CSK_MD5, checksum: "d1776268f398bd1ca997c840ad581432")
+!143 = !DILocalVariable(name: "iRet", scope: !122, file: !15, line: 135, type: !44)
+!144 = distinct !DIAssignID()
+!145 = !DILocation(line: 0, scope: !122)
+!146 = !DILocation(line: 133, column: 5, scope: !122)
+!147 = !DILocation(line: 137, column: 14, scope: !122)
+!148 = !DILocation(line: 142, column: 50, scope: !122)
+!149 = !DILocation(line: 144, column: 38, scope: !122)
+!150 = !DILocation(line: 146, column: 13, scope: !122)
+!151 = !DILocation(line: 146, column: 20, scope: !122)
+!152 = !{!153, !157, i64 8}
+!153 = !{!"THREAD", !154, i64 0, !157, i64 8, !157, i64 16, !154, i64 24, !157, i64 32}
+!154 = !{!"long", !155, i64 0}
+!155 = !{!"omnipotent char", !156, i64 0}
+!156 = !{!"Simple C/C++ TBAA"}
+!157 = !{!"any pointer", !155, i64 0}
+!158 = !DILocation(line: 147, column: 13, scope: !122)
+!159 = !DILocation(line: 147, column: 22, scope: !122)
+!160 = !{!153, !157, i64 16}
+!161 = !DILocation(line: 148, column: 13, scope: !122)
+!162 = !DILocation(line: 148, column: 20, scope: !122)
+!163 = !{!153, !154, i64 24}
+!164 = !DILocation(line: 150, column: 5, scope: !122)
+!165 = !DILocation(line: 151, column: 12, scope: !122)
+!166 = !DILocation(line: 152, column: 14, scope: !167)
+!167 = distinct !DILexicalBlock(scope: !122, file: !15, line: 152, column: 9)
+!168 = !DILocation(line: 152, column: 9, scope: !122)
+!169 = !DILocation(line: 154, column: 18, scope: !170)
+!170 = distinct !DILexicalBlock(scope: !167, file: !15, line: 153, column: 5)
+!171 = !{!157, !157, i64 0}
+!172 = !DILocation(line: 154, column: 9, scope: !170)
+!173 = !DILocation(line: 155, column: 18, scope: !170)
+!174 = !DILocation(line: 155, column: 9, scope: !170)
+!175 = !DILocation(line: 156, column: 5, scope: !170)
+!176 = !DILocation(line: 158, column: 18, scope: !122)
+!177 = !DILocation(line: 158, column: 16, scope: !122)
+!178 = !{!153, !157, i64 32}
+!179 = !DILocation(line: 265, column: 9, scope: !180, inlinedAt: !184)
+!180 = distinct !DILexicalBlock(scope: !181, file: !15, line: 265, column: 9)
+!181 = distinct !DISubprogram(name: "vPortEnterCritical", scope: !15, file: !15, line: 263, type: !182, scopeLine: 264, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2)
+!182 = !DISubroutineType(types: !183)
+!183 = !{null}
+!184 = distinct !DILocation(line: 160, column: 5, scope: !122)
+!185 = !{!154, !154, i64 0}
+!186 = !DILocation(line: 265, column: 27, scope: !180, inlinedAt: !184)
+!187 = !DILocation(line: 265, column: 9, scope: !181, inlinedAt: !184)
+!188 = !DILocation(line: 313, column: 5, scope: !189, inlinedAt: !190)
+!189 = distinct !DISubprogram(name: "vPortDisableInterrupts", scope: !15, file: !15, line: 311, type: !182, scopeLine: 312, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2)
+!190 = distinct !DILocation(line: 267, column: 9, scope: !191, inlinedAt: !184)
+!191 = distinct !DILexicalBlock(scope: !180, file: !15, line: 266, column: 5)
+!192 = !DILocation(line: 268, column: 5, scope: !191, inlinedAt: !184)
+!193 = !DILocation(line: 270, column: 22, scope: !181, inlinedAt: !184)
+!194 = !DILocation(line: 162, column: 12, scope: !122)
+!195 = !DILocation(line: 165, column: 14, scope: !196)
+!196 = distinct !DILexicalBlock(scope: !122, file: !15, line: 165, column: 9)
+!197 = !DILocation(line: 165, column: 9, scope: !122)
+!198 = !DILocalVariable(name: "pcCall", arg: 1, scope: !199, file: !15, line: 117, type: !202)
+!199 = distinct !DISubprogram(name: "prvFatalError", scope: !15, file: !15, line: 117, type: !200, scopeLine: 119, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !204)
+!200 = !DISubroutineType(types: !201)
+!201 = !{null, !202, !44}
+!202 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !203, size: 64)
+!203 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !53)
+!204 = !{!198, !205}
+!205 = !DILocalVariable(name: "iErrno", arg: 2, scope: !199, file: !15, line: 118, type: !44)
+!206 = !DILocation(line: 0, scope: !199, inlinedAt: !207)
+!207 = distinct !DILocation(line: 167, column: 9, scope: !208)
+!208 = distinct !DILexicalBlock(scope: !196, file: !15, line: 166, column: 5)
+!209 = !DILocation(line: 120, column: 14, scope: !199, inlinedAt: !207)
+!210 = !DILocation(line: 120, column: 42, scope: !199, inlinedAt: !207)
+!211 = !DILocation(line: 120, column: 5, scope: !199, inlinedAt: !207)
+!212 = !DILocation(line: 121, column: 5, scope: !199, inlinedAt: !207)
+!213 = !DILocation(line: 276, column: 22, scope: !214, inlinedAt: !215)
+!214 = distinct !DISubprogram(name: "vPortExitCritical", scope: !15, file: !15, line: 274, type: !182, scopeLine: 275, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2)
+!215 = distinct !DILocation(line: 170, column: 5, scope: !122)
+!216 = !DILocation(line: 279, column: 9, scope: !217, inlinedAt: !215)
+!217 = distinct !DILexicalBlock(scope: !214, file: !15, line: 279, column: 9)
+!218 = !DILocation(line: 279, column: 27, scope: !217, inlinedAt: !215)
+!219 = !DILocation(line: 279, column: 9, scope: !214, inlinedAt: !215)
+!220 = !DILocation(line: 319, column: 5, scope: !221, inlinedAt: !222)
+!221 = distinct !DISubprogram(name: "vPortEnableInterrupts", scope: !15, file: !15, line: 317, type: !182, scopeLine: 318, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2)
+!222 = distinct !DILocation(line: 281, column: 9, scope: !223, inlinedAt: !215)
+!223 = distinct !DILexicalBlock(scope: !217, file: !15, line: 280, column: 5)
+!224 = !DILocation(line: 282, column: 5, scope: !223, inlinedAt: !215)
+!225 = !DILocation(line: 143, column: 48, scope: !122)
+!226 = !DILocation(line: 173, column: 1, scope: !122)
+!227 = !DILocation(line: 172, column: 5, scope: !122)
+!228 = !DISubprogram(name: "pthread_once", scope: !229, file: !229, line: 509, type: !230, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!229 = !DIFile(filename: "/usr/include/pthread.h", directory: "", checksumkind: CSK_MD5, checksum: "5205981c6f80cc3dc1e81231df63d8ef")
+!230 = !DISubroutineType(types: !231)
+!231 = !{!44, !232, !233}
+!232 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !112, size: 64)
+!233 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !182, size: 64)
+!234 = distinct !DISubprogram(name: "prvSetupSignalsAndSchedulerPolicy", scope: !15, file: !15, line: 537, type: !182, scopeLine: 538, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !235)
+!235 = !{!236, !328}
+!236 = !DILocalVariable(name: "sigtick", scope: !234, file: !15, line: 539, type: !237)
+!237 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "sigaction", file: !238, line: 27, size: 1216, elements: !239)
+!238 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/sigaction.h", directory: "", checksumkind: CSK_MD5, checksum: "95401d18e887df415f59d7a2cb411c28")
+!239 = !{!240, !325, !326, !327}
+!240 = !DIDerivedType(tag: DW_TAG_member, name: "__sigaction_handler", scope: !237, file: !238, line: 38, baseType: !241, size: 64)
+!241 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !237, file: !238, line: 31, size: 64, elements: !242)
+!242 = !{!243, !244}
+!243 = !DIDerivedType(tag: DW_TAG_member, name: "sa_handler", scope: !241, file: !238, line: 34, baseType: !39, size: 64)
+!244 = !DIDerivedType(tag: DW_TAG_member, name: "sa_sigaction", scope: !241, file: !238, line: 36, baseType: !245, size: 64)
+!245 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !246, size: 64)
+!246 = !DISubroutineType(types: !247)
+!247 = !{null, !44, !248, !28}
+!248 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !249, size: 64)
+!249 = !DIDerivedType(tag: DW_TAG_typedef, name: "siginfo_t", file: !250, line: 124, baseType: !251)
+!250 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h", directory: "", checksumkind: CSK_MD5, checksum: "023cf7b0ef843da262cf07900eda0ac5")
+!251 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !250, line: 36, size: 1024, elements: !252)
+!252 = !{!253, !254, !255, !256, !257}
+!253 = !DIDerivedType(tag: DW_TAG_member, name: "si_signo", scope: !251, file: !250, line: 38, baseType: !44, size: 32)
+!254 = !DIDerivedType(tag: DW_TAG_member, name: "si_errno", scope: !251, file: !250, line: 40, baseType: !44, size: 32, offset: 32)
+!255 = !DIDerivedType(tag: DW_TAG_member, name: "si_code", scope: !251, file: !250, line: 42, baseType: !44, size: 32, offset: 64)
+!256 = !DIDerivedType(tag: DW_TAG_member, name: "__pad0", scope: !251, file: !250, line: 48, baseType: !44, size: 32, offset: 96)
+!257 = !DIDerivedType(tag: DW_TAG_member, name: "_sifields", scope: !251, file: !250, line: 123, baseType: !258, size: 896, offset: 128)
+!258 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !251, file: !250, line: 51, size: 896, elements: !259)
+!259 = !{!260, !264, !271, !283, !289, !298, !314, !319}
+!260 = !DIDerivedType(tag: DW_TAG_member, name: "_pad", scope: !258, file: !250, line: 53, baseType: !261, size: 896)
+!261 = !DICompositeType(tag: DW_TAG_array_type, baseType: !44, size: 896, elements: !262)
+!262 = !{!263}
+!263 = !DISubrange(count: 28)
+!264 = !DIDerivedType(tag: DW_TAG_member, name: "_kill", scope: !258, file: !250, line: 60, baseType: !265, size: 64)
+!265 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 56, size: 64, elements: !266)
+!266 = !{!267, !269}
+!267 = !DIDerivedType(tag: DW_TAG_member, name: "si_pid", scope: !265, file: !250, line: 58, baseType: !268, size: 32)
+!268 = !DIDerivedType(tag: DW_TAG_typedef, name: "__pid_t", file: !104, line: 154, baseType: !44)
+!269 = !DIDerivedType(tag: DW_TAG_member, name: "si_uid", scope: !265, file: !250, line: 59, baseType: !270, size: 32, offset: 32)
+!270 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uid_t", file: !104, line: 146, baseType: !7)
+!271 = !DIDerivedType(tag: DW_TAG_member, name: "_timer", scope: !258, file: !250, line: 68, baseType: !272, size: 128)
+!272 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 63, size: 128, elements: !273)
+!273 = !{!274, !275, !276}
+!274 = !DIDerivedType(tag: DW_TAG_member, name: "si_tid", scope: !272, file: !250, line: 65, baseType: !44, size: 32)
+!275 = !DIDerivedType(tag: DW_TAG_member, name: "si_overrun", scope: !272, file: !250, line: 66, baseType: !44, size: 32, offset: 32)
+!276 = !DIDerivedType(tag: DW_TAG_member, name: "si_sigval", scope: !272, file: !250, line: 67, baseType: !277, size: 64, offset: 64)
+!277 = !DIDerivedType(tag: DW_TAG_typedef, name: "__sigval_t", file: !278, line: 30, baseType: !279)
+!278 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h", directory: "", checksumkind: CSK_MD5, checksum: "bc7605d16e396c16f725f8da13f6eb20")
+!279 = distinct !DICompositeType(tag: DW_TAG_union_type, name: "sigval", file: !278, line: 24, size: 64, elements: !280)
+!280 = !{!281, !282}
+!281 = !DIDerivedType(tag: DW_TAG_member, name: "sival_int", scope: !279, file: !278, line: 26, baseType: !44, size: 32)
+!282 = !DIDerivedType(tag: DW_TAG_member, name: "sival_ptr", scope: !279, file: !278, line: 27, baseType: !28, size: 64)
+!283 = !DIDerivedType(tag: DW_TAG_member, name: "_rt", scope: !258, file: !250, line: 76, baseType: !284, size: 128)
+!284 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 71, size: 128, elements: !285)
+!285 = !{!286, !287, !288}
+!286 = !DIDerivedType(tag: DW_TAG_member, name: "si_pid", scope: !284, file: !250, line: 73, baseType: !268, size: 32)
+!287 = !DIDerivedType(tag: DW_TAG_member, name: "si_uid", scope: !284, file: !250, line: 74, baseType: !270, size: 32, offset: 32)
+!288 = !DIDerivedType(tag: DW_TAG_member, name: "si_sigval", scope: !284, file: !250, line: 75, baseType: !277, size: 64, offset: 64)
+!289 = !DIDerivedType(tag: DW_TAG_member, name: "_sigchld", scope: !258, file: !250, line: 86, baseType: !290, size: 256)
+!290 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 79, size: 256, elements: !291)
+!291 = !{!292, !293, !294, !295, !297}
+!292 = !DIDerivedType(tag: DW_TAG_member, name: "si_pid", scope: !290, file: !250, line: 81, baseType: !268, size: 32)
+!293 = !DIDerivedType(tag: DW_TAG_member, name: "si_uid", scope: !290, file: !250, line: 82, baseType: !270, size: 32, offset: 32)
+!294 = !DIDerivedType(tag: DW_TAG_member, name: "si_status", scope: !290, file: !250, line: 83, baseType: !44, size: 32, offset: 64)
+!295 = !DIDerivedType(tag: DW_TAG_member, name: "si_utime", scope: !290, file: !250, line: 84, baseType: !296, size: 64, offset: 128)
+!296 = !DIDerivedType(tag: DW_TAG_typedef, name: "__clock_t", file: !104, line: 156, baseType: !33)
+!297 = !DIDerivedType(tag: DW_TAG_member, name: "si_stime", scope: !290, file: !250, line: 85, baseType: !296, size: 64, offset: 192)
+!298 = !DIDerivedType(tag: DW_TAG_member, name: "_sigfault", scope: !258, file: !250, line: 105, baseType: !299, size: 256)
+!299 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 89, size: 256, elements: !300)
+!300 = !{!301, !302, !304}
+!301 = !DIDerivedType(tag: DW_TAG_member, name: "si_addr", scope: !299, file: !250, line: 91, baseType: !28, size: 64)
+!302 = !DIDerivedType(tag: DW_TAG_member, name: "si_addr_lsb", scope: !299, file: !250, line: 93, baseType: !303, size: 16, offset: 64)
+!303 = !DIBasicType(name: "short", size: 16, encoding: DW_ATE_signed)
+!304 = !DIDerivedType(tag: DW_TAG_member, name: "_bounds", scope: !299, file: !250, line: 104, baseType: !305, size: 128, offset: 128)
+!305 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !299, file: !250, line: 94, size: 128, elements: !306)
+!306 = !{!307, !312}
+!307 = !DIDerivedType(tag: DW_TAG_member, name: "_addr_bnd", scope: !305, file: !250, line: 101, baseType: !308, size: 128)
+!308 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !305, file: !250, line: 97, size: 128, elements: !309)
+!309 = !{!310, !311}
+!310 = !DIDerivedType(tag: DW_TAG_member, name: "_lower", scope: !308, file: !250, line: 99, baseType: !28, size: 64)
+!311 = !DIDerivedType(tag: DW_TAG_member, name: "_upper", scope: !308, file: !250, line: 100, baseType: !28, size: 64, offset: 64)
+!312 = !DIDerivedType(tag: DW_TAG_member, name: "_pkey", scope: !305, file: !250, line: 103, baseType: !313, size: 32)
+!313 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uint32_t", file: !104, line: 42, baseType: !7)
+!314 = !DIDerivedType(tag: DW_TAG_member, name: "_sigpoll", scope: !258, file: !250, line: 112, baseType: !315, size: 128)
+!315 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 108, size: 128, elements: !316)
+!316 = !{!317, !318}
+!317 = !DIDerivedType(tag: DW_TAG_member, name: "si_band", scope: !315, file: !250, line: 110, baseType: !33, size: 64)
+!318 = !DIDerivedType(tag: DW_TAG_member, name: "si_fd", scope: !315, file: !250, line: 111, baseType: !44, size: 32, offset: 64)
+!319 = !DIDerivedType(tag: DW_TAG_member, name: "_sigsys", scope: !258, file: !250, line: 121, baseType: !320, size: 128)
+!320 = distinct !DICompositeType(tag: DW_TAG_structure_type, scope: !258, file: !250, line: 116, size: 128, elements: !321)
+!321 = !{!322, !323, !324}
+!322 = !DIDerivedType(tag: DW_TAG_member, name: "_call_addr", scope: !320, file: !250, line: 118, baseType: !28, size: 64)
+!323 = !DIDerivedType(tag: DW_TAG_member, name: "_syscall", scope: !320, file: !250, line: 119, baseType: !44, size: 32, offset: 64)
+!324 = !DIDerivedType(tag: DW_TAG_member, name: "_arch", scope: !320, file: !250, line: 120, baseType: !7, size: 32, offset: 96)
+!325 = !DIDerivedType(tag: DW_TAG_member, name: "sa_mask", scope: !237, file: !238, line: 46, baseType: !70, size: 1024, offset: 64)
+!326 = !DIDerivedType(tag: DW_TAG_member, name: "sa_flags", scope: !237, file: !238, line: 49, baseType: !44, size: 32, offset: 1088)
+!327 = !DIDerivedType(tag: DW_TAG_member, name: "sa_restorer", scope: !237, file: !238, line: 52, baseType: !233, size: 64, offset: 1152)
+!328 = !DILocalVariable(name: "iRet", scope: !234, file: !15, line: 540, type: !44)
+!329 = distinct !DIAssignID()
+!330 = !DILocation(line: 0, scope: !234)
+!331 = !DILocation(line: 539, column: 5, scope: !234)
+!332 = !DILocation(line: 542, column: 19, scope: !234)
+!333 = !DILocation(line: 542, column: 17, scope: !234)
+!334 = !DILocation(line: 545, column: 5, scope: !234)
+!335 = !DILocation(line: 549, column: 5, scope: !234)
+!336 = !DILocation(line: 558, column: 14, scope: !234)
+!337 = !DILocation(line: 562, column: 13, scope: !234)
+!338 = !DILocation(line: 562, column: 22, scope: !234)
+!339 = !{!340, !342, i64 136}
+!340 = !{!"sigaction", !155, i64 0, !341, i64 8, !342, i64 136, !157, i64 144}
+!341 = !{!"", !155, i64 0}
+!342 = !{!"int", !155, i64 0}
+!343 = distinct !DIAssignID()
+!344 = !DILocation(line: 563, column: 24, scope: !234)
+!345 = !{!155, !155, i64 0}
+!346 = distinct !DIAssignID()
+!347 = !DILocation(line: 564, column: 26, scope: !234)
+!348 = !DILocation(line: 564, column: 5, scope: !234)
+!349 = !DILocation(line: 566, column: 12, scope: !234)
+!350 = !DILocation(line: 568, column: 14, scope: !351)
+!351 = distinct !DILexicalBlock(scope: !234, file: !15, line: 568, column: 9)
+!352 = !DILocation(line: 568, column: 9, scope: !234)
+!353 = !DILocation(line: 570, column: 37, scope: !354)
+!354 = distinct !DILexicalBlock(scope: !351, file: !15, line: 569, column: 5)
+!355 = !{!342, !342, i64 0}
+!356 = !DILocation(line: 0, scope: !199, inlinedAt: !357)
+!357 = distinct !DILocation(line: 570, column: 9, scope: !354)
+!358 = !DILocation(line: 120, column: 14, scope: !199, inlinedAt: !357)
+!359 = !DILocation(line: 120, column: 42, scope: !199, inlinedAt: !357)
+!360 = !DILocation(line: 120, column: 5, scope: !199, inlinedAt: !357)
+!361 = !DILocation(line: 121, column: 5, scope: !199, inlinedAt: !357)
+!362 = !DILocation(line: 572, column: 1, scope: !234)
+!363 = !DISubprogram(name: "pthread_attr_init", scope: !229, file: !229, line: 285, type: !364, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!364 = !DISubroutineType(types: !365)
+!365 = !{!44, !366}
+!366 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !132, size: 64)
+!367 = !DISubprogram(name: "pthread_attr_setstack", scope: !229, file: !229, line: 387, type: !368, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!368 = !DISubroutineType(types: !369)
+!369 = !{!44, !366, !28, !141}
+!370 = !DISubprogram(name: "fprintf", scope: !371, file: !371, line: 350, type: !372, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!371 = !DIFile(filename: "/usr/include/stdio.h", directory: "", checksumkind: CSK_MD5, checksum: "f31eefcc3f15835fc5a4023a625cf609")
+!372 = !DISubroutineType(types: !373)
+!373 = !{!44, !374, !430, null}
+!374 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !375)
+!375 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !376, size: 64)
+!376 = !DIDerivedType(tag: DW_TAG_typedef, name: "FILE", file: !377, line: 7, baseType: !378)
+!377 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/FILE.h", directory: "", checksumkind: CSK_MD5, checksum: "571f9fb6223c42439075fdde11a0de5d")
+!378 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "_IO_FILE", file: !379, line: 49, size: 1728, elements: !380)
+!379 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h", directory: "", checksumkind: CSK_MD5, checksum: "1bad07471b7974df4ecc1d1c2ca207e6")
+!380 = !{!381, !382, !384, !385, !386, !387, !388, !389, !390, !391, !392, !393, !394, !397, !399, !400, !401, !403, !405, !407, !411, !414, !416, !419, !422, !423, !424, !425, !426}
+!381 = !DIDerivedType(tag: DW_TAG_member, name: "_flags", scope: !378, file: !379, line: 51, baseType: !44, size: 32)
+!382 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_read_ptr", scope: !378, file: !379, line: 54, baseType: !383, size: 64, offset: 64)
+!383 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !53, size: 64)
+!384 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_read_end", scope: !378, file: !379, line: 55, baseType: !383, size: 64, offset: 128)
+!385 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_read_base", scope: !378, file: !379, line: 56, baseType: !383, size: 64, offset: 192)
+!386 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_write_base", scope: !378, file: !379, line: 57, baseType: !383, size: 64, offset: 256)
+!387 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_write_ptr", scope: !378, file: !379, line: 58, baseType: !383, size: 64, offset: 320)
+!388 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_write_end", scope: !378, file: !379, line: 59, baseType: !383, size: 64, offset: 384)
+!389 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_buf_base", scope: !378, file: !379, line: 60, baseType: !383, size: 64, offset: 448)
+!390 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_buf_end", scope: !378, file: !379, line: 61, baseType: !383, size: 64, offset: 512)
+!391 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_save_base", scope: !378, file: !379, line: 64, baseType: !383, size: 64, offset: 576)
+!392 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_backup_base", scope: !378, file: !379, line: 65, baseType: !383, size: 64, offset: 640)
+!393 = !DIDerivedType(tag: DW_TAG_member, name: "_IO_save_end", scope: !378, file: !379, line: 66, baseType: !383, size: 64, offset: 704)
+!394 = !DIDerivedType(tag: DW_TAG_member, name: "_markers", scope: !378, file: !379, line: 68, baseType: !395, size: 64, offset: 768)
+!395 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !396, size: 64)
+!396 = !DICompositeType(tag: DW_TAG_structure_type, name: "_IO_marker", file: !379, line: 36, flags: DIFlagFwdDecl)
+!397 = !DIDerivedType(tag: DW_TAG_member, name: "_chain", scope: !378, file: !379, line: 70, baseType: !398, size: 64, offset: 832)
+!398 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !378, size: 64)
+!399 = !DIDerivedType(tag: DW_TAG_member, name: "_fileno", scope: !378, file: !379, line: 72, baseType: !44, size: 32, offset: 896)
+!400 = !DIDerivedType(tag: DW_TAG_member, name: "_flags2", scope: !378, file: !379, line: 73, baseType: !44, size: 32, offset: 928)
+!401 = !DIDerivedType(tag: DW_TAG_member, name: "_old_offset", scope: !378, file: !379, line: 74, baseType: !402, size: 64, offset: 960)
+!402 = !DIDerivedType(tag: DW_TAG_typedef, name: "__off_t", file: !104, line: 152, baseType: !33)
+!403 = !DIDerivedType(tag: DW_TAG_member, name: "_cur_column", scope: !378, file: !379, line: 77, baseType: !404, size: 16, offset: 1024)
+!404 = !DIBasicType(name: "unsigned short", size: 16, encoding: DW_ATE_unsigned)
+!405 = !DIDerivedType(tag: DW_TAG_member, name: "_vtable_offset", scope: !378, file: !379, line: 78, baseType: !406, size: 8, offset: 1040)
+!406 = !DIBasicType(name: "signed char", size: 8, encoding: DW_ATE_signed_char)
+!407 = !DIDerivedType(tag: DW_TAG_member, name: "_shortbuf", scope: !378, file: !379, line: 79, baseType: !408, size: 8, offset: 1048)
+!408 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 8, elements: !409)
+!409 = !{!410}
+!410 = !DISubrange(count: 1)
+!411 = !DIDerivedType(tag: DW_TAG_member, name: "_lock", scope: !378, file: !379, line: 81, baseType: !412, size: 64, offset: 1088)
+!412 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !413, size: 64)
+!413 = !DIDerivedType(tag: DW_TAG_typedef, name: "_IO_lock_t", file: !379, line: 43, baseType: null)
+!414 = !DIDerivedType(tag: DW_TAG_member, name: "_offset", scope: !378, file: !379, line: 89, baseType: !415, size: 64, offset: 1152)
+!415 = !DIDerivedType(tag: DW_TAG_typedef, name: "__off64_t", file: !104, line: 153, baseType: !33)
+!416 = !DIDerivedType(tag: DW_TAG_member, name: "_codecvt", scope: !378, file: !379, line: 91, baseType: !417, size: 64, offset: 1216)
+!417 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !418, size: 64)
+!418 = !DICompositeType(tag: DW_TAG_structure_type, name: "_IO_codecvt", file: !379, line: 37, flags: DIFlagFwdDecl)
+!419 = !DIDerivedType(tag: DW_TAG_member, name: "_wide_data", scope: !378, file: !379, line: 92, baseType: !420, size: 64, offset: 1280)
+!420 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !421, size: 64)
+!421 = !DICompositeType(tag: DW_TAG_structure_type, name: "_IO_wide_data", file: !379, line: 38, flags: DIFlagFwdDecl)
+!422 = !DIDerivedType(tag: DW_TAG_member, name: "_freeres_list", scope: !378, file: !379, line: 93, baseType: !398, size: 64, offset: 1344)
+!423 = !DIDerivedType(tag: DW_TAG_member, name: "_freeres_buf", scope: !378, file: !379, line: 94, baseType: !28, size: 64, offset: 1408)
+!424 = !DIDerivedType(tag: DW_TAG_member, name: "__pad5", scope: !378, file: !379, line: 95, baseType: !141, size: 64, offset: 1472)
+!425 = !DIDerivedType(tag: DW_TAG_member, name: "_mode", scope: !378, file: !379, line: 96, baseType: !44, size: 32, offset: 1536)
+!426 = !DIDerivedType(tag: DW_TAG_member, name: "_unused2", scope: !378, file: !379, line: 98, baseType: !427, size: 160, offset: 1568)
+!427 = !DICompositeType(tag: DW_TAG_array_type, baseType: !53, size: 160, elements: !428)
+!428 = !{!429}
+!429 = !DISubrange(count: 20)
+!430 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !202)
+!431 = !DISubprogram(name: "event_create", scope: !37, file: !37, line: 37, type: !432, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!432 = !DISubroutineType(types: !433)
+!433 = !{!35}
+!434 = !DILocation(line: 265, column: 9, scope: !180)
+!435 = !DILocation(line: 265, column: 27, scope: !180)
+!436 = !DILocation(line: 265, column: 9, scope: !181)
+!437 = !DILocation(line: 313, column: 5, scope: !189, inlinedAt: !438)
+!438 = distinct !DILocation(line: 267, column: 9, scope: !191)
+!439 = !DILocation(line: 268, column: 5, scope: !191)
+!440 = !DILocation(line: 270, column: 22, scope: !181)
+!441 = !DILocation(line: 271, column: 1, scope: !181)
+!442 = !DISubprogram(name: "pthread_create", scope: !229, file: !229, line: 202, type: !443, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!443 = !DISubroutineType(types: !444)
+!444 = !{!44, !445, !447, !450, !453}
+!445 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !446)
+!446 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !19, size: 64)
+!447 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !448)
+!448 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !449, size: 64)
+!449 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !132)
+!450 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !451, size: 64)
+!451 = !DISubroutineType(types: !452)
+!452 = !{!28, !28}
+!453 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !28)
+!454 = distinct !DISubprogram(name: "prvWaitForStart", scope: !15, file: !15, line: 454, type: !451, scopeLine: 455, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !455)
+!455 = !{!456, !457}
+!456 = !DILocalVariable(name: "pvParams", arg: 1, scope: !454, file: !15, line: 454, type: !28)
+!457 = !DILocalVariable(name: "pxThread", scope: !454, file: !15, line: 456, type: !13)
+!458 = !DILocation(line: 0, scope: !454)
+!459 = !DILocation(line: 458, column: 5, scope: !454)
+!460 = !DILocalVariable(name: "thread", arg: 1, scope: !461, file: !15, line: 508, type: !13)
+!461 = distinct !DISubprogram(name: "prvSuspendSelf", scope: !15, file: !15, line: 508, type: !462, scopeLine: 509, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !464)
+!462 = !DISubroutineType(types: !463)
+!463 = !{null, !13}
+!464 = !{!460}
+!465 = !DILocation(line: 0, scope: !461, inlinedAt: !466)
+!466 = distinct !DILocation(line: 458, column: 5, scope: !454)
+!467 = !DILocation(line: 523, column: 5, scope: !461, inlinedAt: !466)
+!468 = !DILocation(line: 461, column: 23, scope: !454)
+!469 = !DILocation(line: 319, column: 5, scope: !221, inlinedAt: !470)
+!470 = distinct !DILocation(line: 462, column: 5, scope: !454)
+!471 = !DILocation(line: 465, column: 15, scope: !454)
+!472 = !DILocation(line: 465, column: 33, scope: !454)
+!473 = !DILocation(line: 465, column: 5, scope: !454)
+!474 = !DILocation(line: 472, column: 5, scope: !475)
+!475 = distinct !DILexicalBlock(scope: !454, file: !15, line: 472, column: 5)
+!476 = !DILocation(line: 474, column: 5, scope: !454)
+!477 = !DILocation(line: 276, column: 22, scope: !214)
+!478 = !DILocation(line: 279, column: 9, scope: !217)
+!479 = !DILocation(line: 279, column: 27, scope: !217)
+!480 = !DILocation(line: 279, column: 9, scope: !214)
+!481 = !DILocation(line: 319, column: 5, scope: !221, inlinedAt: !482)
+!482 = distinct !DILocation(line: 281, column: 9, scope: !223)
+!483 = !DILocation(line: 282, column: 5, scope: !223)
+!484 = !DILocation(line: 283, column: 1, scope: !214)
+!485 = distinct !DISubprogram(name: "xPortStartScheduler", scope: !15, file: !15, line: 188, type: !486, scopeLine: 189, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !488)
+!486 = !DISubroutineType(types: !487)
+!487 = !{!31}
+!488 = !{!489, !490}
+!489 = !DILocalVariable(name: "iSignal", scope: !485, file: !15, line: 190, type: !44)
+!490 = !DILocalVariable(name: "xSignals", scope: !485, file: !15, line: 191, type: !68)
+!491 = distinct !DIAssignID()
+!492 = distinct !DIAssignID()
+!493 = distinct !DIAssignID()
+!494 = !DILocation(line: 0, scope: !485)
+!495 = distinct !DIAssignID()
+!496 = !DILocation(line: 190, column: 5, scope: !485)
+!497 = !DILocation(line: 191, column: 5, scope: !485)
+!498 = !DILocation(line: 193, column: 19, scope: !485)
+!499 = !DILocation(line: 193, column: 17, scope: !485)
+!500 = !DILocalVariable(name: "itimer", scope: !501, file: !15, line: 358, type: !504)
+!501 = distinct !DISubprogram(name: "prvSetupTimerInterrupt", scope: !15, file: !15, line: 356, type: !182, scopeLine: 357, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !502)
+!502 = !{!500, !503}
+!503 = !DILocalVariable(name: "iRet", scope: !501, file: !15, line: 359, type: !44)
+!504 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "itimerval", file: !6, line: 130, size: 256, elements: !505)
+!505 = !{!506, !514}
+!506 = !DIDerivedType(tag: DW_TAG_member, name: "it_interval", scope: !504, file: !6, line: 133, baseType: !507, size: 128)
+!507 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "timeval", file: !508, line: 8, size: 128, elements: !509)
+!508 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h", directory: "", checksumkind: CSK_MD5, checksum: "9b45d950050c215f216850b27bd1e8f3")
+!509 = !{!510, !512}
+!510 = !DIDerivedType(tag: DW_TAG_member, name: "tv_sec", scope: !507, file: !508, line: 14, baseType: !511, size: 64)
+!511 = !DIDerivedType(tag: DW_TAG_typedef, name: "__time_t", file: !104, line: 160, baseType: !33)
+!512 = !DIDerivedType(tag: DW_TAG_member, name: "tv_usec", scope: !507, file: !508, line: 15, baseType: !513, size: 64, offset: 64)
+!513 = !DIDerivedType(tag: DW_TAG_typedef, name: "__suseconds_t", file: !104, line: 162, baseType: !33)
+!514 = !DIDerivedType(tag: DW_TAG_member, name: "it_value", scope: !504, file: !6, line: 135, baseType: !507, size: 128, offset: 128)
+!515 = !DILocation(line: 0, scope: !501, inlinedAt: !516)
+!516 = distinct !DILocation(line: 197, column: 5, scope: !485)
+!517 = !DILocation(line: 358, column: 5, scope: !501, inlinedAt: !516)
+!518 = !DILocation(line: 362, column: 12, scope: !501, inlinedAt: !516)
+!519 = !DILocation(line: 364, column: 14, scope: !520, inlinedAt: !516)
+!520 = distinct !DILexicalBlock(scope: !501, file: !15, line: 364, column: 9)
+!521 = !DILocation(line: 364, column: 9, scope: !501, inlinedAt: !516)
+!522 = !DILocation(line: 366, column: 37, scope: !523, inlinedAt: !516)
+!523 = distinct !DILexicalBlock(scope: !520, file: !15, line: 365, column: 5)
+!524 = !DILocation(line: 0, scope: !199, inlinedAt: !525)
+!525 = distinct !DILocation(line: 366, column: 9, scope: !523, inlinedAt: !516)
+!526 = !DILocation(line: 120, column: 14, scope: !199, inlinedAt: !525)
+!527 = !DILocation(line: 120, column: 42, scope: !199, inlinedAt: !525)
+!528 = !DILocation(line: 120, column: 5, scope: !199, inlinedAt: !525)
+!529 = !DILocation(line: 121, column: 5, scope: !199, inlinedAt: !525)
+!530 = !DILocation(line: 370, column: 31, scope: !501, inlinedAt: !516)
+!531 = !{!532, !154, i64 0}
+!532 = !{!"itimerval", !533, i64 0, !533, i64 16}
+!533 = !{!"timeval", !154, i64 0, !154, i64 8}
+!534 = distinct !DIAssignID()
+!535 = !DILocation(line: 371, column: 24, scope: !501, inlinedAt: !516)
+!536 = !DILocation(line: 371, column: 32, scope: !501, inlinedAt: !516)
+!537 = !{!532, !154, i64 8}
+!538 = distinct !DIAssignID()
+!539 = !DILocation(line: 374, column: 12, scope: !501, inlinedAt: !516)
+!540 = !DILocation(line: 374, column: 28, scope: !501, inlinedAt: !516)
+!541 = !{!532, !154, i64 16}
+!542 = distinct !DIAssignID()
+!543 = !DILocation(line: 375, column: 21, scope: !501, inlinedAt: !516)
+!544 = !DILocation(line: 375, column: 29, scope: !501, inlinedAt: !516)
+!545 = !{!532, !154, i64 24}
+!546 = distinct !DIAssignID()
+!547 = !DILocation(line: 378, column: 12, scope: !501, inlinedAt: !516)
+!548 = !DILocation(line: 380, column: 14, scope: !549, inlinedAt: !516)
+!549 = distinct !DILexicalBlock(scope: !501, file: !15, line: 380, column: 9)
+!550 = !DILocation(line: 380, column: 9, scope: !501, inlinedAt: !516)
+!551 = !DILocation(line: 382, column: 37, scope: !552, inlinedAt: !516)
+!552 = distinct !DILexicalBlock(scope: !549, file: !15, line: 381, column: 5)
+!553 = !DILocation(line: 0, scope: !199, inlinedAt: !554)
+!554 = distinct !DILocation(line: 382, column: 9, scope: !552, inlinedAt: !516)
+!555 = !DILocation(line: 120, column: 14, scope: !199, inlinedAt: !554)
+!556 = !DILocation(line: 120, column: 42, scope: !199, inlinedAt: !554)
+!557 = !DILocation(line: 120, column: 5, scope: !199, inlinedAt: !554)
+!558 = !DILocation(line: 121, column: 5, scope: !199, inlinedAt: !554)
+!559 = !DILocalVariable(name: "t", scope: !560, file: !15, line: 339, type: !564)
+!560 = distinct !DISubprogram(name: "prvGetTimeNs", scope: !15, file: !15, line: 337, type: !561, scopeLine: 338, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !563)
+!561 = !DISubroutineType(types: !562)
+!562 = !{!101}
+!563 = !{!559}
+!564 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "timespec", file: !565, line: 11, size: 128, elements: !566)
+!565 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h", directory: "", checksumkind: CSK_MD5, checksum: "55dc154df3f21a5aa944dcafba9b43f6")
+!566 = !{!567, !568}
+!567 = !DIDerivedType(tag: DW_TAG_member, name: "tv_sec", scope: !564, file: !565, line: 16, baseType: !511, size: 64)
+!568 = !DIDerivedType(tag: DW_TAG_member, name: "tv_nsec", scope: !564, file: !565, line: 21, baseType: !569, size: 64, offset: 64)
+!569 = !DIDerivedType(tag: DW_TAG_typedef, name: "__syscall_slong_t", file: !104, line: 197, baseType: !33)
+!570 = !DILocation(line: 0, scope: !560, inlinedAt: !571)
+!571 = distinct !DILocation(line: 385, column: 22, scope: !501, inlinedAt: !516)
+!572 = !DILocation(line: 339, column: 5, scope: !560, inlinedAt: !571)
+!573 = !DILocation(line: 341, column: 5, scope: !560, inlinedAt: !571)
+!574 = !DILocation(line: 344, column: 1, scope: !560, inlinedAt: !571)
+!575 = !DILocation(line: 386, column: 1, scope: !501, inlinedAt: !516)
+!576 = !DILocation(line: 204, column: 5, scope: !485)
+!577 = !DILocation(line: 205, column: 5, scope: !485)
+!578 = !DILocation(line: 206, column: 14, scope: !485)
+!579 = !DILocation(line: 178, column: 54, scope: !580, inlinedAt: !583)
+!580 = distinct !DISubprogram(name: "vPortStartFirstTask", scope: !15, file: !15, line: 176, type: !182, scopeLine: 177, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !581)
+!581 = !{!582}
+!582 = !DILocalVariable(name: "pxFirstThread", scope: !580, file: !15, line: 178, type: !13)
+!583 = distinct !DILocation(line: 209, column: 5, scope: !485)
+!584 = !DILocation(line: 178, column: 32, scope: !580, inlinedAt: !583)
+!585 = !DILocalVariable(name: "xTask", arg: 1, scope: !586, file: !15, line: 86, type: !589)
+!586 = distinct !DISubprogram(name: "prvGetThreadFromTask", scope: !15, file: !15, line: 86, type: !587, scopeLine: 87, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !593)
+!587 = !DISubroutineType(types: !588)
+!588 = !{!13, !589}
+!589 = !DIDerivedType(tag: DW_TAG_typedef, name: "TaskHandle_t", file: !590, line: 87, baseType: !591)
+!590 = !DIFile(filename: "Source/include/task.h", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS", checksumkind: CSK_MD5, checksum: "f5b1ec2c31920a04652e1bbf80f1f0a7")
+!591 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !592, size: 64)
+!592 = !DICompositeType(tag: DW_TAG_structure_type, name: "tskTaskControlBlock", file: !590, line: 86, flags: DIFlagFwdDecl)
+!593 = !{!585, !594}
+!594 = !DILocalVariable(name: "pxTopOfStack", scope: !586, file: !15, line: 88, type: !46)
+!595 = !DILocation(line: 0, scope: !586, inlinedAt: !596)
+!596 = distinct !DILocation(line: 178, column: 32, scope: !580, inlinedAt: !583)
+!597 = !DILocation(line: 90, column: 42, scope: !586, inlinedAt: !596)
+!598 = !DILocation(line: 0, scope: !580, inlinedAt: !583)
+!599 = !DILocalVariable(name: "xThreadId", arg: 1, scope: !600, file: !15, line: 528, type: !13)
+!600 = distinct !DISubprogram(name: "prvResumeThread", scope: !15, file: !15, line: 528, type: !462, scopeLine: 529, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !601)
+!601 = !{!599}
+!602 = !DILocation(line: 0, scope: !600, inlinedAt: !603)
+!603 = distinct !DILocation(line: 181, column: 5, scope: !580, inlinedAt: !583)
+!604 = !DILocation(line: 530, column: 38, scope: !605, inlinedAt: !603)
+!605 = distinct !DILexicalBlock(scope: !600, file: !15, line: 530, column: 9)
+!606 = !{!153, !154, i64 0}
+!607 = !DILocation(line: 530, column: 24, scope: !605, inlinedAt: !603)
+!608 = !DILocation(line: 530, column: 9, scope: !600, inlinedAt: !603)
+!609 = !DILocation(line: 532, column: 34, scope: !610, inlinedAt: !603)
+!610 = distinct !DILexicalBlock(scope: !605, file: !15, line: 531, column: 5)
+!611 = !DILocation(line: 532, column: 9, scope: !610, inlinedAt: !603)
+!612 = !DILocation(line: 533, column: 5, scope: !610, inlinedAt: !603)
+!613 = !DILocation(line: 212, column: 12, scope: !485)
+!614 = !DILocation(line: 212, column: 5, scope: !485)
+!615 = !DILocation(line: 214, column: 9, scope: !616)
+!616 = distinct !DILexicalBlock(scope: !485, file: !15, line: 213, column: 5)
+!617 = distinct !{!617, !614, !618, !619}
+!618 = !DILocation(line: 215, column: 5, scope: !485)
+!619 = !{!"llvm.loop.mustprogress"}
+!620 = !DILocation(line: 219, column: 28, scope: !485)
+!621 = !DILocalVariable(name: "pxTaskToDelete", arg: 1, scope: !622, file: !15, line: 441, type: !28)
+!622 = distinct !DISubprogram(name: "vPortCancelThread", scope: !15, file: !15, line: 441, type: !26, scopeLine: 442, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !623)
+!623 = !{!621, !624}
+!624 = !DILocalVariable(name: "pxThreadToCancel", scope: !622, file: !15, line: 443, type: !13)
+!625 = !DILocation(line: 0, scope: !622, inlinedAt: !626)
+!626 = distinct !DILocation(line: 219, column: 9, scope: !485)
+!627 = !DILocation(line: 443, column: 35, scope: !622, inlinedAt: !626)
+!628 = !DILocation(line: 0, scope: !586, inlinedAt: !629)
+!629 = distinct !DILocation(line: 443, column: 35, scope: !622, inlinedAt: !626)
+!630 = !DILocation(line: 90, column: 42, scope: !586, inlinedAt: !629)
+!631 = !DILocation(line: 448, column: 39, scope: !622, inlinedAt: !626)
+!632 = !DILocation(line: 448, column: 5, scope: !622, inlinedAt: !626)
+!633 = !DILocation(line: 449, column: 37, scope: !622, inlinedAt: !626)
+!634 = !DILocation(line: 449, column: 5, scope: !622, inlinedAt: !626)
+!635 = !DILocation(line: 450, column: 37, scope: !622, inlinedAt: !626)
+!636 = !DILocation(line: 450, column: 5, scope: !622, inlinedAt: !626)
+!637 = !DILocation(line: 224, column: 28, scope: !485)
+!638 = !DILocation(line: 0, scope: !622, inlinedAt: !639)
+!639 = distinct !DILocation(line: 224, column: 9, scope: !485)
+!640 = !DILocation(line: 443, column: 35, scope: !622, inlinedAt: !639)
+!641 = !DILocation(line: 0, scope: !586, inlinedAt: !642)
+!642 = distinct !DILocation(line: 443, column: 35, scope: !622, inlinedAt: !639)
+!643 = !DILocation(line: 90, column: 42, scope: !586, inlinedAt: !642)
+!644 = !DILocation(line: 448, column: 39, scope: !622, inlinedAt: !639)
+!645 = !DILocation(line: 448, column: 5, scope: !622, inlinedAt: !639)
+!646 = !DILocation(line: 449, column: 37, scope: !622, inlinedAt: !639)
+!647 = !DILocation(line: 449, column: 5, scope: !622, inlinedAt: !639)
+!648 = !DILocation(line: 450, column: 37, scope: !622, inlinedAt: !639)
+!649 = !DILocation(line: 450, column: 5, scope: !622, inlinedAt: !639)
+!650 = !DILocation(line: 228, column: 14, scope: !485)
+!651 = !DILocation(line: 231, column: 1, scope: !485)
+!652 = !DILocation(line: 230, column: 5, scope: !485)
+!653 = !DISubprogram(name: "pthread_self", scope: !229, file: !229, line: 273, type: !654, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!654 = !DISubroutineType(types: !655)
+!655 = !{!19}
+!656 = !DISubprogram(name: "sigemptyset", scope: !40, file: !40, line: 199, type: !657, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!657 = !DISubroutineType(types: !658)
+!658 = !{!44, !659}
+!659 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !68, size: 64)
+!660 = !DISubprogram(name: "sigaddset", scope: !40, file: !40, line: 205, type: !661, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!661 = !DISubroutineType(types: !662)
+!662 = !{!44, !659, !44}
+!663 = !DISubprogram(name: "pthread_sigmask", scope: !664, file: !664, line: 31, type: !665, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!664 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/sigthread.h", directory: "", checksumkind: CSK_MD5, checksum: "d940c5b4954a0a2c917ac4439b95f766")
+!665 = !DISubroutineType(types: !666)
+!666 = !{!44, !44, !667, !670}
+!667 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !668)
+!668 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !669, size: 64)
+!669 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !70)
+!670 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !671)
+!671 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !70, size: 64)
+!672 = !DISubprogram(name: "sigwait", scope: !40, file: !40, line: 255, type: !673, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!673 = !DISubroutineType(types: !674)
+!674 = !{!44, !675, !678}
+!675 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !676)
+!676 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !677, size: 64)
+!677 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !68)
+!678 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !679)
+!679 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !44, size: 64)
+!680 = !DILocation(line: 0, scope: !622)
+!681 = !DILocation(line: 443, column: 35, scope: !622)
+!682 = !DILocation(line: 0, scope: !586, inlinedAt: !683)
+!683 = distinct !DILocation(line: 443, column: 35, scope: !622)
+!684 = !DILocation(line: 90, column: 42, scope: !586, inlinedAt: !683)
+!685 = !DILocation(line: 448, column: 39, scope: !622)
+!686 = !DILocation(line: 448, column: 5, scope: !622)
+!687 = !DILocation(line: 449, column: 37, scope: !622)
+!688 = !DILocation(line: 449, column: 5, scope: !622)
+!689 = !DILocation(line: 450, column: 37, scope: !622)
+!690 = !DILocation(line: 450, column: 5, scope: !622)
+!691 = !DILocation(line: 451, column: 1, scope: !622)
+!692 = !DISubprogram(name: "xTaskGetIdleTaskHandle", scope: !590, file: !590, line: 1709, type: !693, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!693 = !DISubroutineType(types: !694)
+!694 = !{!589}
+!695 = !DISubprogram(name: "xTimerGetTimerDaemonTaskHandle", scope: !696, file: !696, line: 457, type: !693, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!696 = !DIFile(filename: "Source/include/timers.h", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS", checksumkind: CSK_MD5, checksum: "03c5a23eabe3073b20d6b6f5a9bd200d")
+!697 = distinct !DISubprogram(name: "vPortEndScheduler", scope: !15, file: !15, line: 234, type: !182, scopeLine: 235, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !698)
+!698 = !{!699, !700, !701}
+!699 = !DILocalVariable(name: "itimer", scope: !697, file: !15, line: 236, type: !504)
+!700 = !DILocalVariable(name: "sigtick", scope: !697, file: !15, line: 237, type: !237)
+!701 = !DILocalVariable(name: "xCurrentThread", scope: !697, file: !15, line: 238, type: !13)
+!702 = distinct !DIAssignID()
+!703 = !DILocation(line: 0, scope: !697)
+!704 = distinct !DIAssignID()
+!705 = !DILocation(line: 236, column: 5, scope: !697)
+!706 = !DILocation(line: 237, column: 5, scope: !697)
+!707 = distinct !DIAssignID()
+!708 = !DILocation(line: 245, column: 31, scope: !697)
+!709 = !DILocation(line: 247, column: 14, scope: !697)
+!710 = !DILocation(line: 249, column: 13, scope: !697)
+!711 = !DILocation(line: 249, column: 22, scope: !697)
+!712 = distinct !DIAssignID()
+!713 = !DILocation(line: 250, column: 24, scope: !697)
+!714 = distinct !DIAssignID()
+!715 = !DILocation(line: 251, column: 27, scope: !697)
+!716 = !DILocation(line: 251, column: 5, scope: !697)
+!717 = !DILocation(line: 252, column: 5, scope: !697)
+!718 = !DILocation(line: 255, column: 19, scope: !697)
+!719 = !DILocation(line: 256, column: 28, scope: !697)
+!720 = !DILocation(line: 256, column: 14, scope: !697)
+!721 = !DILocation(line: 258, column: 44, scope: !697)
+!722 = !DILocation(line: 258, column: 22, scope: !697)
+!723 = !DILocation(line: 259, column: 5, scope: !697)
+!724 = !DILocation(line: 0, scope: !461, inlinedAt: !725)
+!725 = distinct !DILocation(line: 259, column: 5, scope: !697)
+!726 = !DILocation(line: 523, column: 5, scope: !461, inlinedAt: !725)
+!727 = !DILocation(line: 260, column: 1, scope: !697)
+!728 = !DISubprogram(name: "setitimer", scope: !6, file: !6, line: 155, type: !729, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!729 = !DISubroutineType(types: !730)
+!730 = !{!44, !731, !732, !735}
+!731 = !DIDerivedType(tag: DW_TAG_typedef, name: "__itimer_which_t", file: !6, line: 143, baseType: !44)
+!732 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !733)
+!733 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !734, size: 64)
+!734 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !504)
+!735 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !736)
+!736 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !504, size: 64)
+!737 = !DISubprogram(name: "sigaction", scope: !40, file: !40, line: 243, type: !738, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!738 = !DISubroutineType(types: !739)
+!739 = !{!44, !44, !740, !743}
+!740 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !741)
+!741 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !742, size: 64)
+!742 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !237)
+!743 = !DIDerivedType(tag: DW_TAG_restrict_type, baseType: !744)
+!744 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !237, size: 64)
+!745 = !DISubprogram(name: "pthread_kill", scope: !664, file: !664, line: 36, type: !746, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!746 = !DISubroutineType(types: !747)
+!747 = !{!44, !19, !44}
+!748 = !DISubprogram(name: "xTaskGetCurrentTaskHandle", scope: !590, file: !590, line: 3025, type: !693, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!749 = !DILocation(line: 313, column: 5, scope: !189)
+!750 = !DILocation(line: 314, column: 1, scope: !189)
+!751 = !DILocation(line: 319, column: 5, scope: !221)
+!752 = !DILocation(line: 320, column: 1, scope: !221)
+!753 = distinct !DISubprogram(name: "vPortYield", scope: !15, file: !15, line: 301, type: !182, scopeLine: 302, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2)
+!754 = !DILocation(line: 265, column: 9, scope: !180, inlinedAt: !755)
+!755 = distinct !DILocation(line: 303, column: 5, scope: !753)
+!756 = !DILocation(line: 265, column: 27, scope: !180, inlinedAt: !755)
+!757 = !DILocation(line: 265, column: 9, scope: !181, inlinedAt: !755)
+!758 = !DILocation(line: 313, column: 5, scope: !189, inlinedAt: !759)
+!759 = distinct !DILocation(line: 267, column: 9, scope: !191, inlinedAt: !755)
+!760 = !DILocation(line: 268, column: 5, scope: !191, inlinedAt: !755)
+!761 = !DILocation(line: 270, column: 22, scope: !181, inlinedAt: !755)
+!762 = !DILocation(line: 291, column: 46, scope: !763, inlinedAt: !767)
+!763 = distinct !DISubprogram(name: "prvPortYieldFromISR", scope: !15, file: !15, line: 286, type: !182, scopeLine: 287, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !764)
+!764 = !{!765, !766}
+!765 = !DILocalVariable(name: "xThreadToSuspend", scope: !763, file: !15, line: 288, type: !13)
+!766 = !DILocalVariable(name: "xThreadToResume", scope: !763, file: !15, line: 289, type: !13)
+!767 = distinct !DILocation(line: 305, column: 5, scope: !753)
+!768 = !DILocation(line: 291, column: 24, scope: !763, inlinedAt: !767)
+!769 = !DILocation(line: 0, scope: !586, inlinedAt: !770)
+!770 = distinct !DILocation(line: 291, column: 24, scope: !763, inlinedAt: !767)
+!771 = !DILocation(line: 0, scope: !763, inlinedAt: !767)
+!772 = !DILocation(line: 293, column: 5, scope: !763, inlinedAt: !767)
+!773 = !DILocation(line: 295, column: 45, scope: !763, inlinedAt: !767)
+!774 = !DILocation(line: 295, column: 23, scope: !763, inlinedAt: !767)
+!775 = !DILocation(line: 0, scope: !586, inlinedAt: !776)
+!776 = distinct !DILocation(line: 295, column: 23, scope: !763, inlinedAt: !767)
+!777 = !DILocalVariable(name: "pxThreadToResume", arg: 1, scope: !778, file: !15, line: 478, type: !13)
+!778 = distinct !DISubprogram(name: "prvSwitchThread", scope: !15, file: !15, line: 478, type: !779, scopeLine: 480, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !781)
+!779 = !DISubroutineType(types: !780)
+!780 = !{null, !13, !13}
+!781 = !{!777, !782, !783}
+!782 = !DILocalVariable(name: "pxThreadToSuspend", arg: 2, scope: !778, file: !15, line: 479, type: !13)
+!783 = !DILocalVariable(name: "uxSavedCriticalNesting", scope: !778, file: !15, line: 481, type: !31)
+!784 = !DILocation(line: 0, scope: !778, inlinedAt: !785)
+!785 = distinct !DILocation(line: 297, column: 5, scope: !763, inlinedAt: !767)
+!786 = !DILocation(line: 483, column: 27, scope: !787, inlinedAt: !785)
+!787 = distinct !DILexicalBlock(scope: !778, file: !15, line: 483, column: 9)
+!788 = !DILocation(line: 483, column: 9, scope: !778, inlinedAt: !785)
+!789 = !DILocation(line: 90, column: 42, scope: !586, inlinedAt: !776)
+!790 = !DILocation(line: 492, column: 34, scope: !791, inlinedAt: !785)
+!791 = distinct !DILexicalBlock(scope: !787, file: !15, line: 484, column: 5)
+!792 = !DILocation(line: 0, scope: !600, inlinedAt: !793)
+!793 = distinct !DILocation(line: 494, column: 9, scope: !791, inlinedAt: !785)
+!794 = !DILocation(line: 530, column: 9, scope: !605, inlinedAt: !793)
+!795 = !DILocation(line: 530, column: 38, scope: !605, inlinedAt: !793)
+!796 = !DILocation(line: 530, column: 24, scope: !605, inlinedAt: !793)
+!797 = !DILocation(line: 530, column: 9, scope: !600, inlinedAt: !793)
+!798 = !DILocation(line: 532, column: 34, scope: !610, inlinedAt: !793)
+!799 = !DILocation(line: 532, column: 9, scope: !610, inlinedAt: !793)
+!800 = !DILocation(line: 533, column: 5, scope: !610, inlinedAt: !793)
+!801 = !DILocation(line: 496, column: 32, scope: !802, inlinedAt: !785)
+!802 = distinct !DILexicalBlock(scope: !791, file: !15, line: 496, column: 13)
+!803 = !DILocation(line: 496, column: 39, scope: !802, inlinedAt: !785)
+!804 = !DILocation(line: 496, column: 13, scope: !791, inlinedAt: !785)
+!805 = !DILocation(line: 498, column: 13, scope: !806, inlinedAt: !785)
+!806 = distinct !DILexicalBlock(scope: !802, file: !15, line: 497, column: 9)
+!807 = !DILocation(line: 501, column: 9, scope: !791, inlinedAt: !785)
+!808 = !DILocation(line: 0, scope: !461, inlinedAt: !809)
+!809 = distinct !DILocation(line: 501, column: 9, scope: !791, inlinedAt: !785)
+!810 = !DILocation(line: 523, column: 5, scope: !461, inlinedAt: !809)
+!811 = !DILocation(line: 503, column: 27, scope: !791, inlinedAt: !785)
+!812 = !DILocation(line: 504, column: 5, scope: !791, inlinedAt: !785)
+!813 = !DILocation(line: 276, column: 22, scope: !214, inlinedAt: !814)
+!814 = distinct !DILocation(line: 307, column: 5, scope: !753)
+!815 = !DILocation(line: 279, column: 9, scope: !217, inlinedAt: !814)
+!816 = !DILocation(line: 279, column: 27, scope: !217, inlinedAt: !814)
+!817 = !DILocation(line: 279, column: 9, scope: !214, inlinedAt: !814)
+!818 = !DILocation(line: 319, column: 5, scope: !221, inlinedAt: !819)
+!819 = distinct !DILocation(line: 281, column: 9, scope: !223, inlinedAt: !814)
+!820 = !DILocation(line: 282, column: 5, scope: !223, inlinedAt: !814)
+!821 = !DILocation(line: 308, column: 1, scope: !753)
+!822 = distinct !DISubprogram(name: "xPortSetInterruptMask", scope: !15, file: !15, line: 323, type: !823, scopeLine: 324, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2)
+!823 = !DISubroutineType(types: !824)
+!824 = !{!33}
+!825 = !DILocation(line: 327, column: 5, scope: !822)
+!826 = distinct !DISubprogram(name: "vPortClearInterruptMask", scope: !15, file: !15, line: 331, type: !827, scopeLine: 332, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !829)
+!827 = !DISubroutineType(types: !828)
+!828 = !{null, !33}
+!829 = !{!830}
+!830 = !DILocalVariable(name: "xMask", arg: 1, scope: !826, file: !15, line: 331, type: !33)
+!831 = !DILocation(line: 0, scope: !826)
+!832 = !DILocation(line: 334, column: 1, scope: !826)
+!833 = distinct !DISubprogram(name: "vPortThreadDying", scope: !15, file: !15, line: 431, type: !834, scopeLine: 433, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !838)
+!834 = !DISubroutineType(types: !835)
+!835 = !{null, !28, !836}
+!836 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !837, size: 64)
+!837 = !DIDerivedType(tag: DW_TAG_volatile_type, baseType: !31)
+!838 = !{!839, !840, !841}
+!839 = !DILocalVariable(name: "pxTaskToDelete", arg: 1, scope: !833, file: !15, line: 431, type: !28)
+!840 = !DILocalVariable(name: "pxPendYield", arg: 2, scope: !833, file: !15, line: 432, type: !836)
+!841 = !DILocalVariable(name: "pxThread", scope: !833, file: !15, line: 434, type: !13)
+!842 = !DILocation(line: 0, scope: !833)
+!843 = !DILocation(line: 434, column: 27, scope: !833)
+!844 = !DILocation(line: 438, column: 15, scope: !833)
+!845 = !DILocation(line: 438, column: 22, scope: !833)
+!846 = !DILocation(line: 439, column: 1, scope: !833)
+!847 = !DISubprogram(name: "pthread_cancel", scope: !229, file: !229, line: 528, type: !848, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!848 = !DISubroutineType(types: !849)
+!849 = !{!44, !19}
+!850 = !DISubprogram(name: "pthread_join", scope: !229, file: !229, line: 219, type: !851, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!851 = !DISubroutineType(types: !852)
+!852 = !{!44, !19, !853}
+!853 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !28, size: 64)
+!854 = !DISubprogram(name: "event_delete", scope: !37, file: !37, line: 38, type: !855, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!855 = !DISubroutineType(types: !856)
+!856 = !{null, !35}
+!857 = distinct !DISubprogram(name: "ulPortGetRunTime", scope: !15, file: !15, line: 575, type: !858, scopeLine: 576, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !860)
+!858 = !DISubroutineType(types: !859)
+!859 = !{!21}
+!860 = !{!861}
+!861 = !DILocalVariable(name: "xTimes", scope: !857, file: !15, line: 577, type: !862)
+!862 = distinct !DICompositeType(tag: DW_TAG_structure_type, name: "tms", file: !863, line: 32, size: 256, elements: !864)
+!863 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/sys/times.h", directory: "", checksumkind: CSK_MD5, checksum: "f2f04aac06c6227efa828b9b01e5f78b")
+!864 = !{!865, !868, !869, !870}
+!865 = !DIDerivedType(tag: DW_TAG_member, name: "tms_utime", scope: !862, file: !863, line: 34, baseType: !866, size: 64)
+!866 = !DIDerivedType(tag: DW_TAG_typedef, name: "clock_t", file: !867, line: 7, baseType: !296)
+!867 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/clock_t.h", directory: "", checksumkind: CSK_MD5, checksum: "1aade99fd778d1551600c7ca1410b9f1")
+!868 = !DIDerivedType(tag: DW_TAG_member, name: "tms_stime", scope: !862, file: !863, line: 35, baseType: !866, size: 64, offset: 64)
+!869 = !DIDerivedType(tag: DW_TAG_member, name: "tms_cutime", scope: !862, file: !863, line: 37, baseType: !866, size: 64, offset: 128)
+!870 = !DIDerivedType(tag: DW_TAG_member, name: "tms_cstime", scope: !862, file: !863, line: 38, baseType: !866, size: 64, offset: 192)
+!871 = distinct !DIAssignID()
+!872 = !DILocation(line: 0, scope: !857)
+!873 = !DILocation(line: 577, column: 5, scope: !857)
+!874 = !DILocation(line: 579, column: 5, scope: !857)
+!875 = !DILocation(line: 581, column: 37, scope: !857)
+!876 = !{!877, !154, i64 0}
+!877 = !{!"tms", !154, i64 0, !154, i64 8, !154, i64 16, !154, i64 24}
+!878 = !DILocation(line: 582, column: 1, scope: !857)
+!879 = !DILocation(line: 581, column: 5, scope: !857)
+!880 = !DISubprogram(name: "times", scope: !863, file: !863, line: 46, type: !881, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!881 = !DISubroutineType(types: !882)
+!882 = !{!866, !883}
+!883 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !862, size: 64)
+!884 = !DISubprogram(name: "strerror", scope: !885, file: !885, line: 419, type: !886, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!885 = !DIFile(filename: "/usr/include/string.h", directory: "", checksumkind: CSK_MD5, checksum: "f443da8025a0b7c1498fb6c554ec788d")
+!886 = !DISubroutineType(types: !887)
+!887 = !{!383, !44}
+!888 = !DISubprogram(name: "abort", scope: !889, file: !889, line: 598, type: !182, flags: DIFlagPrototyped | DIFlagNoReturn, spFlags: DISPFlagOptimized)
+!889 = !DIFile(filename: "/usr/include/stdlib.h", directory: "", checksumkind: CSK_MD5, checksum: "02258fad21adf111bb9df9825e61954a")
+!890 = !DISubprogram(name: "event_signal", scope: !37, file: !37, line: 42, type: !855, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!891 = !DISubprogram(name: "vTaskSwitchContext", scope: !590, file: !590, line: 3014, type: !182, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!892 = !DISubprogram(name: "pthread_exit", scope: !229, file: !229, line: 211, type: !26, flags: DIFlagPrototyped | DIFlagNoReturn, spFlags: DISPFlagOptimized)
+!893 = !DISubprogram(name: "getitimer", scope: !6, file: !6, line: 149, type: !894, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!894 = !DISubroutineType(types: !895)
+!895 = !{!44, !731, !736}
+!896 = !DISubprogram(name: "__errno_location", scope: !897, file: !897, line: 37, type: !898, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!897 = !DIFile(filename: "/usr/include/errno.h", directory: "", checksumkind: CSK_MD5, checksum: "01c14bf4ab600a3884f5da68eb763170")
+!898 = !DISubroutineType(types: !899)
+!899 = !{!679}
+!900 = !DISubprogram(name: "clock_gettime", scope: !901, file: !901, line: 279, type: !902, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!901 = !DIFile(filename: "/usr/include/time.h", directory: "", checksumkind: CSK_MD5, checksum: "db37158473a25e1d89b19f8bc6892801")
+!902 = !DISubroutineType(types: !903)
+!903 = !{!44, !904, !907}
+!904 = !DIDerivedType(tag: DW_TAG_typedef, name: "clockid_t", file: !905, line: 7, baseType: !906)
+!905 = !DIFile(filename: "/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h", directory: "", checksumkind: CSK_MD5, checksum: "099a80153c2ad48bc7f5f4a188cb6d24")
+!906 = !DIDerivedType(tag: DW_TAG_typedef, name: "__clockid_t", file: !104, line: 169, baseType: !44)
+!907 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !564, size: 64)
+!908 = !DISubprogram(name: "vAssertCalled", scope: !909, file: !909, line: 116, type: !910, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!909 = !DIFile(filename: "./FreeRTOSConfig.h", directory: "/home/sri/Desktop/Rehosting_FreeRTOS/FreeRTOSv202212.01/FreeRTOS/Demo/Posix_GCC", checksumkind: CSK_MD5, checksum: "2a576e6396dc8b1a5d839e036a1eddc4")
+!910 = !DISubroutineType(types: !911)
+!911 = !{null, !912, !21}
+!912 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !202)
+!913 = !DISubprogram(name: "event_wait", scope: !37, file: !37, line: 39, type: !914, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!914 = !DISubroutineType(types: !915)
+!915 = !{!916, !35}
+!916 = !DIBasicType(name: "_Bool", size: 8, encoding: DW_ATE_boolean)
+!917 = !DISubprogram(name: "sigfillset", scope: !40, file: !40, line: 202, type: !657, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!918 = !DISubprogram(name: "sigdelset", scope: !40, file: !40, line: 208, type: !661, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
+!919 = distinct !DISubprogram(name: "vPortSystemTickHandler", scope: !15, file: !15, line: 389, type: !42, scopeLine: 390, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !920)
+!920 = !{!921, !922, !923}
+!921 = !DILocalVariable(name: "sig", arg: 1, scope: !919, file: !15, line: 389, type: !44)
+!922 = !DILocalVariable(name: "pxThreadToSuspend", scope: !919, file: !15, line: 391, type: !13)
+!923 = !DILocalVariable(name: "pxThreadToResume", scope: !919, file: !15, line: 392, type: !13)
+!924 = !DILocation(line: 0, scope: !919)
+!925 = !DILocation(line: 398, column: 22, scope: !919)
+!926 = !DILocation(line: 401, column: 51, scope: !919)
+!927 = !DILocation(line: 401, column: 29, scope: !919)
+!928 = !DILocation(line: 0, scope: !586, inlinedAt: !929)
+!929 = distinct !DILocation(line: 401, column: 29, scope: !919)
+!930 = !DILocation(line: 412, column: 5, scope: !919)
+!931 = !DILocation(line: 420, column: 9, scope: !919)
+!932 = !DILocation(line: 422, column: 50, scope: !919)
+!933 = !DILocation(line: 422, column: 28, scope: !919)
+!934 = !DILocation(line: 0, scope: !586, inlinedAt: !935)
+!935 = distinct !DILocation(line: 422, column: 28, scope: !919)
+!936 = !DILocation(line: 0, scope: !778, inlinedAt: !937)
+!937 = distinct !DILocation(line: 424, column: 9, scope: !919)
+!938 = !DILocation(line: 483, column: 27, scope: !787, inlinedAt: !937)
+!939 = !DILocation(line: 483, column: 9, scope: !778, inlinedAt: !937)
+!940 = !DILocation(line: 90, column: 42, scope: !586, inlinedAt: !935)
+!941 = !DILocation(line: 492, column: 34, scope: !791, inlinedAt: !937)
+!942 = !DILocation(line: 0, scope: !600, inlinedAt: !943)
+!943 = distinct !DILocation(line: 494, column: 9, scope: !791, inlinedAt: !937)
+!944 = !DILocation(line: 530, column: 9, scope: !605, inlinedAt: !943)
+!945 = !DILocation(line: 530, column: 38, scope: !605, inlinedAt: !943)
+!946 = !DILocation(line: 530, column: 24, scope: !605, inlinedAt: !943)
+!947 = !DILocation(line: 530, column: 9, scope: !600, inlinedAt: !943)
+!948 = !DILocation(line: 532, column: 34, scope: !610, inlinedAt: !943)
+!949 = !DILocation(line: 532, column: 9, scope: !610, inlinedAt: !943)
+!950 = !DILocation(line: 533, column: 5, scope: !610, inlinedAt: !943)
+!951 = !DILocation(line: 496, column: 32, scope: !802, inlinedAt: !937)
+!952 = !DILocation(line: 496, column: 39, scope: !802, inlinedAt: !937)
+!953 = !DILocation(line: 496, column: 13, scope: !791, inlinedAt: !937)
+!954 = !DILocation(line: 498, column: 13, scope: !806, inlinedAt: !937)
+!955 = !DILocation(line: 501, column: 9, scope: !791, inlinedAt: !937)
+!956 = !DILocation(line: 0, scope: !461, inlinedAt: !957)
+!957 = distinct !DILocation(line: 501, column: 9, scope: !791, inlinedAt: !937)
+!958 = !DILocation(line: 523, column: 5, scope: !461, inlinedAt: !957)
+!959 = !DILocation(line: 503, column: 27, scope: !791, inlinedAt: !937)
+!960 = !DILocation(line: 504, column: 5, scope: !791, inlinedAt: !937)
+!961 = !DILocation(line: 427, column: 22, scope: !919)
+!962 = !DILocation(line: 428, column: 1, scope: !919)
+!963 = !DISubprogram(name: "xTaskIncrementTick", scope: !590, file: !590, line: 2924, type: !486, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized)
