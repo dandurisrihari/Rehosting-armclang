@@ -2,6 +2,5 @@ output/obj/
 output/optimized_ll_files/
 posix/
 ll_files/
-bc_files/
 src/*.o
 src/*.so
