@@ -357,7 +357,6 @@ const int __aeabi_EILSEQ = 138; /**< Illegal byte sequence */
 unsigned char const __aeabi_ctype_table_[257];
 
 
-
 void arch_cpu_atomic_idle(unsigned int key) {
     // Dummy implementation
 }
