@@ -58,6 +58,12 @@ bin.elf: obj
 	
 	clang-17 -fsanitize=address -g -fPIE -m32 ../output/obj/*.o -pthread -o ../output/elf/bin.elf
 
+# merge all ../output/optimized_ll_files/*.ll to ../output/elf/bin.ll
+	rm -f \
+	../output/optimized_ll_files/armlink_symbol_steering_optimized.ll \
+	../output/optimized_ll_files/main_weak_optimized.ll
+	llvm-link-17 ../output/optimized_ll_files/*.ll -S -o ../output/elf/bin.ll
+
 clean:
 	rm -f ../ll_files/*.ll \
 	-r ../output \
